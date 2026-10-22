@@ -53,7 +53,7 @@
 
 ## 成果文件
 
-- `src/day02_matrix.cpp`：完整 2×2 矩阵乘法实现（源码已在学习对话中提交并检查；归档入仓以每日归档包为准）。
+- `src/day02_matrix.cpp`：完整 2×2 矩阵乘法实现，已存入仓库；2026-10-22 由 Muse 使用 g++（C++17, -O2）独立编译运行复验，原始输入与单位矩阵两组输出均与记录一致。Day 2 归档记录见 `notes/day02-record.md`。
 - 每日任务完成记录见 `notes/gpt-daily-task-records.md`。
 
 ## 下一阶段
