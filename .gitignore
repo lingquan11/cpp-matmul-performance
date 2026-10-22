@@ -1,0 +1,15 @@
+# Build artifacts
+*.o
+*.obj
+*.out
+*.exe
+*.a
+*.so
+*.dylib
+a.out
+matmul
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
