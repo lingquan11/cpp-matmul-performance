@@ -1,115 +1,58 @@
 # cpp-matmul-performance
 
-**从三重循环出发的 C++ 矩阵乘法性能实验** —— 一个面向 AI 芯片（NPU / AI 加速器）方向的本科入门成果项目。
+[![小规模基准](https://github.com/lingquan11/cpp-matmul-performance/actions/workflows/bench.yml/badge.svg)](https://github.com/lingquan11/cpp-matmul-performance/actions/workflows/bench.yml)
 
-矩阵乘法是 AI 芯片最核心的计算负载。本项目从最朴素的三重循环实现开始，走完「正确性 → 性能测量 → 缓存与分块优化 → 数据流与脉动阵列」的全过程，把课本上的矩阵乘法做成可测量、可复现、可展示的工程实验，并以此理解 NPU 的计算阵列为何而设计。
+**English.** Early-stage undergraduate project at Southeast University (electronic information, first year). It checks a naive C++ i-j-k matrix multiplication and measures that one kernel from n = 64 to 1024 on a cloud VM. The aim is to see, with reproducible numbers, why data movement matters for NPUs. Loop reordering, tiling, and systolic arrays are planned, not implemented. The badge is the real status of the 「小规模基准」 GitHub Action (compile and run n = 64). It is not a score.
 
-## 路线图
+矩阵乘法是 NPU / AI 芯片上最主要的计算。这个仓库从朴素三重循环做起，用可复现的计时看规模变大以后耗时为什么不跟运算次数走，从而理解数据复用为什么重要。作者是东南大学电子信息大一，项目还在早期。
 
-- [x] **阶段 A · 算法实现**：完整三重循环实现矩阵乘法，用小矩阵手算结果和参考实现验证正确性，分析时间复杂度
-- [ ] **阶段 B · 性能测量**：计时方法、控制变量（矩阵规模、循环顺序、编译优化选项），观察缓存与数据局部性对性能的影响；入口任务 Day 4 拆为程序规模扩展、计时入门、完整实验三个目标，逐步推进
-- [ ] **阶段 C · 分块优化与实验报告**：分块（tiling）优化，产出一份可复现的实验报告（环境、方法、数据、结论齐全）
-- [ ] **阶段 D · 脉动阵列与 SCALE-Sim**：理解脉动阵列数据流，用 SCALE-Sim 对照前面的实测结果
+## 进度
 
-## 阶段成果
+| 状态 | 内容 |
+| --- | --- |
+| 已完成 | 固定 2×2 的 i-j-k（`src/day02_matrix.cpp`），原始结果 `11 10` / `19 30`。2026-10-26 在云端 VM 上测了 n=64～1024 |
+| 进行中 | 性能测量。计时口径、5 次样本和这一次规模扫描已经进仓库。循环重排还没有代码 |
+| 计划中 | 分块；脉动阵列与 SCALE-Sim。做完才会出现在对比图里 |
 
-| 阶段 | 状态 | 成果 |
-| --- | --- | --- |
-| A · 算法实现 | ✅ 已完成（2026-10-22） | 完整 2×2 三重循环实现，原始输入与单位矩阵两组测试通过；见 [阶段 A 实验报告](reports/stage-a-algorithm-implementation.md) |
-| B · 性能测量 | 已有 i-j-k 规模扫描（2026-10-26） | 云端 VM 上的耗时与 GFLOPS 见「性能对比」。循环重排和分块还没有实现。学习计划中的 Day 4 仍以 [PROJECT_STATE.md](PROJECT_STATE.md) 为准 |
-| C · 分块优化与实验报告 | 未开始 | — |
-| D · 脉动阵列与 SCALE-Sim | 未开始 | — |
+学习过程中的每日记录在 [`notes/`](notes/)，不在首页展开。学习计划原文在 [`PROJECT_STATE.md`](PROJECT_STATE.md)：仓库里的这次扫描不能代替作者自己把 Day 4 的步骤做完。
 
-每个阶段完成后，本表与 `reports/` 中的阶段实验报告同步更新。
+## 目前的结果
 
-## 进展记录
-
-- 每日学习任务的完成记录（任务、产出、用时、验收结论）持续归档在 [`notes/gpt-daily-task-records.md`](notes/gpt-daily-task-records.md)，只记已完成并验收的任务，不含未完成计划。
-- 当前状态摘要（当前阶段、最近任务、下一步与风险）统一维护在 [`PROJECT_STATE.md`](PROJECT_STATE.md)；与阶段表冲突时以状态文件为准。
-- 已验证能力与未验证范围在记录中严格区分；仓库中的代码均为作者本人产出，外部模板代码会明确标注来源。
-
-## 项目介绍
-
-我正在开展一个基于 C++ 的矩阵乘法实现与性能分析入门项目，目标是逐步理解 AI 加速器中的计算与数据访问问题。目前，我已完成单个矩阵输出元素的计算与代码实现，并进一步独立完成了 2×2 矩阵乘法的三重循环程序。程序通过了原始矩阵测试和单位矩阵测试，完整矩阵乘法任务实际用时约 20 分钟。下一阶段，我将学习基准计时、重复测量和控制变量，为分析循环顺序、缓存与数据局部性，以及后续分块优化和计算阵列模拟建立基础。
-
-## 目录结构
-
-```
-src/         矩阵乘法的实现代码（作者本人产出）
-tests/       正确性测试（手算对照、参考实现比对）
-benchmarks/  性能测量代码与脚本
-results/     实验结果数据与图表
-reports/     阶段实验报告
-notes/       学习笔记与每日任务完成记录
-```
-
-每个目录里都有一份 README，写明该目录放什么、按什么约定放。
-
-## 如何运行
-
-- 语言：C++17
-- 现有实现可以直接编译运行：
-
-```bash
-g++ -O2 -std=c++17 -o day02 src/day02_matrix.cpp
-```
-
-- 一键复现性能测量（只跑仓库里已有的 i-j-k 三重循环，不新增算法）：
-
-```bash
-python3 benchmarks/run_bench.py
-```
-
-需要本机有 `g++` 和 Python 3。画图需要 `matplotlib`；没有安装时，上面这条命令会尝试帮你装上。测完后，CSV 和图写到 `results/<日期>_ijk-scale/`。
-
-- 每次实验的结果数据存入 `results/`，结论写进 `reports/`，保证任何一次实验都能按记录复现。
-
-## 性能对比
-
-仓库里目前的完整矩阵乘法是 `src/day02_matrix.cpp` 的 **i-j-k 三重循环**。Day 1 只计算一个输出元素，没有放进下表。循环重排和分块还没有对应源码，因此表里只有这一列实现。基准把原来写死的规模 2 换成参数 `n`，循环顺序和 `C[i][j] += A[i][k] * B[k][j]` 的累加方式与原程序一致。
-
-本地复现是这一条命令：
-
-```bash
-python3 benchmarks/run_bench.py
-```
-
-需要 `g++` 和 Python 3。画图需要 `matplotlib`；本机没有时，这条命令会尝试安装。默认规模是 64、128、256、512、1024，每个规模 5 个正式样本，输出在 `results/<日期>_ijk-scale/`。
-
-计时用 `std::chrono::steady_clock`。计入结果元素清零和三重循环；输入构造、校准和正确性检查不在正式样本里。单次调用短于 100 ms 时，同一样本内连续重复，单次耗时 = 样本总耗时 / 重复次数。GFLOPS = `2 * n^3 / 单次耗时秒 / 1e9`（一次乘法加一次加法）。内核是 32 位整数，与 Day 2 一致，GFLOPS 只用于相对比较，不是浮点峰值。
-
-下面这组数是 **2026-10-26 04:05 UTC** 在云端 VM 上跑出来的，原始记录在 [`results/2026-10-26_ijk-scale/`](results/2026-10-26_ijk-scale/)。换一台机器数值会变，只适合看这次实验内部的相对关系。
-
-测试环境：
-
-- 机器：KVM 云端 VM，Ubuntu 24.04.5 LTS，Linux 6.12.94+
-- CPU：`lscpu` 报告为 Intel(R) Xeon(R) Processor（family 6，model 207，stepping 2），4 vCPU；L1d 192 KiB，L1i 128 KiB，L2 8 MiB，L3 320 MiB。该环境没有 cpufreq 标称频率
-- 内存：MemTotal 16387280 kB
-- 编译器：g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
-- 编译命令：`g++ -O2 -std=c++17 -Wall -Wextra -Werror -o build/matmul_bench benchmarks/matmul_bench.cpp benchmarks/ijk_kernel.cpp`（未开 LTO）
+只有一种实现。n=1024 的 GFLOPS 是 **0.569162**，约为 n=64（6.929414）的 8.2%。数字来自 2026-10-26 04:05 UTC 那次云端 VM 运行，只适合看这次实验内部的相对关系。口径、环境和能说的分析在 [实验记录](docs/report.md)。
 
 ![i-j-k 三重循环在不同矩阵规模下的耗时与 GFLOPS](results/2026-10-26_ijk-scale/perf.png)
 
-图中的点是 5 次正式样本的中位数，误差线是同组最小和最大。左图纵轴是毫秒，右图 GFLOPS 按上式由中位数耗时换算。最大规模 n=1024 的 GFLOPS 是 **0.569162**。
+| 规模 n | 单次耗时中位数 (ms) | GFLOPS |
+| ---: | ---: | ---: |
+| 64 | 0.075661 | 6.929414 |
+| 128 | 1.285246 | 3.263424 |
+| 256 | 13.434294 | 2.497670 |
+| 512 | 104.810185 | 2.561158 |
+| 1024 | 3773.059512 | 0.569162 |
 
-| 规模 n | 样本内重复 | 正式样本 | 单次耗时中位数 (ms) | 单次耗时最小–最大 (ms) | GFLOPS（中位数耗时） | 相对上一档耗时倍数 |
-| --- | ---: | ---: | ---: | --- | ---: | ---: |
-| 64 | 1322 | 5 | 0.075661 | 0.075447–0.077330 | 6.929414 | — |
-| 128 | 79 | 5 | 1.285246 | 1.283210–1.333168 | 3.263424 | 16.986855 |
-| 256 | 8 | 5 | 13.434294 | 13.413632–13.465532 | 2.497670 | 10.452699 |
-| 512 | 1 | 5 | 104.810185 | 104.400495–105.745261 | 2.561158 | 7.801689 |
-| 1024 | 1 | 5 | 3773.059512 | 3737.205793–3821.183449 | 0.569162 | 35.998978 |
+原始样本在 [`results/2026-10-26_ijk-scale/raw.csv`](results/2026-10-26_ijk-scale/raw.csv)。
 
-表中毫秒和 GFLOPS 保留 6 位小数，与 [`summary.csv`](results/2026-10-26_ijk-scale/summary.csv) 的四舍五入一致。每次原始耗时在 [`raw.csv`](results/2026-10-26_ijk-scale/raw.csv)。n 从 512 增到 1024 时计算量变为 8 倍，测得耗时约为 36.0 倍。
+## 复现
 
-推送到 `main` 时，GitHub Actions 会用同一条脚本编译并跑一次 n=64、1 个样本的小规模基准，只确认能跑通，不提交新的图。
+```bash
+python3 benchmarks/run_bench.py
+```
 
-## 当前进度
+需要 `g++` 和 Python 3。画图需要 `matplotlib`；没有安装时这条命令会尝试安装。默认规模 64、128、256、512、1024，每个规模 5 个正式样本，输出到 `results/<日期>_matmul/`。
 
-- 2026-10-22：仓库建立，并定位为成果展示仓库
-- 2026-10-20（Day 1）：单个输出元素的手算与 C++ 实现已验证，用时约 30 分钟
-- 2026-10-22（Day 2）：完整 2×2 矩阵乘法三重循环实现完成并通过两组测试，用时约 20 分钟 —— **阶段 A 完成**
-- 2026-10-23（Day 3）：零矩阵扩展测试（自报通过）、O(n³) 复杂度推导补全、阶段 B 性能实验方案制定；计时测量尚未执行
-- 2026-10-25：采用新版执行计划（核心工程优先、性能测量分步加强、滚动计划与机动时间、直接辅导为主、视频可选），新增 `PROJECT_STATE.md` 作为当前状态的单一来源；Day 4 尚未开始
-- 2026-10-26：为已有的 i-j-k 三重循环加上一键基准，并在云端 VM 上测了 64～1024。见「性能对比」。没有加入循环重排或分块实现
-- 当前：阶段 B。上面的性能数字是基准脚本在云端 VM 上的相对结果；学习计划里的 Day 4 分步目标仍以 `PROJECT_STATE.md` 为准
+脚本会自动编译 `benchmarks/kernels/` 里的每一个实现，并画进同一张图。现在这个目录里只有 i-j-k。自己写了循环重排或分块之后，把新文件放进去再跑同一条命令即可，步骤写在 [`benchmarks/README.md`](benchmarks/README.md)。
+
+推送到 `main` 时，上面的徽章对应的工作流会编译并跑一次 n=64，只检查能否通过，不更新图。
+
+## 目录
+
+```
+src/          已有的学习程序（Day 1 单元素，Day 2 的 2×2）
+benchmarks/   计时驱动。kernels/ 放要上图的实现
+results/      实测 CSV 和图
+docs/report.md  给这次规模扫描写的实验记录
+reports/      阶段 A 的学习报告
+notes/        每日学习记录
+```
+
+阶段 A 报告：[`reports/stage-a-algorithm-implementation.md`](reports/stage-a-algorithm-implementation.md)。

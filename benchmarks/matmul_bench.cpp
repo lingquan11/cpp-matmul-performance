@@ -1,11 +1,8 @@
-#include "ijk_kernel.h"
+#include "kernel_api.h"
 
-#include <algorithm>
 #include <chrono>
 #include <cmath>
-#include <cstdint>
 #include <cstdlib>
-#include <cstring>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -13,6 +10,8 @@
 #include <vector>
 
 namespace {
+
+using MatmulFn = void (*)(const int*, const int*, int*, int);
 
 struct Options {
     bool check_only = false;
@@ -23,6 +22,7 @@ struct Options {
 };
 
 struct Row {
+    std::string impl;
     int n = 0;
     int sample = 0;
     int reps = 0;
@@ -106,8 +106,8 @@ void fill_inputs(std::vector<int>* A, std::vector<int>* B, int n) {
     B->assign(static_cast<size_t>(n) * n, 0);
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
-            (*A)[i * n + j] = value_a(i, j);
-            (*B)[i * n + j] = value_b(i, j);
+            (*A)[static_cast<size_t>(i * n + j)] = value_a(i, j);
+            (*B)[static_cast<size_t>(i * n + j)] = value_b(i, j);
         }
     }
 }
@@ -118,7 +118,8 @@ long long reference_checksum(const std::vector<int>& A, const std::vector<int>& 
         for (int j = 0; j < n; ++j) {
             long long acc = 0;
             for (int k = 0; k < n; ++k) {
-                acc += static_cast<long long>(A[i * n + k]) * B[k * n + j];
+                acc += static_cast<long long>(A[static_cast<size_t>(i * n + k)]) *
+                       B[static_cast<size_t>(k * n + j)];
             }
             sum += acc;
         }
@@ -139,17 +140,19 @@ int fail(const std::string& message) {
     return 1;
 }
 
-int run_checks() {
+int check_impl(const BenchImpl& impl) {
+    MatmulFn matmul = impl.fn;
+    const std::string name = impl.id;
     {
         const int n = 2;
         const int A[4] = {2, 1, 3, 4};
         const int B[4] = {5, 2, 1, 6};
         int C[4] = {0, 0, 0, 0};
-        matmul_ijk(A, B, C, n);
+        matmul(A, B, C, n);
         const int expect[4] = {11, 10, 19, 30};
         for (int i = 0; i < 4; ++i) {
             if (C[i] != expect[i]) {
-                return fail("Day 2 原始输入结果与手算不一致");
+                return fail(name + "：Day 2 原始输入结果与手算不一致");
             }
         }
     }
@@ -158,10 +161,10 @@ int run_checks() {
         const int A[4] = {2, 1, 3, 4};
         const int B[4] = {1, 0, 0, 1};
         int C[4] = {0, 0, 0, 0};
-        matmul_ijk(A, B, C, n);
+        matmul(A, B, C, n);
         for (int i = 0; i < 4; ++i) {
             if (C[i] != A[i]) {
-                return fail("右乘单位矩阵后结果不是 A");
+                return fail(name + "：右乘单位矩阵后结果不是 A");
             }
         }
     }
@@ -170,10 +173,10 @@ int run_checks() {
         const int A[4] = {2, 1, 3, 4};
         const int B[4] = {0, 0, 0, 0};
         int C[4] = {7, 7, 7, 7};
-        matmul_ijk(A, B, C, n);
+        matmul(A, B, C, n);
         for (int i = 0; i < 4; ++i) {
             if (C[i] != 0) {
-                return fail("右乘零矩阵后结果不是零矩阵");
+                return fail(name + "：右乘零矩阵后结果不是零矩阵");
             }
         }
     }
@@ -182,10 +185,10 @@ int run_checks() {
         std::vector<int> A(16, 1);
         std::vector<int> B(16, 1);
         std::vector<int> C(16, 9);
-        matmul_ijk(A.data(), B.data(), C.data(), n);
+        matmul(A.data(), B.data(), C.data(), n);
         for (int value : C) {
             if (value != n) {
-                return fail("全 1 矩阵的结果不是 n");
+                return fail(name + "：全 1 矩阵的结果不是 n");
             }
         }
     }
@@ -195,23 +198,36 @@ int run_checks() {
         std::vector<int> B;
         fill_inputs(&A, &B, n);
         std::vector<int> C(static_cast<size_t>(n) * n, -1);
-        matmul_ijk(A.data(), B.data(), C.data(), n);
+        matmul(A.data(), B.data(), C.data(), n);
         if (matrix_checksum(C) != reference_checksum(A, B, n)) {
-            return fail("n=3 校验和与逐项乘加不一致");
+            return fail(name + "：n=3 校验和与逐项乘加不一致");
         }
     }
-    std::cout << "正确性检查通过\n";
+    std::cout << "正确性检查通过: " << name << "\n";
     return 0;
 }
 
-int calibrate_reps(const int* A, const int* B, int* C, int n, double min_ms) {
+int run_checks() {
+    if (bench_impl_count() <= 0) {
+        return fail("没有发现实现");
+    }
+    for (int i = 0; i < bench_impl_count(); ++i) {
+        const int status = check_impl(*bench_impl_at(i));
+        if (status != 0) {
+            return status;
+        }
+    }
+    return 0;
+}
+
+int calibrate_reps(MatmulFn matmul, const int* A, const int* B, int* C, int n, double min_ms) {
     int batch = 1;
     long long elapsed_ns = 0;
     const long long target_cal_ns = 20LL * 1000LL * 1000LL;
     while (true) {
         const auto t0 = std::chrono::steady_clock::now();
         for (int r = 0; r < batch; ++r) {
-            matmul_ijk(A, B, C, n);
+            matmul(A, B, C, n);
         }
         const auto t1 = std::chrono::steady_clock::now();
         elapsed_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(t1 - t0).count();
@@ -246,53 +262,59 @@ double gflops_of(int n, long long elapsed_ns, int reps) {
 
 int run_bench(const Options& opt) {
     std::vector<Row> rows;
-    for (int n : opt.sizes) {
-        std::vector<int> A;
-        std::vector<int> B;
-        fill_inputs(&A, &B, n);
-        std::vector<int> C(static_cast<size_t>(n) * n, 0);
-        const long long expect = reference_checksum(A, B, n);
+    for (int impl_index = 0; impl_index < bench_impl_count(); ++impl_index) {
+        const BenchImpl& impl = *bench_impl_at(impl_index);
+        MatmulFn matmul = impl.fn;
+        for (int n : opt.sizes) {
+            std::vector<int> A;
+            std::vector<int> B;
+            fill_inputs(&A, &B, n);
+            std::vector<int> C(static_cast<size_t>(n) * n, 0);
+            const long long expect = reference_checksum(A, B, n);
 
-        matmul_ijk(A.data(), B.data(), C.data(), n);
-        if (matrix_checksum(C) != expect) {
-            std::cerr << "测量前校验失败, n=" << n << "\n";
-            return 1;
-        }
-
-        const int reps = calibrate_reps(A.data(), B.data(), C.data(), n, opt.min_ms);
-        if (matrix_checksum(C) != expect) {
-            std::cerr << "校准后校验失败, n=" << n << "\n";
-            return 1;
-        }
-        std::cerr << "n=" << n << " 样本内重复=" << reps << "\n";
-
-        for (int sample = 1; sample <= opt.runs; ++sample) {
-            const auto t0 = std::chrono::steady_clock::now();
-            for (int r = 0; r < reps; ++r) {
-                matmul_ijk(A.data(), B.data(), C.data(), n);
-            }
-            const auto t1 = std::chrono::steady_clock::now();
-            const long long elapsed_ns =
-                std::chrono::duration_cast<std::chrono::nanoseconds>(t1 - t0).count();
-            if (elapsed_ns <= 0) {
-                std::cerr << "正式样本计时为 0, n=" << n << "\n";
+            matmul(A.data(), B.data(), C.data(), n);
+            if (matrix_checksum(C) != expect) {
+                std::cerr << "测量前校验失败, impl=" << impl.id << " n=" << n << "\n";
                 return 1;
             }
-            const long long checksum = matrix_checksum(C);
-            if (checksum != expect) {
-                std::cerr << "正式样本校验失败, n=" << n << " sample=" << sample << "\n";
+
+            const int reps = calibrate_reps(matmul, A.data(), B.data(), C.data(), n, opt.min_ms);
+            if (matrix_checksum(C) != expect) {
+                std::cerr << "校准后校验失败, impl=" << impl.id << " n=" << n << "\n";
                 return 1;
             }
-            Row row;
-            row.n = n;
-            row.sample = sample;
-            row.reps = reps;
-            row.elapsed_ns = elapsed_ns;
-            row.gflops = gflops_of(n, elapsed_ns, reps);
-            row.checksum = checksum;
-            rows.push_back(row);
-            std::cerr << "  sample " << sample << "/" << opt.runs << " elapsed_ns=" << elapsed_ns
-                      << " gflops=" << row.gflops << "\n";
+            std::cerr << "impl=" << impl.id << " n=" << n << " 样本内重复=" << reps << "\n";
+
+            for (int sample = 1; sample <= opt.runs; ++sample) {
+                const auto t0 = std::chrono::steady_clock::now();
+                for (int r = 0; r < reps; ++r) {
+                    matmul(A.data(), B.data(), C.data(), n);
+                }
+                const auto t1 = std::chrono::steady_clock::now();
+                const long long elapsed_ns =
+                    std::chrono::duration_cast<std::chrono::nanoseconds>(t1 - t0).count();
+                if (elapsed_ns <= 0) {
+                    std::cerr << "正式样本计时为 0, impl=" << impl.id << " n=" << n << "\n";
+                    return 1;
+                }
+                const long long checksum = matrix_checksum(C);
+                if (checksum != expect) {
+                    std::cerr << "正式样本校验失败, impl=" << impl.id << " n=" << n
+                              << " sample=" << sample << "\n";
+                    return 1;
+                }
+                Row row;
+                row.impl = impl.id;
+                row.n = n;
+                row.sample = sample;
+                row.reps = reps;
+                row.elapsed_ns = elapsed_ns;
+                row.gflops = gflops_of(n, elapsed_ns, reps);
+                row.checksum = checksum;
+                rows.push_back(row);
+                std::cerr << "  sample " << sample << "/" << opt.runs
+                          << " elapsed_ns=" << elapsed_ns << " gflops=" << row.gflops << "\n";
+            }
         }
     }
 
@@ -305,8 +327,8 @@ int run_bench(const Options& opt) {
     out.setf(std::ios::fmtflags(0), std::ios::floatfield);
     out.precision(17);
     for (const Row& row : rows) {
-        out << "ijk," << row.n << "," << row.sample << "," << row.reps << "," << row.elapsed_ns
-            << "," << row.gflops << "," << row.checksum << "\n";
+        out << row.impl << "," << row.n << "," << row.sample << "," << row.reps << ","
+            << row.elapsed_ns << "," << row.gflops << "," << row.checksum << "\n";
     }
     std::cout << "已写入 " << opt.csv_path << "\n";
     return 0;
@@ -319,6 +341,15 @@ int main(int argc, char** argv) {
     if (!parse_args(argc, argv, &opt)) {
         usage();
         return 2;
+    }
+    if (bench_impl_count() <= 0) {
+        std::cerr << "没有发现实现\n";
+        return 1;
+    }
+    std::cerr << "实现数量: " << bench_impl_count() << "\n";
+    for (int i = 0; i < bench_impl_count(); ++i) {
+        const BenchImpl* impl = bench_impl_at(i);
+        std::cerr << "  " << impl->id << "\t" << impl->label << "\n";
     }
     const int check_status = run_checks();
     if (check_status != 0 || opt.check_only) {
