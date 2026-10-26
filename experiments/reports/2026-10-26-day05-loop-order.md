@@ -1,8 +1,8 @@
 # 我的实验记录：Day 5 循环顺序
 
-2026-10-26。我是东南大学电子信息大一。这页记 `ijk` 和 `ikj`。今天的 CSV 在 [`experiments/results/2026-10-26-day05-loop-order-local/`](../results/2026-10-26-day05-loop-order-local/README.md)，前一轮的 CSV 在 [`experiments/results/2026-10-25-day05-ikj-only-prior/`](../results/2026-10-25-day05-ikj-only-prior/README.md)。任务记录在 [`notes/day05-record.md`](../../notes/day05-record.md)，学习笔记在 [`notes/day05-notes.md`](../../notes/day05-notes.md)。
+2026-10-26。我是东南大学电子信息大一。这页只记 Day 5 今天的 `ijk` 和 `ikj`，30 条在 [`experiments/results/2026-10-26-day05-loop-order-local/`](../results/2026-10-26-day05-loop-order-local/README.md)。任务记录在 [`notes/day05-record.md`](../../notes/day05-record.md)，学习笔记在 [`notes/day05-notes.md`](../../notes/day05-notes.md)。
 
-今天和前一轮各一份 CSV，都是原样放进来的，测量数字没有改。两份不是同一轮，程序结构也不同。下面分开写。不把前一轮的单算法耗时和今天的双版本耗时做成同一轮对照。前一轮也不是 Day 4 的 ijk 基线。
+验收包里曾有另一份 15 条，当时写成「昨天的单算法」。用户确认那是 Day 4 的程序导出，已经放到 [`experiments/results/2026-10-26-day04-local/day04-local-program-export.csv`](../results/2026-10-26-day04-local/day04-local-program-export.csv)。它不是 Day 5 的数据，下面的表也不含它。测量数字没有改。
 
 ## 今天：同一次运行里的 ijk 和 ikj
 
@@ -31,35 +31,27 @@
 | 256 | ijk | 11.327138 | 11.266811 | 11.373856 |
 | 256 | ikj | 1.209587 | 1.157249 | 1.266663 |
 
-128 阶 `ijk` 最大 1.774361 ms，`ikj` 最大 0.270315 ms。原始记录留着，原因我没定。
+128 阶 `ijk` 最大 1.774361 ms，`ikj` 最大 0.270315 ms。原值留着。原因暂留，以后再研究。
 
 今天这一轮里，`ikj` 的中位数低于 `ijk`。内层 j 连续走，`B[k][j]` 和 `C[i][j]` 更顺着一行，这和按行存储对得上。比值是这次程序、这次规模、这次运行下的结果，不是所有机器上都一样的常数。
 
-配置截图在 [`visual-studio-release-x64.png`](../results/2026-10-26-day05-loop-order-local/visual-studio-release-x64.png)。截图显示 Visual Studio Release | x64。CPU 型号、编译器具体版本、学习用时：未记录。截图没有单独注明只属于今天还是前一轮，原图放在今天的结果目录。
-
-## 前一轮：只测 ikj
-
-文件是 [`day05-ikj-only-program-export.csv`](../results/2026-10-25-day05-ikj-only-prior/day05-ikj-only-program-export.csv)。15 条，64、128、256 各 5 次，全部 PASS。表头没有 `algorithm`，也没有逐元素比较。对应的程序快照是 [`code_history/day05/V01_yesterday_ikj_only.cpp`](../../code_history/day05/V01_yesterday_ikj_only.cpp)，里面只有 `matmul_ikj`。程序写出的原文件名是 `matmul_benchmark_raw.csv`。CSV 内没有日历日期；验收包把这轮叫做相对 2026-10-26 的「昨天」，结果目录因此用 2026-10-25，这不是 CSV 里的时间戳。
-
-重复次数是 64 阶 2208、128 阶 552、256 阶 84。计时同样包住 C 清零和乘法。检查是 `C[0][0]` 和校验和，没有今天那种逐元素列。
-
-这 15 条和今天的 30 条分开放。我不拿它们对 `ijk` 有多快，也不把两轮的单次耗时排成一张算法对照表。它也不是 Day 4 那份截图转录。
+配置截图在 [`visual-studio-release-x64.png`](../results/2026-10-26-day05-loop-order-local/visual-studio-release-x64.png)。截图显示 Visual Studio Release | x64，打开的文件名是「源1.cpp」。用户确认 Day 5 和 Day 4 是同一套环境：Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.x。CPU 截图在 [`cpu-intel-core-ultra-7-255hx.png`](../results/2026-10-26-day04-local/cpu-intel-core-ultra-7-255hx.png)，这里不复制。更细的编译器版本号未记录。学习用时未记录。
 
 ## 代码放在哪
 
 1. 我提交的今天双版本：[`src/day05_ijk_ikj_benchmark.cpp`](../../src/day05_ijk_ikj_benchmark.cpp)。快照 [`code_history/day05/V02_today_ijk_ikj.cpp`](../../code_history/day05/V02_today_ijk_ikj.cpp) 是同一份复制。里面不一定每一行都是我自己写的。`matmul_ikj` 的累加后面还留着 TODO 注释和多出来的分号，可以以后删，这次结果不变。
-2. 我此前提交的昨天单算法：只在 `code_history/day05/`。没有拿它盖掉今天的 `src/` 文件，也没有动 `src/day04_matmul.cpp`。
+2. 曾被放在 `code_history/day05/` 的那份只测 `ikj` 的源码，用户确认对应 Day 4 程序导出，已移到 [`code_history/day04/V07_user_ikj_program_export.cpp`](../../code_history/day04/V07_user_ikj_program_export.cpp)。没有拿它盖掉今天的 `src/` 文件，也没有动 `src/day04_matmul.cpp`。
 3. [`templates/gpt/day05-loop-order-template.cpp`](../../templates/gpt/day05-loop-order-template.cpp) 是 GPT 模板，文件头写了「GPT 指导模板」。它不是我交上来的源码，也不保证和我电脑上跑的版本逐字一样。验收包原件在 [`archive/2026-10-26-day05-final-acceptance/`](../../archive/2026-10-26-day05-final-acceptance/README.md)。
 
 ## 材料缺口
 
-1. CPU 型号：未记录。
-2. 编译器具体版本：未记录。源码里的泛型 lambda 需要 C++14 或更新的标准，这是语言要求，不是我记下来的编译器版本。
+1. CPU：Intel Core Ultra 7 255HX。操作系统：Windows。IDE：Visual Studio 2026 18.x。这三项是用户补记，并说明与 Day 4 一致。
+2. 比 18.x 更细的编译器版本号：未记录。源码里的泛型 lambda 需要 C++14 或更新的标准，这是语言要求，不是我记下来的工具集号。
 3. 学习用时：未记录。
-4. 配置截图只支持一条：Visual Studio Release | x64。操作系统没有另记。
+4. 配置截图支持 Release | x64。截图上的源文件名是「源1.cpp」，不是仓库里的文件名。
 
 ## 下一步
 
 1. 看缓存行和空间局部性。
 2. 把现在的 `ijk` 和 `ikj` 留作分块的基线。
-3. 以后各版本的输入、正确性检查、计时范围和编译设置保持一致。口径变了就另记一次，不覆盖这两份 CSV。
+3. 以后各版本的输入、正确性检查、计时范围和编译设置保持一致。口径变了就另记一次，不覆盖这 30 条，也不覆盖 Day 4 的两份 15 条。

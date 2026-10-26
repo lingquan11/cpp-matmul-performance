@@ -1,6 +1,6 @@
 # 今天这 30 条的简要统计
 
-数字只来自 [`day05-loop-order-program-export.csv`](day05-loop-order-program-export.csv) 的 `ms_per_multiply`。前一轮 15 条不在这里。测量值没有改。读法在 [实验记录](../../reports/2026-10-26-day05-loop-order.md)。
+数字只来自 [`day05-loop-order-program-export.csv`](day05-loop-order-program-export.csv) 的 `ms_per_multiply`。Day 4 的两份 15 条不在这里。测量值没有改。读法在 [实验记录](../../reports/2026-10-26-day05-loop-order.md)。
 
 中位数是每组 5 个数排序后的第 3 个。比值是 `ijk` 中位数除以 `ikj` 中位数，写到两位小数。
 

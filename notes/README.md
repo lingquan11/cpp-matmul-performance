@@ -17,7 +17,7 @@
 | [day04-notes.md](day04-notes.md) | Day 4：规模扩展、计时，以及校验和能查出什么 |
 | [day04-record.md](day04-record.md) | Day 4 任务记录：三个目标、本地样本、材料缺口 |
 | [day05-notes.md](day05-notes.md) | Day 5：`ijk` 和 `ikj` 的访问方式，以及今天这轮的中位数 |
-| [day05-record.md](day05-record.md) | Day 5 任务记录：30 条同轮结果、昨天 15 条补档、材料缺口 |
+| [day05-record.md](day05-record.md) | Day 5 任务记录：今天 30 条。曾误记的 15 条已改回 Day 4 |
 | [daily-task-records.md](daily-task-records.md) | 已做完并有反馈的每天 |
 | [handoff-2026-10-25-项目变更与协作同步报告.md](handoff-2026-10-25-项目变更与协作同步报告.md) | 2026-10-25 定下来的范围和约定 |
 

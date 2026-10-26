@@ -8,6 +8,6 @@ C 的每个元素要把所有 k 的乘积加完，所以要先清零再累加。
 
 今天的双版本测了 64、128、256，每种算法、每种规模 5 次。30 条都是 PASS，逐元素比较都是 YES。按今天这一份 CSV 的中位数，`ijk` 的耗时是 `ikj` 的 6.85 倍、8.45 倍、9.38 倍。数字在 [`experiments/results/2026-10-26-day05-loop-order-local/`](../experiments/results/2026-10-26-day05-loop-order-local/README.md)。
 
-前一轮的 15 条我也补进来了，全部 PASS。验收包把它叫做相对今天的「昨天」。那是只测 `ikj` 的另一份程序，放在 [`experiments/results/2026-10-25-day05-ikj-only-prior/`](../experiments/results/2026-10-25-day05-ikj-only-prior/README.md)，不混成同一轮，也不是 Day 4 的 ijk 基线。
+验收包里曾把另一份 15 条写成「昨天」。用户确认那是 Day 4 的程序导出，在 [`experiments/results/2026-10-26-day04-local/`](../experiments/results/2026-10-26-day04-local/README.md)，不算进今天这 30 条。
 
-学习用时未记录。我提交的双版本源码在 [`src/day05_ijk_ikj_benchmark.cpp`](../src/day05_ijk_ikj_benchmark.cpp)。[`templates/gpt/day05-loop-order-template.cpp`](../templates/gpt/day05-loop-order-template.cpp) 是 GPT 模板，不是我独立写的。
+学习用时未记录。环境和 Day 4 是同一套：Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.x。我提交的双版本源码在 [`src/day05_ijk_ikj_benchmark.cpp`](../src/day05_ijk_ikj_benchmark.cpp)。[`templates/gpt/day05-loop-order-template.cpp`](../templates/gpt/day05-loop-order-template.cpp) 是 GPT 模板，不是我独立写的。

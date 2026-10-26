@@ -1,12 +1,9 @@
 # 还缺的材料
 
-下面这些我还没放进仓。以前用 `03_GPT模板/`、`04_实验数据/` 这样的叫法描述缺口。仓库里没有这些路径，这里也不补空文件。
+1. 截图转录那 15 条的批量执行源码还没上传。重复次数是 585 / 89 / 9，和程序导出不是同一份输出。[`templates/gpt/day04-benchmark-template.cpp`](../../../templates/gpt/day04-benchmark-template.cpp) 是 GPT 模板，不是那份执行稿。
+2. 程序导出已经在 [`day04-local-program-export.csv`](day04-local-program-export.csv)。与它一起提交的源码是 [`code_history/day04/V07_user_ikj_program_export.cpp`](../../../code_history/day04/V07_user_ikj_program_export.cpp)。表头和输出文件名一致，只含 `matmul_ikj`。耗时不在源码里，没有重跑核对，所以不写成已经逐行复现。
+3. Visual Studio 只记到用户说的 2026、18.x。更细的编译器版本号未记录。
+4. 两份 15 条都只检查了 `C[0][0]` 和校验和，没有逐元素对照。
+5. 128 阶偏高样本的原因暂留，以后再研究。原值不删。
 
-1. 实际跑的完整基准源码。[`templates/gpt/day04-benchmark-template.cpp`](../../../templates/gpt/day04-benchmark-template.cpp) 是 GPT 模板，不保证和实际跑的那份一样。
-2. 电脑直接导出的原始 CSV。[`day04-local-screenshot-transcription.csv`](day04-local-screenshot-transcription.csv) 是按运行截图抄的。Day 5 前一轮程序也会写出名为 `matmul_benchmark_raw.csv` 的文件，那是另一份，在 [`../2026-10-25-day05-ikj-only-prior/`](../2026-10-25-day05-ikj-only-prior/README.md)，不能当成这个缺口已经补上。
-3. 编译器版本、CPU 型号、操作系统：没记。
-4. 是不是 Visual Studio Release/x64：还没确认。
-5. 学习用时：没记。
-6. 整张矩阵还没有逐元素对照。现在只对了 `C[0][0]` 和校验和，以后可以再加。
-
-测试是做完的。这里只记还缺的材料。
+测试记录是留着的。这里只记还缺的材料和还没定的原因。

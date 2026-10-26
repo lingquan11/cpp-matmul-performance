@@ -13,4 +13,4 @@
 
 GPT 模板不在这里，在 [`templates/gpt/`](../templates/gpt/README.md)。
 
-[`code_history/day04/`](../code_history/day04/README.md) 是 Day 4 的版本快照（V01–V06）。[`code_history/day05/`](../code_history/day05/README.md) 是 Day 5 的快照：前一轮 `ikj` 单算法，以及今天双版本的一份复制。前一轮源码只放在 `code_history/`，不放进本目录，避免和今天的双版本混成一份。现在用的程序仍在本目录。`day04_matmul.cpp` 没有被盖掉。
+[`code_history/day04/`](../code_history/day04/README.md) 是 Day 4 的版本快照（V01–V07）。V07 是和 Day 4 程序导出一起提交的 `ikj` 批量程序，不放进本目录，也不盖掉 `day04_matmul.cpp`。[`code_history/day05/`](../code_history/day05/README.md) 只留今天双版本的一份复制。现在用的程序仍在本目录。

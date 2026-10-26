@@ -1,11 +1,18 @@
-# 2026-10-26 Day 4 本地基准（截图转录）
+# 2026-10-26 Day 4 本地
 
-这是 Day 4 目标③的正式样本记录。我把运行截图逐行转录成 [`day04-local-screenshot-transcription.csv`](day04-local-screenshot-transcription.csv)，**不是**从电脑直接读出的原始 CSV；原始 CSV 和实际执行的完整基准源码都还没上传。元数据在 [`metadata.md`](metadata.md)。
+同一天有两份 15 条，都是 PASS，数值不同，不合并，也不互相覆盖。元数据在 [`metadata.md`](metadata.md)。
 
-- 规模：64 / 128 / 256，各 5 次正式样本，截图中均为 PASS
+| 文件 | 是什么 |
+| --- | --- |
+| [day04-local-screenshot-transcription.csv](day04-local-screenshot-transcription.csv) | 运行截图逐行转录。重复次数 585 / 89 / 9。耗时在后来 Day 5 的 `ijk` 量级。不是程序导出 |
+| [day04-local-program-export.csv](day04-local-program-export.csv) | 程序直接导出。重复次数 2208 / 552 / 84，耗时更快。用户确认这是 Day 4，不是 Day 5 |
+| [cpu-intel-core-ultra-7-255hx.png](cpu-intel-core-ultra-7-255hx.png) | 任务管理器截图。处理器为 Intel(R) Core(TM) Ultra 7 255HX |
+
+- 日期：2026-10-26
 - 计时口径：含 C 清零与矩阵乘法；A/B 初始化、校验、输出在计时外
-- 编译器、CPU、是否 Release/x64：**未记录**
-- 128 阶第 5 次明显偏高，原始值保留
-- GPT 基准模板在 [`templates/gpt/day04-benchmark-template.cpp`](../../../templates/gpt/day04-benchmark-template.cpp)，**不能**当作我实际执行的源码
-- 我实际粘贴过的单次计时程序在 [`src/day04_matmul.cpp`](../../../src/day04_matmul.cpp)
-- 缺口清单见 [`missing-materials.md`](missing-materials.md)；统计说明见 [`summary.md`](summary.md)
+- 环境：用户确认 Windows，Visual Studio 2026 18.x，CPU 见上面的截图。配置截图显示 Release | x64，在 Day 5 结果目录，用户确认两天实验因素一致
+- 128 阶偏高样本保留原值，原因暂留，以后再研究
+- 截图转录那组的批量源码还没上传。GPT 模板不能当作执行稿
+- 和程序导出一起提交的源码在 [`code_history/day04/V07_user_ikj_program_export.cpp`](../../../code_history/day04/V07_user_ikj_program_export.cpp)，只含 `matmul_ikj`。原先误放在 `code_history/day05/`
+- 我粘贴过的单次计时程序在 [`src/day04_matmul.cpp`](../../../src/day04_matmul.cpp)
+- 统计见 [`summary.md`](summary.md)。缺口见 [`missing-materials.md`](missing-materials.md)

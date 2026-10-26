@@ -8,11 +8,11 @@
 
 i-j-k 小规模正确性（Day 2）已有。`src/day02_matrix.cpp` 是固定 2×2，输出 `11 10` 和 `19 30`。
 
-Day 4 本地 64、128、256 的截图转录在 [`experiments/results/2026-10-26-day04-local/`](experiments/results/2026-10-26-day04-local/README.md)。我粘贴过的单次计时程序在 [`src/day04_matmul.cpp`](src/day04_matmul.cpp)。那次实际跑的完整基准源码和电脑直接导出的原始 CSV 还没上传。
+Day 4 是 2026-10-26。同一目录里有截图转录和程序导出两份 15 条，数值不同，都不覆盖：[`experiments/results/2026-10-26-day04-local/`](experiments/results/2026-10-26-day04-local/README.md)。我粘贴过的单次计时程序在 [`src/day04_matmul.cpp`](src/day04_matmul.cpp)。截图转录那组的批量源码还没上传。
 
-Day 5 的循环顺序（`ijk` 与 `ikj`）已验收通过。今天的 30 条程序导出在 [`experiments/results/2026-10-26-day05-loop-order-local/`](experiments/results/2026-10-26-day05-loop-order-local/README.md)。前一轮只测 `ikj` 的 15 条另放在 [`experiments/results/2026-10-25-day05-ikj-only-prior/`](experiments/results/2026-10-25-day05-ikj-only-prior/README.md)，不是 Day 4 的 ijk 基线。我提交的双版本在 [`src/day05_ijk_ikj_benchmark.cpp`](src/day05_ijk_ikj_benchmark.cpp)。[`templates/gpt/`](templates/gpt/README.md) 里的是 GPT 模板，不是我独立写的。版本快照在 [`code_history/`](code_history/README.md)。
+Day 5 的循环顺序（`ijk` 与 `ikj`）已验收通过，只计今天的 30 条：[`experiments/results/2026-10-26-day05-loop-order-local/`](experiments/results/2026-10-26-day05-loop-order-local/README.md)。我提交的双版本在 [`src/day05_ijk_ikj_benchmark.cpp`](src/day05_ijk_ikj_benchmark.cpp)。[`templates/gpt/`](templates/gpt/README.md) 里的是 GPT 模板，不是我独立写的。版本快照在 [`code_history/`](code_history/README.md)。
 
-下一步我看缓存行和空间局部性，再以现在的 `ijk`、`ikj` 为基线做分块。Day 4 的编译器和原始 CSV 仍未补。CPU 型号、编译器具体版本、Day 5 学习用时也未记录。
+下一步我看缓存行和空间局部性，再以现在的 `ijk`、`ikj` 为基线做分块。Day 4 截图转录的批量源码仍未补。比 Visual Studio 2026 18.x 更细的编译器版本号，以及 Day 5 学习用时，也未记录。
 
 眼下的安排以 [`PROJECT_STATE.md`](PROJECT_STATE.md) 为准。
 
@@ -22,7 +22,7 @@ Day 5 的循环顺序（`ijk` 与 `ikj`）已验收通过。今天的 30 条程�
 
 ## 结果在哪
 
-仓里现在有的是 Day 4 本地 64、128、256 的截图转录，在 [`experiments/results/2026-10-26-day04-local/`](experiments/results/2026-10-26-day04-local/README.md)，短记录在 [Day 4 本地实验记录](experiments/reports/2026-10-26-day04-local.md)。Day 5 今天的程序导出在 [`experiments/results/2026-10-26-day05-loop-order-local/`](experiments/results/2026-10-26-day05-loop-order-local/README.md)，前一轮单算法在 [`experiments/results/2026-10-25-day05-ikj-only-prior/`](experiments/results/2026-10-25-day05-ikj-only-prior/README.md)，短记录在 [Day 5 循环顺序](experiments/reports/2026-10-26-day05-loop-order.md)。
+仓里现在有的是 Day 4 的截图转录和程序导出，在 [`experiments/results/2026-10-26-day04-local/`](experiments/results/2026-10-26-day04-local/README.md)，短记录在 [Day 4 本地实验记录](experiments/reports/2026-10-26-day04-local.md)。Day 5 的 30 条在 [`experiments/results/2026-10-26-day05-loop-order-local/`](experiments/results/2026-10-26-day05-loop-order-local/README.md)，短记录在 [Day 5 循环顺序](experiments/reports/2026-10-26-day05-loop-order.md)。
 
 报告从 [`experiments/reports/`](experiments/reports/README.md) 进入。大规模扫描结果我还没放进仓。
 
@@ -40,11 +40,11 @@ Day 5 的循环顺序（`ijk` 与 `ikj`）已验收通过。今天的 30 条程�
 | --- | --- |
 | [`src/`](src/README.md) | 我提交或粘贴过、现在接着看的程序（Day 1 单元素，Day 2 的 2×2，Day 4 单次计时，Day 5 双版本） |
 | [`templates/gpt/`](templates/gpt/README.md) | GPT 模板。不是我独立写的，也不放在 `src/` |
-| [`code_history/`](code_history/README.md) | Day 4（V01–V06）和 Day 5 的版本快照。前一轮 `ikj` 只在这里 |
+| [`code_history/`](code_history/README.md) | Day 4（V01–V07）和 Day 5 双版本的快照。哈希不同的文件没有合并 |
 | [`benchmarks/`](benchmarks/README.md) | 占位。以后放我自己测稳后再公开的计时驱动。现在没有可跑的云端基准脚本 |
 | [`experiments/`](experiments/README.md) | 实验入口。分析在 `experiments/reports/`，原始数据在 `experiments/results/` |
 | [`experiments/reports/`](experiments/reports/README.md) | 实验记录和阶段报告 |
-| [`experiments/results/`](experiments/results/README.md) | 实测记录。一组一个目录。Day 4 是截图转录；Day 5 今天是程序导出，前一轮另开目录 |
+| [`experiments/results/`](experiments/results/README.md) | 实测记录。Day 4 的转录和程序导出分文件放在同一目录；Day 5 是 30 条程序导出 |
 | [`notes/`](notes/README.md) | 每日学习记录和理解笔记 |
 | [`archive/2026-10-26-day05-final-acceptance/`](archive/2026-10-26-day05-final-acceptance/README.md) | Day 5 最终验收 ZIP 原件。拆开的文件在各目录，原包留着核对 |
 | [`PROJECT_STATE.md`](PROJECT_STATE.md) | 当前状态。和本页不一致时，以它为准 |
