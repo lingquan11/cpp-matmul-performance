@@ -13,4 +13,4 @@
 
 `gpt-templates/` 只放辅导时的模板，不算我独立写完的实现。
 
-[`code_history/day04/`](../code_history/day04/README.md) 是 Day 4 的演进快照（V01–V06），和本目录现行文件并存，哈希未必相同。现行入口仍在这里。
+[`code_history/day04/`](../code_history/day04/README.md) 是 Day 4 的版本快照（V01–V06）。现在用的程序仍在本目录。

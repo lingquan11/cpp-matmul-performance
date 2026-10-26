@@ -8,4 +8,4 @@
 
 我在对话里粘贴过的单次计时程序在 [`src/day04_matmul.cpp`](../day04_matmul.cpp)。本地 64、128、256 的截图转录在 [`experiments/results/2026-10-26_day04-local/`](../../experiments/results/2026-10-26_day04-local/README.md)。
 
-V06 的演进副本在 [`code_history/day04/V06_gpt_benchmark_template.cpp`](../../code_history/day04/V06_gpt_benchmark_template.cpp)。那份也是 GPT 模板，不是我独立写的。本目录的 `day04_benchmark.cpp` 继续留着，没有用 V06 覆盖，两份哈希也不相同。
+V06 的副本在 [`code_history/day04/V06_gpt_benchmark_template.cpp`](../../code_history/day04/V06_gpt_benchmark_template.cpp)。那份也是 GPT 模板，不是我独立写的。

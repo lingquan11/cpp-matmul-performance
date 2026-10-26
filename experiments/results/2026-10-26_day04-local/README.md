@@ -9,5 +9,3 @@
 - GPT 基准模板在 [`src/gpt-templates/day04_benchmark.cpp`](../../../src/gpt-templates/day04_benchmark.cpp)，**不能**当作我实际执行的源码
 - 我实际粘贴过的单次计时程序在 [`src/day04_matmul.cpp`](../../../src/day04_matmul.cpp)
 - 缺口清单见 [`missing-materials.md`](missing-materials.md)；统计说明见 [`summary.md`](summary.md)
-
-公开仓里曾经放过的云端规模扫描展示已按我的要求撤下。这组只是 Day 4 本地截图转录。

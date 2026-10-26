@@ -9,6 +9,4 @@
 | [2026-10-26-day04-local.md](2026-10-26-day04-local.md) | 2026-10-26 Day 4 本地 64/128/256，数据来自截图转录 |
 | [stage-a-algorithm-implementation.md](stage-a-algorithm-implementation.md) | 阶段 A：2×2 算法实现与正确性 |
 
-公开展示用的云端规模扫描已按我的要求撤下。
-
 分块的报告还没写。
