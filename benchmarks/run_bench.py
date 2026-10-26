@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import csv
 import datetime as dt
+import math
 import os
 import statistics
 import subprocess
@@ -221,26 +222,36 @@ def plot_summary(summary: list[dict[str, object]], path: Path) -> str:
     if language == "zh":
         title = "i-j-k 三重循环在不同矩阵规模下的性能"
         xlabel = "矩阵规模 n"
-        ylabel_time = "单次耗时（秒）"
+        ylabel_time = "单次耗时（毫秒）"
         ylabel_gflops = "GFLOPS"
-        note = "GFLOPS = 2·n³ / 单次耗时 / 10⁹；整数乘加，误差线为样本最小/最大。仅供相对比较。"
+        note = "GFLOPS = 2*n^3 / 单次耗时(秒) / 1e9；整数乘加，误差线为样本最小/最大。仅供相对比较。"
         labels = IMPL_LABELS
+        time_scale = 1e3
     else:
         title = "i-j-k triple loop across matrix sizes"
         xlabel = "Matrix size n"
-        ylabel_time = "Time per call (s)"
+        ylabel_time = "Time per call (ms)"
         ylabel_gflops = "GFLOPS"
-        note = "GFLOPS = 2*n^3 / time / 1e9 for integer multiply-adds. Error bars are min/max. Relative only."
+        note = "GFLOPS = 2*n^3 / time(s) / 1e9 for integer multiply-adds. Error bars are min/max. Relative only."
         labels = {"ijk": "i-j-k triple loop"}
+        time_scale = 1e3
+
+    def log_tick(value, _pos):
+        if value <= 0:
+            return ""
+        exponent = round(math.log10(value))
+        if abs(value - 10**exponent) / value < 1e-6:
+            return f"1e{exponent}" if exponent != 0 else "1"
+        return f"{value:g}"
 
     fig, axes = plt.subplots(1, 2, figsize=(10.2, 4.4))
     colors = ["#1f4e79", "#c45911", "#548235", "#7030a0"]
     for index, impl in enumerate(impls):
         rows = [row for row in summary if row["impl"] == impl]
         ns = [int(row["n"]) for row in rows]
-        med_t = [float(row["median_time_s"]) for row in rows]
-        min_t = [float(row["min_time_s"]) for row in rows]
-        max_t = [float(row["max_time_s"]) for row in rows]
+        med_t = [float(row["median_time_s"]) * time_scale for row in rows]
+        min_t = [float(row["min_time_s"]) * time_scale for row in rows]
+        max_t = [float(row["max_time_s"]) * time_scale for row in rows]
         med_g = [float(row["gflops_median"]) for row in rows]
         min_g = [float(row["gflops_min"]) for row in rows]
         max_g = [float(row["gflops_max"]) for row in rows]
@@ -283,7 +294,10 @@ def plot_summary(summary: list[dict[str, object]], path: Path) -> str:
         axis.grid(True, which="both", linestyle="--", alpha=0.35)
         axis.legend()
     axes[0].set_yscale("log")
+    axes[0].yaxis.set_major_formatter(plt.FuncFormatter(log_tick))
     axes[0].set_ylabel(ylabel_time)
+    gmax = max(float(row["gflops_max"]) for row in summary)
+    axes[1].set_ylim(0, gmax * 1.28)
     axes[1].set_ylabel(ylabel_gflops)
     fig.suptitle(title)
     fig.tight_layout(rect=(0, 0.07, 1, 0.92))
