@@ -2,11 +2,11 @@
 // BENCH_LABEL: i-j-k 三重循环
 // BENCH_LABEL_EN: i-j-k triple loop
 
-// 与 src/day02_matrix.cpp 相同的 i-j-k 循环，只把固定上界 2 换成参数 n：
+// 我把 day02 的 i-j-k 拿过来，上界改成 n：
 //   for i, for j:
 //     C[i][j] = 0;
 //     for k: C[i][j] += A[i][k] * B[k][j];
-// 单独编译，且基准不开启 LTO，避免计时循环把多次调用折成一次。
+// 这个文件单独编译。基准不开 LTO，计时循环里的多次调用就会一次次执行。
 void matmul_ijk(const int* __restrict__ A, const int* __restrict__ B,
                 int* __restrict__ C, int n) {
     for (int i = 0; i < n; ++i) {
