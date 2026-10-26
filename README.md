@@ -8,11 +8,13 @@
 
 ## 当前做到哪
 
-i-j-k 基线我已经做完了。`src/day02_matrix.cpp` 是固定 2×2，输出 `11 10` 和 `19 30`。2026-10-26 我在云端 VM 上把同一种实现从 n=64 测到 1024，每个规模 5 个正式样本。这是 i-j-k 的规模扫描，不是循环重排、分块或 SCALE-Sim。
+i-j-k 小规模正确性（Day 2）已有。`src/day02_matrix.cpp` 是固定 2×2，输出 `11 10` 和 `19 30`。
 
-同一天我把 Day 4 也归档了。本地程序可以输入矩阵阶数，并计了 64、128、256 各 5 次。那组在 [`experiments/results/2026-10-26_day04-local/`](experiments/results/2026-10-26_day04-local/README.md)，和上面这场云端扫描分开，数字不放进下面那张表。我粘贴过的单次计时程序在 [`src/day04_matmul.cpp`](src/day04_matmul.cpp)。实际执行的完整基准源码和电脑直接导出的原始 CSV 还没上传。[`src/gpt-templates/`](src/gpt-templates/README.md) 里放的是 GPT 模板，不是我独立写的。
+Day 4 本地 64、128、256 的截图转录已归档，在 [`experiments/results/2026-10-26_day04-local/`](experiments/results/2026-10-26_day04-local/README.md)。我粘贴过的单次计时程序在 [`src/day04_matmul.cpp`](src/day04_matmul.cpp)。实际执行的完整基准源码和电脑直接导出的原始 CSV 还没上传。[`src/gpt-templates/`](src/gpt-templates/README.md) 里放的是 GPT 模板，不是我独立写的。
 
-下一步我先把 Day 4 的编译器和构建配置补记清楚。若补测 128，旧样本留着另记。然后加另一种循环顺序，和 i-j-k 放在同一张图上，再在同一口径下做分块，然后看脉动阵列和 SCALE-Sim。
+公开展示用的规模扫描结果已按我的要求撤下。等我自己在本地或正式复现之后，再放。
+
+下一步我先把 Day 4 的编译器和构建配置补记清楚。若补测 128，旧样本留着另记。然后加另一种循环顺序，再在同一口径下做分块，然后看脉动阵列和 SCALE-Sim。
 
 眼下的安排以 [`PROJECT_STATE.md`](PROJECT_STATE.md) 为准。
 
@@ -26,25 +28,13 @@ python3 benchmarks/run_bench.py
 
 脚本会把 `benchmarks/kernels/` 里的实现画在同一张图上，现在里面是 i-j-k。循环重排或分块放进这个目录之后，还是跑同一条命令，步骤在 [`benchmarks/README.md`](benchmarks/README.md)。
 
-推送到 `main` 时，上面的徽章会编译并跑一次 n=64，只检查能否通过，不更新图。
+推送到 `main` 时，上面的徽章会编译并跑一次 n=64，只检查能否通过。这次检查不往仓库里写结果。
 
 ## 结果在哪
 
-n=1024 的 GFLOPS 是 **0.569162**，约为 n=64（6.929414）的 8.2%。数字来自 2026-10-26 04:05 UTC 那次云端 VM 运行，只适合看这次实验内部的相对关系。口径、环境和能说的分析在 [规模扫描实验记录](experiments/reports/2026-10-26-ijk-scale.md)。
+现在公开留着的是 Day 4 本地 64、128、256 的截图转录，在 [`experiments/results/2026-10-26_day04-local/`](experiments/results/2026-10-26_day04-local/README.md)。短记录在 [Day 4 本地实验记录](experiments/reports/2026-10-26-day04-local.md)。
 
-![i-j-k 三重循环在不同矩阵规模下的耗时与 GFLOPS](experiments/results/2026-10-26_ijk-scale/perf.png)
-
-| 规模 n | 单次耗时中位数 (ms) | GFLOPS |
-| ---: | ---: | ---: |
-| 64 | 0.075661 | 6.929414 |
-| 128 | 1.285246 | 3.263424 |
-| 256 | 13.434294 | 2.497670 |
-| 512 | 104.810185 | 2.561158 |
-| 1024 | 3773.059512 | 0.569162 |
-
-原始样本在 [`experiments/results/2026-10-26_ijk-scale/raw.csv`](experiments/results/2026-10-26_ijk-scale/raw.csv)。报告都从 [`experiments/reports/`](experiments/reports/README.md) 进入。
-
-Day 4 本地 64、128、256 的截图转录在 [`experiments/results/2026-10-26_day04-local/`](experiments/results/2026-10-26_day04-local/README.md)，短记录在 [Day 4 本地实验记录](experiments/reports/2026-10-26-day04-local.md)。那组和上面这张云端表分开。
+报告从 [`experiments/reports/`](experiments/reports/README.md) 进入。上面说的规模扫描已撤下，这里不再放那次的表和图。
 
 ## 笔记在哪
 
@@ -62,7 +52,7 @@ Day 4 本地 64、128、256 的截图转录在 [`experiments/results/2026-10-26_
 | [`benchmarks/`](benchmarks/README.md) | 计时驱动。`kernels/` 放要上图的实现 |
 | [`experiments/`](experiments/README.md) | 实验入口。分析在 `experiments/reports/`，原始数据在 `experiments/results/` |
 | [`experiments/reports/`](experiments/reports/README.md) | 实验记录与阶段报告（唯一报告入口） |
-| [`experiments/results/`](experiments/results/README.md) | CSV 和图。云端扫描是程序写出的，Day 4 本地是截图转录 |
+| [`experiments/results/`](experiments/results/README.md) | 实测记录。现在留着的是 Day 4 本地截图转录 |
 | [`notes/`](notes/README.md) | 每日学习记录和理解笔记 |
 | [`PROJECT_STATE.md`](PROJECT_STATE.md) | 当前状态。和本页不一致时，以它为准 |
 
