@@ -20,7 +20,7 @@ i-j-k 基线我已经做完了。`src/day02_matrix.cpp` 是固定 2×2，输出 
 python3 benchmarks/run_bench.py
 ```
 
-需要 `g++` 和 Python 3。画图需要 `matplotlib`；没有安装时这条命令会尝试安装。默认规模 64、128、256、512、1024，每个规模 5 个正式样本，输出到 `results/<日期>_matmul/`。
+需要 `g++` 和 Python 3。画图需要 `matplotlib`；没有安装时这条命令会尝试安装。默认规模 64、128、256、512、1024，每个规模 5 个正式样本，输出到 `experiments/results/<日期>_matmul/`。
 
 脚本会把 `benchmarks/kernels/` 里的实现画在同一张图上，现在里面是 i-j-k。循环重排或分块放进这个目录之后，还是跑同一条命令，步骤在 [`benchmarks/README.md`](benchmarks/README.md)。
 
@@ -28,9 +28,9 @@ python3 benchmarks/run_bench.py
 
 ## 结果在哪
 
-n=1024 的 GFLOPS 是 **0.569162**，约为 n=64（6.929414）的 8.2%。数字来自 2026-10-26 04:05 UTC 那次云端 VM 运行，只适合看这次实验内部的相对关系。口径、环境和能说的分析在 [规模扫描实验记录](reports/2026-10-26-ijk-scale.md)。
+n=1024 的 GFLOPS 是 **0.569162**，约为 n=64（6.929414）的 8.2%。数字来自 2026-10-26 04:05 UTC 那次云端 VM 运行，只适合看这次实验内部的相对关系。口径、环境和能说的分析在 [规模扫描实验记录](experiments/reports/2026-10-26-ijk-scale.md)。
 
-![i-j-k 三重循环在不同矩阵规模下的耗时与 GFLOPS](results/2026-10-26_ijk-scale/perf.png)
+![i-j-k 三重循环在不同矩阵规模下的耗时与 GFLOPS](experiments/results/2026-10-26_ijk-scale/perf.png)
 
 | 规模 n | 单次耗时中位数 (ms) | GFLOPS |
 | ---: | ---: | ---: |
@@ -40,7 +40,7 @@ n=1024 的 GFLOPS 是 **0.569162**，约为 n=64（6.929414）的 8.2%。数字�
 | 512 | 104.810185 | 2.561158 |
 | 1024 | 3773.059512 | 0.569162 |
 
-原始样本在 [`results/2026-10-26_ijk-scale/raw.csv`](results/2026-10-26_ijk-scale/raw.csv)。报告都从 [`reports/`](reports/README.md) 进入。
+原始样本在 [`experiments/results/2026-10-26_ijk-scale/raw.csv`](experiments/results/2026-10-26_ijk-scale/raw.csv)。报告都从 [`experiments/reports/`](experiments/reports/README.md) 进入。
 
 ## 笔记在哪
 
@@ -56,14 +56,15 @@ n=1024 的 GFLOPS 是 **0.569162**，约为 n=64（6.929414）的 8.2%。数字�
 | --- | --- |
 | [`src/`](src/README.md) | 已有的学习程序（Day 1 单元素，Day 2 的 2×2） |
 | [`benchmarks/`](benchmarks/README.md) | 计时驱动。`kernels/` 放要上图的实现 |
-| [`results/`](results/README.md) | 实测 CSV 和图 |
+| [`experiments/`](experiments/README.md) | 实验入口。分析在 `experiments/reports/`，原始数据在 `experiments/results/` |
+| [`experiments/reports/`](experiments/reports/README.md) | 实验记录与阶段报告（唯一报告入口） |
+| [`experiments/results/`](experiments/results/README.md) | 实测 CSV 和图 |
 | [`notes/`](notes/README.md) | 每日学习记录和理解笔记 |
-| [`reports/`](reports/README.md) | 实验记录与阶段报告（唯一报告入口） |
 | [`PROJECT_STATE.md`](PROJECT_STATE.md) | 当前状态。和本页不一致时，以它为准 |
 
 <details>
 <summary>协作备忘（看成果可以跳过）</summary>
 
-2026-10-25 确认的范围和教学约定在 [`handoff/2026-10-25-项目变更与协作同步报告.md`](handoff/2026-10-25-项目变更与协作同步报告.md)。那是给后续协作者的决定记录，不是实验结论。
+2026-10-25 确认的范围和教学约定在 [`notes/handoff-2026-10-25-项目变更与协作同步报告.md`](notes/handoff-2026-10-25-项目变更与协作同步报告.md)。那是给后续协作者的决定记录，不是实验结论。
 
 </details>

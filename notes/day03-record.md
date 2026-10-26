@@ -2,7 +2,7 @@
 
 2026-10-23。用时我没记。
 
-这一天我做了零矩阵测试，并把 O(n³) 和性能实验方案写进 `day03-notes.md`。后来按这个方向做的规模扫描在 `results/2026-10-26_ijk-scale/`，我怎么读那些数在 `reports/2026-10-26-ijk-scale.md`。
+这一天我做了零矩阵测试，并把 O(n³) 和性能实验方案写进 `day03-notes.md`。后来按这个方向做的规模扫描在 `experiments/results/2026-10-26_ijk-scale/`，我怎么读那些数在 `experiments/reports/2026-10-26-ijk-scale.md`。
 
 零矩阵通过了。我把输入换回原来的矩阵，输出是：
 

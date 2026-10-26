@@ -1,0 +1,8 @@
+# 我的实验
+
+分析写在 [`reports/`](reports/README.md)，原始 CSV、图和环境记录放在 [`results/`](results/README.md)。当前做到哪以仓库根的 [`PROJECT_STATE.md`](../PROJECT_STATE.md) 为准。
+
+| 实验 | 报告 | 原始数据 |
+| --- | --- | --- |
+| 2026-10-26，i-j-k，n 从 64 到 1024 | [2026-10-26-ijk-scale.md](reports/2026-10-26-ijk-scale.md) | [2026-10-26_ijk-scale/](results/2026-10-26_ijk-scale/) |
+| 阶段 A：2×2 算法实现与正确性 | [stage-a-algorithm-implementation.md](reports/stage-a-algorithm-implementation.md) | 这次没有单独的测量目录 |
