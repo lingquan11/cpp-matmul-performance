@@ -1,7 +1,5 @@
 # cpp-matmul-performance
 
-[![小规模基准](https://github.com/lingquan11/cpp-matmul-performance/actions/workflows/bench.yml/badge.svg)](https://github.com/lingquan11/cpp-matmul-performance/actions/workflows/bench.yml)
-
 用可复现的 C++ 计时，看朴素矩阵乘法在规模变大以后，耗时为什么不跟着运算次数走，从而理解数据复用为什么对 NPU 重要。
 
 我是东南大学电子信息专业大一。
@@ -18,15 +16,7 @@ Day 4 本地 64、128、256 的截图转录在 [`experiments/results/2026-10-26_
 
 ## 怎么跑
 
-```bash
-python3 benchmarks/run_bench.py
-```
-
-需要 `g++` 和 Python 3。画图需要 `matplotlib`；没有安装时这条命令会尝试安装。默认规模 64、128、256、512、1024，每个规模 5 个正式样本，输出到 `experiments/results/<日期>_matmul/`。
-
-脚本会把 `benchmarks/kernels/` 里的实现画在同一张图上，现在里面是 i-j-k。循环重排或分块放进这个目录之后，还是跑同一条命令，步骤在 [`benchmarks/README.md`](benchmarks/README.md)。
-
-推送到 `main` 时，上面的徽章会编译并跑一次 n=64，只检查能否通过。这次检查不往仓库里写结果。
+仓库里现在没有可跑的云端基准脚本。学习程序在 [`src/`](src/README.md)。
 
 ## 结果在哪
 
@@ -48,7 +38,7 @@ python3 benchmarks/run_bench.py
 | --- | --- |
 | [`src/`](src/README.md) | 学习程序（Day 1 单元素，Day 2 的 2×2，Day 4 单次计时）。[`src/gpt-templates/`](src/gpt-templates/README.md) 只放 GPT 模板 |
 | [`code_history/`](code_history/README.md) | Day 4 代码演进快照（V01–V06） |
-| [`benchmarks/`](benchmarks/README.md) | 计时驱动。`kernels/` 放要上图的实现 |
+| [`benchmarks/`](benchmarks/README.md) | 占位。以后放我自己测稳后再公开的计时驱动。现在没有可跑的云端基准脚本 |
 | [`experiments/`](experiments/README.md) | 实验入口。分析在 `experiments/reports/`，原始数据在 `experiments/results/` |
 | [`experiments/reports/`](experiments/reports/README.md) | 实验记录和阶段报告 |
 | [`experiments/results/`](experiments/results/README.md) | 实测记录。现在是 Day 4 本地截图转录 |
