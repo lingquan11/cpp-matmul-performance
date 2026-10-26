@@ -58,7 +58,9 @@ GFLOPS = 2 * n^3 / 单次耗时（秒） / 1e9
 - 内存：MemTotal 16387280 kB
 - 编译器：g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
 - 编译命令：`g++ -O2 -std=c++17 -Wall -Wextra -Werror -o build/matmul_bench benchmarks/matmul_bench.cpp benchmarks/ijk_kernel.cpp`
-- 没有 `-flto`，没有 `-march=native`，没有绑核，没有采 perf 计数器
+- 没有 `-flto`，没有 `-march=native`，没有 `-falign-loops`，没有绑核，没有采 perf 计数器
+
+之后的 `python3 benchmarks/run_bench.py` 会多一个 `-falign-loops=32`。这是计时工具的选项，不改循环写法。同一天在这台 VM 上做过一次对照：两份循环体相同的函数，只因链接位置不同，n=64 测得大约 3.87 和 6.94 GFLOPS；加上该选项后大约是 6.84 和 6.85（各 2 个样本）。所以上表里的 i-j-k 落在较快的那种布局（6.93），规模之间的比较仍然可用，但不要把以后带这个选项的绝对值和本表混在一起。
 
 `lscpu` 写 4 instances。下面把 L1d、L2 理解成每核一份，也就是每核 L1d 48 KiB、每核 L2 2 MiB，L3 是 320 MiB 共享。这是对字段的读法，不是另一次缓存测量。
 

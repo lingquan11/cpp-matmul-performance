@@ -25,6 +25,9 @@ KERNEL_DIR = ROOT / "benchmarks" / "kernels"
 BENCH_SRC = ROOT / "benchmarks" / "matmul_bench.cpp"
 DAY02_SRC = ROOT / "src" / "day02_matrix.cpp"
 CXX_FLAGS = ["-O2", "-std=c++17", "-Wall", "-Wextra", "-Werror"]
+# 同一循环体若落在不同对齐上，这台机器上的耗时可以差出将近一倍。
+# 只加在计时编译上，不改变算法。2026-10-26 已发表的数据没有这个选项。
+BENCH_FLAGS = CXX_FLAGS + ["-falign-loops=32"]
 ID_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 
 
@@ -163,7 +166,7 @@ def compile_sources(kernels: list[Kernel]) -> tuple[Path, str]:
     bench_bin = BUILD / "matmul_bench"
     cmd = [
         "g++",
-        *CXX_FLAGS,
+        *BENCH_FLAGS,
         "-I",
         str(ROOT / "benchmarks"),
         "-o",
