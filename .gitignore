@@ -8,6 +8,9 @@
 *.dylib
 a.out
 matmul
+build/
+__pycache__/
+*.pyc
 
 # Editor / OS
 .DS_Store

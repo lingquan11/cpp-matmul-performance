@@ -1,0 +1,20 @@
+name: 小规模基准
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装 g++
+        run: sudo apt-get update && sudo apt-get install -y g++
+
+      - name: 编译并运行 n=64 基准
+        run: python3 benchmarks/run_bench.py --sizes 64 --runs 1 --min-ms 50 --skip-plot --out /tmp/matmul-bench-ci
