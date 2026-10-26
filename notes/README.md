@@ -2,4 +2,16 @@
 
 看视频、读文档时我把以后还会翻的东西放在这里，比如缓存和数据局部性、循环顺序为什么会影响性能、脉动阵列的数据流。我会写上来源，把原文里的事实和我自己的理解分开。跟代码有关的，我会注明对应的实现或实验结果。
 
-每天的流水在 `daily-task-records.md`。某一天更全的记录是 `dayNN-record.md` 或 `dayNN_notes.md`。
+命名：
+
+- 理解笔记：`dayNN-notes.md`
+- 每日归档：`dayNN-record.md`
+- 每天的流水：[`daily-task-records.md`](daily-task-records.md)
+
+| 文件 | 内容 |
+| --- | --- |
+| [day01-notes.md](day01-notes.md) | Day 1：单元素 |
+| [day02-record.md](day02-record.md) | Day 2：固定 2×2 |
+| [day03-notes.md](day03-notes.md) | Day 3：零矩阵、O(n³) 和当时的测量方案 |
+| [day03-record.md](day03-record.md) | Day 3 的短说明 |
+| [daily-task-records.md](daily-task-records.md) | 已做完并有反馈的每天 |

@@ -4,9 +4,9 @@
 
 我想把 C++ 矩阵乘法做成能复现的实验：先保证算对，再把性能测稳，然后比较循环顺序、做分块、把报告写清楚。测到的数据复用，我再去对 MAC、PE、脉动阵列和 SCALE-Sim。我给自己的日期是 2026-12-10，12 月 11 日之前把材料理好。量化先不放进主线。
 
-Day 1 的 `src/day01_matrix.cpp` 算 C[0][0]，输出 11，笔记在 `notes/day01_notes.md`。Day 2 的 `src/day02_matrix.cpp` 是固定 2×2 的 i-j-k，原始输入输出 `11 10` 和 `19 30`，单位矩阵测试得到 A 本身。阶段 A 的报告在 `reports/stage-a-algorithm-implementation.md`。Day 3 我把 B 换成零矩阵，输出全 0，换回原来的输入后又是 `11 10` 和 `19 30`。当天的 O(n³) 和实验方案在 `notes/day03_notes.md`。2026-10-26 我在云端 VM 上扫了 n=64、128、256、512、1024，每个规模 5 个正式样本，数据在 `results/2026-10-26_ijk-scale/`，我怎么读这些数写在 `docs/report.md`。
+Day 1 的 `src/day01_matrix.cpp` 算 C[0][0]，输出 11，笔记在 `notes/day01-notes.md`。Day 2 的 `src/day02_matrix.cpp` 是固定 2×2 的 i-j-k，原始输入输出 `11 10` 和 `19 30`，单位矩阵测试得到 A 本身。阶段 A 的报告在 `reports/stage-a-algorithm-implementation.md`。Day 3 我把 B 换成零矩阵，输出全 0，换回原来的输入后又是 `11 10` 和 `19 30`。当天的 O(n³) 和实验方案在 `notes/day03-notes.md`。2026-10-26 我在云端 VM 上扫了 n=64、128、256、512、1024，每个规模 5 个正式样本，数据在 `results/2026-10-26_ijk-scale/`，我怎么读这些数写在 `reports/2026-10-26-ijk-scale.md`。
 
-下一步我打算先加另一种循环顺序，和 i-j-k 放在同一张图上。然后在同一口径下做分块，原始数据留着。cache miss 和 TLB miss 用来对 `docs/report.md` 里的假设。再往后是脉动阵列和 SCALE-Sim。新内核怎么放，我写在 `benchmarks/README.md`。
+下一步我打算先加另一种循环顺序，和 i-j-k 放在同一张图上。然后在同一口径下做分块，原始数据留着。cache miss 和 TLB miss 用来对 `reports/2026-10-26-ijk-scale.md` 里的假设。再往后是脉动阵列和 SCALE-Sim。新内核怎么放，我写在 `benchmarks/README.md`。
 
 时间上我每周大约留 8 到 10 小时，课优先。大约七到八成排成预定的任务，剩下的用来排错和复习。工作日做小步，完整实验等我有整块时间。一件事做到两小时还卡住，我就先把卡点记下来再拆开。
 
