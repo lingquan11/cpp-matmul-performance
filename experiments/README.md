@@ -4,6 +4,7 @@
 
 | 实验 | 报告 | 原始数据 |
 | --- | --- | --- |
-| 2026-10-26，Day 4 本地 64/128/256（截图转录） | [2026-10-26-day04-local.md](reports/2026-10-26-day04-local.md) | [2026-10-26_day04-local/](results/2026-10-26_day04-local/) |
-| 2026-10-26，Day 5 循环顺序（今天双版本，昨天单算法另存） | [2026-10-26-day05-loop-order.md](reports/2026-10-26-day05-loop-order.md) | [2026-10-26_day05-loop-order/](results/2026-10-26_day05-loop-order/) |
+| 2026-10-26，Day 4 本地 64/128/256（截图转录） | [2026-10-26-day04-local.md](reports/2026-10-26-day04-local.md) | [2026-10-26-day04-local/](results/2026-10-26-day04-local/) |
+| Day 5 前一轮，只测 `ikj`（程序导出，不是 Day 4 基线） | [2026-10-26-day05-loop-order.md](reports/2026-10-26-day05-loop-order.md) 的前一轮一节 | [2026-10-25-day05-ikj-only-prior/](results/2026-10-25-day05-ikj-only-prior/) |
+| 2026-10-26，Day 5 今天的 `ijk` / `ikj` | [2026-10-26-day05-loop-order.md](reports/2026-10-26-day05-loop-order.md) | [2026-10-26-day05-loop-order-local/](results/2026-10-26-day05-loop-order-local/) |
 | 阶段 A：2×2 算法实现与正确性 | [stage-a-algorithm-implementation.md](reports/stage-a-algorithm-implementation.md) | 这次没有单独的测量目录 |

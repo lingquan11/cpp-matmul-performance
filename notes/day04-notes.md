@@ -10,4 +10,4 @@
 
 正式样本是 64、128、256，每个规模 5 次。截图里 15 条都是 PASS。128 阶第 5 次明显偏高，我留着，原因没定。学习用时没记。
 
-这轮是辅导着做的。GPT 给的基准模板我放在 `src/gpt-templates/`，不是我独立写的。实际跑的完整源码和原始 CSV 还没上传。版本快照在 `code_history/day04/`。
+这轮是辅导着做的。GPT 给的基准模板我放在 `templates/gpt/`，不是我独立写的。实际跑的完整源码和原始 CSV 还没上传。版本快照在 `code_history/day04/`。截图转录在 `experiments/results/2026-10-26-day04-local/`。

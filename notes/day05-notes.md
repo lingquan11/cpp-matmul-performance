@@ -6,8 +6,8 @@ C++ 的二维数组按行存。`i-j-k` 最里面是 k，访问 `B[k][j]` 时每�
 
 C 的每个元素要把所有 k 的乘积加完，所以要先清零再累加。如果每进入一次 k 就把 C 清零，前面加过的就没了。
 
-今天的双版本测了 64、128、256，每种算法、每种规模 5 次。30 条都是 PASS，逐元素比较都是 YES。按今天这一份 CSV 的中位数，`ijk` 的耗时是 `ikj` 的 6.85 倍、8.45 倍、9.38 倍。数字在 [`experiments/results/2026-10-26_day05-loop-order/`](../experiments/results/2026-10-26_day05-loop-order/README.md)。
+今天的双版本测了 64、128、256，每种算法、每种规模 5 次。30 条都是 PASS，逐元素比较都是 YES。按今天这一份 CSV 的中位数，`ijk` 的耗时是 `ikj` 的 6.85 倍、8.45 倍、9.38 倍。数字在 [`experiments/results/2026-10-26-day05-loop-order-local/`](../experiments/results/2026-10-26-day05-loop-order-local/README.md)。
 
-昨天的 15 条我也补进来了，全部 PASS。那是另一天、只测 `ikj` 的程序，和今天分开放，不混成同一轮。
+前一轮的 15 条我也补进来了，全部 PASS。验收包把它叫做相对今天的「昨天」。那是只测 `ikj` 的另一份程序，放在 [`experiments/results/2026-10-25-day05-ikj-only-prior/`](../experiments/results/2026-10-25-day05-ikj-only-prior/README.md)，不混成同一轮，也不是 Day 4 的 ijk 基线。
 
-学习用时未记录。我提交的双版本源码在 [`src/day05_ijk_ikj_benchmark.cpp`](../src/day05_ijk_ikj_benchmark.cpp)。[`src/gpt-templates/day05_loop_order_comparison.cpp`](../src/gpt-templates/day05_loop_order_comparison.cpp) 是 GPT 模板，不是我独立写的。
+学习用时未记录。我提交的双版本源码在 [`src/day05_ijk_ikj_benchmark.cpp`](../src/day05_ijk_ikj_benchmark.cpp)。[`templates/gpt/day05-loop-order-template.cpp`](../templates/gpt/day05-loop-order-template.cpp) 是 GPT 模板，不是我独立写的。

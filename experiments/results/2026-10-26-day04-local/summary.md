@@ -2,7 +2,7 @@
 
 ## 数据来源
 
-我把聊天里交的运行截图逐行抄成 CSV。这不是电脑直接导出的原始 CSV。原始 CSV 还没上传。以后找到的话，以原始文件为准。
+我把聊天里交的运行截图逐行抄成 [`day04-local-screenshot-transcription.csv`](day04-local-screenshot-transcription.csv)。这不是电脑直接导出的原始 CSV。原始 CSV 还没上传。以后找到的话，以原始文件为准，这份转录留着。
 
 ## 汇总
 

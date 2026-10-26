@@ -1,3 +1,6 @@
+# Measured CSV and experiments/results/ stay tracked.
+# Do not add a global *.csv ignore or ignore that directory.
+
 # Build artifacts
 *.o
 *.obj

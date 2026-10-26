@@ -16,7 +16,7 @@
 4. 64、128、256 各测了五次。奇数样本先 `ijk` 再 `ikj`，偶数样本反过来。
 5. 今天的 CSV 有 30 条，全部 PASS，逐元素比较全部 YES。
 6. 昨天的 CSV 有 15 条，全部 PASS。那份程序只测 `ikj`，没有逐元素那一列。
-7. 今天的完整双版本源码在 [`src/day05_ijk_ikj_benchmark.cpp`](../src/day05_ijk_ikj_benchmark.cpp)，按我交的内容留着。昨天的单算法快照在 [`code_history/day05/`](../code_history/day05/README.md)，没有和今天的文件混成一个。
+7. 今天的完整双版本源码在 [`src/day05_ijk_ikj_benchmark.cpp`](../src/day05_ijk_ikj_benchmark.cpp)，按我交的内容留着。前一轮的单算法快照在 [`code_history/day05/`](../code_history/day05/README.md)，没有和今天的文件混成一个。
 
 ## 今天这轮的中位数
 
@@ -46,7 +46,7 @@
 
 `run_sample` 用了泛型 lambda，编译需要 C++14 或更新的标准。我实际用的编译器版本没有记。这次测的是含 C 清零的整段耗时，不是纯乘法循环。
 
-里面不一定每一行都是我自己写的。辅导时的 GPT 模板另放在 [`src/gpt-templates/day05_loop_order_comparison.cpp`](../src/gpt-templates/day05_loop_order_comparison.cpp)，文件头写了「GPT 模板，非我独立写的」。那份不是我交上来的源码。
+里面不一定每一行都是我自己写的。辅导时的 GPT 模板另放在 [`templates/gpt/day05-loop-order-template.cpp`](../templates/gpt/day05-loop-order-template.cpp)，文件头写了「GPT 指导模板」。那份不是我交上来的源码。验收包原件在 [`archive/2026-10-26-day05-final-acceptance/`](../archive/2026-10-26-day05-final-acceptance/README.md)。
 
 ## 我的反馈原话
 
