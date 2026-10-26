@@ -24,7 +24,7 @@ Day 5 的循环顺序（`ijk` 与 `ikj`）已验收通过，只计今天的 30 �
 
 仓里现在有的是 Day 4 的截图转录和程序导出，在 [`experiments/results/2026-10-26-day04-local/`](experiments/results/2026-10-26-day04-local/README.md)，短记录在 [Day 4 本地实验记录](experiments/reports/2026-10-26-day04-local.md)。Day 5 的 30 条在 [`experiments/results/2026-10-26-day05-loop-order-local/`](experiments/results/2026-10-26-day05-loop-order-local/README.md)，短记录在 [Day 5 循环顺序](experiments/reports/2026-10-26-day05-loop-order.md)。
 
-报告从 [`experiments/reports/`](experiments/reports/README.md) 进入。虚拟机或大规模扫描的结果不在库里。材料缺口：待用户提供。
+报告从 [`experiments/reports/`](experiments/reports/README.md) 进入。虚拟机或大规模扫描的结果不在库里。材料缺口：待用户提供。材料已按职责归档进 src / notes / experiments，验收 ZIP 原件不再入库。
 
 ## 笔记在哪
 
@@ -48,5 +48,4 @@ Day 5 的循环顺序（`ijk` 与 `ikj`）已验收通过，只计今天的 30 �
 | [`experiments/reports/`](experiments/reports/README.md) | 实验记录和阶段报告 |
 | [`experiments/results/`](experiments/results/README.md) | 实测记录。Day 4 的转录和程序导出分文件放在同一目录；Day 5 是 30 条程序导出 |
 | [`notes/`](notes/README.md) | 每日学习记录和理解笔记 |
-| [`archive/2026-10-26-day05-final-acceptance/`](archive/2026-10-26-day05-final-acceptance/README.md) | Day 5 最终验收 ZIP 原件。拆开的文件在各目录，原包留着核对 |
 | [`PROJECT_STATE.md`](PROJECT_STATE.md) | 当前状态。和本页不一致时，以它为准 |

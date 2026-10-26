@@ -14,6 +14,6 @@ GPT 模板不在本表里。文件是 [`templates/gpt/day05-loop-order-template.
 
 - Day 5 的正式数据只有今天 30 条，在 [`experiments/results/2026-10-26-day05-loop-order-local/`](../../experiments/results/2026-10-26-day05-loop-order-local/README.md)。原样复制，测量数字没有改。
 - 曾被本目录称作「昨天 15 条」的 CSV 已改记为 Day 4 程序导出，在 [`experiments/results/2026-10-26-day04-local/day04-local-program-export.csv`](../../experiments/results/2026-10-26-day04-local/day04-local-program-export.csv)。
-- 验收包原件在 [`archive/2026-10-26-day05-final-acceptance/`](../../archive/2026-10-26-day05-final-acceptance/README.md)。包内旧目录名还写着「昨天」，以用户这次的判定为准。
+- 材料已按职责归档进 src / notes / experiments，验收 ZIP 原件不再入库。曾被标成「昨天」的 15 条以用户这次的判定为准，记在 Day 4 程序导出。
 - 环境与 Day 4 一致：Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.x。配置截图显示 Release | x64。比 18.x 更细的编译器版本号、学习用时：未记录。
 - V02 的 `matmul_ikj` 里，累加那一行后面还留着 TODO 注释和多出来的分号。可以以后清，这次计算不受影响。V02 的泛型 lambda 需要 C++14 或更新的标准。这是源码的要求，不是我记下来的编译器版本。
