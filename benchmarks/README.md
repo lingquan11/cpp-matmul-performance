@@ -31,7 +31,7 @@ void matmul_ikj(const int* __restrict__ A, const int* __restrict__ B,
 
 `BENCH_ID` 用字母、数字和下划线，并且跟函数名 `matmul_<id>` 一样。`BENCH_LABEL` 是图例里的中文名。`BENCH_LABEL_EN` 可以不写，机器上没有中文字体时我用它。这个目录里每个 `.cpp` 都会参加编译，所以放进来的文件得能通过下面的检查。A、B、C 是行主序的 n×n `int` 矩阵，三块地址不重叠。函数先把 C 的每个元素写成 0 再累加。同一样本会连着调用很多次，调用之间我不再另外清零。实现按文件名排序，一个实现的全部规模测完再测下一个。
 
-计时编译是 `-O2 -std=c++17 -Wall -Wextra -Werror -falign-loops=32`。内核和计时循环分文件编译，我不用 LTO，这样多次调用会一次次执行。`-falign-loops=32` 是为了让各内核的循环用同样的对齐。我在这台云端 VM 上试过，两份相同循环因为链接位置不同，n=64 大约测到 3.87 和 6.94 GFLOPS；加上这个选项后大约是 6.84 和 6.85，各 2 个样本。2026-10-26 主表的编译命令在 `experiments/results/2026-10-26_ijk-scale/environment.txt`。
+计时编译是 `-O2 -std=c++17 -Wall -Wextra -Werror -falign-loops=32`。内核和计时循环分文件编译，我不用 LTO，这样多次调用会一次次执行。`-falign-loops=32` 是为了让各内核的循环用同样的对齐。对齐不一样时，同样的循环测出来会差一截，所以我把这个选项写进计时编译。跑完后的输出目录示例是 `experiments/results/<日期>_matmul/`，里面会有当次的 `perf.png`。仓库里现在没有我决定公开的规模扫描图。
 
 加进去之后还是同一条命令。每个实现我都会对一下：n=2 用 Day 2 的 A、B，结果应是 `11 10 / 19 30`；n=2 且 B 是单位矩阵，结果应是 A；n=2 且 B 是零矩阵，结果应是 0；n=4 且 A 和 B 全是 1，结果应全是 4；n=3 用固定的小整数，校验和要和逐项乘加一致。检查过了才写性能数据。带 `main` 的学习程序我放在 `src/`，基准只扫 `benchmarks/kernels/`。
 

@@ -10,4 +10,4 @@
 - 我实际粘贴过的单次计时程序在 [`src/day04_matmul.cpp`](../../../src/day04_matmul.cpp)
 - 缺口清单见 [`missing-materials.md`](missing-materials.md)；统计说明见 [`summary.md`](summary.md)
 
-这组数据和云端 VM 的 [`2026-10-26_ijk-scale/`](../2026-10-26_ijk-scale/) **不是同一次实验**，不要混读。
+公开仓里曾经放过的云端规模扫描展示已按我的要求撤下。这组只是 Day 4 本地截图转录。
