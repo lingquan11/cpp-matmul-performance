@@ -25,7 +25,7 @@ BENCH_SRC = ROOT / "benchmarks" / "matmul_bench.cpp"
 DAY02_SRC = ROOT / "src" / "day02_matrix.cpp"
 CXX_FLAGS = ["-O2", "-std=c++17", "-Wall", "-Wextra", "-Werror"]
 # 我注意到循环入口对齐会让耗时差一截，所以计时编译加上 -falign-loops=32。
-# 2026-10-26 那次的编译命令在 results/2026-10-26_ijk-scale/environment.txt。
+# 2026-10-26 那次的编译命令在 experiments/results/2026-10-26_ijk-scale/environment.txt。
 BENCH_FLAGS = CXX_FLAGS + ["-falign-loops=32"]
 ID_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 
@@ -532,7 +532,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--out",
         type=Path,
-        default=ROOT / "results" / f"{today}_matmul",
+        default=ROOT / "experiments" / "results" / f"{today}_matmul",
         help="CSV 和图的输出目录",
     )
     parser.add_argument("--skip-plot", action="store_true", help="只编译和测量，不画图")
