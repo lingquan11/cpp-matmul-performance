@@ -9,6 +9,6 @@
 
 Day 4 的截图转录和程序导出不在这里，在 [`../2026-10-26-day04-local/`](../2026-10-26-day04-local/README.md)。那两份 15 条不计入这 30 条。
 
-我提交的双版本在 [`src/day05_ijk_ikj_benchmark.cpp`](../../../src/day05_ijk_ikj_benchmark.cpp)。[`templates/gpt/day05-loop-order-template.cpp`](../../../templates/gpt/day05-loop-order-template.cpp) 是 GPT 模板，不是这份 CSV 的程序。
+我提交的双版本在 [`src/day05-ijk-ikj-benchmark.cpp`](../../../src/day05-ijk-ikj-benchmark.cpp)。[`templates/gpt/day05-loop-order-template.cpp`](../../../templates/gpt/day05-loop-order-template.cpp) 是 GPT 模板，不是这份 CSV 的程序。
 
 环境与 Day 4 相同：Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.x。CPU 截图放在 Day 4 目录。学习用时未记录。比 18.x 更细的编译器版本号未记录。

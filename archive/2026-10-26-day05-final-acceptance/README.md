@@ -6,7 +6,7 @@
 
 | 包内路径 | 仓库路径 |
 | --- | --- |
-| `02_用户提交代码/day05_today_ijk_ikj_benchmark.cpp` | [`src/day05_ijk_ikj_benchmark.cpp`](../../src/day05_ijk_ikj_benchmark.cpp)，并复制为 [`code_history/day05/V02_today_ijk_ikj.cpp`](../../code_history/day05/V02_today_ijk_ikj.cpp) |
+| `02_用户提交代码/day05_today_ijk_ikj_benchmark.cpp` | [`src/day05-ijk-ikj-benchmark.cpp`](../../src/day05-ijk-ikj-benchmark.cpp)，并复制为 [`code_history/day05/V02_today_ijk_ikj.cpp`](../../code_history/day05/V02_today_ijk_ikj.cpp) |
 | `02_用户提交代码/day05_yesterday_ikj_only_benchmark.cpp` | [`code_history/day04/V07_user_ikj_program_export.cpp`](../../code_history/day04/V07_user_ikj_program_export.cpp)。用户确认它对应 Day 4 程序导出。包内文件名仍是当时的叫法，仓库路径已改。不放进 `src/` |
 | `03_GPT模板/day05_loop_order_comparison_gpt_template.cpp` | [`templates/gpt/day05-loop-order-template.cpp`](../../templates/gpt/day05-loop-order-template.cpp) |
 | `04_实验数据/今天_双版本对比/matmul_benchmark_day5_loop_order.csv` | [`experiments/results/2026-10-26-day05-loop-order-local/day05-loop-order-program-export.csv`](../../experiments/results/2026-10-26-day05-loop-order-local/day05-loop-order-program-export.csv) |

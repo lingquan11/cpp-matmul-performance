@@ -3,7 +3,7 @@
 - 编号 / 日期：Day 4。日期是 2026-10-26。用户确认程序导出就是这一天的，不再把它记成「昨天」或 2026-10-25。
 - 目标：64、128、256 各 5 次正式计时。本目录有两份材料，不合并。
 - 源码路径：
-  - 截图转录没有对应的已上传批量源码。我粘贴过的单次计时程序在 [`src/day04_matmul.cpp`](../../../src/day04_matmul.cpp)，不是这批批量样本。[`templates/gpt/day04-benchmark-template.cpp`](../../../templates/gpt/day04-benchmark-template.cpp) 和 [`code_history/day04/V06_gpt_benchmark_template.cpp`](../../../code_history/day04/V06_gpt_benchmark_template.cpp) 是 GPT 模板，不能当作执行稿。
+  - 截图转录没有对应的已上传批量源码。我粘贴过的单次计时程序在 [`src/day04-matmul.cpp`](../../../src/day04-matmul.cpp)，不是这批批量样本。[`templates/gpt/day04-benchmark-template.cpp`](../../../templates/gpt/day04-benchmark-template.cpp) 和 [`code_history/day04/V06_gpt_benchmark_template.cpp`](../../../code_history/day04/V06_gpt_benchmark_template.cpp) 是 GPT 模板，不能当作执行稿。
   - 程序导出和 [`code_history/day04/V07_user_ikj_program_export.cpp`](../../../code_history/day04/V07_user_ikj_program_export.cpp) 一起提交。该文件只调用 `matmul_ikj`，写出的表头和文件名 `matmul_benchmark_raw.csv` 与这份 CSV 一致。重复次数由试测决定，源码里没有写死耗时。没有在本环境重跑，所以不把「表头一致」写成已经逐行复现。此文件原先误放在 `code_history/day05/V01_yesterday_ikj_only.cpp`，内容没有改。
 - 编译器 / 参数：用户口述 IDE 是 Visual Studio 2026，版本 18.x。没有更细的版本号，MSVC 工具集号未记录。配置截图在 [`../2026-10-26-day05-loop-order-local/visual-studio-release-x64.png`](../2026-10-26-day05-loop-order-local/visual-studio-release-x64.png)，可见 Visual Studio、Release、x64。用户确认 Day 4 与 Day 5 的实验因素保持一致。计时范围沿用已有记录：含 C 清零和矩阵乘法，输入初始化、正确性检查、输出在计时外。
 - CPU / OS：用户确认操作系统是 Windows。CPU 是 Intel Core Ultra 7 255HX。截图 [`cpu-intel-core-ultra-7-255hx.png`](cpu-intel-core-ultra-7-255hx.png) 是任务管理器性能页，处理器一栏为 Intel(R) Core(TM) Ultra 7 255HX。

@@ -6,7 +6,7 @@
 
 ## 今天：同一次运行里的 ijk 和 ikj
 
-程序是我提交的 [`src/day05_ijk_ikj_benchmark.cpp`](../../src/day05_ijk_ikj_benchmark.cpp)。输入按公式生成：`A[i][j] = i + j + 1`，`B[i][j] = 2 * i + j + 1`。
+程序是我提交的 [`src/day05-ijk-ikj-benchmark.cpp`](../../src/day05-ijk-ikj-benchmark.cpp)。输入按公式生成：`A[i][j] = i + j + 1`，`B[i][j] = 2 * i + j + 1`。
 
 计时包住 C 的清零和矩阵乘法。A、B 的初始化、校验和、逐元素比较、输出都在计时外面。参考矩阵用 `ijk` 试测的结果来存。奇数样本先测 `ijk`，偶数样本先测 `ikj`。
 
@@ -39,8 +39,8 @@
 
 ## 代码放在哪
 
-1. 我提交的今天双版本：[`src/day05_ijk_ikj_benchmark.cpp`](../../src/day05_ijk_ikj_benchmark.cpp)。快照 [`code_history/day05/V02_today_ijk_ikj.cpp`](../../code_history/day05/V02_today_ijk_ikj.cpp) 是同一份复制。里面不一定每一行都是我自己写的。`matmul_ikj` 的累加后面还留着 TODO 注释和多出来的分号，可以以后删，这次结果不变。
-2. 曾被放在 `code_history/day05/` 的那份只测 `ikj` 的源码，用户确认对应 Day 4 程序导出，已移到 [`code_history/day04/V07_user_ikj_program_export.cpp`](../../code_history/day04/V07_user_ikj_program_export.cpp)。没有拿它盖掉今天的 `src/` 文件，也没有动 `src/day04_matmul.cpp`。
+1. 我提交的今天双版本：[`src/day05-ijk-ikj-benchmark.cpp`](../../src/day05-ijk-ikj-benchmark.cpp)。快照 [`code_history/day05/V02_today_ijk_ikj.cpp`](../../code_history/day05/V02_today_ijk_ikj.cpp) 是同一份复制。里面不一定每一行都是我自己写的。`matmul_ikj` 的累加后面还留着 TODO 注释和多出来的分号，可以以后删，这次结果不变。
+2. 曾被放在 `code_history/day05/` 的那份只测 `ikj` 的源码，用户确认对应 Day 4 程序导出，已移到 [`code_history/day04/V07_user_ikj_program_export.cpp`](../../code_history/day04/V07_user_ikj_program_export.cpp)。没有拿它盖掉今天的 `src/` 文件，也没有动 `src/day04-matmul.cpp`。
 3. [`templates/gpt/day05-loop-order-template.cpp`](../../templates/gpt/day05-loop-order-template.cpp) 是 GPT 模板，文件头写了「GPT 指导模板」。它不是我交上来的源码，也不保证和我电脑上跑的版本逐字一样。验收包原件在 [`archive/2026-10-26-day05-final-acceptance/`](../../archive/2026-10-26-day05-final-acceptance/README.md)。
 
 ## 材料缺口
@@ -49,6 +49,7 @@
 2. 比 18.x 更细的编译器版本号：未记录。源码里的泛型 lambda 需要 C++14 或更新的标准，这是语言要求，不是我记下来的工具集号。
 3. 学习用时：未记录。
 4. 配置截图支持 Release | x64。截图上的源文件名是「源1.cpp」，不是仓库里的文件名。
+5. 计时复现：未验证。没有在 CI 或云端重跑这 30 条，以免混入新样本。
 
 ## 下一步
 

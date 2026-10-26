@@ -2,7 +2,7 @@
 
 - 编号 / 日期：Day 5。这组是 2026-10-26 的同一次运行，`ijk` 和 `ikj` 放在一起测。
 - 目标：在同一程序、同一轮样本里比较 `i-j-k` 和 `i-k-j`。
-- 源码路径：[`src/day05_ijk_ikj_benchmark.cpp`](../../../src/day05_ijk_ikj_benchmark.cpp)。[`code_history/day05/V02_today_ijk_ikj.cpp`](../../../code_history/day05/V02_today_ijk_ikj.cpp) 是同一份复制。程序用 `ofstream` 写出的文件名是 `matmul_benchmark_day5_loop_order.csv`。GPT 模板在 [`templates/gpt/day05-loop-order-template.cpp`](../../../templates/gpt/day05-loop-order-template.cpp)，不是这份提交，也不是这份 CSV 的来源。
+- 源码路径：[`src/day05-ijk-ikj-benchmark.cpp`](../../../src/day05-ijk-ikj-benchmark.cpp)。[`code_history/day05/V02_today_ijk_ikj.cpp`](../../../code_history/day05/V02_today_ijk_ikj.cpp) 是同一份复制。程序用 `ofstream` 写出的文件名是 `matmul_benchmark_day5_loop_order.csv`。GPT 模板在 [`templates/gpt/day05-loop-order-template.cpp`](../../../templates/gpt/day05-loop-order-template.cpp)，不是这份提交，也不是这份 CSV 的来源。
 - 编译器 / 参数：用户确认与 Day 4 的实验因素一致。IDE 是 Visual Studio 2026 18.x，没有更细的版本号。配置截图可见 Release | x64。源码里的泛型 lambda 需要 C++14 或更新标准，这是语言要求，不是记下来的工具集号。计时范围沿用已有记录，见下一条。
 - CPU / OS：用户确认与 Day 4 相同：Windows，Intel Core Ultra 7 255HX。CPU 截图在 [`../2026-10-26-day04-local/cpu-intel-core-ultra-7-255hx.png`](../2026-10-26-day04-local/cpu-intel-core-ultra-7-255hx.png)，这里不复制。配置截图上还可见调试下拉「本地 Windows 调试器」，打开的文件名是「源1.cpp」。截图没有显示仓库里的源文件名，也没有显示比 18.x 更细的编译器版本号。
 - 矩阵生成：`A[i][j] = i + j + 1`，`B[i][j] = 2 * i + j + 1`。写在提交的源码里。

@@ -14,5 +14,5 @@
 - 128 阶偏高样本保留原值，原因暂留，以后再研究
 - 截图转录那组的批量源码还没上传。GPT 模板不能当作执行稿
 - 和程序导出一起提交的源码在 [`code_history/day04/V07_user_ikj_program_export.cpp`](../../../code_history/day04/V07_user_ikj_program_export.cpp)，只含 `matmul_ikj`。原先误放在 `code_history/day05/`
-- 我粘贴过的单次计时程序在 [`src/day04_matmul.cpp`](../../../src/day04_matmul.cpp)
+- 我粘贴过的单次计时程序在 [`src/day04-matmul.cpp`](../../../src/day04-matmul.cpp)
 - 统计见 [`summary.md`](summary.md)。缺口见 [`missing-materials.md`](missing-materials.md)

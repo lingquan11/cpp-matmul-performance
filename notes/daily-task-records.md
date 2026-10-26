@@ -26,9 +26,9 @@ B = [[5, 2],
      [1, 6]]
 ```
 
-我要算 `C = AB` 里的 `C₁₁` 和 `C₂₁`，说清用了 A 的哪一行、B 的哪一列，用中文把步骤写下来，再写成伪代码。累加变量为什么从 0 开始，k 怎么把对应元素走完，这些我都要能讲。然后在下面这个框架里把累加补上，存成 `day01_matrix.cpp`，编译运行，和手算对一下。还要看懂 `A[0][k]`、`B[k][0]`，知道为什么是累加不是覆盖，以及 C++ 下标为什么从 0 开始。手算、伪代码和解释存成 `day01-notes.md`。
+我要算 `C = AB` 里的 `C₁₁` 和 `C₂₁`，说清用了 A 的哪一行、B 的哪一列，用中文把步骤写下来，再写成伪代码。累加变量为什么从 0 开始，k 怎么把对应元素走完，这些我都要能讲。然后在下面这个框架里把累加补上，存成 `day01-matrix.cpp`，编译运行，和手算对一下。还要看懂 `A[0][k]`、`B[k][0]`，知道为什么是累加不是覆盖，以及 C++ 下标为什么从 0 开始。手算、伪代码和解释存成 `day01-notes.md`。
 
-开始时的框架是这样，我补的是循环里的那句累加。完整程序在 `src/day01_matrix.cpp`。
+开始时的框架是这样，我补的是循环里的那句累加。完整程序在 `src/day01-matrix.cpp`。
 
 ```cpp
 #include <iostream>
@@ -56,7 +56,7 @@ int main() {
 
 ## 2026-10-22
 
-在单元素的基础上，我用 `i/j/k` 写了完整的 2×2，并用原始矩阵和单位矩阵各测一次。代码在 `src/day02_matrix.cpp`，更全的记录在 `notes/day02-record.md`。当天我也把阶段 A 的记录理了一遍。
+在单元素的基础上，我用 `i/j/k` 写了完整的 2×2，并用原始矩阵和单位矩阵各测一次。代码在 `src/day02-matrix.cpp`，更全的记录在 `notes/day02-record.md`。当天我也把阶段 A 的记录理了一遍。
 
 `i` 选结果的行，`j` 选结果的列，`k` 把要相乘的位置走完。`C[i][j] = A[i][0] * B[0][j] + A[i][1] * B[1][j]`。单位矩阵是用来看右乘之后 A 还是不是自己。
 
@@ -66,7 +66,7 @@ int main() {
 
 ## 2026-10-23
 
-我在 Day 2 的程序上做了零矩阵，推了三重循环的 O(n³)，也说明了边长翻倍时计算量怎么变，并写下性能方案：64、128、256，Release，每个规模 5 次，只计矩阵乘法本身。笔记在 `notes/day03-notes.md`，当天的短说明在 `notes/day03-record.md`。程序还是 `src/day02_matrix.cpp`。当天没写用时，后来补记为 30 分钟。
+我在 Day 2 的程序上做了零矩阵，推了三重循环的 O(n³)，也说明了边长翻倍时计算量怎么变，并写下性能方案：64、128、256，Release，每个规模 5 次，只计矩阵乘法本身。笔记在 `notes/day03-notes.md`，当天的短说明在 `notes/day03-record.md`。程序还是 `src/day02-matrix.cpp`。当天没写用时，后来补记为 30 分钟。
 
 B 是零矩阵时，输出是零矩阵。换回原始输入后是 `11 10` 和 `19 30`，和 Day 2 一样。
 
@@ -78,7 +78,7 @@ B 是零矩阵时，输出是零矩阵。换回原始输入后是 `11 10` 和 `1
 
 Day 4 三个目标这轮都做完了。程序可以输入矩阵阶数，非法的 n 会拒绝。我用 `steady_clock` 给单次乘法计了时。正式样本是 64、128、256 各 5 次，截图里 15 条都是 PASS。笔记在 [`notes/day04-notes.md`](day04-notes.md)，任务记录在 [`notes/day04-record.md`](day04-record.md)，短实验记录在 [`experiments/reports/2026-10-26-day04-local.md`](../experiments/reports/2026-10-26-day04-local.md)。学习用时后来补记为 2 小时。环境后来补记为 Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.x。
 
-我粘贴过的单次计时程序在 [`src/day04_matmul.cpp`](../src/day04_matmul.cpp)。容量 `MAX_N = 256`，A 和 B 用公式填。n = 1、2、3、4 我看过，结果符合预期。n = 0 和 n = 257 会被拒绝。n = 0 是循环进不去；n = 257 是超过数组容量，不检查就可能越界。
+我粘贴过的单次计时程序在 [`src/day04-matmul.cpp`](../src/day04-matmul.cpp)。容量 `MAX_N = 256`，A 和 B 用公式填。n = 1、2、3、4 我看过，结果符合预期。n = 0 和 n = 257 会被拒绝。n = 0 是循环进不去；n = 257 是超过数组容量，不检查就可能越界。
 
 计时包住 C 清零和乘法。A、B 初始化、输出和正确性检查在外面。初步试过 n = 4，`C[0][0] = 50`，0.0016 ms；n = 64，`C[0][0] = 176800`，0.4099 ms。这两条不是正式样本。
 
@@ -98,7 +98,7 @@ Day 4 三个目标这轮都做完了。程序可以输入矩阵阶数，非法�
 
 循环顺序这轮验收通过，只看今天的 30 条。学习用时未记录。环境和 Day 4 是同一套：Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.x。配置截图显示 Release | x64。更细的编译器版本号未记录。
 
-我提交的双版本在 [`src/day05_ijk_ikj_benchmark.cpp`](../src/day05_ijk_ikj_benchmark.cpp)。`ijk` 和 `ikj` 同一次运行，奇数样本先 `ijk`，偶数样本先 `ikj`。计时包住 C 清零和乘法。输入初始化、校验和、逐元素比较在外面。笔记在 [`notes/day05-notes.md`](day05-notes.md)，任务记录在 [`notes/day05-record.md`](day05-record.md)，短实验记录在 [`experiments/reports/2026-10-26-day05-loop-order.md`](../experiments/reports/2026-10-26-day05-loop-order.md)。
+我提交的双版本在 [`src/day05-ijk-ikj-benchmark.cpp`](../src/day05-ijk-ikj-benchmark.cpp)。`ijk` 和 `ikj` 同一次运行，奇数样本先 `ijk`，偶数样本先 `ikj`。计时包住 C 清零和乘法。输入初始化、校验和、逐元素比较在外面。笔记在 [`notes/day05-notes.md`](day05-notes.md)，任务记录在 [`notes/day05-record.md`](day05-record.md)，短实验记录在 [`experiments/reports/2026-10-26-day05-loop-order.md`](../experiments/reports/2026-10-26-day05-loop-order.md)。
 
 今天的 CSV 是我交的双版本测试结果，30 条，64、128、256，每种算法 5 次，全部 PASS，逐元素全部 YES。文件在 [`experiments/results/2026-10-26-day05-loop-order-local/day05-loop-order-program-export.csv`](../experiments/results/2026-10-26-day05-loop-order-local/day05-loop-order-program-export.csv)。
 

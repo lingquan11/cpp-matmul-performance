@@ -15,7 +15,7 @@
 3. 参考矩阵用 `ijk` 的试测结果来存。检查用了 `C[0][0]` 的预期值、校验和，以及逐元素比较。
 4. 64、128、256 各测了五次。奇数样本先 `ijk` 再 `ikj`，偶数样本反过来。
 5. 今天的 CSV 有 30 条，全部 PASS，逐元素比较全部 YES。
-6. 今天的完整双版本源码在 [`src/day05_ijk_ikj_benchmark.cpp`](../src/day05_ijk_ikj_benchmark.cpp)，按我交的内容留着。快照在 [`code_history/day05/`](../code_history/day05/README.md)。
+6. 今天的完整双版本源码在 [`src/day05-ijk-ikj-benchmark.cpp`](../src/day05-ijk-ikj-benchmark.cpp)，按我交的内容留着。快照在 [`code_history/day05/`](../code_history/day05/README.md)。
 
 ## 今天这轮的中位数
 
