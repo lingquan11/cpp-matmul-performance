@@ -5,6 +5,6 @@
 | 目录 | 里面是什么 |
 | --- | --- |
 | [day04/](day04/README.md) | Day 4：固定 2×2 → 单次计时 → 批量模板（V01–V06），加上和程序导出一起提交的 V07。来源看该目录的 `VERSION_MANIFEST.md` |
-| [day05/](day05/README.md) | Day 5：今天的 `ijk` / `ikj` 双版本。曾误放在这里的 `ikj` 单算法已移到 day04 的 V07。验收包原件在 [`archive/2026-10-26-day05-final-acceptance/`](../archive/2026-10-26-day05-final-acceptance/README.md) |
+| [day05/](day05/README.md) | Day 5：今天的 `ijk` / `ikj` 双版本。曾误放在这里的 `ikj` 单算法已移到 day04 的 V07 |
 
-仓库里没有完整的 Day 4 ZIP，所以 Day 4 的快照只放在 `day04/`。Day 5 的快照只放在 `day05/`，没有盖掉 `day04/`。
+仓库里没有完整的 Day 4 ZIP，所以 Day 4 的快照只放在 `day04/`。Day 5 的快照只放在 `day05/`，没有盖掉 `day04/`。材料已按职责归档进 src / notes / experiments，验收 ZIP 原件不再入库。

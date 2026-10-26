@@ -13,6 +13,6 @@
 - 正确性检查：两份都是 `C[0][0]` 和校验和，15 条都是 PASS。都没有逐元素列。
 - 原始数据来源：
   - [`day04-local-screenshot-transcription.csv`](day04-local-screenshot-transcription.csv)：运行截图逐行转录。任务记录把这组写成 i-j-k。耗时在后来 Day 5 的 `ijk` 量级。
-  - [`day04-local-program-export.csv`](day04-local-program-export.csv)：程序直接导出。字节与用户确认的 Day 4 导出一致。验收包曾经把它放在 `04_实验数据/昨天_单算法测试/matmul_benchmark_raw.csv`，那个叫法作废。导出耗时更快，和只含 `matmul_ikj` 的 V07 放在一起。
+  - [`day04-local-program-export.csv`](day04-local-program-export.csv)：程序直接导出。字节与用户确认的 Day 4 导出一致。它曾经被标成「昨天的单算法测试」里的 `matmul_benchmark_raw.csv`，那个叫法作废。验收 ZIP 原件不再入库。导出耗时更快，和只含 `matmul_ikj` 的 V07 放在一起。
 - 统计方法：截图转录的中位数和均值只在 [`summary.md`](summary.md)，不把程序导出的数算进去。程序导出不在这里新算一套中位数，避免和转录或 Day 5 排成一张对照表。
 - 解释与限制：两份材料数值不同，禁止合并或互相覆盖。例如 n = 64 的第 1 次，转录是 0.139568 ms，导出是 0.020481 ms。重复次数也不同。128 阶偏高样本保留原值，原因暂留，以后再研究。截图转录里是第 5 次 2.010587 ms。学习用时用户补记为 2 小时。截图转录那组的批量源码仍然未上传。
