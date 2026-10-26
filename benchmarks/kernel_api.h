@@ -2,7 +2,7 @@
 #define BENCHMARKS_KERNEL_API_H
 
 // 基准驱动和 build/kernel_registry.cpp 共用的调度表。
-// 新实现不要改这个文件。约定写在 benchmarks/README.md。
+// 增加内核时在 benchmarks/kernels/ 添加源文件。约定见 benchmarks/README.md。
 //
 // 每个 kernels/*.cpp 提供：
 //   void matmul_<BENCH_ID>(const int* A, const int* B, int* C, int n);

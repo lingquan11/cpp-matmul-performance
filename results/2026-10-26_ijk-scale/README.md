@@ -1,8 +1,8 @@
 # i-j-k 三重循环规模扫描
 
-测了什么：仓库里已有的 i-j-k 三重循环（`src/day02_matrix.cpp`）。循环结构和累加方式不变，只把固定上界 2 换成参数 n。没有循环重排，没有分块。Day 1 只算一个元素，不参与这次对比。
+测了什么：i-j-k 三重循环。实现与 `src/day02_matrix.cpp` 相同，上界为参数 n。Day 1 的程序计算单个元素 C[0][0]。
 
-测量时内核文件是 `benchmarks/ijk_kernel.cpp`。后来整理到 `benchmarks/kernels/ijk.cpp`，循环体没有改，这组 CSV 和图没有重跑。解读见 [实验记录](../../docs/report.md)。
+测量时源文件记为 `benchmarks/ijk_kernel.cpp`，现位于 `benchmarks/kernels/ijk.cpp`。本目录的 CSV 和图对应该次编译。解读见 [实验记录](../../docs/report.md)。
 
 条件摘要：
 

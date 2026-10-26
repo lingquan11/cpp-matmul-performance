@@ -16,7 +16,7 @@ jobs:
       - name: 安装 g++
         run: sudo apt-get update && sudo apt-get install -y g++
 
-      - name: 确认能发现已有实现
+      - name: 列出内核
         run: python3 benchmarks/run_bench.py --list
 
       - name: 编译并运行 n=64 基准

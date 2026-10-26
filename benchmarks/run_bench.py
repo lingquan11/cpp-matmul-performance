@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-"""编译 benchmarks/kernels 里的全部实现，测量并画到同一张图。
+"""编译 benchmarks/kernels 里的实现，测量耗时并画到同一张图。
 
-脚本不提供新算法。当前目录里只有与 src/day02_matrix.cpp 相同的 i-j-k 循环。
-以后把新的 .cpp 放进 benchmarks/kernels/，再跑这一条命令即可。
+把新的 .cpp 放进 benchmarks/kernels/ 后，再运行这一条命令。
 """
 
 from __future__ import annotations
@@ -25,8 +24,8 @@ KERNEL_DIR = ROOT / "benchmarks" / "kernels"
 BENCH_SRC = ROOT / "benchmarks" / "matmul_bench.cpp"
 DAY02_SRC = ROOT / "src" / "day02_matrix.cpp"
 CXX_FLAGS = ["-O2", "-std=c++17", "-Wall", "-Wextra", "-Werror"]
-# 同一循环体若落在不同对齐上，这台机器上的耗时可以差出将近一倍。
-# 只加在计时编译上，不改变算法。2026-10-26 已发表的数据没有这个选项。
+# 循环入口的对齐会影响耗时。计时编译加上 -falign-loops=32。
+# 2026-10-26 已发表数据的编译命令见 results/2026-10-26_ijk-scale/environment.txt。
 BENCH_FLAGS = CXX_FLAGS + ["-falign-loops=32"]
 ID_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 
@@ -511,7 +510,7 @@ def write_result_readme(
         )
     text = f"""# 矩阵乘法规模扫描
 
-测了什么：本次命令发现的实现是 {names}。脚本会把 `benchmarks/kernels/*.cpp` 里的每个实现画进同一张图。Day 1 只算一个元素，不参与对比。
+测了什么：本次测量的实现是 {names}。各实现来自 `benchmarks/kernels/*.cpp`，画在同一张图上。
 
 条件摘要：
 

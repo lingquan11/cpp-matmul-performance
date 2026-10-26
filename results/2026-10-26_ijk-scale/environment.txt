@@ -1,13 +1,13 @@
 measured_at_utc: 2026-10-26T04:05:29Z
 os: Ubuntu 24.04.5 LTS
-uname: Linux cursor 6.12.94+ #1 SMP PREEMPT_DYNAMIC Mon Oct 19 22:12:29 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+uname: Linux vm 6.12.94+ #1 SMP PREEMPT_DYNAMIC Mon Oct 19 22:12:29 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 compiler: g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
 compile_command: g++ -O2 -std=c++17 -Wall -Wextra -Werror -o build/matmul_bench benchmarks/matmul_bench.cpp benchmarks/ijk_kernel.cpp
 lto: off
 timing: std::chrono::steady_clock；每次调用含 C[i][j]=0 与 i-j-k 累加；输入构造、校准、正确性检查不在正式样本计时内
 repetition: 单次调用短于 min_ms 时，在同一样本内连续重复，单次耗时 = 样本总耗时 / reps；校准跑不写入 CSV
 gflops: 2 * n^3 / time_per_call_seconds / 1e9；一次乘法加一次加法。内核是 32 位整数，与 day02 一致
-algorithm: src/day02_matrix.cpp 的 i-j-k。没有循环重排，没有分块
+algorithm: src/day02_matrix.cpp 的 i-j-k 三重循环
 sizes: 64,128,256,512,1024
 runs: 5
 min_ms: 100.0
