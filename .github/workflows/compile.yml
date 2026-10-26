@@ -1,0 +1,15 @@
+name: compile
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install g++
+        run: sudo apt-get update && sudo apt-get install -y g++
+      - name: Compile src and smoke Day 1 and Day 2
+        run: bash tests/smoke.sh

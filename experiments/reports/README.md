@@ -6,8 +6,8 @@
 
 | 文件 | 内容 |
 | --- | --- |
-| [2026-10-26-day04-local.md](2026-10-26-day04-local.md) | 2026-10-26 Day 4 本地 64/128/256，数据来自截图转录 |
-| [2026-10-26-day05-loop-order.md](2026-10-26-day05-loop-order.md) | 2026-10-26 Day 5 循环顺序。今天的双版本和昨天的单算法分开写 |
+| [2026-10-26-day04-local.md](2026-10-26-day04-local.md) | 2026-10-26 Day 4。截图转录和程序导出分开写，不合并 |
+| [2026-10-26-day05-loop-order.md](2026-10-26-day05-loop-order.md) | Day 5 循环顺序。只记今天的 30 条 |
 | [stage-a-algorithm-implementation.md](stage-a-algorithm-implementation.md) | 阶段 A：2×2 算法实现与正确性 |
 
 分块的报告还没写。

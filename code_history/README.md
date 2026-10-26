@@ -1,12 +1,10 @@
 # 代码版本历史
 
-这里放以前的版本，不是我现在接着改的程序。现在用的在 [`src/`](../src/README.md)。
-
-和 `src/` 里的文件一起留着，内容可能不一样。哈希也不一定相同。
+`code_history/dayNN/` 记的是那一天代码怎么变过来的快照。[`src/`](../src/README.md) 放这一阶段我现在接着用的成品。两处并存是正常的。哈希不同的文件不合成一份。快照文件名留着当时的样子；要改程序改 `src/`，说明里指向 `src/` 的连字符路径。
 
 | 目录 | 里面是什么 |
 | --- | --- |
-| [day04/](day04/README.md) | Day 4：固定 2×2 → 单次计时 → 批量基准模板（V01–V06）。来源看该目录的 `VERSION_MANIFEST.md` |
-| [day05/](day05/README.md) | Day 5：昨天的 `ikj` 单算法，和今天的 `ijk` / `ikj` 双版本。来源看该目录的 `VERSION_MANIFEST.md` |
+| [day04/](day04/README.md) | Day 4：固定 2×2 → 单次计时 → 批量模板（V01–V06），加上和程序导出一起提交的 V07。来源看该目录的 `VERSION_MANIFEST.md` |
+| [day05/](day05/README.md) | Day 5：今天的 `ijk` / `ikj` 双版本。曾误放在这里的 `ikj` 单算法已移到 day04 的 V07。验收包原件在 [`archive/2026-10-26-day05-final-acceptance/`](../archive/2026-10-26-day05-final-acceptance/README.md) |
 
 仓库里没有完整的 Day 4 ZIP，所以 Day 4 的快照只放在 `day04/`。Day 5 的快照只放在 `day05/`，没有盖掉 `day04/`。

@@ -1,8 +1,16 @@
 # 我做完的每天
 
-这里记 AI 芯片和计算机体系结构这条线上，我已经做完并且有反馈的任务。整理是从 2026-10-22 开始的。没做完的我写在当天的下一步里，不记成已经完成。到现在按日期记了 4 天。2026-10-26 这一天里 Day 4 和 Day 5 都做完了。
+这里是每天的索引。已经做完并且有反馈的任务才记进来。整理是从 2026-10-22 开始的。没做完的我写在当天的下一步里，不记成已经完成。到现在按日期记了 4 天。2026-10-26 这一天里 Day 4 和 Day 5 都做完了。当天的细节以 `dayNN-record.md` 和 `dayNN-notes.md` 为准，实验数字以 `experiments/` 为准，当前状态以 `PROJECT_STATE.md` 为准。
 
-我先学会了算一个输出元素，并写成 C++。2026-10-22 我把完整的 2×2 三重循环做完了，原始输入和单位矩阵都通过。阶段 A 到这里。2026-10-23 我做了零矩阵，写了 O(n³)，也写了后面怎么测性能的方案。2026-10-26 我另外做完了 Day 4：规模可以输入，单次计时也接上了，本地 64、128、256 各测了 5 次。那组转录数据在 [`experiments/results/2026-10-26_day04-local/`](../experiments/results/2026-10-26_day04-local/README.md)。同一天 Day 5 比了循环顺序。今天的 30 条和昨天补上的 15 条分开放，在 [`experiments/results/2026-10-26_day05-loop-order/`](../experiments/results/2026-10-26_day05-loop-order/README.md)。
+| 日期 | Day | 入口 |
+| --- | --- | --- |
+| 2026-10-20 | Day 1 | [day01-notes.md](day01-notes.md) |
+| 2026-10-22 | Day 2 | [day02-record.md](day02-record.md) |
+| 2026-10-23 | Day 3 | [day03-notes.md](day03-notes.md)、[day03-record.md](day03-record.md) |
+| 2026-10-26 | Day 4 | [day04-notes.md](day04-notes.md)、[day04-record.md](day04-record.md)、[转录和程序导出](../experiments/results/2026-10-26-day04-local/README.md) |
+| 2026-10-26 | Day 5，已验收，只计 30 条 | [day05-notes.md](day05-notes.md)、[day05-record.md](day05-record.md)、[今天 30 条](../experiments/results/2026-10-26-day05-loop-order-local/README.md) |
+
+我先学会了算一个输出元素，并写成 C++。2026-10-22 我把完整的 2×2 三重循环做完了，原始输入和单位矩阵都通过。阶段 A 到这里。2026-10-23 我做了零矩阵，写了 O(n³)，也写了后面怎么测性能的方案。2026-10-26 我另外做完了 Day 4：规模可以输入，单次计时也接上了，本地 64、128、256 各测了 5 次。截图转录和程序导出都在 [`experiments/results/2026-10-26-day04-local/`](../experiments/results/2026-10-26-day04-local/README.md)。同一天 Day 5 比了循环顺序，验收只看今天的 30 条，在 [`experiments/results/2026-10-26-day05-loop-order-local/`](../experiments/results/2026-10-26-day05-loop-order-local/README.md)。
 
 ## 2026-10-20
 
@@ -18,9 +26,9 @@ B = [[5, 2],
      [1, 6]]
 ```
 
-我要算 `C = AB` 里的 `C₁₁` 和 `C₂₁`，说清用了 A 的哪一行、B 的哪一列，用中文把步骤写下来，再写成伪代码。累加变量为什么从 0 开始，k 怎么把对应元素走完，这些我都要能讲。然后在下面这个框架里把累加补上，存成 `day01_matrix.cpp`，编译运行，和手算对一下。还要看懂 `A[0][k]`、`B[k][0]`，知道为什么是累加不是覆盖，以及 C++ 下标为什么从 0 开始。手算、伪代码和解释存成 `day01-notes.md`。
+我要算 `C = AB` 里的 `C₁₁` 和 `C₂₁`，说清用了 A 的哪一行、B 的哪一列，用中文把步骤写下来，再写成伪代码。累加变量为什么从 0 开始，k 怎么把对应元素走完，这些我都要能讲。然后在下面这个框架里把累加补上，存成 `day01-matrix.cpp`，编译运行，和手算对一下。还要看懂 `A[0][k]`、`B[k][0]`，知道为什么是累加不是覆盖，以及 C++ 下标为什么从 0 开始。手算、伪代码和解释存成 `day01-notes.md`。
 
-开始时的框架是这样，我补的是循环里的那句累加。完整程序在 `src/day01_matrix.cpp`。
+开始时的框架是这样，我补的是循环里的那句累加。完整程序在 `src/day01-matrix.cpp`。
 
 ```cpp
 #include <iostream>
@@ -48,7 +56,7 @@ int main() {
 
 ## 2026-10-22
 
-在单元素的基础上，我用 `i/j/k` 写了完整的 2×2，并用原始矩阵和单位矩阵各测一次。代码在 `src/day02_matrix.cpp`，更全的记录在 `notes/day02-record.md`。当天我也把阶段 A 的记录理了一遍。
+在单元素的基础上，我用 `i/j/k` 写了完整的 2×2，并用原始矩阵和单位矩阵各测一次。代码在 `src/day02-matrix.cpp`，更全的记录在 `notes/day02-record.md`。当天我也把阶段 A 的记录理了一遍。
 
 `i` 选结果的行，`j` 选结果的列，`k` 把要相乘的位置走完。`C[i][j] = A[i][0] * B[0][j] + A[i][1] * B[1][j]`。单位矩阵是用来看右乘之后 A 还是不是自己。
 
@@ -58,7 +66,7 @@ int main() {
 
 ## 2026-10-23
 
-我在 Day 2 的程序上做了零矩阵，推了三重循环的 O(n³)，也说明了边长翻倍时计算量怎么变，并写下性能方案：64、128、256，Release，每个规模 5 次，只计矩阵乘法本身。笔记在 `notes/day03-notes.md`，当天的短说明在 `notes/day03-record.md`。程序还是 `src/day02_matrix.cpp`。用时没记。
+我在 Day 2 的程序上做了零矩阵，推了三重循环的 O(n³)，也说明了边长翻倍时计算量怎么变，并写下性能方案：64、128、256，Release，每个规模 5 次，只计矩阵乘法本身。笔记在 `notes/day03-notes.md`，当天的短说明在 `notes/day03-record.md`。程序还是 `src/day02-matrix.cpp`。当天没写用时，后来补记为 30 分钟。
 
 B 是零矩阵时，输出是零矩阵。换回原始输入后是 `11 10` 和 `19 30`，和 Day 2 一样。
 
@@ -68,13 +76,13 @@ B 是零矩阵时，输出是零矩阵。换回原始输入后是 `11 10` 和 `1
 
 ## 2026-10-26
 
-Day 4 三个目标这轮都做完了。程序可以输入矩阵阶数，非法的 n 会拒绝。我用 `steady_clock` 给单次乘法计了时。正式样本是 64、128、256 各 5 次，截图里 15 条都是 PASS。笔记在 [`notes/day04-notes.md`](day04-notes.md)，任务记录在 [`notes/day04-record.md`](day04-record.md)，短实验记录在 [`experiments/reports/2026-10-26-day04-local.md`](../experiments/reports/2026-10-26-day04-local.md)。学习用时未记录。编译器、CPU、是不是 Release/x64，也未记录。
+Day 4 三个目标这轮都做完了。程序可以输入矩阵阶数，非法的 n 会拒绝。我用 `steady_clock` 给单次乘法计了时。正式样本是 64、128、256 各 5 次，截图里 15 条都是 PASS。笔记在 [`notes/day04-notes.md`](day04-notes.md)，任务记录在 [`notes/day04-record.md`](day04-record.md)，短实验记录在 [`experiments/reports/2026-10-26-day04-local.md`](../experiments/reports/2026-10-26-day04-local.md)。学习用时后来补记为 2 小时。环境后来补记为 Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.x。
 
-我粘贴过的单次计时程序在 [`src/day04_matmul.cpp`](../src/day04_matmul.cpp)。容量 `MAX_N = 256`，A 和 B 用公式填。n = 1、2、3、4 我看过，结果符合预期。n = 0 和 n = 257 会被拒绝。n = 0 是循环进不去；n = 257 是超过数组容量，不检查就可能越界。
+我粘贴过的单次计时程序在 [`src/day04-matmul.cpp`](../src/day04-matmul.cpp)。容量 `MAX_N = 256`，A 和 B 用公式填。n = 1、2、3、4 我看过，结果符合预期。n = 0 和 n = 257 会被拒绝。n = 0 是循环进不去；n = 257 是超过数组容量，不检查就可能越界。
 
 计时包住 C 清零和乘法。A、B 初始化、输出和正确性检查在外面。初步试过 n = 4，`C[0][0] = 50`，0.0016 ms；n = 64，`C[0][0] = 176800`，0.4099 ms。这两条不是正式样本。
 
-正式的 15 条我从运行截图逐行抄进 [`experiments/results/2026-10-26_day04-local/raw.csv`](../experiments/results/2026-10-26_day04-local/raw.csv)。这是截图转录，电脑直接导出的原始 CSV 我还没上传。实际执行的完整基准源码也还没上传。[`src/gpt-templates/day04_benchmark.cpp`](../src/gpt-templates/day04_benchmark.cpp) 是 GPT 模板，不是我独立写的，也不保证和我电脑上那份逐字一样。
+截图里的 15 条我逐行抄进 [`experiments/results/2026-10-26-day04-local/day04-local-screenshot-transcription.csv`](../experiments/results/2026-10-26-day04-local/day04-local-screenshot-transcription.csv)。这是转录，不是程序导出。程序导出在同目录的 [`day04-local-program-export.csv`](../experiments/results/2026-10-26-day04-local/day04-local-program-export.csv)，数值不同，下面这张表不含它。截图转录那组的批量源码还没上传。[`templates/gpt/day04-benchmark-template.cpp`](../templates/gpt/day04-benchmark-template.cpp) 是 GPT 模板，不是我独立写的。和程序导出一起提交的源码在 [`code_history/day04/V07_user_ikj_program_export.cpp`](../code_history/day04/V07_user_ikj_program_export.cpp)。
 
 | n | 样本 | 重复次数 | 单次中位数 (ms) | 单次均值 (ms) |
 | ---: | ---: | ---: | ---: | ---: |
@@ -82,17 +90,17 @@ Day 4 三个目标这轮都做完了。程序可以输入矩阵阶数，非法�
 | 128 | 5 | 89 | 1.204964 | 1.396575 |
 | 256 | 5 | 9 | 10.891122 | 10.859920 |
 
-128 阶第 5 次单次 2.010587 ms，总时间 178.942200 ms，比同规模其他几次高。我留着，原因没定。
+128 阶第 5 次单次 2.010587 ms，总时间 178.942200 ms，比同规模其他几次高。原值留着。原因暂留，以后再研究。
 
-下一步我要确认实际编译器、构建配置和平台。如果补测 128，旧样本留着，补测另记。然后继续看循环顺序和数据访问，再比分块。以后各版本的输入、正确性检查、计时范围和编译设置保持一致。
+如果补测 128，旧样本留着，补测另记。然后继续看循环顺序和数据访问，再比分块。以后各版本的输入、正确性检查、计时范围和编译设置保持一致。
 
 ## 2026-10-26，Day 5
 
-循环顺序这轮验收通过。学习用时未记录。CPU 型号和编译器具体版本未记录。配置截图显示 Visual Studio Release | x64。
+循环顺序这轮验收通过，只看今天的 30 条。学习用时未记录。环境和 Day 4 是同一套：Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.x。配置截图显示 Release | x64。更细的编译器版本号未记录。
 
-我提交的双版本在 [`src/day05_ijk_ikj_benchmark.cpp`](../src/day05_ijk_ikj_benchmark.cpp)。`ijk` 和 `ikj` 同一次运行，奇数样本先 `ijk`，偶数样本先 `ikj`。计时包住 C 清零和乘法。输入初始化、校验和、逐元素比较在外面。笔记在 [`notes/day05-notes.md`](day05-notes.md)，任务记录在 [`notes/day05-record.md`](day05-record.md)，短实验记录在 [`experiments/reports/2026-10-26-day05-loop-order.md`](../experiments/reports/2026-10-26-day05-loop-order.md)。
+我提交的双版本在 [`src/day05-ijk-ikj-benchmark.cpp`](../src/day05-ijk-ikj-benchmark.cpp)。`ijk` 和 `ikj` 同一次运行，奇数样本先 `ijk`，偶数样本先 `ikj`。计时包住 C 清零和乘法。输入初始化、校验和、逐元素比较在外面。笔记在 [`notes/day05-notes.md`](day05-notes.md)，任务记录在 [`notes/day05-record.md`](day05-record.md)，短实验记录在 [`experiments/reports/2026-10-26-day05-loop-order.md`](../experiments/reports/2026-10-26-day05-loop-order.md)。
 
-今天的 CSV 是我交的双版本测试结果，30 条，64、128、256，每种算法 5 次，全部 PASS，逐元素全部 YES。文件在 [`experiments/results/2026-10-26_day05-loop-order/raw-today-loop-order.csv`](../experiments/results/2026-10-26_day05-loop-order/raw-today-loop-order.csv)。
+今天的 CSV 是我交的双版本测试结果，30 条，64、128、256，每种算法 5 次，全部 PASS，逐元素全部 YES。文件在 [`experiments/results/2026-10-26-day05-loop-order-local/day05-loop-order-program-export.csv`](../experiments/results/2026-10-26-day05-loop-order-local/day05-loop-order-program-export.csv)。
 
 | n | ijk 中位数 (ms) | ikj 中位数 (ms) | ijk/ikj |
 | ---: | ---: | ---: | ---: |
@@ -100,14 +108,12 @@ Day 4 三个目标这轮都做完了。程序可以输入矩阵阶数，非法�
 | 128 | 1.375541 | 0.162732 | 8.45× |
 | 256 | 11.333944 | 1.207955 | 9.38× |
 
-这些中位数只从今天这一份 CSV 来。
+这些中位数只从今天这一份 CSV 来。曾经被写成「昨天 15 条」的文件，用户确认是 Day 4 程序导出，不在这张表里。
 
-昨天我补了一份只测 `ikj` 的 CSV，15 条全部 PASS，在同目录的 `raw-yesterday-ikj-only.csv`。程序快照在 [`code_history/day05/`](../code_history/day05/README.md)。它和今天不是同一轮，我不拿它来对 `ijk`。
-
-[`src/gpt-templates/day05_loop_order_comparison.cpp`](../src/gpt-templates/day05_loop_order_comparison.cpp) 是 GPT 模板，不是我独立写的。
+[`templates/gpt/day05-loop-order-template.cpp`](../templates/gpt/day05-loop-order-template.cpp) 是 GPT 模板，不是我独立写的。
 
 `ijk` 内层走 B 的列，按行存时跳得大。`ikj` 内层 j 连续，B 和 C 更顺着行走。C 要先清零再累加，不能在每次 k 里重新清零。
 
 下一步我看缓存行和空间局部性，并把这两个版本留作分块基线。
 
-这四天里，Day 1 是 30 分钟，Day 2 大约 20 分钟，Day 3 没记，Day 4 和 Day 5 也没记。单元素程序编译运行输出 11。2×2 的原始输入和单位矩阵我都编译跑过。零矩阵输出是零矩阵，换回去和 Day 2 一致。O(n³) 以及“边长翻倍变成 8 倍”是我推出来的。Day 4 的 15 条正式样本来自截图转录，执行用的完整基准源码和原始 CSV 还没放进仓库。Day 5 今天的 30 条和昨天的 15 条已经放进仓库，CPU 型号和编译器具体版本仍然未记录。
+这四天里，Day 1 是 30 分钟，Day 2 大约 20 分钟，Day 3 补记为 30 分钟，Day 4 补记为 2 小时，Day 5 的学习用时仍未记录。单元素程序编译运行输出 11。2×2 的原始输入和单位矩阵我都编译跑过。零矩阵输出是零矩阵，换回去和 Day 2 一致。O(n³) 以及“边长翻倍变成 8 倍”是我推出来的。Day 4 有截图转录和程序导出两份 15 条。截图转录那组的批量源码还没放进仓库。Day 5 的正式结果是今天的 30 条。比 18.x 更细的编译器版本号仍然未记录。
