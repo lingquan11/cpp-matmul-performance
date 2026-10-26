@@ -10,7 +10,7 @@
 
 i-j-k 小规模正确性（Day 2）已有。`src/day02_matrix.cpp` 是固定 2×2，输出 `11 10` 和 `19 30`。
 
-Day 4 本地 64、128、256 的截图转录已归档，在 [`experiments/results/2026-10-26_day04-local/`](experiments/results/2026-10-26_day04-local/README.md)。我粘贴过的单次计时程序在 [`src/day04_matmul.cpp`](src/day04_matmul.cpp)。实际执行的完整基准源码和电脑直接导出的原始 CSV 还没上传。[`src/gpt-templates/`](src/gpt-templates/README.md) 里放的是 GPT 模板，不是我独立写的。
+Day 4 本地 64、128、256 的截图转录已归档，在 [`experiments/results/2026-10-26_day04-local/`](experiments/results/2026-10-26_day04-local/README.md)。我粘贴过的单次计时程序在 [`src/day04_matmul.cpp`](src/day04_matmul.cpp)。实际执行的完整基准源码和电脑直接导出的原始 CSV 还没上传。[`src/gpt-templates/`](src/gpt-templates/README.md) 里放的是 GPT 模板，不是我独立写的。从固定 2×2 到批量模板的版本快照在 [`code_history/day04/`](code_history/day04/README.md)，和 `src/` 现行文件并存，哈希未必相同。
 
 公开展示用的规模扫描结果已按我的要求撤下。等我自己在本地或正式复现之后，再放。
 
@@ -49,6 +49,7 @@ python3 benchmarks/run_bench.py
 | 路径 | 里面是什么 |
 | --- | --- |
 | [`src/`](src/README.md) | 学习程序（Day 1 单元素，Day 2 的 2×2，Day 4 单次计时）。[`src/gpt-templates/`](src/gpt-templates/README.md) 只放 GPT 模板 |
+| [`code_history/`](code_history/README.md) | Day 4 代码演进快照（V01–V06）。和 `src/` 现行文件并存，哈希未必相同 |
 | [`benchmarks/`](benchmarks/README.md) | 计时驱动。`kernels/` 放要上图的实现 |
 | [`experiments/`](experiments/README.md) | 实验入口。分析在 `experiments/reports/`，原始数据在 `experiments/results/` |
 | [`experiments/reports/`](experiments/reports/README.md) | 实验记录与阶段报告（唯一报告入口） |

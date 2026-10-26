@@ -18,3 +18,5 @@
 | [day04-record.md](day04-record.md) | Day 4 任务记录：三目标验收、本地样本、材料缺口 |
 | [daily-task-records.md](daily-task-records.md) | 已做完并有反馈的每天 |
 | [handoff-2026-10-25-项目变更与协作同步报告.md](handoff-2026-10-25-项目变更与协作同步报告.md) | 2026-10-25 定下来的范围和约定 |
+
+Day 4 从固定 2×2 到基准模板的演进快照，我放在 [`code_history/day04/`](../code_history/day04/README.md)，和 `src/` 现行文件并存。

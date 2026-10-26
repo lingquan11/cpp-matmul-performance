@@ -12,3 +12,5 @@
 | [gpt-templates/day04_benchmark.cpp](gpt-templates/day04_benchmark.cpp) | GPT 模板，不是我独立写的。说明在 [gpt-templates/README.md](gpt-templates/README.md) |
 
 `gpt-templates/` 只放辅导时的模板，不算我独立写完的实现。
+
+[`code_history/day04/`](../code_history/day04/README.md) 是 Day 4 的演进快照（V01–V06），和本目录现行文件并存，哈希未必相同。现行入口仍在这里。
