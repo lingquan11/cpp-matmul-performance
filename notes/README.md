@@ -15,8 +15,8 @@
 | [day03-notes.md](day03-notes.md) | Day 3：零矩阵、O(n³) 和当时的测量方案 |
 | [day03-record.md](day03-record.md) | Day 3 的短说明 |
 | [day04-notes.md](day04-notes.md) | Day 4：规模扩展、计时，以及校验和能查出什么 |
-| [day04-record.md](day04-record.md) | Day 4 任务记录：三目标验收、本地样本、材料缺口 |
+| [day04-record.md](day04-record.md) | Day 4 任务记录：三个目标、本地样本、材料缺口 |
 | [daily-task-records.md](daily-task-records.md) | 已做完并有反馈的每天 |
 | [handoff-2026-10-25-项目变更与协作同步报告.md](handoff-2026-10-25-项目变更与协作同步报告.md) | 2026-10-25 定下来的范围和约定 |
 
-Day 4 从固定 2×2 到基准模板的演进快照，我放在 [`code_history/day04/`](../code_history/day04/README.md)，和 `src/` 现行文件并存。
+Day 4 的版本快照在 [`code_history/day04/`](../code_history/day04/README.md)。

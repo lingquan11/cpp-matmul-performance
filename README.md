@@ -10,9 +10,7 @@
 
 i-j-k 小规模正确性（Day 2）已有。`src/day02_matrix.cpp` 是固定 2×2，输出 `11 10` 和 `19 30`。
 
-Day 4 本地 64、128、256 的截图转录已归档，在 [`experiments/results/2026-10-26_day04-local/`](experiments/results/2026-10-26_day04-local/README.md)。我粘贴过的单次计时程序在 [`src/day04_matmul.cpp`](src/day04_matmul.cpp)。实际执行的完整基准源码和电脑直接导出的原始 CSV 还没上传。[`src/gpt-templates/`](src/gpt-templates/README.md) 里放的是 GPT 模板，不是我独立写的。从固定 2×2 到批量模板的版本快照在 [`code_history/day04/`](code_history/day04/README.md)，和 `src/` 现行文件并存，哈希未必相同。
-
-公开展示用的规模扫描结果已按我的要求撤下。等我自己在本地或正式复现之后，再放。
+Day 4 本地 64、128、256 的截图转录在 [`experiments/results/2026-10-26_day04-local/`](experiments/results/2026-10-26_day04-local/README.md)。我粘贴过的单次计时程序在 [`src/day04_matmul.cpp`](src/day04_matmul.cpp)。实际跑的完整基准源码和原始 CSV 还没上传。[`src/gpt-templates/`](src/gpt-templates/README.md) 是 GPT 模板，不是我独立写的。版本快照在 [`code_history/day04/`](code_history/day04/README.md)。
 
 下一步我先把 Day 4 的编译器和构建配置补记清楚。若补测 128，旧样本留着另记。然后加另一种循环顺序，再在同一口径下做分块，然后看脉动阵列和 SCALE-Sim。
 
@@ -32,9 +30,9 @@ python3 benchmarks/run_bench.py
 
 ## 结果在哪
 
-现在公开留着的是 Day 4 本地 64、128、256 的截图转录，在 [`experiments/results/2026-10-26_day04-local/`](experiments/results/2026-10-26_day04-local/README.md)。短记录在 [Day 4 本地实验记录](experiments/reports/2026-10-26-day04-local.md)。
+仓里现在有的是 Day 4 本地 64、128、256 的截图转录，在 [`experiments/results/2026-10-26_day04-local/`](experiments/results/2026-10-26_day04-local/README.md)。短记录在 [Day 4 本地实验记录](experiments/reports/2026-10-26-day04-local.md)。
 
-报告从 [`experiments/reports/`](experiments/reports/README.md) 进入。上面说的规模扫描已撤下，这里不再放那次的表和图。
+报告从 [`experiments/reports/`](experiments/reports/README.md) 进入。大规模扫描结果我还没放进仓。
 
 ## 笔记在哪
 
@@ -49,17 +47,10 @@ python3 benchmarks/run_bench.py
 | 路径 | 里面是什么 |
 | --- | --- |
 | [`src/`](src/README.md) | 学习程序（Day 1 单元素，Day 2 的 2×2，Day 4 单次计时）。[`src/gpt-templates/`](src/gpt-templates/README.md) 只放 GPT 模板 |
-| [`code_history/`](code_history/README.md) | Day 4 代码演进快照（V01–V06）。和 `src/` 现行文件并存，哈希未必相同 |
+| [`code_history/`](code_history/README.md) | Day 4 代码演进快照（V01–V06） |
 | [`benchmarks/`](benchmarks/README.md) | 计时驱动。`kernels/` 放要上图的实现 |
 | [`experiments/`](experiments/README.md) | 实验入口。分析在 `experiments/reports/`，原始数据在 `experiments/results/` |
-| [`experiments/reports/`](experiments/reports/README.md) | 实验记录与阶段报告（唯一报告入口） |
-| [`experiments/results/`](experiments/results/README.md) | 实测记录。现在留着的是 Day 4 本地截图转录 |
+| [`experiments/reports/`](experiments/reports/README.md) | 实验记录和阶段报告 |
+| [`experiments/results/`](experiments/results/README.md) | 实测记录。现在是 Day 4 本地截图转录 |
 | [`notes/`](notes/README.md) | 每日学习记录和理解笔记 |
 | [`PROJECT_STATE.md`](PROJECT_STATE.md) | 当前状态。和本页不一致时，以它为准 |
-
-<details>
-<summary>协作备忘（看成果可以跳过）</summary>
-
-2026-10-25 确认的范围和教学约定在 [`notes/handoff-2026-10-25-项目变更与协作同步报告.md`](notes/handoff-2026-10-25-项目变更与协作同步报告.md)。那是给后续协作者的决定记录，不是实验结论。
-
-</details>

@@ -1,16 +1,16 @@
 # 我现在做到哪
 
-最近我在 2026-10-26 更新过。i-j-k 小规模正确性（Day 2）有了。Day 4 三个目标这轮验收也通过了。公开仓曾有过云端 VM 的 ijk-scale 展示，已按我的要求整组撤下。当前不以那次数字为成果。仓库是 https://github.com/lingquan11/cpp-matmul-performance
+最近我在 2026-10-26 更新过。i-j-k 小规模正确性（Day 2）有了。Day 4 三个目标这轮也做完了。仓库是 https://github.com/lingquan11/cpp-matmul-performance
 
 我想把 C++ 矩阵乘法做成能复现的实验：先保证算对，再把性能测稳，然后比较循环顺序、做分块、把报告写清楚。测到的数据复用，我再去对 MAC、PE、脉动阵列和 SCALE-Sim。我给自己的日期是 2026-12-10，12 月 11 日之前把材料理好。量化先不放进主线。
 
-Day 1 的 `src/day01_matrix.cpp` 算 C[0][0]，输出 11，笔记在 `notes/day01-notes.md`。Day 2 的 `src/day02_matrix.cpp` 是固定 2×2 的 i-j-k，原始输入输出 `11 10` 和 `19 30`，单位矩阵测试得到 A 本身。阶段 A 的报告在 `experiments/reports/stage-a-algorithm-implementation.md`。Day 3 我把 B 换成零矩阵，输出全 0，换回原来的输入后又是 `11 10` 和 `19 30`。当天的 O(n³) 和实验方案在 `notes/day03-notes.md`。上面说的云端展示已撤下，不再当作当前成果。
+Day 1 的 `src/day01_matrix.cpp` 算 C[0][0]，输出 11，笔记在 `notes/day01-notes.md`。Day 2 的 `src/day02_matrix.cpp` 是固定 2×2 的 i-j-k，原始输入输出 `11 10` 和 `19 30`，单位矩阵测试得到 A 本身。阶段 A 的报告在 `experiments/reports/stage-a-algorithm-implementation.md`。Day 3 我把 B 换成零矩阵，输出全 0，换回原来的输入后又是 `11 10` 和 `19 30`。当天的 O(n³) 和实验方案在 `notes/day03-notes.md`。
 
-同一天的 Day 4 是另一场。目标①规模扩展、目标②计时入门、目标③完整基准测试，这轮辅导验收都通过了。正式样本是 n = 64、128、256，每种 5 次，共 15 条。我提交的运行截图里 15 条都是 PASS。128 阶第 5 次明显偏高，原始记录留着，原因还没定。我粘贴过的单次计时程序在 [`src/day04_matmul.cpp`](src/day04_matmul.cpp)。那 15 条是运行截图逐行转录的，在 [`experiments/results/2026-10-26_day04-local/`](experiments/results/2026-10-26_day04-local/README.md)，短记录在 [`experiments/reports/2026-10-26-day04-local.md`](experiments/reports/2026-10-26-day04-local.md)。实际执行的完整基准源码还没上传，电脑直接导出的原始 CSV 也还没上传。[`src/gpt-templates/day04_benchmark.cpp`](src/gpt-templates/day04_benchmark.cpp) 是 GPT 模板，不是我独立写的，也不保证和我电脑上执行的版本逐字一样。编译器、CPU、是不是 Release/x64，还有当天学习用时，都是未记录。笔记在 [`notes/day04-notes.md`](notes/day04-notes.md)，任务记录在 [`notes/day04-record.md`](notes/day04-record.md)。
+Day 4 是 2026-10-26 做的。目标①规模扩展、目标②计时入门、目标③完整基准测试，辅导时都过了。正式样本是 n = 64、128、256，每种 5 次，共 15 条。我提交的运行截图里 15 条都是 PASS。128 阶第 5 次明显偏高，原始记录留着，原因还没定。我粘贴过的单次计时程序在 [`src/day04_matmul.cpp`](src/day04_matmul.cpp)。那 15 条是运行截图逐行转录的，在 [`experiments/results/2026-10-26_day04-local/`](experiments/results/2026-10-26_day04-local/README.md)，短记录在 [`experiments/reports/2026-10-26-day04-local.md`](experiments/reports/2026-10-26-day04-local.md)。实际执行的完整基准源码还没上传，电脑直接导出的原始 CSV 也还没上传。[`src/gpt-templates/day04_benchmark.cpp`](src/gpt-templates/day04_benchmark.cpp) 是 GPT 模板，不是我独立写的，也不保证和我电脑上执行的版本逐字一样。编译器、CPU、是不是 Release/x64，还有当天学习用时，都是未记录。笔记在 [`notes/day04-notes.md`](notes/day04-notes.md)，任务记录在 [`notes/day04-record.md`](notes/day04-record.md)。
 
-从固定 2×2 到单次计时、再到批量基准模板，版本快照在 [`code_history/day04/`](code_history/day04/README.md)。V01 和 V05 是我实际粘贴的；V02、V03、V04、V06 是 GPT 模板，不是我独立写的。它们和 `src/` 现行文件并存，哈希不一定相同。`src/` 仍是现行入口。仓库里没有完整的 Day 4 ZIP，这次没有改旧压缩包。
+从固定 2×2 到单次计时、再到批量基准模板，版本快照在 [`code_history/day04/`](code_history/day04/README.md)。V01 和 V05 是我实际粘贴的；V02、V03、V04、V06 是 GPT 模板，不是我独立写的。要改的程序仍看 `src/`。
 
-下一步我先确认并记下 Day 4 实际用的编译器、构建配置和平台。若补测 128 阶，旧样本留着，补测另记一条，不覆盖这次转录。Day 5 的循环顺序我正在学，还没验收。学完再比较分块；以后各版本的输入、正确性检查、计时范围和编译设置保持一致。循环顺序我仍打算和 i-j-k 放在同一张图上，原始数据留着。cache miss 和 TLB miss 等我有自己正式的规模扫描数据后再对。再往后是脉动阵列和 SCALE-Sim。新内核怎么放，我写在 `benchmarks/README.md`。
+下一步我先确认并记下 Day 4 实际用的编译器、构建配置和平台。若补测 128 阶，旧样本留着，补测另记一条，不覆盖这次转录。Day 5 的循环顺序我正在学，还没做完。学完再比较分块；以后各版本的输入、正确性检查、计时范围和编译设置保持一致。循环顺序我仍打算和 i-j-k 放在同一张图上，原始数据留着。cache miss 和 TLB miss 等我测完大规模后再对。再往后是脉动阵列和 SCALE-Sim。新内核怎么放，我写在 `benchmarks/README.md`。
 
 时间上我每周大约留 8 到 10 小时，课优先。大约七到八成排成预定的任务，剩下的用来排错和复习。工作日做小步，完整实验等我有整块时间。一件事做到两小时还卡住，我就先把卡点记下来再拆开。
 
