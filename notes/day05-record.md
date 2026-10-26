@@ -45,7 +45,7 @@
 
 `run_sample` 用了泛型 lambda，编译需要 C++14 或更新的标准。我实际用的编译器版本没有记。这次测的是含 C 清零的整段耗时，不是纯乘法循环。
 
-里面不一定每一行都是我自己写的。辅导时的 GPT 模板另放在 [`templates/gpt/day05-loop-order-template.cpp`](../templates/gpt/day05-loop-order-template.cpp)，文件头写了「GPT 指导模板」。那份不是我交上来的源码。验收包原件在 [`archive/2026-10-26-day05-final-acceptance/`](../archive/2026-10-26-day05-final-acceptance/README.md)。
+里面不一定每一行都是我自己写的。辅导时的 GPT 模板另放在 [`templates/gpt/day05-loop-order-template.cpp`](../templates/gpt/day05-loop-order-template.cpp)，文件头写了「GPT 指导模板」。那份不是我交上来的源码。材料已按职责归档进 src / notes / experiments，验收 ZIP 原件不再入库。
 
 ## 我的反馈原话
 
@@ -55,7 +55,7 @@
 
 今天同一次运行里，`ikj` 的中位数耗时低于 `ijk`。这个比值是当前程序和这次测试下的结果，不是所有 CPU、所有规模都一样的常数。
 
-验收包里我说过「补上了昨天的文件」。用户后来确认那份 15 条是 Day 4 的程序导出，已经改放到 Day 4 目录，不再算作 Day 5。今天的 30 条仍是这一轮的正式结果。
+上面那句是我当时说要把昨天的文件放进归档 zip。用户后来确认那份 15 条是 Day 4 的程序导出，已经改放到 Day 4 目录，不再算作 Day 5。今天的 30 条仍是这一轮的正式结果。验收 ZIP 原件不再入库。
 
 ## 下一步
 

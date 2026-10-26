@@ -1,6 +1,6 @@
 # 2026-10-26 Day 5 今天的双版本（程序导出）
 
-这是 2026-10-26 同一次运行里的 `ijk` 和 `ikj`。CSV 按验收包原样放进来，测量数字没有改。元数据在 [`metadata.md`](metadata.md)，统计在 [`summary.md`](summary.md)，读法在 [实验记录](../../reports/2026-10-26-day05-loop-order.md)。
+这是 2026-10-26 同一次运行里的 `ijk` 和 `ikj`。CSV 按导出原样放进来，测量数字没有改。验收 ZIP 原件不再入库。元数据在 [`metadata.md`](metadata.md)，统计在 [`summary.md`](summary.md)，读法在 [实验记录](../../reports/2026-10-26-day05-loop-order.md)。
 
 | 文件 | 是什么 |
 | --- | --- |

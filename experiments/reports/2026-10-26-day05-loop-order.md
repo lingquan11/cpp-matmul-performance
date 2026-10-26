@@ -2,7 +2,7 @@
 
 2026-10-26。我是东南大学电子信息大一。这页只记 Day 5 今天的 `ijk` 和 `ikj`，30 条在 [`experiments/results/2026-10-26-day05-loop-order-local/`](../results/2026-10-26-day05-loop-order-local/README.md)。任务记录在 [`notes/day05-record.md`](../../notes/day05-record.md)，学习笔记在 [`notes/day05-notes.md`](../../notes/day05-notes.md)。
 
-验收包里曾有另一份 15 条，当时写成「昨天的单算法」。用户确认那是 Day 4 的程序导出，已经放到 [`experiments/results/2026-10-26-day04-local/day04-local-program-export.csv`](../results/2026-10-26-day04-local/day04-local-program-export.csv)。它不是 Day 5 的数据，下面的表也不含它。测量数字没有改。
+曾有另一份 15 条被写成「昨天的单算法」。用户确认那是 Day 4 的程序导出，已经放到 [`experiments/results/2026-10-26-day04-local/day04-local-program-export.csv`](../results/2026-10-26-day04-local/day04-local-program-export.csv)。它不是 Day 5 的数据，下面的表也不含它。测量数字没有改。
 
 ## 今天：同一次运行里的 ijk 和 ikj
 
@@ -41,7 +41,7 @@
 
 1. 我提交的今天双版本：[`src/day05-ijk-ikj-benchmark.cpp`](../../src/day05-ijk-ikj-benchmark.cpp)。快照 [`code_history/day05/V02_today_ijk_ikj.cpp`](../../code_history/day05/V02_today_ijk_ikj.cpp) 是同一份复制。里面不一定每一行都是我自己写的。`matmul_ikj` 的累加后面还留着 TODO 注释和多出来的分号，可以以后删，这次结果不变。
 2. 曾被放在 `code_history/day05/` 的那份只测 `ikj` 的源码，用户确认对应 Day 4 程序导出，已移到 [`code_history/day04/V07_user_ikj_program_export.cpp`](../../code_history/day04/V07_user_ikj_program_export.cpp)。没有拿它盖掉今天的 `src/` 文件，也没有动 `src/day04-matmul.cpp`。
-3. [`templates/gpt/day05-loop-order-template.cpp`](../../templates/gpt/day05-loop-order-template.cpp) 是 GPT 模板，文件头写了「GPT 指导模板」。它不是我交上来的源码，也不保证和我电脑上跑的版本逐字一样。验收包原件在 [`archive/2026-10-26-day05-final-acceptance/`](../../archive/2026-10-26-day05-final-acceptance/README.md)。
+3. [`templates/gpt/day05-loop-order-template.cpp`](../../templates/gpt/day05-loop-order-template.cpp) 是 GPT 模板，文件头写了「GPT 指导模板」。它不是我交上来的源码，也不保证和我电脑上跑的版本逐字一样。材料已按职责归档进 src / notes / experiments，验收 ZIP 原件不再入库。
 
 ## 材料缺口
 
