@@ -2,6 +2,8 @@
 
 测了什么：仓库里已有的 i-j-k 三重循环（`src/day02_matrix.cpp`）。循环结构和累加方式不变，只把固定上界 2 换成参数 n。没有循环重排，没有分块。Day 1 只算一个元素，不参与这次对比。
 
+测量时内核文件是 `benchmarks/ijk_kernel.cpp`。后来整理到 `benchmarks/kernels/ijk.cpp`，循环体没有改，这组 CSV 和图没有重跑。解读见 [实验记录](../../docs/report.md)。
+
 条件摘要：
 
 - 时间：2026-10-26T04:05:29Z
