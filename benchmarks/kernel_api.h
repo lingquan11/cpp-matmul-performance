@@ -1,13 +1,13 @@
 #ifndef BENCHMARKS_KERNEL_API_H
 #define BENCHMARKS_KERNEL_API_H
 
-// 基准驱动和 build/kernel_registry.cpp 共用的调度表。
-// 增加内核时在 benchmarks/kernels/ 添加源文件。约定见 benchmarks/README.md。
+// 这张表给我的计时程序和 build/kernel_registry.cpp 一起用。
+// 新的循环我写在 benchmarks/kernels/ 里，约定在 benchmarks/README.md。
 //
 // 每个 kernels/*.cpp 提供：
 //   void matmul_<BENCH_ID>(const int* A, const int* B, int* C, int n);
-// A、B、C 为行主序 n×n，三者互不重叠。
-// 同一样本会连续调用多次，调用之间不会另做清零，函数内部要先把 C 的元素写成 0。
+// A、B、C 是行主序的 n×n，三块内存不重叠。
+// 一次样本里我会连着调用很多次，中间不再清 C，所以函数自己先把 C 写成 0。
 
 struct BenchImpl {
     const char* id;

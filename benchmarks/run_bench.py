@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""编译 benchmarks/kernels 里的实现，测量耗时并画到同一张图。
+"""我用它编译 benchmarks/kernels 里的实现，测耗时，再画到一张图上。
 
-把新的 .cpp 放进 benchmarks/kernels/ 后，再运行这一条命令。
+新的 .cpp 放进 benchmarks/kernels/ 之后，再跑这一条命令。
 """
 
 from __future__ import annotations
@@ -24,8 +24,8 @@ KERNEL_DIR = ROOT / "benchmarks" / "kernels"
 BENCH_SRC = ROOT / "benchmarks" / "matmul_bench.cpp"
 DAY02_SRC = ROOT / "src" / "day02_matrix.cpp"
 CXX_FLAGS = ["-O2", "-std=c++17", "-Wall", "-Wextra", "-Werror"]
-# 循环入口的对齐会影响耗时。计时编译加上 -falign-loops=32。
-# 2026-10-26 已发表数据的编译命令见 results/2026-10-26_ijk-scale/environment.txt。
+# 我注意到循环入口对齐会让耗时差一截，所以计时编译加上 -falign-loops=32。
+# 2026-10-26 那次的编译命令在 results/2026-10-26_ijk-scale/environment.txt。
 BENCH_FLAGS = CXX_FLAGS + ["-falign-loops=32"]
 ID_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 
@@ -490,13 +490,13 @@ def write_result_readme(
 
     names = "、".join(f"{kernel.bench_id}（{kernel.label}）" for kernel in kernels)
     table = [
-        "| 实现 | 规模 n | 样本内重复 | 正式样本 | 单次耗时中位数 (ms) | 单次耗时最小–最大 (ms) | GFLOPS（中位数耗时） | 相对上一档耗时倍数 |",
+        "| 实现 | 规模 n | 样本内重复 | 正式样本 | 单次耗时中位数 (ms) | 单次耗时最小到最大 (ms) | GFLOPS（中位数耗时） | 相对上一档耗时倍数 |",
         "| --- | ---: | ---: | ---: | ---: | --- | ---: | ---: |",
     ]
     for row in summary:
-        ratio = row["time_ratio_vs_prev"] or "—"
+        ratio = row["time_ratio_vs_prev"] or "无"
         table.append(
-            "| {impl} | {n} | {reps} | {runs} | {med:.6f} | {lo:.6f}–{hi:.6f} | {gflops:.6f} | {ratio} |".format(
+            "| {impl} | {n} | {reps} | {runs} | {med:.6f} | {lo:.6f} 到 {hi:.6f} | {gflops:.6f} | {ratio} |".format(
                 impl=row["impl"],
                 n=row["n"],
                 reps=row["reps"],
@@ -508,22 +508,15 @@ def write_result_readme(
                 ratio=ratio,
             )
         )
-    text = f"""# 矩阵乘法规模扫描
+    text = f"""# 我这次的规模扫描
 
-测了什么：本次测量的实现是 {names}。各实现来自 `benchmarks/kernels/*.cpp`，画在同一张图上。
+我测的是 {names}。它们在 `benchmarks/kernels/` 里，我画在同一张图上。
 
-条件摘要：
+时间是 {field('measured_at_utc')}。系统是 {field('os')}。CPU 的 lscpu 在 `environment.txt`。编译器是 {field('compiler')}。编译命令是 `{field('compile_command')}`。图用的字体是 {font_desc}。
 
-- 时间：{field('measured_at_utc')}
-- 系统：{field('os')}
-- CPU：见 `environment.txt` 里的 lscpu（云端 VM）
-- 编译器：{field('compiler')}
-- 编译命令：`{field('compile_command')}`
-- 图中字体：{font_desc}
+我计的是实现函数连着被调用的时间。构造输入、校准和正确性检查不算在正式样本里。一次调用比我设的最短样本时长短时，我就在同一样本里重复，单次耗时等于样本总耗时除以重复次数。GFLOPS = 2 * n^3 / 单次耗时秒 / 1e9。一次乘加我算成一次乘法和一次加法。内核是 32 位整数，数字用来跟同一次实验里的其他规模比。
 
-计时对象是各实现函数的连续调用。输入构造、校准和正确性检查不在正式样本里。单次调用短于设定的最短样本时长时，同一样本内连续重复，单次耗时 = 样本总耗时 / 重复次数。GFLOPS = 2 * n^3 / 单次耗时秒 / 1e9，把每次乘加计为 1 次乘法和 1 次加法。内核是 32 位整数；数字只适合相对比较，不是浮点峰值。
-
-原始数据：`raw.csv`。汇总：`summary.csv`。图：`perf.png`。完整环境：`environment.txt`。
+原始数据在 `raw.csv`，汇总在 `summary.csv`，图是 `perf.png`，环境在 `environment.txt`。
 
 {chr(10).join(table)}
 """
