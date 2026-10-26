@@ -1,6 +1,6 @@
 # 我这次扫的 i-j-k
 
-我测的是 i-j-k 三重循环，和 `src/day02_matrix.cpp` 相同，上界换成参数 n。Day 1 那个程序只算 C[0][0]。测量时源文件我记成 `benchmarks/ijk_kernel.cpp`，现在放在 `benchmarks/kernels/ijk.cpp`。这个目录里的 CSV 和图就是那次编译跑出来的。我怎么读，写在 [实验记录](../../docs/report.md)。
+我测的是 i-j-k 三重循环，和 `src/day02_matrix.cpp` 相同，上界换成参数 n。Day 1 那个程序只算 C[0][0]。测量时源文件我记成 `benchmarks/ijk_kernel.cpp`，现在放在 `benchmarks/kernels/ijk.cpp`。这个目录里的 CSV 和图就是那次编译跑出来的。我怎么读，写在 [实验记录](../../reports/2026-10-26-ijk-scale.md)。
 
 时间是 2026-10-26T04:05:29Z。系统是 Ubuntu 24.04.5 LTS，Linux 6.12.94+，KVM 云端 VM。`lscpu` 型号 Intel(R) Xeon(R) Processor（family 6，model 207，stepping 2），4 vCPU。L1d 192 KiB，L1i 128 KiB，L2 8 MiB，L3 320 MiB。MemTotal 16387280 kB。编译器 g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0。编译命令是 `g++ -O2 -std=c++17 -Wall -Wextra -Werror -o build/matmul_bench benchmarks/matmul_bench.cpp benchmarks/ijk_kernel.cpp`。图用的字体是 WenQuanYi Micro Hei（/usr/share/fonts/truetype/wqy/wqy-microhei.ttc）。
 
