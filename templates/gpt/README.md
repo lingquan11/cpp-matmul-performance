@@ -6,6 +6,7 @@
 | --- | --- |
 | [day04-benchmark-template.cpp](day04-benchmark-template.cpp) | Day 4 基准测试模板。文件头写了「GPT 模板，非我的代码」。我没有上传实际执行的那份源码，所以这份不保证和我电脑上跑的版本逐字一样 |
 | [day05-loop-order-template.cpp](day05-loop-order-template.cpp) | Day 5 循环顺序模板。文件头写的是「GPT 指导模板」。材料已按职责归档进 src / notes / experiments，验收 ZIP 原件不再入库。我提交的双版本是 [`src/day05-ijk-ikj-benchmark.cpp`](../../src/day05-ijk-ikj-benchmark.cpp)，两份不是同一个文件 |
+| [day07-blocking-snippets.md](day07-blocking-snippets.md) | Day 7 分块相关 GPT 片段（函数、边界测试、试测与正式调度）。不是完整可编译单文件，也不是我独立写的程序 |
 
 模板注释里建议 Visual Studio、C++14 或更新标准、Release | x64。那是模板自己的建议。用户后来补记的环境是 Visual Studio 2026 18.x，比这更细的工具集号仍然未记录。Day 5 的配置截图在 [`experiments/results/2026-10-26-day05-loop-order-local/`](../../experiments/results/2026-10-26-day05-loop-order-local/README.md)。
 

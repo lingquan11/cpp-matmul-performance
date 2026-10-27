@@ -12,9 +12,11 @@ Day 4 是 2026-10-26。同一目录里有截图转录和程序导出两份 15 �
 
 Day 5 的循环顺序（`ijk` 与 `ikj`）已验收通过，只计 2026-10-26 的 30 条：[`experiments/results/2026-10-26-day05-loop-order-local/`](experiments/results/2026-10-26-day05-loop-order-local/README.md)。我提交的双版本在 [`src/day05-ijk-ikj-benchmark.cpp`](src/day05-ijk-ikj-benchmark.cpp)。[`templates/gpt/`](templates/gpt/README.md) 里的是 GPT 模板，不是我独立写的。版本快照在 [`code_history/`](code_history/README.md)。
 
-Day 6 是 2026-10-27。概念验收已通过：内存布局、缓存行、空间局部性，以及循环重排和分块的区别。今天没有新代码，也没有新的测量。笔记在 [`notes/day06-notes.md`](notes/day06-notes.md)。
+Day 6 是 2026-10-27。概念验收已通过：内存布局、缓存行、空间局部性，以及循环重排和分块的区别。Day 6 没有新代码，也没有新的测量。笔记在 [`notes/day06-notes.md`](notes/day06-notes.md)。
 
-下一步我学分块矩阵乘法的基本结构，先从小规模示意把索引关系推清楚，再决定要不要写代码测量。Day 5 的 `ijk`、`ikj` 仍作基线。Day 4 截图转录的批量源码仍未补。比 Visual Studio 2026 18.x 更细的编译器版本号，以及 Day 5 学习用时，也未记录。
+同一天 Day 7 分块矩阵乘法学习验收已通过：正式 CSV 75 条全部 PASS；`n=70`、`block_size=32` 边界测试通过；学习用时 60 分钟。数据在 [`experiments/results/2026-10-27-day07-blocking-local/`](experiments/results/2026-10-27-day07-blocking-local/)，分析在 [`experiments/reports/2026-10-27-day07-blocking.md`](experiments/reports/2026-10-27-day07-blocking.md)。中间版在 [`code_history/day07/`](code_history/day07/README.md)，未进 `src/`；GPT 片段在 [`templates/gpt/day07-blocking-snippets.md`](templates/gpt/day07-blocking-snippets.md)。
+
+下一步可选补边界组合，比较中位数和波动，并学数据复用与分块大小选择。Day 5 的 `ijk`、`ikj` 仍作基线。Day 4 截图转录的批量源码仍未补。Day 7 最终整合源码未提交；Day 7 环境未记录。比 Visual Studio 2026 18.x 更细的编译器版本号，以及 Day 5 学习用时，也未记录。
 
 眼下的安排以 [`PROJECT_STATE.md`](PROJECT_STATE.md) 为准。
 
@@ -24,7 +26,7 @@ Day 6 是 2026-10-27。概念验收已通过：内存布局、缓存行、空间
 
 ## 结果在哪
 
-仓里现在有的是 Day 4 的截图转录和程序导出，在 [`experiments/results/2026-10-26-day04-local/`](experiments/results/2026-10-26-day04-local/README.md)，短记录在 [Day 4 本地实验记录](experiments/reports/2026-10-26-day04-local.md)。Day 5 的 30 条在 [`experiments/results/2026-10-26-day05-loop-order-local/`](experiments/results/2026-10-26-day05-loop-order-local/README.md)，短记录在 [Day 5 循环顺序](experiments/reports/2026-10-26-day05-loop-order.md)。
+仓里现在有的是 Day 4 的截图转录和程序导出，在 [`experiments/results/2026-10-26-day04-local/`](experiments/results/2026-10-26-day04-local/README.md)，短记录在 [Day 4 本地实验记录](experiments/reports/2026-10-26-day04-local.md)。Day 5 的 30 条在 [`experiments/results/2026-10-26-day05-loop-order-local/`](experiments/results/2026-10-26-day05-loop-order-local/README.md)，短记录在 [Day 5 循环顺序](experiments/reports/2026-10-26-day05-loop-order.md)。Day 7 的 75 条在 [`experiments/results/2026-10-27-day07-blocking-local/`](experiments/results/2026-10-27-day07-blocking-local/README.md)，短分析在 [Day 7 分块](experiments/reports/2026-10-27-day07-blocking.md)。
 
 报告从 [`experiments/reports/`](experiments/reports/README.md) 进入。虚拟机或大规模扫描的结果不在库里。材料缺口：待用户提供。材料已按职责归档进 src / notes / experiments，验收 ZIP 原件不再入库。
 
@@ -40,7 +42,7 @@ Day 6 是 2026-10-27。概念验收已通过：内存布局、缓存行、空间
 
 | 路径 | 里面是什么 |
 | --- | --- |
-| [`src/`](src/README.md) | 这一阶段的现行成品（Day 1 单元素，Day 2 的 2×2，Day 4 单次计时，Day 5 双版本）。文件名用连字符 |
+| [`src/`](src/README.md) | 这一阶段的现行成品（Day 1 单元素，Day 2 的 2×2，Day 4 单次计时，Day 5 双版本；Day 7 最终整合源码未提交，仍停在 Day 5）。文件名用连字符 |
 | [`templates/gpt/`](templates/gpt/README.md) | GPT 模板。不是我独立写的，也不放在 `src/` |
 | [`code_history/`](code_history/README.md) | 各日代码演变快照。和 `src/` 并存，哈希不同不合并。快照文件名保持原样 |
 | [`benchmarks/`](benchmarks/README.md) | 占位。正式驱动等我本地测稳后再放。没有云端可跑基准 |
@@ -48,6 +50,6 @@ Day 6 是 2026-10-27。概念验收已通过：内存布局、缓存行、空间
 | [`.github/workflows/compile.yml`](.github/workflows/compile.yml) | 只做上面的编译检查。不是计时 CI |
 | [`experiments/`](experiments/README.md) | 实验入口。分析在 `experiments/reports/`，原始数据在 `experiments/results/` |
 | [`experiments/reports/`](experiments/reports/README.md) | 实验记录和阶段报告 |
-| [`experiments/results/`](experiments/results/README.md) | 实测记录。Day 4 的转录和程序导出分文件放在同一目录；Day 5 是 30 条程序导出 |
+| [`experiments/results/`](experiments/results/README.md) | 实测记录。Day 4 的转录和程序导出分文件放在同一目录；Day 5 是 30 条程序导出；Day 7 是 75 条分块程序导出 |
 | [`notes/`](notes/README.md) | 每日学习记录和理解笔记 |
 | [`PROJECT_STATE.md`](PROJECT_STATE.md) | 当前状态。和本页不一致时，以它为准 |
