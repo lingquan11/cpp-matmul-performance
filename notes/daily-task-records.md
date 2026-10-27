@@ -1,6 +1,6 @@
 # 我做完的每天
 
-这里是每天的索引。已经做完并且有反馈的任务才记进来。整理是从 2026-10-22 开始的。没做完的我写在当天的下一步里，不记成已经完成。到现在按日期记了 5 个日历日：2026-10-20、2026-10-22、2026-10-23、2026-10-26、2026-10-27。2026-10-26 这一天里 Day 4 和 Day 5 都做完了。当天的细节以 `dayNN-record.md` 和 `dayNN-notes.md` 为准，实验数字以 `experiments/` 为准，当前状态以 `PROJECT_STATE.md` 为准。
+这里是每天的索引。已经做完并且有反馈的任务才记进来。整理是从 2026-10-22 开始的。没做完的我写在当天的下一步里，不记成已经完成。到现在按日期记了 5 个日历日：2026-10-20、2026-10-22、2026-10-23、2026-10-26、2026-10-27。2026-10-26 这一天里 Day 4 和 Day 5 都做完了。2026-10-27 这一天里 Day 6 和 Day 7 都做完了。当天的细节以 `dayNN-record.md` 和 `dayNN-notes.md` 为准，实验数字以 `experiments/` 为准，当前状态以 `PROJECT_STATE.md` 为准。
 
 | 日期 | Day | 入口 |
 | --- | --- | --- |
@@ -10,8 +10,9 @@
 | 2026-10-26 | Day 4 | [day04-notes.md](day04-notes.md)、[day04-record.md](day04-record.md)、[转录和程序导出](../experiments/results/2026-10-26-day04-local/README.md) |
 | 2026-10-26 | Day 5，已验收，只计 30 条 | [day05-notes.md](day05-notes.md)、[day05-record.md](day05-record.md)、[今天 30 条](../experiments/results/2026-10-26-day05-loop-order-local/README.md) |
 | 2026-10-27 | Day 6，概念验收，无新代码 | [day06-notes.md](day06-notes.md)、[day06-record.md](day06-record.md)、[day06-code-materials.md](day06-code-materials.md) |
+| 2026-10-27 | Day 7，分块验收，75 条 | [day07-notes.md](day07-notes.md)、[day07-record.md](day07-record.md)、[day07-code-materials.md](day07-code-materials.md)、[75 条](../experiments/results/2026-10-27-day07-blocking-local/README.md) |
 
-我先学会了算一个输出元素，并写成 C++。2026-10-22 我把完整的 2×2 三重循环做完了，原始输入和单位矩阵都通过。阶段 A 到这里。2026-10-23 我做了零矩阵，写了 O(n³)，也写了后面怎么测性能的方案。2026-10-26 我另外做完了 Day 4：规模可以输入，单次计时也接上了，本地 64、128、256 各测了 5 次。截图转录和程序导出都在 [`experiments/results/2026-10-26-day04-local/`](../experiments/results/2026-10-26-day04-local/README.md)。同一天 Day 5 比了循环顺序，验收只看今天的 30 条，在 [`experiments/results/2026-10-26-day05-loop-order-local/`](../experiments/results/2026-10-26-day05-loop-order-local/README.md)。2026-10-27 的 Day 6 过了概念验收，记的是内存布局和缓存局部性。这一天没有新程序，也没有新测量。
+我先学会了算一个输出元素，并写成 C++。2026-10-22 我把完整的 2×2 三重循环做完了，原始输入和单位矩阵都通过。阶段 A 到这里。2026-10-23 我做了零矩阵，写了 O(n³)，也写了后面怎么测性能的方案。2026-10-26 我另外做完了 Day 4：规模可以输入，单次计时也接上了，本地 64、128、256 各测了 5 次。截图转录和程序导出都在 [`experiments/results/2026-10-26-day04-local/`](../experiments/results/2026-10-26-day04-local/README.md)。同一天 Day 5 比了循环顺序，验收只看今天的 30 条，在 [`experiments/results/2026-10-26-day05-loop-order-local/`](../experiments/results/2026-10-26-day05-loop-order-local/README.md)。2026-10-27 的 Day 6 过了概念验收，记的是内存布局和缓存局部性。同一天 Day 7 分块验收通过，正式 CSV 75 条全部 PASS，边界测试 `n=70`、`block_size=32` 也过了。
 
 ## 2026-10-20
 
@@ -125,4 +126,14 @@ Day 4 三个目标这轮都做完了。程序可以输入矩阵阶数，非法�
 
 下一步我学分块矩阵乘法的基本结构，先用小规模示意把子块的索引推清楚，再决定要不要写代码去测。Day 5 的 `ijk` 和 `ikj` 还留着当基线。
 
-这 5 个日历日里，Day 1 是 30 分钟，Day 2 大约 20 分钟，Day 3 补记为 30 分钟，Day 4 补记为 2 小时，Day 5 的学习用时仍未记录，Day 6 是 20 分钟。Day 6 没有新的测量，也没有新的程序。单元素程序编译运行输出 11。2×2 的原始输入和单位矩阵我都编译跑过。零矩阵输出是零矩阵，换回去和 Day 2 一致。O(n³) 以及“边长翻倍变成 8 倍”是我推出来的。Day 4 有截图转录和程序导出两份 15 条。截图转录那组的批量源码还没放进仓库。Day 5 的正式结果是 2026-10-26 的 30 条。比 18.x 更细的编译器版本号仍然未记录。
+## 2026-10-27，Day 7
+
+同一天接着做了分块矩阵乘法。学习验收通过，学习用时 60 分钟。环境未记录。
+
+正式样本是 64、128、256，五种配置各 5 次，共 75 条，全部 PASS，逐元素全部 YES。程序导出在 [`experiments/results/2026-10-27-day07-blocking-local/day07-blocking-program-export.csv`](../experiments/results/2026-10-27-day07-blocking-local/day07-blocking-program-export.csv)。边界测试 `n=70`、`block_size=32` 通过，截图在同目录。中位数和分析在 [`experiments/reports/2026-10-27-day07-blocking.md`](../experiments/reports/2026-10-27-day07-blocking.md)：`blocked_64` 三种分块最快；128/256 仍慢于 `ikj`；耗时不能证明 cache miss。
+
+我交的中间版在 [`code_history/day07/V01_user_submitted_intermediate.cpp`](../code_history/day07/V01_user_submitted_intermediate.cpp)，不是最终整合版，所以 `src/` 没有新增 Day 7。[`templates/gpt/day07-blocking-snippets.md`](../templates/gpt/day07-blocking-snippets.md) 是 GPT 片段。笔记在 [`day07-notes.md`](day07-notes.md)，任务记录在 [`day07-record.md`](day07-record.md)，材料说明在 [`day07-code-materials.md`](day07-code-materials.md)。
+
+下一步可选补边界组合，比较中位数和波动，并学数据复用与分块大小。Day 5 的 `ijk`、`ikj` 仍作基线。
+
+这 5 个日历日里，Day 1 是 30 分钟，Day 2 大约 20 分钟，Day 3 补记为 30 分钟，Day 4 补记为 2 小时，Day 5 的学习用时仍未记录，Day 6 是 20 分钟，Day 7 是 60 分钟。2026-10-27 同一天做完了 Day 6 和 Day 7。Day 6 没有新的测量，也没有新的程序。Day 7 有 75 条正式样本和边界截图，但最终整合源码未提交，`src/` 仍停在 Day 5。单元素程序编译运行输出 11。2×2 的原始输入和单位矩阵我都编译跑过。零矩阵输出是零矩阵，换回去和 Day 2 一致。O(n³) 以及“边长翻倍变成 8 倍”是我推出来的。Day 4 有截图转录和程序导出两份 15 条。截图转录那组的批量源码还没放进仓库。Day 5 的正式结果是 2026-10-26 的 30 条。比 18.x 更细的编译器版本号仍然未记录。Day 7 环境未记录。
