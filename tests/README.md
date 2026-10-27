@@ -5,4 +5,4 @@
 - Day 1（`src/day01-matrix.cpp`）输出 `11`
 - Day 2（`src/day02-matrix.cpp`）输出 `11 10` 和 `19 30`（每个数后面有一个空格）
 
-[`.github/workflows/compile.yml`](../.github/workflows/compile.yml) 调用这个脚本。没有性能断言，也没有大规模测试矩阵。Day 4、Day 5 只编译，不运行。计时复现：未验证。
+[`.github/workflows/compile.yml`](../.github/workflows/compile.yml) 调用这个脚本。没有性能断言，也没有大规模测试矩阵。Day 4、Day 5、Day 7 只编译，不运行。计时复现：未验证。Day 7 的 `src/day07-matrix-blocking.cpp` 是 GPT 整合版，编译通过不等于复现了用户正式 CSV。

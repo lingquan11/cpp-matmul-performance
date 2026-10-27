@@ -16,4 +16,12 @@
 
 ## 未记录事项
 
-用户没有在聊天中再次提供修正后的完整整合源码，因此不将中间代码改写或冒充为最终用户产出。没有新增硬件型号、编译器版本或缓存性能计数器数据，故不作相关实测结论。
+用户没有在聊天中再次提供修正后的完整整合源码，因此不将中间代码改写或冒充为最终用户产出。没有新增缓存性能计数器数据，故不作 cache miss 的实测结论。
+
+## 2026-10-27 补缴的 GPT 整合版
+
+[`src/day07-matrix-blocking.cpp`](../src/day07-matrix-blocking.cpp) 是根据学习对话整理的 GPT 整合版，不是上面的用户中间版，也不是用户本机逐字源码。仓库 `src/` 用连字符文件名。
+
+归档生成环境曾用 `g++ -std=c++17 -O2 -Wall -Wextra -pedantic` 编译并运行，边界测试通过，75 条正式样本全部 PASS。没有在用户本机 Visual Studio 重新构建。正式 CSV 仍是 [`experiments/results/2026-10-27-day07-blocking-local/day07-blocking-program-export.csv`](../experiments/results/2026-10-27-day07-blocking-local/day07-blocking-program-export.csv)，不用新跑结果覆盖。
+
+环境沿用此前已提交记录，并确认 Day 4–Day 7 同机同硬件：Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.11.1，Release / x64。MSVC toolset 独立版本号未记录。不把 IDE 版本等同于 toolset。说明在 [`supplements/experiment-environment.md`](supplements/experiment-environment.md)。
