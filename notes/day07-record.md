@@ -75,3 +75,11 @@
 1. 可选补充边界组合测试，例如 `n=1`、`n=70`、`n=255`，分别测试分块大小 16、32、64。
 2. 下一阶段继续比较中位数和样本波动，避免仅凭单次时间判断优化优劣。
 3. 在性能分析基础上，进一步学习数据复用、缓存容量约束与分块大小选择；不把当前实验中分块未普遍加速视为失败。
+
+## 2026-10-27 材料补缴
+
+这次没有重做实验，也没有改正式 CSV 和边界截图。
+
+- [`src/day07-matrix-blocking.cpp`](../src/day07-matrix-blocking.cpp) 是根据学习对话整理的 GPT 整合版。它不是本记录所依据的用户中间版，也不是用户本机逐字源码。中间版仍在 `code_history/day07/`。
+- 归档生成环境曾用 `g++ -std=c++17 -O2 -Wall -Wextra -pedantic` 验证边界与 75 条 PASS。未在本机 Visual Studio 重新构建。
+- 环境沿用同机记录：Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.11.1，Release / x64。MSVC toolset 独立版本号未记录。

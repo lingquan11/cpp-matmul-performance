@@ -8,21 +8,23 @@
 
 i-j-k 小规模正确性（Day 2）已有。`src/day02-matrix.cpp` 是固定 2×2，输出 `11 10` 和 `19 30`。
 
-Day 4 是 2026-10-26。同一目录里有截图转录和程序导出两份 15 条，数值不同，都不覆盖：[`experiments/results/2026-10-26-day04-local/`](experiments/results/2026-10-26-day04-local/README.md)。我粘贴过的单次计时程序在 [`src/day04-matmul.cpp`](src/day04-matmul.cpp)。截图转录那组的批量源码还没上传。
+Day 4 是 2026-10-26。同一目录里有截图转录和程序导出两份 15 条，数值不同，都不覆盖：[`experiments/results/2026-10-26-day04-local/`](experiments/results/2026-10-26-day04-local/README.md)。我粘贴过的单次计时程序在 [`src/day04-matmul.cpp`](src/day04-matmul.cpp)。截图转录那组的实际完整 benchmark 源码仍缺；[`code_history/day04/V06_gpt_benchmark_template.cpp`](code_history/day04/V06_gpt_benchmark_template.cpp) 是 GPT 模板，不能冒充执行稿。128 阶偏高样本的分析在 [`notes/supplements/day04-day05-n128-high-samples.md`](notes/supplements/day04-day05-n128-high-samples.md)，CSV 未改。
 
 Day 5 的循环顺序（`ijk` 与 `ikj`）已验收通过，只计 2026-10-26 的 30 条：[`experiments/results/2026-10-26-day05-loop-order-local/`](experiments/results/2026-10-26-day05-loop-order-local/README.md)。我提交的双版本在 [`src/day05-ijk-ikj-benchmark.cpp`](src/day05-ijk-ikj-benchmark.cpp)。[`templates/gpt/`](templates/gpt/README.md) 里的是 GPT 模板，不是我独立写的。版本快照在 [`code_history/`](code_history/README.md)。
 
 Day 6 是 2026-10-27。概念验收已通过：内存布局、缓存行、空间局部性，以及循环重排和分块的区别。Day 6 没有新代码，也没有新的测量。笔记在 [`notes/day06-notes.md`](notes/day06-notes.md)。
 
-同一天 Day 7 分块矩阵乘法学习验收已通过：正式 CSV 75 条全部 PASS；`n=70`、`block_size=32` 边界测试通过；学习用时 60 分钟。数据在 [`experiments/results/2026-10-27-day07-blocking-local/`](experiments/results/2026-10-27-day07-blocking-local/)，分析在 [`experiments/reports/2026-10-27-day07-blocking.md`](experiments/reports/2026-10-27-day07-blocking.md)。中间版在 [`code_history/day07/`](code_history/day07/README.md)，未进 `src/`；GPT 片段在 [`templates/gpt/day07-blocking-snippets.md`](templates/gpt/day07-blocking-snippets.md)。
+同一天 Day 7 分块矩阵乘法学习验收已通过：正式 CSV 75 条全部 PASS；`n=70`、`block_size=32` 边界测试通过；学习用时 60 分钟。数据在 [`experiments/results/2026-10-27-day07-blocking-local/`](experiments/results/2026-10-27-day07-blocking-local/)，分析在 [`experiments/reports/2026-10-27-day07-blocking.md`](experiments/reports/2026-10-27-day07-blocking.md)。用户中间版在 [`code_history/day07/`](code_history/day07/README.md)。[`src/day07-matrix-blocking.cpp`](src/day07-matrix-blocking.cpp) 是根据学习对话整理的 GPT 整合版，不是用户本机逐字源码；未在用户本机 Visual Studio 重新构建，也不覆盖正式 CSV。GPT 片段在 [`templates/gpt/day07-blocking-snippets.md`](templates/gpt/day07-blocking-snippets.md)。
 
-下一步可选补边界组合，比较中位数和波动，并学数据复用与分块大小选择。Day 5 的 `ijk`、`ikj` 仍作基线。Day 4 截图转录的批量源码仍未补。Day 7 最终整合源码未提交；Day 7 环境未记录。比 Visual Studio 2026 18.x 更细的编译器版本号，以及 Day 5 学习用时，也未记录。
+Day 5 学习用时已补录为 60 分钟。Day 4–Day 7 同机同硬件：Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.11.1，Release / x64。MSVC toolset 独立版本号未记录。
+
+下一步可选补边界组合，比较中位数和波动，并学数据复用与分块大小选择。Day 5 的 `ijk`、`ikj` 仍作基线。仍缺的是 Day 4 截图转录那组的实际批量源码，以及 MSVC toolset 独立版本号。补缴说明在 [`notes/supplements/`](notes/supplements/README.md)。
 
 眼下的安排以 [`PROJECT_STATE.md`](PROJECT_STATE.md) 为准。
 
 ## 怎么跑
 
-`benchmarks/` 只是占位。正式计时驱动等我本地测稳后再放，仓库里没有云端可跑的基准。[`.github/workflows/compile.yml`](.github/workflows/compile.yml) 调用 [`tests/smoke.sh`](tests/smoke.sh)：用 `g++ -std=c++17 -O2` 编译 [`src/`](src/README.md) 下现存的 `.cpp`，并检查 Day 1 输出 `11`、Day 2 输出 `11 10` 和 `19 30`。这不是完整测试，也不是性能测试。Day 4、Day 5 只编译，不运行。计时复现：未验证。Day 5 双版本源码里的泛型 lambda 需要 C++14 或更新标准；我实际用的编译器版本未记录。
+`benchmarks/` 只是占位。正式计时驱动等我本地测稳后再放，仓库里没有云端可跑的基准。[`.github/workflows/compile.yml`](.github/workflows/compile.yml) 调用 [`tests/smoke.sh`](tests/smoke.sh)：用 `g++ -std=c++17 -O2` 编译 [`src/`](src/README.md) 下现存的 `.cpp`，并检查 Day 1 输出 `11`、Day 2 输出 `11 10` 和 `19 30`。这不是完整测试，也不是性能测试。Day 4、Day 5、Day 7 只编译，不运行。计时复现：未验证。Day 5 双版本和 Day 7 GPT 整合版里的泛型 lambda 需要 C++14 或更新标准。MSVC toolset 独立版本号未记录。
 
 ## 结果在哪
 
@@ -42,7 +44,7 @@ Day 6 是 2026-10-27。概念验收已通过：内存布局、缓存行、空间
 
 | 路径 | 里面是什么 |
 | --- | --- |
-| [`src/`](src/README.md) | 这一阶段的现行成品（Day 1 单元素，Day 2 的 2×2，Day 4 单次计时，Day 5 双版本；Day 7 最终整合源码未提交，仍停在 Day 5）。文件名用连字符 |
+| [`src/`](src/README.md) | 这一阶段的现行文件。Day 7 的 `day07-matrix-blocking.cpp` 是 GPT 整合版，不是用户逐字源码。文件名用连字符 |
 | [`templates/gpt/`](templates/gpt/README.md) | GPT 模板。不是我独立写的，也不放在 `src/` |
 | [`code_history/`](code_history/README.md) | 各日代码演变快照。和 `src/` 并存，哈希不同不合并。快照文件名保持原样 |
 | [`benchmarks/`](benchmarks/README.md) | 占位。正式驱动等我本地测稳后再放。没有云端可跑基准 |

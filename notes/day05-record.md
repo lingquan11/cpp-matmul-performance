@@ -5,8 +5,8 @@
 - **任务标题：** 矩阵乘法循环顺序，`ijk` 和 `ikj` 放在同一次运行里比
 - **学习日期：** 2026-10-26
 - **完成状态：** 这轮验收通过。验收只看今天的 30 条
-- **实际学习用时：** 未记录
-- **编译器/构建配置：** 与 Day 4 同一套。用户补记为 Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.x。配置截图显示 Release | x64。更细的编译器版本号未记录
+- **实际学习用时：** 60 分钟（2026-10-27 用户补录；原先写的是未记录）。补录说明在 [`supplements/day05-study-time.md`](supplements/day05-study-time.md)
+- **编译器/构建配置：** 与 Day 4 同一套。Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.11.1（IDE 版本），Release / x64。MSVC toolset 独立版本号未记录。Day 4–Day 7 同机同硬件，未换机
 
 ## 我完成的内容
 
@@ -59,4 +59,4 @@
 
 ## 下一步
 
-接着看缓存行和空间局部性。`ijk` 和 `ikj` 留着，当作以后分块的基线。学习用时仍然未记录。比 18.x 更细的编译器版本号也未记录。
+接着看缓存行和空间局部性。`ijk` 和 `ikj` 留着，当作以后分块的基线。学习用时已补录为 60 分钟。MSVC toolset 独立版本号仍未记录。128 阶偏高样本的分析在 [`supplements/day04-day05-n128-high-samples.md`](supplements/day04-day05-n128-high-samples.md)，原 CSV 未改。

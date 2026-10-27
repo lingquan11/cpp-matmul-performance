@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Compile every current program in src/. Run only Day 1 and Day 2,
-# which have fixed output. Do not run Day 4 or Day 5: those write
-# timings and would mix new samples into the archived results.
+# which have fixed output. Do not run Day 4, Day 5, or Day 7: those
+# write timings and would mix new samples into the archived results.
 set -euo pipefail
 
 root="$(cd "$(dirname "$0")/.." && pwd)"
@@ -34,4 +34,4 @@ if [[ "$day02" != "$expected" ]]; then
 fi
 
 echo "smoke ok: compiled ${#files[@]} files under src/; Day 1 printed 11; Day 2 printed the 2x2 result"
-echo "Day 4 and Day 5 were compiled only. Timing reproduction: not verified."
+echo "Day 4, Day 5, and Day 7 were compiled only. Timing reproduction: not verified."

@@ -8,7 +8,7 @@
 | [day05-loop-order-template.cpp](day05-loop-order-template.cpp) | Day 5 循环顺序模板。文件头写的是「GPT 指导模板」。材料已按职责归档进 src / notes / experiments，验收 ZIP 原件不再入库。我提交的双版本是 [`src/day05-ijk-ikj-benchmark.cpp`](../../src/day05-ijk-ikj-benchmark.cpp)，两份不是同一个文件 |
 | [day07-blocking-snippets.md](day07-blocking-snippets.md) | Day 7 分块相关 GPT 片段（函数、边界测试、试测与正式调度）。不是完整可编译单文件，也不是我独立写的程序 |
 
-模板注释里建议 Visual Studio、C++14 或更新标准、Release | x64。那是模板自己的建议。用户后来补记的环境是 Visual Studio 2026 18.x，比这更细的工具集号仍然未记录。Day 5 的配置截图在 [`experiments/results/2026-10-26-day05-loop-order-local/`](../../experiments/results/2026-10-26-day05-loop-order-local/README.md)。
+模板注释里建议 Visual Studio、C++14 或更新标准、Release | x64。那是模板自己的建议。用户后来补记的环境是 Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.11.1，Release / x64。MSVC toolset 独立版本号仍然未记录，不把 IDE 版本当成 toolset。Day 5 的配置截图在 [`experiments/results/2026-10-26-day05-loop-order-local/`](../../experiments/results/2026-10-26-day05-loop-order-local/README.md)。Day 7 的可编译整合版在 [`src/day07-matrix-blocking.cpp`](../../src/day07-matrix-blocking.cpp)，文件头标明是 GPT 整合版；本目录的片段不是那份完整程序。
 
 我在对话里粘贴过的单次计时程序在 [`src/day04-matmul.cpp`](../../src/day04-matmul.cpp)。Day 4 的截图转录和程序导出都在 [`experiments/results/2026-10-26-day04-local/`](../../experiments/results/2026-10-26-day04-local/README.md)。Day 5 的 30 条在 [`experiments/results/2026-10-26-day05-loop-order-local/`](../../experiments/results/2026-10-26-day05-loop-order-local/README.md)。本目录的模板都不是这些 CSV 的执行稿。
 
