@@ -10,9 +10,11 @@ i-j-k 小规模正确性（Day 2）已有。`src/day02-matrix.cpp` 是固定 2×
 
 Day 4 是 2026-10-26。同一目录里有截图转录和程序导出两份 15 条，数值不同，都不覆盖：[`experiments/results/2026-10-26-day04-local/`](experiments/results/2026-10-26-day04-local/README.md)。我粘贴过的单次计时程序在 [`src/day04-matmul.cpp`](src/day04-matmul.cpp)。截图转录那组的批量源码还没上传。
 
-Day 5 的循环顺序（`ijk` 与 `ikj`）已验收通过，只计今天的 30 条：[`experiments/results/2026-10-26-day05-loop-order-local/`](experiments/results/2026-10-26-day05-loop-order-local/README.md)。我提交的双版本在 [`src/day05-ijk-ikj-benchmark.cpp`](src/day05-ijk-ikj-benchmark.cpp)。[`templates/gpt/`](templates/gpt/README.md) 里的是 GPT 模板，不是我独立写的。版本快照在 [`code_history/`](code_history/README.md)。
+Day 5 的循环顺序（`ijk` 与 `ikj`）已验收通过，只计 2026-10-26 的 30 条：[`experiments/results/2026-10-26-day05-loop-order-local/`](experiments/results/2026-10-26-day05-loop-order-local/README.md)。我提交的双版本在 [`src/day05-ijk-ikj-benchmark.cpp`](src/day05-ijk-ikj-benchmark.cpp)。[`templates/gpt/`](templates/gpt/README.md) 里的是 GPT 模板，不是我独立写的。版本快照在 [`code_history/`](code_history/README.md)。
 
-下一步我看缓存行和空间局部性，再以现在的 `ijk`、`ikj` 为基线做分块。Day 4 截图转录的批量源码仍未补。比 Visual Studio 2026 18.x 更细的编译器版本号，以及 Day 5 学习用时，也未记录。
+Day 6 是 2026-10-27。概念验收已通过：内存布局、缓存行、空间局部性，以及循环重排和分块的区别。今天没有新代码，也没有新的测量。笔记在 [`notes/day06-notes.md`](notes/day06-notes.md)。
+
+下一步我学分块矩阵乘法的基本结构，先从小规模示意把索引关系推清楚，再决定要不要写代码测量。Day 5 的 `ijk`、`ikj` 仍作基线。Day 4 截图转录的批量源码仍未补。比 Visual Studio 2026 18.x 更细的编译器版本号，以及 Day 5 学习用时，也未记录。
 
 眼下的安排以 [`PROJECT_STATE.md`](PROJECT_STATE.md) 为准。
 
