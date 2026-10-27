@@ -4,6 +4,24 @@
 
 我是东南大学电子信息专业大一。
 
+## 路线图
+
+- [x] **阶段 A · 算法实现**：完整三重循环实现矩阵乘法，用小矩阵手算结果核对正确性，并分析时间复杂度。已完成（Day 1–2；Day 3 零矩阵等）。
+- [ ] **阶段 B · 性能测量**：计时方法，以及矩阵规模、循环顺序、编译优化等控制变量。进行中。本地计时和循环顺序对比已阶段性完成（Day 4 规模、计时、截图转录与程序导出；Day 5 `ijk` / `ikj` 30 条验收）。编译优化选项还没有单独对比。计时复现未验证。
+- [ ] **阶段 C · 分块优化与实验报告**：分块（tiling），并写出可复现的实验报告。已启动（Day 6 概念；Day 7 分块 75 条与边界测试 PASS）。正式报告进行中。分块尚未普遍快过 `ikj`。
+- [ ] **阶段 D · 脉动阵列与 SCALE-Sim**：理解脉动阵列数据流，用 SCALE-Sim 对照前面的实测结果。未开始。
+
+## 阶段成果
+
+下表按 [`PROJECT_STATE.md`](PROJECT_STATE.md) 和仓库里现有的报告、结果来写。和状态文件冲突时，以状态文件为准。
+
+| 阶段 | 状态 | 成果 |
+| --- | --- | --- |
+| A · 算法实现 | 已完成（Day 1–2；Day 3 零矩阵等） | [`src/day01-matrix.cpp`](src/day01-matrix.cpp) 算单个输出元素；[`src/day02-matrix.cpp`](src/day02-matrix.cpp) 是固定 2×2。报告在 [阶段 A](experiments/reports/stage-a-algorithm-implementation.md)。 |
+| B · 性能测量 | 进行中；本地计时与循环顺序对比阶段性完成 | Day 4 截图转录与程序导出：[结果](experiments/results/2026-10-26-day04-local/README.md)、[记录](experiments/reports/2026-10-26-day04-local.md)。Day 5 的 30 条：[结果](experiments/results/2026-10-26-day05-loop-order-local/README.md)、[记录](experiments/reports/2026-10-26-day05-loop-order.md)。截图转录那组的完整 benchmark 源码仍缺。计时复现：未验证。 |
+| C · 分块优化与实验报告 | 已启动；正式可复现实验报告进行中 | Day 6 概念在 [`notes/day06-notes.md`](notes/day06-notes.md)，没有新测量。Day 7 正式 CSV 75 条全部 PASS，`n=70`、`block_size=32` 边界测试通过：[结果](experiments/results/2026-10-27-day07-blocking-local/README.md)、[分块记录](experiments/reports/2026-10-27-day07-blocking.md)。[`src/day07-matrix-blocking.cpp`](src/day07-matrix-blocking.cpp) 是 GPT 整合版，不是用户本机逐字源码。分块尚未普遍快过 `ikj`。 |
+| D · 脉动阵列与 SCALE-Sim | 未开始 | — |
+
 ## 当前做到哪
 
 i-j-k 小规模正确性（Day 2）已有。`src/day02-matrix.cpp` 是固定 2×2，输出 `11 10` 和 `19 30`。
