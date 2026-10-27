@@ -18,6 +18,9 @@
 | [day04-record.md](day04-record.md) | Day 4 任务记录：三个目标、本地样本、材料缺口 |
 | [day05-notes.md](day05-notes.md) | Day 5：`ijk` 和 `ikj` 的访问方式，以及今天这轮的中位数 |
 | [day05-record.md](day05-record.md) | Day 5 任务记录：今天 30 条。曾误记的 15 条已改回 Day 4 |
+| [day06-notes.md](day06-notes.md) | Day 6：二维数组内存布局、缓存行和空间局部性 |
+| [day06-record.md](day06-record.md) | Day 6 任务记录：概念验收通过，无新代码 |
+| [day06-code-materials.md](day06-code-materials.md) | Day 6：今天没有新代码，也不把 Day 5 当成今天的产出 |
 | [daily-task-records.md](daily-task-records.md) | 已做完并有反馈的每天 |
 | [handoff-2026-10-25-项目变更与协作同步报告.md](handoff-2026-10-25-项目变更与协作同步报告.md) | 2026-10-25 定下来的范围和约定 |
 
