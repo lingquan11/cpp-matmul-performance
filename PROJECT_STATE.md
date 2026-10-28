@@ -1,5 +1,15 @@
 # 我现在做到哪
 
+## 2026-10-29 维护补充（不是新学习日）
+
+本次整理 README 阅读入口，并从 Day 7 原始 75 条 CSV 生成[可重建图表](experiments/figures/README.md)。新增[独立正确性检查](tests/README.md)：直接调用现有 Day 7 内核，MSVC 下 392 个组合通过，`n=70` 配块 32、64 的单例通过；现行 5 个源码文件均构建成功。CI 现增加运行这个不计时、不输出 CSV 的测试适配器，仍不运行 Day 4/5/7 benchmark main。
+
+这次测试、图表和文档由 Codex 维护，不作为学生独立实现的新算法，也不标记 Day 8 已验收。原始 CSV、历史源码和学习记录保留；历史性能逐行复现仍未验证。本次实际编译器为 MSVC 19.51.36260 x64 / toolset 14.51.36231，不能倒填为历史实验编译器。完整命令、限制和验证见[维护记录](notes/maintenance-2026-10-29.md)。
+
+## 此前维护与学习记录
+
+下文“未在本机构建”“CI 只冒烟 Day 1/2”等是当时状态，现行验证范围以上述维护补充为准；历史测量结论不因本次正确性检查改变。
+
 2026-10-29：README 首页改成分层阅读（30 秒 / 3 分钟）。最前面是问题、读者、阶段进度、「最值得先看」和「与 NPU 的关系」，接着是从已有报告抄来的 Day 5、Day 7 中位数。本文件仍是唯一进度来源。没有新测量。CSV、测量数字和 `code_history/` 快照都没动。中位数可以用 `python3 experiments/summarize_medians.py` 从归档 CSV 再打一遍。
 
 最后更新：2026-10-27（材料补缴，不是新的一天）。Day 4 有 15 条截图转录，另有 15 条程序导出，128 阶偏高样本都保留，分析在 [`notes/supplements/day04-day05-n128-high-samples.md`](notes/supplements/day04-day05-n128-high-samples.md)；截图转录那组的实际完整 benchmark 源码仍缺。Day 5 学习用时 60 分钟。Day 7 分块矩阵乘法学习验收已通过；正式 CSV 75 条全部 PASS；n=70 block_size=32 边界测试通过；学习用时 60 分钟。用户交的中间版仍在 [`code_history/day07/V01_user_submitted_intermediate.cpp`](code_history/day07/V01_user_submitted_intermediate.cpp)，文件没有改。[`src/day07-matrix-blocking.cpp`](src/day07-matrix-blocking.cpp) 是根据学习对话整理的 GPT 整合版，不是用户本机逐字源码；归档生成环境曾用 `g++ -std=c++17 -O2 -Wall -Wextra -pedantic` 验证边界与 75 条 PASS，未在用户本机 Visual Studio 重新构建，也不覆盖正式 CSV。GPT 片段仍在 [`templates/gpt/day07-blocking-snippets.md`](templates/gpt/day07-blocking-snippets.md)；数据在 [`experiments/results/2026-10-27-day07-blocking-local/`](experiments/results/2026-10-27-day07-blocking-local/)；分析在 [`experiments/reports/2026-10-27-day07-blocking.md`](experiments/reports/2026-10-27-day07-blocking.md)；笔记 [`notes/day07-notes.md`](notes/day07-notes.md)、[`notes/day07-record.md`](notes/day07-record.md)、[`notes/day07-code-materials.md`](notes/day07-code-materials.md)。中位数见报告：`blocked_64` 三种分块最快，128/256 仍慢于 `ikj`；耗时不能证明 cache miss。环境与 Day 4–Day 7 同机同硬件，未换机：Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.11.1，Release / x64。MSVC toolset 独立版本号未记录，不把 IDE 版本当成 toolset。同一天还有 Day 6 概念验收。验收 ZIP 原件不再入库。此前用户确认原先误标成 Day 5「昨天 15 条」的 CSV 是 Day 4 程序导出，已改回 Day 4 目录。Day 5 只保留 2026-10-26 的 30 条。`src/` 现行文件用连字符文件名，CI 只编译、只冒烟 Day 1 / Day 2。Day 4、Day 5、Day 7 计时复现：未验证。i-j-k 小规模正确性（Day 2）有了。Day 4 三个目标这轮也做完了。Day 5 的循环顺序对比（`ijk` 与 `ikj`）已验收通过。仓库是 https://github.com/lingquan11/cpp-matmul-performance

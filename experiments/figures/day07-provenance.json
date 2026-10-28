@@ -1,0 +1,24 @@
+{
+  "source": "experiments/results/2026-10-27-day07-blocking-local/day07-blocking-program-export.csv",
+  "source_sha256": "f23624d9aa5b4e50e31d0d1463d34c183d766b6e3db29dac30183148ce71e12e",
+  "generator": "scripts/summarize_day07.py",
+  "generator_sha256": "02aa62c59815ee88f0587f363194cc2c34430554c68956ea1dcaa95bd83c843b",
+  "python": "3.13.5",
+  "matplotlib": "3.10.0",
+  "rows": 75,
+  "groups": 15,
+  "samples_per_group": 5,
+  "excluded_rows": 0,
+  "timing_column": "ms_per_multiply",
+  "aggregation": "median, min, max; all five timed samples retained",
+  "speedup_definition": "median(ikj time) / median(algorithm time), within each n",
+  "figure_points": "median(ikj time) / individual algorithm time, within each n",
+  "range_definition": "observed min-max of the normalized samples; not a confidence interval",
+  "measurements": "historical user CSV dated 2026-10-27; no new benchmark executed",
+  "limitations": [
+    "Original executed source is not available verbatim; reconstructed src is GPT-integrated.",
+    "Exact original toolset and compiler flags are not recorded.",
+    "Current integrated src uses fixed stride 256 and int arrays without explicit parallelism; this does not prove original binary configuration.",
+    "No hardware cache counter or real NPU measurement is present."
+  ]
+}

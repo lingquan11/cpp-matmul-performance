@@ -11,5 +11,5 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install g++
         run: sudo apt-get update && sudo apt-get install -y g++
-      - name: Compile src and smoke Day 1 and Day 2
+      - name: Compile src and check Day 1, Day 2 and Day 7 correctness
         run: bash tests/smoke.sh
