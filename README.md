@@ -6,6 +6,8 @@
 
 **做到哪。** 阶段 A 已完成（Day 1–2；Day 3 零矩阵等）。阶段 B 进行中：本地计时和循环顺序对比已阶段性完成（Day 4、Day 5），编译优化还没有单独对比。阶段 C 已启动：分块有了 75 条和边界测试，正式报告进行中，分块还没有普遍快过 `ikj`。阶段 D 未开始。计时复现：未验证。
 
+> **English:** A student project exploring CPU matrix multiplication, loop order, and tiling through correctness checks and recorded experiments, with a planned introduction to NPU dataflow.
+
 ## 最值得先看
 
 1. **Day 5 循环顺序（先看这个）。** [报告](experiments/reports/2026-10-26-day05-loop-order.md) 和 [30 条结果](experiments/results/2026-10-26-day05-loop-order-local/README.md)。同一次运行里，64 / 128 / 256 的 `ijk` 中位数相对 `ikj` 是 6.85× / 8.45× / 9.38×。程序在 [`src/day05-ijk-ikj-benchmark.cpp`](src/day05-ijk-ikj-benchmark.cpp)。
@@ -45,6 +47,11 @@ python3 experiments/summarize_medians.py
 
 ### Day 7：分块和 `ikj`
 
+![Day 7 历史样本：分块在 128、256 阶均慢于 ikj；64 阶 blocked_64 与 ikj 的范围重叠。](experiments/figures/day07-speedup.svg)
+
+**这张图回答：分块是否比 `ikj` 更快？** 点为全部样本，横线为观测范围，黑色短线为中位数之比；越靠右越快，虚线 1 为同尺寸 `ikj` 基准。范围不是置信区间。关注 128、256 阶的分块点仍在 1 左侧。[图表说明与重生成](experiments/figures/README.md) · [汇总 CSV](experiments/figures/day07-summary.csv)
+
+
 **这张表在回答：** 同一轮里，三种分块的中位数有没有普遍快过 `ikj`？
 
 来源：[Day 7 报告](experiments/reports/2026-10-27-day07-blocking.md)。每组 5 个正式样本的中位数，单位毫秒。
@@ -79,6 +86,38 @@ python3 experiments/summarize_medians.py
 
 ## 怎么跑
 
+### Windows 最小实验与分块正确性
+
+需要支持 C++17 的编译器。下面在 Windows 的 **x64 Native Tools Command Prompt for VS** 中，从仓库根目录运行；已经安装 C++ 工具链的情况下无需额外库：
+
+```bat
+chcp 65001 > nul
+if not exist build mkdir build
+cl /nologo /std:c++17 /O2 /EHsc /utf-8 src\day02-matrix.cpp /Fo:build\day02.obj /Fe:build\day02.exe
+build\day02.exe
+cl /nologo /std:c++17 /O2 /EHsc /utf-8 src\day04-matmul.cpp /Fo:build\day04.obj /Fe:build\day04.exe
+echo 4 | build\day04.exe
+```
+
+Day 2 输出两行 `11 10` 和 `19 30`；Day 4 的 `n=4` 应输出 `C[0][0] = 50`。Day 4 的单次耗时适合认识计时范围，**不足以用于性能结论**；可把 `4` 改为 1–256 的整数观察规模变化。若找不到 `cl`，请从 Visual Studio Installer 安装 C++ 桌面开发组件并打开上述开发者命令提示符。
+
+接着验证分块，改变 `n` 或块大小：
+
+```bat
+cl /nologo /std:c++17 /O2 /EHsc /utf-8 tests\day07-correctness.cpp /Fo:build\day07-correctness.obj /Fe:build\day07-correctness.exe
+build\day07-correctness.exe 70 32
+build\day07-correctness.exe 70 64
+build\day07-correctness.exe
+```
+
+两个单例各输出 `PASS: 12 algorithm/input cases`；最后一条运行 392 个组合。这个入口只做正确性比较，不计时、不写 CSV。Windows/MSVC 下上述最小流程已核对；完整记录见[本次维护核验](notes/maintenance-2026-10-29.md)。性能程序目前没有命令行参数，正式性能实验的配置仍在源码中；Linux 构建与 CI 用法见[测试说明](tests/README.md)。
+
+只想比较已有性能结果，可以运行 `python scripts/summarize_day07.py`（需要 Python 和 Matplotlib），由原始样本重新生成首页图表；这不执行矩阵乘法，也不产生新的性能证据。
+
+Day 7 的固定容量数组为 256×256，逻辑规模小于 256 时物理行跨度仍为 256 个 `int`。整合版使用整数输入与乘加，修改输入范围或扩大容量时需重新检查溢出；不要将它当成浮点误差测试。实验记录、生成图表和独立正确性检查见下方入口。
+
+### Linux 构建与只读中位数复算
+
 前提：`g++` 支持 C++17。冒烟脚本调用的就是 `g++ -std=c++17 -O2`。
 
 在仓库根目录：
@@ -94,12 +133,12 @@ sudo apt-get update && sudo apt-get install -y g++
 bash tests/smoke.sh
 ```
 
-脚本会编译 [`src/`](src/README.md) 下现存的 `.cpp`，然后只运行两份有固定输出的程序：
+脚本会编译 [`src/`](src/README.md) 下现存的 `.cpp`，然后运行两份有固定输出的程序和独立的 Day 7 正确性测试：
 
 - Day 1（[`src/day01-matrix.cpp`](src/day01-matrix.cpp)）：检查输出 `11`
 - Day 2（[`src/day02-matrix.cpp`](src/day02-matrix.cpp)）：检查输出 `11 10` 和 `19 30`
 
-Day 4、Day 5、Day 7 只编译，不运行。计时复现：未验证。不要在 CI 里跑计时程序，否则会混进新样本。
+Day 7 另由 [`tests/day07-correctness.cpp`](tests/day07-correctness.cpp) 调用计算函数，检查 392 个组合和非法参数。Day 4、Day 5、Day 7 的 benchmark main 只编译，不运行；不输出性能 CSV。历史计时复现仍未验证。
 
 想看循环顺序怎么比，读 [`src/day05-ijk-ikj-benchmark.cpp`](src/day05-ijk-ikj-benchmark.cpp)，再对照已经归档的 [Day 5 CSV](experiments/results/2026-10-26-day05-loop-order-local/day05-loop-order-program-export.csv) 和 [Day 5 报告](experiments/reports/2026-10-26-day05-loop-order.md)。这里不把重跑计时写进 CI。
 
@@ -137,10 +176,14 @@ Day 5 的 30 条在 [`experiments/results/2026-10-26-day05-loop-order-local/`](e
 | [`templates/gpt/`](templates/gpt/README.md) | GPT 模板。不是我独立写的，也不放在 `src/` |
 | [`code_history/`](code_history/README.md) | 各日代码演变快照。和 `src/` 并存，哈希不同不合并。快照文件名保持原样 |
 | [`benchmarks/`](benchmarks/README.md) | 占位。正式驱动等我本地测稳后再放。没有云端可跑基准 |
-| [`tests/`](tests/README.md) | 最小冒烟：编译 `src/`，检查 Day 1、Day 2 的已知输出。不含性能测试 |
-| [`.github/workflows/compile.yml`](.github/workflows/compile.yml) | 只做上面的编译检查。不是计时 CI |
+| [`tests/`](tests/README.md) | 编译 `src/`，检查 Day 1/2 已知输出和 Day 7 的独立正确性。不含性能测试 |
+| [`.github/workflows/compile.yml`](.github/workflows/compile.yml) | 做上面的编译与正确性检查。不是计时 CI |
 | [`experiments/`](experiments/README.md) | 实验入口。分析在 `experiments/reports/`，原始数据在 `experiments/results/`。`summarize_medians.py` 只读 Day 5、Day 7 的程序导出 CSV，再打中位数 |
 | [`experiments/reports/`](experiments/reports/README.md) | 实验记录和阶段报告 |
 | [`experiments/results/`](experiments/results/README.md) | 实测记录。Day 4 的转录和程序导出分文件放在同一目录；Day 5 是 30 条程序导出；Day 7 是 75 条分块程序导出 |
 | [`notes/`](notes/README.md) | 每日学习记录和理解笔记 |
 | [`PROJECT_STATE.md`](PROJECT_STATE.md) | 当前状态。和本页不一致时，以它为准 |
+
+## 参与与下一步
+
+采用 [MIT 许可证](LICENSE)。复现问题可以开 issue，注明系统、编译器、命令与输出。新人小任务：先预测 `n=70` 配块 32、64 时的尾块边界，再运行正确性检查；解释为什么都算对不代表一样快。问题与本次验证结果见[维护记录](notes/maintenance-2026-10-29.md)。

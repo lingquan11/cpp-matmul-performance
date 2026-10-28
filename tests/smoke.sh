@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-# Compile every current program in src/. Run only Day 1 and Day 2,
-# which have fixed output. Do not run Day 4, Day 5, or Day 7: those
-# write timings and would mix new samples into the archived results.
+# Compile every current program in src/. Run Day 1, Day 2 and the
+# separate Day 7 correctness adapter. Never invoke a benchmark main.
 set -euo pipefail
 
 root="$(cd "$(dirname "$0")/.." && pwd)"
@@ -33,5 +32,23 @@ if [[ "$day02" != "$expected" ]]; then
   exit 1
 fi
 
-echo "smoke ok: compiled ${#files[@]} files under src/; Day 1 printed 11; Day 2 printed the 2x2 result"
-echo "Day 4, Day 5, and Day 7 were compiled only. Timing reproduction: not verified."
+g++ -std=c++17 -O2 -Wall -Wextra -pedantic -o "$tmp/day07-correctness" "$root/tests/day07-correctness.cpp"
+"$tmp/day07-correctness"
+
+# Reject bad input before touching the fixed-capacity arrays or block loops.
+for args in "0 32" "257 32" "70 0" "70 -1" "70 258" "70 1x" "1" "1 2 3"; do
+  read -r -a values <<< "$args"
+  if "$tmp/day07-correctness" "${values[@]}"; then
+    echo "Expected invalid arguments to fail: $args" >&2
+    exit 1
+  else
+    status=$?
+    if ((status != 2)); then
+      echo "Expected usage exit 2, got $status: $args" >&2
+      exit 1
+    fi
+  fi
+done
+
+echo "smoke ok: compiled ${#files[@]} src files; Day 1/2 output and Day 7 correctness passed"
+echo "Day 4/5/7 benchmark main functions were not run. Timing reproduction: not verified."
