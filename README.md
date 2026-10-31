@@ -32,7 +32,7 @@
 | **分块**（Day 6 概念 + Day 7 实测，阶段 C） | 能否用小块数据提高复用、缩短耗时 | `blocked_16/32/64` 与 `ijk`/`ikj` 同口径计时 | 75 条 PASS；`n=70, block=32` 边界测试 PASS | `blocked_64` 最快，但 **128/256 仍慢于 `ikj`**；`n=64` 与 `ikj` 中位数接近、样本范围重叠 | 总耗时**不能**证明 cache miss 变了多少；[`day07-matrix-blocking.cpp`](src/day07-matrix-blocking.cpp) 为 GPT 整合版 | [Day 7 报告](experiments/reports/2026-10-27-day07-blocking.md)、[75 条 CSV](experiments/results/2026-10-27-day07-blocking-local/README.md) |
 | **脉动阵列 / SCALE-Sim**（阶段 D） | NPU 方向的数据流与 MAC 阵列 | **未开始** | — | — | 以后软件仿真时间须与真实 NPU 测量分开写 | 路线图见 [`PROJECT_STATE.md`](PROJECT_STATE.md) |
 
-下一阶段主线是 **SIMD**（尚未入库实现）。Day 8 性能诊断理论学习归档见 [PR #21](https://github.com/lingquan11/cpp-matmul-performance/pull/21)（待合并），无新 CSV。
+下一阶段主线是 **SIMD**（尚未入库实现）。Day 8 性能诊断与实验设计已完成、综合考核通过，无新增 C++ 实现、无正式硬件性能测量 CSV；归档见 [笔记](notes/day08-notes.md)、[任务记录](notes/day08-record.md)、[方法报告](experiments/reports/day08-performance-analysis.md)、[完整性检查](notes/supplements/day08-completeness-check.md)。
 
 ## 3 分钟证据
 
