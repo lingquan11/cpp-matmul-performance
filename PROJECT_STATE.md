@@ -1,5 +1,9 @@
 # 我现在做到哪
 
+## 2026-11-01 编译选项与分块复测
+
+按用户请求由 Codex 在本机对现行 Day 7 整合版开展 `/O2` 与 `/Od` 对照，四次独立进程运行，共 300 条；详细数据、执行环境及限制见[新实验报告](experiments/reports/2026-11-01-compiler-blocking-windows.md)。这是新测量，不是历史逐字源码或历史计时的复现，也不代表新的学习日。
+
 ## Day 8：性能诊断与实验设计（日期未记录）
 
 Day 8 完成，综合考核通过。实际学习时间 5 小时（300 分钟）。学的是 CPU 性能诊断：缓存行为、MLP、IPC/CPI、Memory Bound、Core Bound、Pipeline Slots、SMT、perf 统计范围和实验设计（含 2×2 因子实验和交互项）。Day 8 没有新增 C++ 实现，也没有正式硬件性能测量 CSV。对话里的 IPC、MLP、带宽、延迟、Pipeline Slots 和 A/B/C/D 数字都是教学示例，不是实测，没有放进 `experiments/results/`。环境：CPU 型号和硬件参数沿用此前记录（Intel Core Ultra 7 255HX），没有变化；Visual Studio 2026 18.11.1；MSVC toolset 独立版本号仍未记录。验收来自辅导问答，我还没有在自己电脑上做过真实 perf 采集。当前归档的对话记录有上下文缺口（聊天里有一段被系统折叠成 “Skipped N messages”），不能称为无缺口的逐字聊天导出；原始聊天导出待补交。Day 8 的具体日期归档包没写，记为未记录。

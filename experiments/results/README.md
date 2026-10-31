@@ -11,3 +11,6 @@
 Day 8 没有结果目录：那天没有真实硬件计数器采集，也没有正式 benchmark CSV。对话里的带宽、IPC、MLP、延迟、Core Bound、Memory Bound、Pipeline Slots 和 A/B/C/D 数字是教学示例，只留在 [`notes/day08-notes.md`](../../notes/day08-notes.md) 和 [Day 8 方法报告](../reports/day08-performance-analysis.md)，不进本目录。
 
 以后我自己测稳、决定公开的计时结果，再按日期放在这个目录里。现在没有可跑的云端基准脚本。编译检查不在这里跑计时。Day 4、Day 5、Day 7 的计时复现：未验证。
+
+
+2026-11-01：[/O2 与 /Od、分块复测的原始数据和环境](2026-11-01-compiler-blocking-windows/metadata.md)，四次独立运行，执行与限制见元数据。

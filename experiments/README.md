@@ -26,3 +26,6 @@ python3 experiments/summarize_medians.py
 ```
 
 需要 Python 3，用标准库，不用额外安装。打出来的中位数应对上 [Day 5 报告](reports/2026-10-26-day05-loop-order.md) 和 [Day 7 报告](reports/2026-10-27-day07-blocking.md)。对不上就停下来查，不要改报告里的旧数字去迁就新输出。计时复现：未验证。
+
+
+2026-11-01：[/O2 与 /Od、分块复测](reports/2026-11-01-compiler-blocking-windows.md) · [原始数据与环境](results/2026-11-01-compiler-blocking-windows/metadata.md)。
