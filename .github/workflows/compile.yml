@@ -13,3 +13,5 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y g++
       - name: Compile src and check Day 1, Day 2 and Day 7 correctness
         run: bash tests/smoke.sh
+      - name: Read-only median check from archived CSV
+        run: python3 experiments/summarize_medians.py | head -n 30

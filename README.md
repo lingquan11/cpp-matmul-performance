@@ -6,7 +6,7 @@
 
 **做到哪。** 阶段 A 已完成（Day 1–2；Day 3 零矩阵等）。阶段 B 进行中：本地计时和循环顺序对比已阶段性完成（Day 4、Day 5），编译优化还没有单独对比。阶段 C 已启动：分块有了 75 条和边界测试，正式报告进行中，分块还没有普遍快过 `ikj`。阶段 D 未开始。计时复现：未验证。
 
-> **English:** A student project exploring CPU matrix multiplication, loop order, and tiling through correctness checks and recorded experiments, with a planned introduction to NPU dataflow.
+> **English:** Undergraduate portfolio repo (SEU, EE): reproducible C++ matrix-multiply experiments on CPU—correctness first, then timing, loop order (`ijk` vs `ikj`), and cache blocking—with archived CSV on Windows. Systolic-array / SCALE-Sim (stage D) and real NPU runs are not started. Progress: [`PROJECT_STATE.md`](PROJECT_STATE.md).
 
 ## 最值得先看
 
@@ -20,6 +20,19 @@
 1. **CPU 上的矩阵乘法。** 这是我目前在做的。阶段 A 的实现做完了。阶段 B 有本地计时和循环顺序。阶段 C 的分块开始了，还没有普遍快过 `ikj`。上面的毫秒都是 CPU 计时。
 2. **软件上的脉动阵列和数据流建模。** 还没做。阶段 D 未开始。以后如果写下软件仿真时间，要单独标明，不能写成真实 NPU 的性能。
 3. **真实 NPU 硬件。** 还没做。仓库里没有 NPU 上的测量。
+
+## 学习路径一览（约 3 分钟）
+
+下面按「基线 → 循环顺序 → 分块 → 脉动阵列」串起来；数字只引用已归档 CSV/报告，不在这里重跑计时。
+
+| 阶段 | 在解决什么问题 | 主要改动 | 怎么验证 | 这轮结论（有出处） | 代价与限制 | 证据入口 |
+| --- | --- | --- | --- | --- | --- | --- |
+| **基线 · 规模与计时**（Day 4，阶段 B） | 规模变大后，耗时为何不像 O(n³) 那样均匀变长 | 从 2×2 到可输入 `n` 的计时；同机有两份 15 条样本（截图转录 vs 程序导出） | 逐行 PASS；Day 4 截图转录那组完整 benchmark 源码仍缺 | 同阶 `n` 下两份 CSV 数值不同，不合并；128 阶有偏高单次，根因未知 | 单次 `n=4` 只适合认输出，不能当性能结论；计时复现未验证 | [Day 4 结果](experiments/results/2026-10-26-day04-local/README.md)、[记录](experiments/reports/2026-10-26-day04-local.md) |
+| **循环顺序**（Day 5） | 只改 `i/j/k` 顺序，中位数差几倍 | 同一次运行交替测 `ijk` 与 `ikj` | 30 条 PASS，逐元素 YES | 64/128/256 阶 `ijk/ikj` 中位数比约 **6.85× / 8.45× / 9.38×**（[Day 5 报告](experiments/reports/2026-10-26-day05-loop-order.md)） | 只属于该程序、该规模、该次 Windows 运行；编译优化未单独对比 | [30 条 CSV](experiments/results/2026-10-26-day05-loop-order-local/README.md)、[`src/day05-ijk-ikj-benchmark.cpp`](src/day05-ijk-ikj-benchmark.cpp) |
+| **分块**（Day 6 概念 + Day 7 实测，阶段 C） | 能否用小块数据提高复用、缩短耗时 | `blocked_16/32/64` 与 `ijk`/`ikj` 同口径计时 | 75 条 PASS；`n=70, block=32` 边界测试 PASS | `blocked_64` 最快，但 **128/256 仍慢于 `ikj`**；`n=64` 与 `ikj` 中位数接近、样本范围重叠 | 总耗时**不能**证明 cache miss 变了多少；[`day07-matrix-blocking.cpp`](src/day07-matrix-blocking.cpp) 为 GPT 整合版 | [Day 7 报告](experiments/reports/2026-10-27-day07-blocking.md)、[75 条 CSV](experiments/results/2026-10-27-day07-blocking-local/README.md) |
+| **脉动阵列 / SCALE-Sim**（阶段 D） | NPU 方向的数据流与 MAC 阵列 | **未开始** | — | — | 以后软件仿真时间须与真实 NPU 测量分开写 | 路线图见 [`PROJECT_STATE.md`](PROJECT_STATE.md) |
+
+下一阶段主线是 **SIMD**（尚未入库实现）。Day 8 性能诊断理论学习归档见 [PR #21](https://github.com/lingquan11/cpp-matmul-performance/pull/21)（待合并），无新 CSV。
 
 ## 3 分钟证据
 
@@ -110,7 +123,7 @@ build\day07-correctness.exe 70 64
 build\day07-correctness.exe
 ```
 
-两个单例各输出 `PASS: 12 algorithm/input cases`；最后一条运行 392 个组合。这个入口只做正确性比较，不计时、不写 CSV。Windows/MSVC 下上述最小流程已核对；完整记录见[本次维护核验](notes/maintenance-2026-10-29.md)。性能程序目前没有命令行参数，正式性能实验的配置仍在源码中；Linux 构建与 CI 用法见[测试说明](tests/README.md)。
+两个单例各输出 `PASS: 12 algorithm/input cases`；最后一条运行 392 个组合。这个入口只做正确性比较，不计时、不写 CSV。Windows/MSVC 下上述最小流程曾在 2026-10-29 核对（见[维护记录](notes/maintenance-2026-10-29.md)）；**本次维护未在 Windows 上复核**。性能 benchmark 的规模与分块大小写在源码常量里（见 [tests/README.md](tests/README.md)「改 matrix 规模与分块大小」）；重跑会写本地 CSV，不能覆盖归档文件。
 
 只想比较已有性能结果，可以运行 `python scripts/summarize_day07.py`（需要 Python 和 Matplotlib），由原始样本重新生成首页图表；这不执行矩阵乘法，也不产生新的性能证据。
 
@@ -140,7 +153,25 @@ bash tests/smoke.sh
 
 Day 7 另由 [`tests/day07-correctness.cpp`](tests/day07-correctness.cpp) 调用计算函数，检查 392 个组合和非法参数。Day 4、Day 5、Day 7 的 benchmark main 只编译，不运行；不输出性能 CSV。历史计时复现仍未验证。
 
+非交互跑 Day 4 最小正确性（**不要把 Linux 上打印的毫秒写进正式结论**）：
+
+```bash
+mkdir -p build
+g++ -std=c++17 -O2 -o build/day04-matmul src/day04-matmul.cpp
+printf '4\n' | build/day04-matmul   # 期望含 C[0][0] = 50
+```
+
 想看循环顺序怎么比，读 [`src/day05-ijk-ikj-benchmark.cpp`](src/day05-ijk-ikj-benchmark.cpp)，再对照已经归档的 [Day 5 CSV](experiments/results/2026-10-26-day05-loop-order-local/day05-loop-order-program-export.csv) 和 [Day 5 报告](experiments/reports/2026-10-26-day05-loop-order.md)。这里不把重跑计时写进 CI。
+
+### 常见问题
+
+| 现象 | 说明 |
+| --- | --- |
+| `cl` / `g++` 找不到 | Windows 用 **x64 Native Tools Command Prompt**；Linux 安装 `g++` 并在仓库根目录执行命令 |
+| Day 4 卡住要输入 | 在提示处输入 1–256 的整数，或用 `printf '4\n' \| …` 管道输入 |
+| 运行 Day 5/7 benchmark 多了 CSV | 程序会在**当前工作目录**写 `matmul_benchmark_day5_loop_order.csv` 或 `matmul_benchmark_day7_blocking.csv`；这是新样本，勿提交、勿覆盖 `experiments/results/` |
+| 中位数和 README 不一致 | 用 `python3 experiments/summarize_medians.py` 只读归档 CSV；若仍不一致，查是否误用了本地新 CSV |
+| CI 绿但本地 Windows 计时对不上 | CI 是 Linux `g++` 冒烟 + 正确性，**不能**代替 Visual Studio 2026 Release/x64 上的历史计时 |
 
 我的正式计时在 Windows 上，Visual Studio 2026 18.11.1，Release / x64。上面的冒烟是 `g++` 编译检查，不能代替那次计时。MSVC toolset 独立版本号未记录。`benchmarks/` 只是占位，仓库里没有云端可跑的性能基准。
 
@@ -186,4 +217,4 @@ Day 5 的 30 条在 [`experiments/results/2026-10-26-day05-loop-order-local/`](e
 
 ## 参与与下一步
 
-采用 [MIT 许可证](LICENSE)。复现问题可以开 issue，注明系统、编译器、命令与输出。新人小任务：先预测 `n=70` 配块 32、64 时的尾块边界，再运行正确性检查；解释为什么都算对不代表一样快。问题与本次验证结果见[维护记录](notes/maintenance-2026-10-29.md)。
+采用 [MIT 许可证](LICENSE)。复现问题可以开 issue，注明系统、编译器、命令与输出。新人小任务：先预测 `n=70` 配块 32、64 时的尾块边界，再运行正确性检查；解释为什么都算对不代表一样快。2026-10-29 Windows 核验见[维护记录](notes/maintenance-2026-10-29.md)；2026-10-31 维护在 Linux VM 复核 `bash tests/smoke.sh` 与 `python3 experiments/summarize_medians.py`（无新性能数字）。

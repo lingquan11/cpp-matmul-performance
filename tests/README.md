@@ -34,6 +34,27 @@ bash tests/smoke.sh
 
 编译器不在 PATH 时，Windows 请使用上面的开发者命令提示符；无需创建 Visual Studio 工程。若找不到源码，检查当前目录是否为仓库根目录。这里不需要 Python 或额外 C++ 测试框架。
 
+## 改 matrix 规模与分块大小（只读源码，不改仓库）
+
+正式性能实验的规模写在 `src/` 里，**没有命令行参数**。下列位置仅供你在本机改常量后重跑；新 CSV 不要提交，也不要覆盖 `experiments/results/` 里已归档文件。
+
+| 程序 | 改什么 | 源码位置（行号随提交可能略变） | 运行产物 |
+| --- | --- | --- | --- |
+| Day 4 单次计时 | 矩阵阶数 `n` | 运行时在 stdin 输入 1–256 | 仅终端输出 |
+| Day 5 循环顺序 | 测试阶数列表 | `src/day05-ijk-ikj-benchmark.cpp` 中 `sizes[]`（默认 64、128、256）与 `MAX_N` | 当前目录 `matmul_benchmark_day5_loop_order.csv` |
+| Day 7 分块 | 阶数与块大小 | 同文件 `sizes[]`、`block_sizes[]`（默认 16/32/64）；边界测试常量 `test_n` / `test_block_size` | 当前目录 `matmul_benchmark_day7_blocking.csv` |
+
+Day 7 使用固定容量 `int[256][256]`，逻辑 `n < 256` 时行跨度仍是 256 个 `int`（见 [`src/README.md`](../src/README.md)）。改 `MAX_N` 或输入公式前须重新检查溢出与正确性测试。
+
+Windows（Release/x64，与历史 CSV 同口径时尽量对齐 Visual Studio 2026 配置）示例——**会长时间运行并写 CSV**：
+
+```bat
+cl /nologo /std:c++17 /O2 /EHsc /utf-8 src\day05-ijk-ikj-benchmark.cpp /Fe:build\day05.exe
+build\day05.exe
+```
+
+Linux 上可同样编译运行，但 **VM 或 g++ 的毫秒不能写入正式报告**；只用于理解输出格式。归档数字仍以 Windows 程序导出 CSV 为准。
+
 ## 检查了什么
 
 - 尺寸：`1, 2, 15, 16, 17, 31, 32, 33, 63, 64, 65, 70, 255, 256`，覆盖分块边缘、非整除及固定容量上限。
