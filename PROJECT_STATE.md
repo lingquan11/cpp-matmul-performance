@@ -1,5 +1,13 @@
 # 我现在做到哪
 
+## Day 8：性能诊断与实验设计（日期未记录）
+
+Day 8 完成，综合考核通过。实际学习时间 5 小时（300 分钟）。学的是 CPU 性能诊断：缓存行为、MLP、IPC/CPI、Memory Bound、Core Bound、Pipeline Slots、SMT、perf 统计范围和实验设计（含 2×2 因子实验和交互项）。Day 8 没有新增 C++ 实现，也没有正式硬件性能测量 CSV。对话里的 IPC、MLP、带宽、延迟、Pipeline Slots 和 A/B/C/D 数字都是教学示例，不是实测，没有放进 `experiments/results/`。环境：CPU 型号和硬件参数沿用此前记录（Intel Core Ultra 7 255HX），没有变化；Visual Studio 2026 18.11.1；MSVC toolset 独立版本号仍未记录。验收来自辅导问答，我还没有在自己电脑上做过真实 perf 采集。当前归档的对话记录有上下文缺口（聊天里有一段被系统折叠成 “Skipped N messages”），不能称为无缺口的逐字聊天导出；原始聊天导出待补交。Day 8 的具体日期归档包没写，记为未记录。
+
+材料：笔记 [`notes/day08-notes.md`](notes/day08-notes.md)，任务记录 [`notes/day08-record.md`](notes/day08-record.md)，对话 [`notes/day08-dialogue-record.md`](notes/day08-dialogue-record.md)，原话 [`notes/day08-visible-user-turns.md`](notes/day08-visible-user-turns.md)，无新代码说明 [`notes/day08-code-materials.md`](notes/day08-code-materials.md)，方法报告 [`experiments/reports/day08-performance-analysis.md`](experiments/reports/day08-performance-analysis.md)，完整性检查 [`notes/supplements/day08-completeness-check.md`](notes/supplements/day08-completeness-check.md)。归档包里的 Day 5 历史快照和 `src/day05-ijk-ikj-benchmark.cpp` 字节不同、计算逻辑相同，两份都留，快照在 [`code_history/day05/`](code_history/day05/README.md)，`src/` 没动。
+
+下一阶段：SIMD 与向量化。计时实验：无新进展。
+
 ## 2026-10-29 维护补充（不是新学习日）
 
 本次整理 README 阅读入口，并从 Day 7 原始 75 条 CSV 生成[可重建图表](experiments/figures/README.md)。新增[独立正确性检查](tests/README.md)：直接调用现有 Day 7 内核，MSVC 下 392 个组合通过，`n=70` 配块 32、64 的单例通过；现行 5 个源码文件均构建成功。CI 现增加运行这个不计时、不输出 CSV 的测试适配器，仍不运行 Day 4/5/7 benchmark main。
@@ -44,6 +52,6 @@ Day 4 是 2026-10-26 做的。目标①规模扩展、目标②计时入门、�
 
 有新的测量或代码，我就更新这份文件。12 月每次有进展也更新。当天没有新的计时实验，就写「无新进展」；概念上有进展时，仍然把学到的内容写在这里。README 我留短一点，链到这里。细节在 `notes/`、`experiments/results/` 和 `experiments/reports/`。
 
-Day 1 我花了 30 分钟，Day 2 大约 20 分钟。Day 3 当天没写用时，2026-10-26 补记为 30 分钟。Day 4 补记为 2 小时。Day 5 补录为 60 分钟。Day 6 是 20 分钟。Day 7 是 60 分钟。Day 4 到 Day 7 是同一台电脑、同一套硬件，没有换机：Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.11.1，Release / x64。MSVC toolset 独立版本号未记录。
+Day 1 我花了 30 分钟，Day 2 大约 20 分钟。Day 3 当天没写用时，2026-10-26 补记为 30 分钟。Day 4 补记为 2 小时。Day 5 补录为 60 分钟。Day 6 是 20 分钟。Day 7 是 60 分钟。Day 8 是 5 小时（300 分钟）。Day 4 到 Day 7 是同一台电脑、同一套硬件，没有换机：Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.11.1，Release / x64。MSVC toolset 独立版本号未记录。
 
 10 月 25 日我定下来：先把核心实验做扎实，架构上的衔接放进主线，SCALE-Sim 做一个基础实验。测量分步加，正确性也分步查，计划按周滚动。这份状态就是那天开始写的。12 月 10 日是目标，12 月 11 日前把材料理好。当天怎么定的，我另外记在 `notes/handoff-2026-10-25-项目变更与协作同步报告.md`。

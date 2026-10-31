@@ -9,5 +9,6 @@
 | 版本 | 文件 | 来源 | 和现行文件的关系 |
 | --- | --- | --- | --- |
 | V02 | `V02_today_ijk_ikj.cpp` | 我在 2026-10-26 提交的 | 和 [`src/day05-ijk-ikj-benchmark.cpp`](../../src/day05-ijk-ikj-benchmark.cpp) 是同一份复制。现行入口在 `src/` |
+| Day 8 归档包快照 | [`matmul_benchmark_day5_loop_order-day08-snapshot.cpp`](matmul_benchmark_day5_loop_order-day08-snapshot.cpp) | Day 8 归档包附带的历史参考快照，原样保存 | 和 V02 字节不同：删了注释、改了排版，计算逻辑相同。不是 Day 8 新代码，没有重新编译运行。比较见 [`notes/day08-code-materials.md`](../../notes/day08-code-materials.md) |
 
 GPT 模板不在这个目录。它在 [`templates/gpt/day05-loop-order-template.cpp`](../../templates/gpt/day05-loop-order-template.cpp)，文件头写了「GPT 指导模板」。那份不是我独立写的，也不是我交上来的源码。

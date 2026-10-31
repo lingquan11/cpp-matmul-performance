@@ -11,6 +11,7 @@
 | 2026-10-26 | Day 5，已验收，只计 30 条，用时 60 分钟 | [day05-notes.md](day05-notes.md)、[day05-record.md](day05-record.md)、[今天 30 条](../experiments/results/2026-10-26-day05-loop-order-local/README.md)、[用时补录](supplements/day05-study-time.md) |
 | 2026-10-27 | Day 6，概念验收，无新代码 | [day06-notes.md](day06-notes.md)、[day06-record.md](day06-record.md)、[day06-code-materials.md](day06-code-materials.md) |
 | 2026-10-27 | Day 7，分块验收，75 条；src 中为 GPT 整合版 | [day07-notes.md](day07-notes.md)、[day07-record.md](day07-record.md)、[day07-code-materials.md](day07-code-materials.md)、[75 条](../experiments/results/2026-10-27-day07-blocking-local/README.md)、[环境](supplements/experiment-environment.md) |
+| 未记录 | Day 8，性能诊断综合考核通过，无新代码、无 CSV，用时 300 分钟 | [day08-notes.md](day08-notes.md)、[day08-record.md](day08-record.md)、[对话](day08-dialogue-record.md)、[原话](day08-visible-user-turns.md)、[day08-code-materials.md](day08-code-materials.md)、[方法报告](../experiments/reports/day08-performance-analysis.md)、[完整性检查](supplements/day08-completeness-check.md) |
 
 我先学会了算一个输出元素，并写成 C++。2026-10-22 我把完整的 2×2 三重循环做完了，原始输入和单位矩阵都通过。阶段 A 到这里。2026-10-23 我做了零矩阵，写了 O(n³)，也写了后面怎么测性能的方案。2026-10-26 我另外做完了 Day 4：规模可以输入，单次计时也接上了，本地 64、128、256 各测了 5 次。截图转录和程序导出都在 [`experiments/results/2026-10-26-day04-local/`](../experiments/results/2026-10-26-day04-local/README.md)。同一天 Day 5 比了循环顺序，验收只看今天的 30 条，在 [`experiments/results/2026-10-26-day05-loop-order-local/`](../experiments/results/2026-10-26-day05-loop-order-local/README.md)。2026-10-27 的 Day 6 过了概念验收，记的是内存布局和缓存局部性。同一天 Day 7 分块验收通过，正式 CSV 75 条全部 PASS，边界测试 `n=70`、`block_size=32` 也过了。
 
@@ -137,3 +138,13 @@ Day 4 三个目标这轮都做完了。程序可以输入矩阵阶数，非法�
 下一步可选补边界组合，比较中位数和波动，并学数据复用与分块大小。Day 5 的 `ijk`、`ikj` 仍作基线。
 
 这 5 个日历日里，Day 1 是 30 分钟，Day 2 大约 20 分钟，Day 3 补记为 30 分钟，Day 4 补记为 2 小时，Day 5 补录为 60 分钟，Day 6 是 20 分钟，Day 7 是 60 分钟。2026-10-27 同一天做完了 Day 6 和 Day 7。Day 6 没有新的测量，也没有新的程序。Day 7 有 75 条正式样本和边界截图。`src/day07-matrix-blocking.cpp` 是 GPT 整合版，不是用户逐字源码。单元素程序编译运行输出 11。2×2 的原始输入和单位矩阵我都编译跑过。零矩阵输出是零矩阵，换回去和 Day 2 一致。O(n³) 以及“边长翻倍变成 8 倍”是我推出来的。Day 4 有截图转录和程序导出两份 15 条。截图转录那组的实际批量源码仍缺。Day 5 的正式结果是 2026-10-26 的 30 条。IDE 版本是 Visual Studio 2026 18.11.1。MSVC toolset 独立版本号仍然未记录。Day 4–Day 7 环境沿用 Windows、Intel Core Ultra 7 255HX、Release / x64。补缴索引在 [`supplements/README.md`](supplements/README.md)。
+
+## 日期未记录，Day 8
+
+Day 8 学的是 CPU 性能诊断：缓存行为、MLP、IPC/CPI、Memory Bound、Core Bound、Pipeline Slots、SMT、perf 统计范围和实验设计。综合考核通过，学习用时 5 小时（300 分钟）。归档包没写日期，这里记为未记录。
+
+今天没有新的 C++ 程序，也没有正式 CSV。对话里的 IPC、MLP、带宽、Pipeline Slots 和 A/B/C/D 数字都是教学示例，不是实测。环境沿用此前记录：Intel Core Ultra 7 255HX，Visual Studio 2026 18.11.1。对话记录有缺口，聊天里有一段被系统折叠成 “Skipped N messages”，不是逐字无缺口导出。
+
+笔记在 [`day08-notes.md`](day08-notes.md)，任务记录在 [`day08-record.md`](day08-record.md)，对话在 [`day08-dialogue-record.md`](day08-dialogue-record.md)，我的原话在 [`day08-visible-user-turns.md`](day08-visible-user-turns.md)，没有新代码这件事写在 [`day08-code-materials.md`](day08-code-materials.md)。方法报告在 [`experiments/reports/day08-performance-analysis.md`](../experiments/reports/day08-performance-analysis.md)。缺什么在 [`supplements/day08-completeness-check.md`](supplements/day08-completeness-check.md)。
+
+下一步学 SIMD 与向量化。

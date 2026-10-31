@@ -8,4 +8,6 @@
 | [2026-10-26-day05-loop-order-local/](2026-10-26-day05-loop-order-local/) | Day 5 今天的双版本，30 条程序导出。读法在 [实验记录](../reports/2026-10-26-day05-loop-order.md) |
 | [2026-10-27-day07-blocking-local/](2026-10-27-day07-blocking-local/) | Day 7 分块本地实验，75 条程序导出与边界截图。读法在 [实验记录](../reports/2026-10-27-day07-blocking.md) |
 
+Day 8 没有结果目录：那天没有真实硬件计数器采集，也没有正式 benchmark CSV。对话里的带宽、IPC、MLP、延迟、Core Bound、Memory Bound、Pipeline Slots 和 A/B/C/D 数字是教学示例，只留在 [`notes/day08-notes.md`](../../notes/day08-notes.md) 和 [Day 8 方法报告](../reports/day08-performance-analysis.md)，不进本目录。
+
 以后我自己测稳、决定公开的计时结果，再按日期放在这个目录里。现在没有可跑的云端基准脚本。编译检查不在这里跑计时。Day 4、Day 5、Day 7 的计时复现：未验证。
