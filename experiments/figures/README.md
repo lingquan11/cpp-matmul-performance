@@ -39,3 +39,13 @@ python scripts/summarize_day07.py --output-dir build/day07-figures
 现行 [Day 7 整合源码](../../src/day07-matrix-blocking.cpp) 使用固定容量 `int[256][256]`、物理行跨度 256、没有显式并行；在常见 MSVC/GCC 目标上 `int` 为 32 位。它是 GPT 整合版，**不能因此证明历史执行文件与当前源码、布局或构建选项逐字一致**。原始 CSV 的精确源码对应关系仍未验证。
 
 这里的速度差既不证明 cache miss 降低，也不表示真实 NPU 性能。分析原文继续保存在 [Day 7 报告](../reports/2026-10-27-day07-blocking.md)。当前图表只是让已有证据更容易比较，不替代后续受控测量。
+
+## 2026-11-01 编译选项与分块复测
+
+![编译选项与分块复测的批次耗时与中位数](compiler-blocking-2026-11-01.svg)
+
+三面板分别为 n=64、128、256；每种算法依次显示 `/O2`、`/Od`、`/Od`、`/O2` 四次独立进程运行。圆点为该轮五个批次的平均耗时（可能重叠），黑色短线为五个批次的中位数；不是置信区间。横轴为每次乘法的毫秒数，采用对数刻度，数值越小越快。四轮共 300 条，未排除任何样本；每种编译选项只有两次进程运行，不应把批次视为独立进程重复。
+
+数据见[原始 CSV 与环境](../results/2026-11-01-compiler-blocking-windows/metadata.md)，绝对中位数见[实验报告](../reports/2026-11-01-compiler-blocking-windows.md)。频率、温度、后台负载和 CPU 亲和性未控制；无硬件计数器数据，不能据此断言缓存机制或复现历史可执行文件。
+
+安装 Python 3 和 Matplotlib 后，在仓库根目录运行 `python scripts/plot-compiler-blocking.py` 可从四份原始 CSV 重建 SVG；脚本验证每组样本数、状态和耗时有效性，不会修改原始 CSV。图表使用 Matplotlib 3.10.0 生成，不保证跨版本逐字节相同。
