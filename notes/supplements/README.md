@@ -9,3 +9,10 @@
 | [day05-study-time.md](day05-study-time.md) | Day 5 实际学习用时 60 分钟 |
 | [day04-screenshot-source-gap.md](day04-screenshot-source-gap.md) | 截图转录那组的实际批量源码仍缺。V06 是 GPT 模板 |
 | [material-completeness-2026-10-27.md](material-completeness-2026-10-27.md) | 本次补缴的材料完整性检查 |
+
+## Day 8
+
+| 文件 | 内容 |
+| --- | --- |
+| [day08-completeness-check.md](day08-completeness-check.md) | Day 8 材料完整性检查和归档包文件去向 |
+| [experiment-environment.md](experiment-environment.md) | 末尾追加 Day 8 环境延续 |

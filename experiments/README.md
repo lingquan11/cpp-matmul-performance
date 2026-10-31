@@ -7,6 +7,7 @@
 | 2026-10-26，Day 4 本地：截图转录和程序导出各 15 条 | [2026-10-26-day04-local.md](reports/2026-10-26-day04-local.md) | [2026-10-26-day04-local/](results/2026-10-26-day04-local/) |
 | 2026-10-26，Day 5 今天的 `ijk` / `ikj`，30 条 | [2026-10-26-day05-loop-order.md](reports/2026-10-26-day05-loop-order.md) | [2026-10-26-day05-loop-order-local/](results/2026-10-26-day05-loop-order-local/) |
 | 2026-10-27，Day 7 分块，75 条 | [2026-10-27-day07-blocking.md](reports/2026-10-27-day07-blocking.md) | [2026-10-27-day07-blocking-local/](results/2026-10-27-day07-blocking-local/) |
+| Day 8 性能诊断方法（日期未记录），无实测 | [day08-performance-analysis.md](reports/day08-performance-analysis.md) | 没有。文中数字是教学示例 |
 | 阶段 A：2×2 算法实现与正确性 | [stage-a-algorithm-implementation.md](reports/stage-a-algorithm-implementation.md) | 这次没有单独的测量目录 |
 
 ## 从归档 CSV 再打一遍中位数

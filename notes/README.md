@@ -21,6 +21,12 @@
 | [day06-notes.md](day06-notes.md) | Day 6：二维数组内存布局、缓存行和空间局部性 |
 | [day06-record.md](day06-record.md) | Day 6 任务记录：概念验收通过，无新代码 |
 | [day06-code-materials.md](day06-code-materials.md) | Day 6：今天没有新代码，也不把 Day 5 当成今天的产出 |
+| [day08-notes.md](day08-notes.md) | Day 8：性能诊断——缓存、MLP、IPC/CPI、Top-down、SMT、perf 和实验设计 |
+| [day08-record.md](day08-record.md) | Day 8 任务记录：综合考核通过，用时 300 分钟 |
+| [day08-dialogue-record.md](day08-dialogue-record.md) | Day 8 对话记录，只含看得见的部分，有缺口 |
+| [day08-visible-user-turns.md](day08-visible-user-turns.md) | Day 8 我的原话，只含看得见的部分 |
+| [day08-code-materials.md](day08-code-materials.md) | Day 8：没有新代码；Day 5 历史快照的比较 |
+| [handoff-day08-github-maintenance-agent-prompt.md](handoff-day08-github-maintenance-agent-prompt.md) | Day 8 归档包附带的 GitHub 维护提示词，GPT 写的，原样保存 |
 | [daily-task-records.md](daily-task-records.md) | 已做完并有反馈的每天 |
 | [supplements/](supplements/README.md) | 2026-10-27 材料补缴：环境、128 阶分析、Day 5 用时、Day 4 源码缺口、完整性检查 |
 | [handoff-2026-10-25-项目变更与协作同步报告.md](handoff-2026-10-25-项目变更与协作同步报告.md) | 2026-10-25 定下来的范围和约定 |

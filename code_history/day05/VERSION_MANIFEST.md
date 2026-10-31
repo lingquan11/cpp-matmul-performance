@@ -5,6 +5,7 @@
 | 版本 | 文件 | 来源 | 主要变化 | 说明 |
 |---|---|---|---|---|
 | V02 | `V02_today_ijk_ikj.cpp` | 我在 2026-10-26 提交的 | `ijk` 与 `ikj` 同一次运行，奇数样本和偶数样本交换先后 | 和 [`src/day05-ijk-ikj-benchmark.cpp`](../../src/day05-ijk-ikj-benchmark.cpp) 是同一份复制。对应 [`day05-loop-order-program-export.csv`](../../experiments/results/2026-10-26-day05-loop-order-local/day05-loop-order-program-export.csv) 的 30 条，全部 PASS，逐元素全部 YES |
+| — | `matmul_benchmark_day5_loop_order-day08-snapshot.cpp` | Day 8 归档包附带的历史参考快照 | 和 V02 相比删了注释、并了多行语句；结尾一句输出由两个字符串并成一个，打印文字相同 | 不替代 V02，不对应任何新 CSV。没有重新编译运行。比较见 [`notes/day08-code-materials.md`](../../notes/day08-code-materials.md) |
 
 原先的 V01（`V01_yesterday_ikj_only.cpp`）已移到 [`code_history/day04/V07_user_ikj_program_export.cpp`](../day04/V07_user_ikj_program_export.cpp)。用户判定它对应 Day 4 程序导出。历史路径曾误挂在 day05。没有另写一份源码。
 
