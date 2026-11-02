@@ -1,5 +1,11 @@
 # 我现在做到哪
 
+## 2026-11-02 维护补充（不是新学习日）
+
+这次没有新的学习日，也没有做任何新测量。计时实验：无新进展。
+
+我还没有写输出驻留脉动阵列的拍推进、输入错位和 PE 乘加。这次只加了脚手架，放在 [`templates/gpt/systolic-os-model.hpp`](templates/gpt/systolic-os-model.hpp) 和 [`templates/gpt/systolic-os-model.cpp`](templates/gpt/systolic-os-model.cpp)，不在 `src/`。`step_one_cycle`、`inject_skewed_inputs`、`run_tile` 只有签名和 `TODO(零醛)`。未实现时程序打印「未实现」并以非零码退出。测试 [`tests/systolic-model-check.cpp`](tests/systolic-model-check.cpp) 在核心未实现时输出 SKIP，没有接进 [`tests/smoke.sh`](tests/smoke.sh)。编译辅助在 [`scripts/build-systolic-os-model.sh`](scripts/build-systolic-os-model.sh)。手算空表在 [`notes/dayNN-systolic-notes.md`](notes/dayNN-systolic-notes.md)，日程序号还没定。结果目录 [`experiments/results/2026-11-02-systolic-model-software/`](experiments/results/2026-11-02-systolic-model-software/metadata.md) 写明软件模型、非硬件实测，里面没有 `model.csv`。解析式周期数待我手算核对，不能当成已经跑通的模拟结果。Day 验收都不因这次维护而改变。
+
 ## 2026-11-01 编译选项与分块复测
 
 按用户请求由 Codex 在本机对现行 Day 7 整合版开展 `/O2` 与 `/Od` 对照，四次独立进程运行，共 300 条；详细数据、执行环境及限制见[新实验报告](experiments/reports/2026-11-01-compiler-blocking-windows.md)。这是新测量，不是历史逐字源码或历史计时的复现，也不代表新的学习日。

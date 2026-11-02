@@ -30,5 +30,6 @@
 | [daily-task-records.md](daily-task-records.md) | 已做完并有反馈的每天 |
 | [supplements/](supplements/README.md) | 2026-10-27 材料补缴：环境、128 阶分析、Day 5 用时、Day 4 源码缺口、完整性检查 |
 | [handoff-2026-10-25-项目变更与协作同步报告.md](handoff-2026-10-25-项目变更与协作同步报告.md) | 2026-10-25 定下来的范围和约定 |
+| [dayNN-systolic-notes.md](dayNN-systolic-notes.md) | 输出驻留软件模型的手算空表。日程序号未定，不是新的学习日，核心还没写 |
 
 Day 4 的版本快照在 [`code_history/day04/`](../code_history/day04/README.md)。Day 5 的在 [`code_history/day05/`](../code_history/day05/README.md)。

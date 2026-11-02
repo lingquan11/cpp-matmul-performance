@@ -29,3 +29,5 @@ python3 experiments/summarize_medians.py
 
 
 2026-11-01：[/O2 与 /Od、分块复测](reports/2026-11-01-compiler-blocking-windows.md) · [原始数据与环境](results/2026-11-01-compiler-blocking-windows/metadata.md)。
+
+2026-11-02 的软件脉动阵列只有 [metadata](results/2026-11-02-systolic-model-software/metadata.md)，没有 CSV，也没有报告。它不是计时实验。运行耗时不代表性能。

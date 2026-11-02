@@ -71,3 +71,25 @@ Linux 上可同样编译运行，但 **VM 或 g++ 的毫秒不能写入正式报
 现有实现是单线程、固定行跨度 256 的 `int` 方阵。这里不测试矩形、浮点数、任意整数范围或并行实现。原初始化在 `n <= 256` 时，每个累加结果的保守上界为 `256 × 511 × 766 = 100205056`，小于 32 位有符号整数上限；正负输入的绝对和至多 `256 × 5 × 6 = 7680`。因此本套输入使用精确整数比较，不涉及浮点误差容限。修改数据类型或扩大范围后，须重新检查溢出和误差标准。
 
 正确性通过只能说明这些输入与边界组合通过。它不是用户历史 75 条 CSV 的逐行复现，也不能证明分块性能更好或缓存未命中更少。历史 Day 7 程序仍是 GPT 整合版，来源说明保持不变。
+
+## 脉动阵列脚手架检查（未接入 smoke）
+
+[`systolic-model-check.cpp`](systolic-model-check.cpp) 用 `#define main` 引入 [`templates/gpt/systolic-os-model.cpp`](../templates/gpt/systolic-os-model.cpp)。核心三个函数还是 `TODO(零醛)` 时，它打印 `SKIP`，退出码 0。这不是 `PASS`。不要把它接进 [`smoke.sh`](smoke.sh)，待零醛实现后接入。
+
+`smoke.sh` 会编译 `src/` 下全部 `.cpp`，但不会编译 `templates/`。在仓库根目录单独编译：
+
+```sh
+bash scripts/build-systolic-os-model.sh
+```
+
+等价的 g++ 命令：
+
+```sh
+mkdir -p build
+g++ -std=c++17 -O2 -Wall -Wextra -pedantic \
+    -o build/systolic-os-model templates/gpt/systolic-os-model.cpp
+g++ -std=c++17 -O2 -Wall -Wextra -pedantic \
+    -o build/systolic-model-check tests/systolic-model-check.cpp
+```
+
+核心未实现时，`./build/systolic-os-model --n 2 --P 2` 应打印「未实现」并以非零码退出，且不写 CSV。实现并自测通过后，把头文件里的 `kSystolicCoreImplemented` 改为 `true`，确认本测试输出以 `PASS:` 开头，再决定是否写入 `smoke.sh`。日程序号确定之前，不要把脚手架拷进 `src/`。本测试不记时，输出也不能当成性能结果。
