@@ -9,6 +9,7 @@
 | 2026-10-27，Day 7 分块，75 条 | [2026-10-27-day07-blocking.md](reports/2026-10-27-day07-blocking.md) | [2026-10-27-day07-blocking-local/](results/2026-10-27-day07-blocking-local/) |
 | Day 8 性能诊断方法（日期未记录），无实测 | [day08-performance-analysis.md](reports/day08-performance-analysis.md) | 没有。文中数字是教学示例 |
 | 阶段 A：2×2 算法实现与正确性 | [stage-a-algorithm-implementation.md](reports/stage-a-algorithm-implementation.md) | 这次没有单独的测量目录 |
+| 数据流账本模板，无实测 | [YYYY-MM-DD-dataflow-ledger.md](reports/YYYY-MM-DD-dataflow-ledger.md) | 没有。不在这里放次数或毫秒 |
 
 ## 从归档 CSV 再打一遍中位数
 

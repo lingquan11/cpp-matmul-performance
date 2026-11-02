@@ -11,6 +11,7 @@
 | [2026-10-27-day07-blocking.md](2026-10-27-day07-blocking.md) | Day 7 分块。正式 75 条中位数与相对耗时；耗时不能证明 cache miss |
 | [day08-performance-analysis.md](day08-performance-analysis.md) | Day 8 性能诊断方法报告。日期未记录；数字是教学示例，不是实测，没有结果目录 |
 | [stage-a-algorithm-implementation.md](stage-a-algorithm-implementation.md) | 阶段 A：2×2 算法实现与正确性 |
+| [YYYY-MM-DD-dataflow-ledger.md](YYYY-MM-DD-dataflow-ledger.md) | 数据流账本报告模板。没有实测，结论待填，不含 SCALE-Sim |
 
 
 2026-11-01：[编译选项与分块复测](2026-11-01-compiler-blocking-windows.md)，现行整合版的新实验。

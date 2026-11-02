@@ -14,6 +14,8 @@
 
 GPT 模板不在这里，在 [`templates/gpt/`](../templates/gpt/README.md)。Day 7 的可编译整合版放在本目录，是因为补缴时需要一份带完整 `main` 的文件；文件头写明它是 GPT 整合版，不能把它读成用户原始提交。
 
+六种循环顺序的 1002-I4 脚手架不在本目录。它在 [`templates/gpt/exp-loop-orders.cpp`](../templates/gpt/exp-loop-orders.cpp)。`jik`、`kij`、`jki`、`kji` 仍是 `TODO(零醛)`。本目录的 Day 7 文件没有为这件事改过。
+
 本目录放这一阶段接着用的程序，文件名用连字符。Day 7 的 `day07-matrix-blocking.cpp` 是标明来源的 GPT 整合版，不把它算作用户逐字提交的成品。[`code_history/dayNN/`](../code_history/README.md) 是各日演变快照，快照文件名保持原样。两处并存是正常的，哈希不同不合成一份。
 
 [`code_history/day04/`](../code_history/day04/README.md) 是 Day 4 的版本快照（V01–V07）。V07 是和 Day 4 程序导出一起提交的 `ikj` 批量程序，不放进本目录，也不盖掉 `day04-matmul.cpp`。[`code_history/day05/`](../code_history/day05/README.md) 只留今天双版本的一份复制。现在用的程序仍在本目录。
