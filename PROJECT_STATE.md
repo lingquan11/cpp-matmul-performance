@@ -1,5 +1,13 @@
 # 我现在做到哪
 
+## 2026-11-02 维护补充（不是新学习日）
+
+我加了测量地基的脚手架，没有改 `src/` 里的任何 `.cpp`，也没有新测量。计时实验：无新进展。
+
+脚手架由 AI 维护，不是我写的核心算法。新增 [`scripts/run-core-scan.bat`](scripts/run-core-scan.bat)、[`scripts/run-c0-c1.bat`](scripts/run-c0-c1.bat)、[`scripts/summarize-baseline.py`](scripts/summarize-baseline.py)。结果目录还是模板 [`experiments/results/YYYY-MM-DD-measure-baseline-windows/`](experiments/results/YYYY-MM-DD-measure-baseline-windows/metadata.md)，里面没有 CSV。规则草案在 [`experiments/reports/measurement-rules.md`](experiments/reports/measurement-rules.md)，报告模板在 [`experiments/reports/YYYY-MM-DD-measure-baseline.md`](experiments/reports/YYYY-MM-DD-measure-baseline.md)。格式测试夹具在 [`tests/fixtures/baseline-fixture/`](tests/fixtures/baseline-fixture/README.md)，标明非实测。
+
+规则 R 是草案，等我在自己的 Windows 电脑上测完再确认。04:03 批「3 轮方向一致且差 >15%」建议以 R 取代，待我确认。`experiments/summarize_medians.py` 这次没加 `--csv`，默认输出不动。电源、频率、绑核掩码都还是待测，不倒填。没有标记新的 Day 验收。
+
 ## 2026-11-01 编译选项与分块复测
 
 按用户请求由 Codex 在本机对现行 Day 7 整合版开展 `/O2` 与 `/Od` 对照，四次独立进程运行，共 300 条；详细数据、执行环境及限制见[新实验报告](experiments/reports/2026-11-01-compiler-blocking-windows.md)。这是新测量，不是历史逐字源码或历史计时的复现，也不代表新的学习日。

@@ -11,6 +11,9 @@
 | [2026-10-27-day07-blocking.md](2026-10-27-day07-blocking.md) | Day 7 分块。正式 75 条中位数与相对耗时；耗时不能证明 cache miss |
 | [day08-performance-analysis.md](day08-performance-analysis.md) | Day 8 性能诊断方法报告。日期未记录；数字是教学示例，不是实测，没有结果目录 |
 | [stage-a-algorithm-implementation.md](stage-a-algorithm-implementation.md) | 阶段 A：2×2 算法实现与正确性 |
+| [measurement-rules.md](measurement-rules.md) | 测量判定规则 R 的草案。待我实测后确认，不是新测量 |
+| [YYYY-MM-DD-measure-baseline.md](YYYY-MM-DD-measure-baseline.md) | 测量地基报告模板。核扫描、离散度和规则 R 都写待测 |
 
 
 2026-11-01：[编译选项与分块复测](2026-11-01-compiler-blocking-windows.md)，现行整合版的新实验。
+

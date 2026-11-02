@@ -15,3 +15,5 @@ jobs:
         run: bash tests/smoke.sh
       - name: Read-only median check from archived CSV
         run: python3 experiments/summarize_medians.py | head -n 30
+      - name: Rule R fixture checks, not a timing run
+        run: python3 tests/test_summarize_baseline.py

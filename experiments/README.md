@@ -27,5 +27,9 @@ python3 experiments/summarize_medians.py
 
 需要 Python 3，用标准库，不用额外安装。打出来的中位数应对上 [Day 5 报告](reports/2026-10-26-day05-loop-order.md) 和 [Day 7 报告](reports/2026-10-27-day07-blocking.md)。对不上就停下来查，不要改报告里的旧数字去迁就新输出。计时复现：未验证。
 
+## 测量地基（还没有实测）
+
+[`../scripts/summarize-baseline.py`](../scripts/summarize-baseline.py) 只读新的 day07 目录树，按 [规则 R 草案](reports/measurement-rules.md) 做跨进程汇总。它不读、也不改上面两份归档 CSV。[`summarize_medians.py`](summarize_medians.py) 仍然没有参数。结果目录还是模板，数值待测。格式夹具在 [`../tests/fixtures/baseline-fixture/`](../tests/fixtures/baseline-fixture/README.md)，标明非实测。
+
 
 2026-11-01：[/O2 与 /Od、分块复测](reports/2026-11-01-compiler-blocking-windows.md) · [原始数据与环境](results/2026-11-01-compiler-blocking-windows/metadata.md)。
