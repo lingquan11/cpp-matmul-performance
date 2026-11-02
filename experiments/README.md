@@ -29,3 +29,5 @@ python3 experiments/summarize_medians.py
 
 
 2026-11-01：[/O2 与 /Od、分块复测](reports/2026-11-01-compiler-blocking-windows.md) · [原始数据与环境](results/2026-11-01-compiler-blocking-windows/metadata.md)。
+
+2026-11-02 的行跨度 LDA 和 SIMD 对照只有模板：[LDA 报告模板](reports/YYYY-MM-DD-layout-lda.md)、[SIMD 报告模板](reports/YYYY-MM-DD-simd-factor.md)。没有新的 CSV，也没有实测数字。计时实验：无新进展。
