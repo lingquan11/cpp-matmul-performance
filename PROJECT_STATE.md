@@ -2,6 +2,16 @@
 
 ## 2026-11-02 维护补充（不是新学习日）
 
+这次没有新的学习日，也没有做任何新测量。计时实验：无新进展。
+
+我还没有写带运行时行跨度的 `matmul_ijk_lda`、`matmul_ikj_lda`，也没有写 SIMD 对照里的 `matmul_ikj_simd`、`matmul_blocked_simd`。这次只加了脚手架，放在 [`templates/gpt/layout-lda.cpp`](templates/gpt/layout-lda.cpp) 和 [`templates/gpt/simd-factor.cpp`](templates/gpt/simd-factor.cpp)，不在 `src/`。未实现时程序打印「未实现」并以非零码退出，不写 CSV。测试 [`tests/layout-lda-correctness.cpp`](tests/layout-lda-correctness.cpp) 和 [`tests/simd-factor-check.cpp`](tests/simd-factor-check.cpp) 在 kernel 未实现时输出 SKIP，没有接进 [`tests/smoke.sh`](tests/smoke.sh)。
+
+编译器闸门只做了一份：[`scripts/vec-report.bat`](scripts/vec-report.bat) 和 [`scripts/scan-asm-keywords.py`](scripts/scan-asm-keywords.py)。行跨度和 SIMD 对照共用它。本机还没跑过 `cl`，C5001/C5002 以我自己机器上的 txt 为准。没有提交 `.asm`。
+
+计时脚本是 [`scripts/run-layout-lda.bat`](scripts/run-layout-lda.bat) 和 [`scripts/run-simd-factor.bat`](scripts/run-simd-factor.bat)。10 个进程的中位数口径依赖尚未合并的分支 `ideas/matmul-1002-i1-measurement-baseline` 里的 `experiments/reports/measurement-rules.md`（规则 R）。那份文件不在这次的目录里，我也没有把它抄进来。行跨度自己的阈值是 0.90 和 0.97–1.03，不是规则 R 的 5%。汇总脚本是 [`scripts/summarize-layout-lda.py`](scripts/summarize-layout-lda.py)，格式测试用的数字不是实测。
+
+报告和结果目录都还是模板，结论空着。L1D 容量和相联度空着，写在 [`notes/dayNN-hw-facts.md`](notes/dayNN-hw-facts.md)。汇编阅读空表在 [`notes/dayNN-asm-reading.md`](notes/dayNN-asm-reading.md)，日程序号未定。`src/day07-matrix-blocking.cpp` 没有改。Day 验收都不因这次维护而改变。电源、频率、绑核掩码仍是待测，不倒填。
+
 AI 加了 matmul 1002-I4 数据流账本的脚手架。我没有新的学习日，也不把这次记成任何 Day 验收。计时实验：无新进展。未做任何新测量，没有新的 CSV，没有把云端或 Linux 的毫秒写进结果目录。环境参数不倒填。
 
 脚手架不放进 `src/`。循环顺序程序在 [`templates/gpt/exp-loop-orders.cpp`](templates/gpt/exp-loop-orders.cpp)，C1 的 Windows 启动脚本在 [`scripts/run-loop-orders-c1.ps1`](scripts/run-loop-orders-c1.ps1)，访存账本在 [`scripts/dataflow-ledger.py`](scripts/dataflow-ledger.py)。`jik`、`kij`、`jki`、`kji` 和 `count_os`、`count_ws`、`count_is` 标了 `TODO(零醛)`，未实现时程序非零退出。正确性测试在未实现时 SKIP，还没有接进 [`tests/smoke.sh`](tests/smoke.sh)，待零醛实现后接入。纸笔表是空的，在 [`notes/dayNN-dataflow-derivation.md`](notes/dayNN-dataflow-derivation.md)。报告模板在 [`experiments/reports/YYYY-MM-DD-dataflow-ledger.md`](experiments/reports/YYYY-MM-DD-dataflow-ledger.md)，结论待填，不含 SCALE-Sim。
@@ -67,3 +77,23 @@ Day 4 是 2026-10-26 做的。目标①规模扩展、目标②计时入门、�
 Day 1 我花了 30 分钟，Day 2 大约 20 分钟。Day 3 当天没写用时，2026-10-26 补记为 30 分钟。Day 4 补记为 2 小时。Day 5 补录为 60 分钟。Day 6 是 20 分钟。Day 7 是 60 分钟。Day 8 是 5 小时（300 分钟）。Day 4 到 Day 7 是同一台电脑、同一套硬件，没有换机：Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.11.1，Release / x64。MSVC toolset 独立版本号未记录。
 
 10 月 25 日我定下来：先把核心实验做扎实，架构上的衔接放进主线，SCALE-Sim 做一个基础实验。测量分步加，正确性也分步查，计划按周滚动。这份状态就是那天开始写的。12 月 10 日是目标，12 月 11 日前把材料理好。当天怎么定的，我另外记在 `notes/handoff-2026-10-25-项目变更与协作同步报告.md`。
+
+## 维护补充（不是新学习日）
+
+新增规模扫描的 AI 脚手架、正确性测试、绘图和报告模板；核心算法及输入仍待零醛完成，没有新测量。计时实验：无新进展。
+
+## 维护补充（不是新学习日）
+
+新增计数器探路清单及 Plan B 脚手架、汇总和报告模板；没有新测量，计时实验：无新进展。
+
+## 维护补充（不是新学习日）
+
+新增硬件事实和复用预测模板、公式核对工具与块大小扫描脚手架；没有新测量，计时实验：无新进展。
+
+## 维护补充（不是新学习日）
+
+新增打包分块实验脚手架、正确性测试和报告模板；未进行新测量，计时实验：无新进展。
+
+## 维护补充（不是新学习日）
+
+新增 GEMM 形状实验及溢出核查脚手架和映射模板；没有新测量，计时实验：无新进展。

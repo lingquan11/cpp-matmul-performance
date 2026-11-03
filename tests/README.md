@@ -72,6 +72,31 @@ Linux 上可同样编译运行，但 **VM 或 g++ 的毫秒不能写入正式报
 
 正确性通过只能说明这些输入与边界组合通过。它不是用户历史 75 条 CSV 的逐行复现，也不能证明分块性能更好或缓存未命中更少。历史 Day 7 程序仍是 GPT 整合版，来源说明保持不变。
 
+## 行跨度与 SIMD 脚手架检查（未接入 smoke）
+
+[`layout-lda-correctness.cpp`](layout-lda-correctness.cpp) 用 `#define main` 引入 [`templates/gpt/layout-lda.cpp`](../templates/gpt/layout-lda.cpp)。两个 LDA kernel 还是 `TODO(零醛)` 时，它打印 `SKIP`，退出码 0。这不是 `PASS`。n=70 以及 `lda>n` 的逐元素比对要等 kernel 实现之后才会执行。
+
+[`simd-factor-check.cpp`](simd-factor-check.cpp) 同样只在 kernel 未实现时打印 `SKIP`。它检查 build 标记和「n=1024 不能沿用 day07 的 int 公式」，不跑计时。
+
+两个检查都不要接进 [`smoke.sh`](smoke.sh)，待零醛实现后接入。`smoke.sh` 会编译 `src/` 下全部 `.cpp`，但不会编译 `templates/`。
+
+格式测试，非实测：
+
+```sh
+python3 tests/test_scan_asm_keywords.py
+python3 tests/test_summarize_layout_lda.py
+```
+
+夹具在 [`fixtures/asm-keyword-fixture/`](fixtures/asm-keyword-fixture/README.md) 和 [`fixtures/layout-lda-fixture/`](fixtures/layout-lda-fixture/README.md)。里面的数字和指令计数不能写进正式 CSV 或报告。
+
+在仓库根目录单独编译并跑脚手架检查：
+
+```sh
+bash scripts/build-lda-simd.sh
+```
+
+核心未实现时，`./build/layout-lda --algo ijk --n 64 --lda n --runs 1 --out build/layout-lda.csv` 应打印「未实现」并以非零码退出，且不创建 CSV。SIMD 那份同样。实现并自测通过后，把对应文件里的 `kLayoutLdaImplemented` 或 `kSimdKernelImplemented` 改为 `true`，确认检查输出以 `PASS:` 开头，再决定是否写入 `smoke.sh`。
+
 ## 1002-I4 脚手架测试（未接入 smoke）
 
 下面两项不在 [`smoke.sh`](smoke.sh) 里。四种新循环顺序和三个访存计数还是 `TODO(零醛)`。待零醛实现后接入。

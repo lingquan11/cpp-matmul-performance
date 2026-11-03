@@ -20,6 +20,8 @@ GPT 模板不在这里，在 [`templates/gpt/`](../templates/gpt/README.md)。Da
 
 [`code_history/day04/`](../code_history/day04/README.md) 是 Day 4 的版本快照（V01–V07）。V07 是和 Day 4 程序导出一起提交的 `ikj` 批量程序，不放进本目录，也不盖掉 `day04-matmul.cpp`。[`code_history/day05/`](../code_history/day05/README.md) 只留今天双版本的一份复制。现在用的程序仍在本目录。
 
+2026-11-02：行跨度 LDA 和 SIMD 对照的脚手架不在本目录。C++ 在 [`templates/gpt/layout-lda.cpp`](../templates/gpt/layout-lda.cpp) 和 [`templates/gpt/simd-factor.cpp`](../templates/gpt/simd-factor.cpp)。kernel 还是 `TODO(零醛)`。本目录不新增文件，`day07-matrix-blocking.cpp` 也没改。
+
 ## 2026-10-29 验证补充
 
 上述来源与历史验证描述保留。现行文件已在本机 MSVC 构建；Day 7 的独立正确性测试覆盖 392 个组合，不执行 benchmark main，不复现历史 CSV。[测试入口](../tests/README.md) · [环境与维护记录](../notes/maintenance-2026-10-29.md)。

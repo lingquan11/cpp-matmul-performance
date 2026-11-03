@@ -26,6 +26,8 @@ if [[ "$day01" != "11" ]]; then
 fi
 
 day02="$("$tmp/day02-matrix")"
+# Native Windows executables emit CRLF under Git Bash.
+day02="${day02//$'\r'/}"
 expected="$(printf '11 10 \n19 30 ')"
 if [[ "$day02" != "$expected" ]]; then
   printf 'Day 2 mismatch\nexpected %q\ngot      %q\n' "$expected" "$day02" >&2

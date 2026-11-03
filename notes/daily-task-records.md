@@ -13,6 +13,8 @@
 | 2026-10-27 | Day 7，分块验收，75 条；src 中为 GPT 整合版 | [day07-notes.md](day07-notes.md)、[day07-record.md](day07-record.md)、[day07-code-materials.md](day07-code-materials.md)、[75 条](../experiments/results/2026-10-27-day07-blocking-local/README.md)、[环境](supplements/experiment-environment.md) |
 | 未记录 | Day 8，性能诊断综合考核通过，无新代码、无 CSV，用时 300 分钟 | [day08-notes.md](day08-notes.md)、[day08-record.md](day08-record.md)、[对话](day08-dialogue-record.md)、[原话](day08-visible-user-turns.md)、[day08-code-materials.md](day08-code-materials.md)、[方法报告](../experiments/reports/day08-performance-analysis.md)、[完整性检查](supplements/day08-completeness-check.md) |
 
+待零醛填写：汇编阅读（[dayNN-asm-reading.md](dayNN-asm-reading.md)）。日程序号未定，还没做完，不记成已完成的一天。
+
 我先学会了算一个输出元素，并写成 C++。2026-10-22 我把完整的 2×2 三重循环做完了，原始输入和单位矩阵都通过。阶段 A 到这里。2026-10-23 我做了零矩阵，写了 O(n³)，也写了后面怎么测性能的方案。2026-10-26 我另外做完了 Day 4：规模可以输入，单次计时也接上了，本地 64、128、256 各测了 5 次。截图转录和程序导出都在 [`experiments/results/2026-10-26-day04-local/`](../experiments/results/2026-10-26-day04-local/README.md)。同一天 Day 5 比了循环顺序，验收只看今天的 30 条，在 [`experiments/results/2026-10-26-day05-loop-order-local/`](../experiments/results/2026-10-26-day05-loop-order-local/README.md)。2026-10-27 的 Day 6 过了概念验收，记的是内存布局和缓存局部性。同一天 Day 7 分块验收通过，正式 CSV 75 条全部 PASS，边界测试 `n=70`、`block_size=32` 也过了。
 
 ## 2026-10-20

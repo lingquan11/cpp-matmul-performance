@@ -16,3 +16,5 @@ Day 8 没有结果目录：那天没有真实硬件计数器采集，也没有�
 
 
 2026-11-01：[/O2 与 /Od、分块复测的原始数据和环境](2026-11-01-compiler-blocking-windows/metadata.md)，四次独立运行，执行与限制见元数据。
+
+2026-11-02：[行跨度 LDA 模板](YYYY-MM-DD-layout-lda-windows/metadata.md) 和 [SIMD 对照模板](YYYY-MM-DD-simd-factor-windows/metadata.md)。两个目录都没有 CSV，也没有汇编。占位名等我开跑那天再改。
