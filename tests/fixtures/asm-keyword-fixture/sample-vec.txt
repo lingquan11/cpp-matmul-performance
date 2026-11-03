@@ -1,0 +1,9 @@
+; fixture
+; 手写夹具，不是 MSVC 19.51 的输出，也不是实测。
+day07-matrix-blocking.cpp(81) : info C5001: loop vectorized
+day07-matrix-blocking.cpp(90) : info C5002: loop not vectorized due to reason '1200'
+day07-matrix-blocking.cpp(110) : info C5002: loop not vectorized due to reason: "1204"
+c:\source.cpp(4) : loop vectorized
+c:\source.cpp(5) : loop not vectorized due to reason '501'
+cl : Command line warning D9025 : ignoring unknown option
+Copyright (C) Microsoft Corporation. All rights reserved.

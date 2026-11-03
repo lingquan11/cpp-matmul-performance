@@ -21,23 +21,24 @@ bool matmul_blocked_ld(const vector<int>&, const vector<int>&, vector<int>&, int
     return false;
 }
 int main(int argc, char** argv) {
-    int n=0, runs=1, timeout=15; string algo, out;
+    int n=0, runs=1, timeout=15, requested_block=0; string algo, out;
     try {
         for(int i=1;i<argc;++i) {
             string key=argv[i];
-            if(key=="--help") { cout << "--n N --algo {ikj,blocked_64,blocked_128,blocked_packed_64,ikj_lda16} --runs N --out CSV --timeout-sec N (default 15)\n"; return 0; }
+            if(key=="--help") { cout << "--n N --algo {ikj,blocked,blocked_64,blocked_128,blocked_packed_64,ikj_lda16} --block {16,32,64,128,256} --runs N --out CSV --timeout-sec N (default 15)\n"; return 0; }
             if(i+1==argc) throw invalid_argument("missing value");
             string v=argv[++i]; size_t pos=0;
             if(key=="--algo") algo=v;
             else if(key=="--out") out=v;
-            else if(key=="--n" || key=="--runs" || key=="--timeout-sec") {
+            else if(key=="--n" || key=="--runs" || key=="--timeout-sec" || key=="--block") {
                 int x=stoi(v,&pos); if(pos!=v.size() || x<=0) throw invalid_argument("positive integer required");
-                if(key=="--n") n=x; else if(key=="--runs") runs=x; else timeout=x;
+                if(key=="--n") n=x; else if(key=="--runs") runs=x; else if(key=="--block") requested_block=x; else timeout=x;
             } else throw invalid_argument("unknown option");
         }
-        if(!n || out.empty() || (algo!="ikj" && algo!="blocked_64" && algo!="blocked_128" && algo!="blocked_packed_64" && algo!="ikj_lda16")) throw invalid_argument("required options");
+        if(!n || out.empty() || (algo!="ikj" && algo!="blocked" && algo!="blocked_64" && algo!="blocked_128" && algo!="blocked_packed_64" && algo!="ikj_lda16")) throw invalid_argument("required options");
         if(algo=="blocked_packed_64" || algo=="ikj_lda16") { cerr << "未实现: " << algo << '\n'; return 2; }
-        int ld=n, block=algo=="blocked_64"?64:algo=="blocked_128"?128:0;
+        if ((algo=="blocked" && requested_block!=16 && requested_block!=32 && requested_block!=64 && requested_block!=128 && requested_block!=256) || (algo!="blocked" && requested_block)) throw invalid_argument("--block requires blocked and a supported size");
+        int ld=n, block=algo=="blocked"?requested_block:algo=="blocked_64"?64:algo=="blocked_128"?128:0;
         if(n>46340) throw invalid_argument("n too large");
         size_t count=static_cast<size_t>(n)*ld;
         vector<int> a(count), b(count), c(count);
