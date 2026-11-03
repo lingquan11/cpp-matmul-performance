@@ -1,5 +1,17 @@
 # 我现在做到哪
 
+## 2026-11-02 维护补充（不是新学习日）
+
+这次没有新的学习日，也没有做任何新测量。计时实验：无新进展。
+
+我还没有写带运行时行跨度的 `matmul_ijk_lda`、`matmul_ikj_lda`，也没有写 SIMD 对照里的 `matmul_ikj_simd`、`matmul_blocked_simd`。这次只加了脚手架，放在 [`templates/gpt/layout-lda.cpp`](templates/gpt/layout-lda.cpp) 和 [`templates/gpt/simd-factor.cpp`](templates/gpt/simd-factor.cpp)，不在 `src/`。未实现时程序打印「未实现」并以非零码退出，不写 CSV。测试 [`tests/layout-lda-correctness.cpp`](tests/layout-lda-correctness.cpp) 和 [`tests/simd-factor-check.cpp`](tests/simd-factor-check.cpp) 在 kernel 未实现时输出 SKIP，没有接进 [`tests/smoke.sh`](tests/smoke.sh)。
+
+编译器闸门只做了一份：[`scripts/vec-report.bat`](scripts/vec-report.bat) 和 [`scripts/scan-asm-keywords.py`](scripts/scan-asm-keywords.py)。行跨度和 SIMD 对照共用它。本机还没跑过 `cl`，C5001/C5002 以我自己机器上的 txt 为准。没有提交 `.asm`。
+
+计时脚本是 [`scripts/run-layout-lda.bat`](scripts/run-layout-lda.bat) 和 [`scripts/run-simd-factor.bat`](scripts/run-simd-factor.bat)。10 个进程的中位数口径依赖尚未合并的分支 `ideas/matmul-1002-i1-measurement-baseline` 里的 `experiments/reports/measurement-rules.md`（规则 R）。那份文件不在这次的目录里，我也没有把它抄进来。行跨度自己的阈值是 0.90 和 0.97–1.03，不是规则 R 的 5%。汇总脚本是 [`scripts/summarize-layout-lda.py`](scripts/summarize-layout-lda.py)，格式测试用的数字不是实测。
+
+报告和结果目录都还是模板，结论空着。L1D 容量和相联度空着，写在 [`notes/dayNN-hw-facts.md`](notes/dayNN-hw-facts.md)。汇编阅读空表在 [`notes/dayNN-asm-reading.md`](notes/dayNN-asm-reading.md)，日程序号未定。`src/day07-matrix-blocking.cpp` 没有改。Day 验收都不因这次维护而改变。电源、频率、绑核掩码仍是待测，不倒填。
+
 ## 2026-11-01 编译选项与分块复测
 
 按用户请求由 Codex 在本机对现行 Day 7 整合版开展 `/O2` 与 `/Od` 对照，四次独立进程运行，共 300 条；详细数据、执行环境及限制见[新实验报告](experiments/reports/2026-11-01-compiler-blocking-windows.md)。这是新测量，不是历史逐字源码或历史计时的复现，也不代表新的学习日。
@@ -63,6 +75,10 @@ Day 1 我花了 30 分钟，Day 2 大约 20 分钟。Day 3 当天没写用时，
 ## 维护补充（不是新学习日）
 
 新增规模扫描的 AI 脚手架、正确性测试、绘图和报告模板；核心算法及输入仍待零醛完成，没有新测量。计时实验：无新进展。
+
+## 维护补充（不是新学习日）
+
+新增计数器探路清单及 Plan B 脚手架、汇总和报告模板；没有新测量，计时实验：无新进展。
 
 ## 维护补充（不是新学习日）
 
