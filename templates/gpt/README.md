@@ -9,6 +9,8 @@
 | [day07-blocking-snippets.md](day07-blocking-snippets.md) | Day 7 分块相关 GPT 片段（函数、边界测试、试测与正式调度）。不是完整可编译单文件，也不是我独立写的程序 |
 | [layout-lda.cpp](layout-lda.cpp) | 2026-11-02 行跨度脚手架。不在 `src/`。`matmul_ijk_lda`、`matmul_ikj_lda` 是 `TODO(零醛)`。未实现时会报错退出。不是已经写完的 kernel |
 | [simd-factor.cpp](simd-factor.cpp) | 2026-11-02 SIMD 对照脚手架。不在 `src/`。`matmul_ikj_simd`、`matmul_blocked_simd` 是 `TODO(零醛)`。不是 AVX2 一定更快的结论 |
+| [exp-loop-orders.cpp](exp-loop-orders.cpp) | 1002-I4 六种循环顺序的脚手架。复用 Day 7 的 `ijk` / `ikj`。`jik`、`kij`、`jki`、`kji` 只有签名和 `TODO(零醛)`，不是我写的 kernel。不放进 `src/` |
+| [loop-orders-run-metadata.md](loop-orders-run-metadata.md) | C1 运行记录的空 metadata。没有实测数字 |
 
 模板注释里建议 Visual Studio、C++14 或更新标准、Release | x64。那是模板自己的建议。用户后来补记的环境是 Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.11.1，Release / x64。MSVC toolset 独立版本号仍然未记录，不把 IDE 版本当成 toolset。Day 5 的配置截图在 [`experiments/results/2026-10-26-day05-loop-order-local/`](../../experiments/results/2026-10-26-day05-loop-order-local/README.md)。Day 7 的可编译整合版在 [`src/day07-matrix-blocking.cpp`](../../src/day07-matrix-blocking.cpp)，文件头标明是 GPT 整合版；本目录的片段不是那份完整程序。
 
@@ -17,3 +19,5 @@
 [`code_history/day04/V06_gpt_benchmark_template.cpp`](../../code_history/day04/V06_gpt_benchmark_template.cpp) 也是 GPT 模板，和本目录的 Day 4 模板不是同一份文件，没有互相覆盖。两份都不是我独立写的。
 
 2026-11-02 的行跨度和 SIMD 脚手架也在本目录，不在 `src/`。`tests/smoke.sh` 会编译 `src/` 下全部 `.cpp`，所以实现之前不把这两份拷进去。编译见 [`scripts/build-lda-simd.sh`](../../scripts/build-lda-simd.sh)。汇编空表在 [`notes/dayNN-asm-reading.md`](../../notes/dayNN-asm-reading.md)。L1D 待测项在 [`notes/dayNN-hw-facts.md`](../../notes/dayNN-hw-facts.md)。
+
+2026-11-02 的循环顺序脚手架也放在本目录，不放进 `src/`，这样 `tests/smoke.sh` 不会把它当成现行程序去编译。四种新顺序和访存计数还没由我实现。账本脚本在 [`scripts/dataflow-ledger.py`](../../scripts/dataflow-ledger.py)。未实现时它非零退出。正式计时仍等我在自己的 Windows 电脑上跑。

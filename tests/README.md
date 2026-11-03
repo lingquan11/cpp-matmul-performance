@@ -96,3 +96,18 @@ bash scripts/build-lda-simd.sh
 ```
 
 核心未实现时，`./build/layout-lda --algo ijk --n 64 --lda n --runs 1 --out build/layout-lda.csv` 应打印「未实现」并以非零码退出，且不创建 CSV。SIMD 那份同样。实现并自测通过后，把对应文件里的 `kLayoutLdaImplemented` 或 `kSimdKernelImplemented` 改为 `true`，确认检查输出以 `PASS:` 开头，再决定是否写入 `smoke.sh`。
+
+## 1002-I4 脚手架测试（未接入 smoke）
+
+下面两项不在 [`smoke.sh`](smoke.sh) 里。四种新循环顺序和三个访存计数还是 `TODO(零醛)`。待零醛实现后接入。
+
+```sh
+g++ -std=c++17 -O2 -Wall -Wextra -pedantic -o build/loop-orders-correctness tests/loop-orders-correctness.cpp
+build/loop-orders-correctness
+python3 tests/test_dataflow_ledger.py
+python3 scripts/dataflow-ledger.py --M 64 --K 64 --N 64 --R 8 --C 8 --dataflow OS
+```
+
+循环顺序测试在 `n ∈ {1,2,70,255,256}` 上检查。`ijk` 和 `ikj` 与独立 int64 参考比较；`jik`、`kij`、`jki`、`kji` 未实现时打印 `SKIP`。未实现的桩若改写了 C，测试失败。账本脚本未实现时退出码非零，测试把数值对照记为 `SKIP`。
+
+Claude 给出的参考值，待零醛手推核对；WS/IS 的值取决于计数口径。`(64,64,64)` 在 8×8 上是 OS 69632、WS 98304、IS 98304；在 16×4 上是 OS 86016、WS 98304、IS 147456。提示词只给了这些总数，没有 A/B/C 分项。计数口径（待零醛确认）：C 的部分和第一趟是否计读？只计片外/缓冲访问，还是也计 PE 间传递？这些数不是本仓库的实测，也不是程序当前的输出。

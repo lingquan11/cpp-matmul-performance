@@ -13,6 +13,7 @@
 | [stage-a-algorithm-implementation.md](stage-a-algorithm-implementation.md) | 阶段 A：2×2 算法实现与正确性 |
 | [YYYY-MM-DD-layout-lda.md](YYYY-MM-DD-layout-lda.md) | 行跨度 LDA 报告模板。结论待测。组冲突和 4 KB 别名并列，都还没选定 |
 | [YYYY-MM-DD-simd-factor.md](YYYY-MM-DD-simd-factor.md) | SIMD 对照报告模板。不预设 AVX2 一定更快。结论待测 |
+| [YYYY-MM-DD-dataflow-ledger.md](YYYY-MM-DD-dataflow-ledger.md) | 数据流账本报告模板。没有实测，结论待填，不含 SCALE-Sim |
 
 
 2026-11-01：[编译选项与分块复测](2026-11-01-compiler-blocking-windows.md)，现行整合版的新实验。

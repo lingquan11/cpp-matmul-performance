@@ -12,6 +12,12 @@
 
 报告和结果目录都还是模板，结论空着。L1D 容量和相联度空着，写在 [`notes/dayNN-hw-facts.md`](notes/dayNN-hw-facts.md)。汇编阅读空表在 [`notes/dayNN-asm-reading.md`](notes/dayNN-asm-reading.md)，日程序号未定。`src/day07-matrix-blocking.cpp` 没有改。Day 验收都不因这次维护而改变。电源、频率、绑核掩码仍是待测，不倒填。
 
+AI 加了 matmul 1002-I4 数据流账本的脚手架。我没有新的学习日，也不把这次记成任何 Day 验收。计时实验：无新进展。未做任何新测量，没有新的 CSV，没有把云端或 Linux 的毫秒写进结果目录。环境参数不倒填。
+
+脚手架不放进 `src/`。循环顺序程序在 [`templates/gpt/exp-loop-orders.cpp`](templates/gpt/exp-loop-orders.cpp)，C1 的 Windows 启动脚本在 [`scripts/run-loop-orders-c1.ps1`](scripts/run-loop-orders-c1.ps1)，访存账本在 [`scripts/dataflow-ledger.py`](scripts/dataflow-ledger.py)。`jik`、`kij`、`jki`、`kji` 和 `count_os`、`count_ws`、`count_is` 标了 `TODO(零醛)`，未实现时程序非零退出。正确性测试在未实现时 SKIP，还没有接进 [`tests/smoke.sh`](tests/smoke.sh)，待零醛实现后接入。纸笔表是空的，在 [`notes/dayNN-dataflow-derivation.md`](notes/dayNN-dataflow-derivation.md)。报告模板在 [`experiments/reports/YYYY-MM-DD-dataflow-ledger.md`](experiments/reports/YYYY-MM-DD-dataflow-ledger.md)，结论待填，不含 SCALE-Sim。
+
+计数口径（待零醛确认）：C 的部分和第一趟是否计读？只计片外/缓冲访问，还是也计 PE 间传递？`src/`、`code_history/`、已有 CSV 和历史报告里的旧数字都没改。
+
 ## 2026-11-01 编译选项与分块复测
 
 按用户请求由 Codex 在本机对现行 Day 7 整合版开展 `/O2` 与 `/Od` 对照，四次独立进程运行，共 300 条；详细数据、执行环境及限制见[新实验报告](experiments/reports/2026-11-01-compiler-blocking-windows.md)。这是新测量，不是历史逐字源码或历史计时的复现，也不代表新的学习日。
