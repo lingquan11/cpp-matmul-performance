@@ -1,9 +1,9 @@
-# 段一：规模扫描实测——任务卡（S1-T1～S1-T11）
+# 段一：规模扫描实测——任务卡（S1-T1～S1-T13）
 
 本文件收录 Day 9 起段一（规模扫描实测）已定稿的任务卡，供后续读取本仓库的 tutor 型 AI 按卡教学、引导执行与验收，也供学习者本人按卡执行。
 每张卡含：做什么、分步拆解、预计用时、前置知识、产出物、验收标准、停下条件与卡点处理。卡内日期与用时为原定计划，实际执行进度以仓库 PROJECT_STATE.md 为准；卡中标〔推断〕的内容不是实测事实，执行时以本机工具读数为准，读不到写「未读到」，不得用推断值或旧值代填。
 
-收录状态（2026-11-06）：段一共 17 块，本文件先收已定稿的 S1-T1～S1-T11；S1-T12～S1-T17 定稿后陆续补入本文件。
+收录状态（2026-11-07）：段一共 17 块，本文件已收已定稿的 S1-T1～S1-T13；S1-T14～S1-T17 定稿后陆续补入本文件。
 
 目录：
 
@@ -18,6 +18,8 @@
 - [S1-T9 扫描会话 1](#s1-t9)｜原定 11-13（五）｜30 分钟（另加机器时长）
 - [S1-T10 扫描会话 2](#s1-t10)｜原定 11-14（六）｜30 分钟（另加机器时长）
 - [S1-T11 扫描会话 3](#s1-t11)｜原定 11-15（日）｜30 分钟（另加机器时长）
+- [S1-T12 完整性核对（跨会话）](#s1-t12)｜原定 11-16（一）｜40 分钟
+- [S1-T13 Day 8 概念对照与预测核对骨架（纸面）](#s1-t13)｜原定 11-17（二）｜30 分钟
 
 <a id="s1-t1"></a>
 
@@ -3825,5 +3827,1071 @@ $L | ForEach-Object { $_.Split(',').Count } | Sort-Object -Unique
 | C13 | 落实 | ③-4、④-1、R7 保留「最晚修改时间作下限」；B-1 第 4 条只记推断，不展开偏差 |
 | C14 | 落实 | B-3 改为「协调员已裁定」记录，没有待确认项 |
 | C15 | 落实 | B-5；回应范围只含当前保存的 ①-⑤ |
+
+---
+
+<a id="s1-t12"></a>
+
+## S1-T12 完整性核对（跨会话）
+
+原定日期：2026-11-16｜预计用时：40 分钟
+
+# S1-T12 任务卡 v2：完整性核对（跨会话）
+
+| 项 | 内容 |
+|---|---|
+| 任务 | S1-T12 完整性核对（跨会话）。三个扫描会话都入库后、任何分析之前，独立复核一遍 |
+| 执行日 | 2026-11-16（一），当天只做本卡 |
+| 人工 | 40 分钟。轻，只读核对。仓库里只新增或修改 3 个文件，提交一次；另在 %TEMP% 放一个模板副本，不入库 |
+| 连续时间 | 40 分钟。本卡没有机器运行，不加 M |
+| 前置 | S1-T9（11-13）、S1-T10（11-14）、S1-T11（11-15）都已执行并入库：各有 commit A（原始数据）和 commit B（record + PROJECT_STATE 的 Day 15/16/17 小节）；day17-record 的 R12 已写好 6 项交接 |
+| 下游 | S1-T13：本卡未完成，它自动挂起，不开工。跨会话汇总（S1-T14）、作图（S1-T15）、实验报告（S1-T16）都不在本卡做。各 Day 的索引由 S1-T17（收口与索引同步）统一更新 |
+| 时间约束 | 满 40 分钟硬停。累计 25 分钟时 ②③ 必须做完。不占用 11-17～11-18 的数分期中复习（11-18 19:00–21:00 考试）。补做窗口只有 11-19～11-23 |
+| 产出物 | notes/supplements/scale-sweep-completeness-2026-11-16.md（下称「核对文件」）、notes/day18-record.md、PROJECT_STATE.md 的 Day 18 小节，提交一次 |
+
+## 证据边界
+
+### （一）仓库里的证据（从 ZIP 复核，结果与协调员实测一致）
+
+- ZIP 是文件快照，不含 .git，也不含 plans/。所以提交号 24fa425…、段一定稿（S1-T12 原文、S1-T9～S1-T11 定稿）都没法从 ZIP 本身核实，本卡照协调员的转述使用。
+- PROJECT_STATE.md 最新一条是「2026-11-02 维护补充（不是新学习日）」，没有 Day 9 及以后的小节。段一还没执行，本卡是执行前的细化。
+- 占位目录 experiments/results/YYYY-MM-DD-scale-sweep-windows/ 里只有 metadata.md：499 字节，UTF-8 无 BOM，LF 换行；10 个字段全是「待测」，都在第 3 行；SHA-256 为 f31c77c7d6dcf5063a75b7fba05cff690702aa51a8b247a6da3aab973e6383c6。
+- sample.csv 表头 16 列，templates/gpt/scale-sweep.cpp 和 scripts/scale-sweep-launch.ps1 里写的逐字相同：n,algorithm,pilot_ms,sample,repeats,total_ms,ms_per_multiply,C00,expected_C00,checksum,elementwise_match,status,ld,block_size,gmac_per_s,skipped_timeout。
+- 标记行有两种，末段都是 1：
+  - 程序软超时，自己写一行 16 段的标记行。
+  - 启动器硬超时，用 Set-Content 把整个 sample.csv 重写成表头加一行 15 段的标记行（比表头少 1 段）。
+  - S1-T11 定稿 §6 V7 用段数区分乙、丙，依据就在这里。以上是 ZIP 里的版本；零醛实际用的版本，以 S1-T9 的 record 为准。
+- Day 7 程序跑一次写 75 条数据行。2026-10-27 的 day07-blocking-program-export.csv 为 76 行（含表头，CRLF 换行），每行 12 段，没有空值。
+
+### （二）ZIP 里没有的内容
+
+执行时以 S1-T9～S1-T11 的 record 和 PROJECT_STATE Day 15/16/17 小节为准，不现编：
+
+- 三个结果目录和各自的 raw-manifest.sha256。
+- 6 个提交哈希：A1 B1 A2 B2 A3 B3。
+- 清单的行格式。
+- 窗口 Timeout 提示的登记。
+- 每会话 15 个配置的取值范围：由协调员裁定 D6 给出，ZIP 里核实不了，以裁定为准。
+  - n ∈ {256, 384, 512, 768, 1024}；
+  - 算法 ∈ {ikj, blocked_64, blocked_128}；
+  - 5 × 3 = 15，目录名形如 run〈数字〉-〈n〉-〈算法〉；
+  - 实际有哪些目录，以 ② 打印的列表为准。
+
+day17-record R12 六项在本卡的用法：
+
+| R12 项 | 本卡怎么用 |
+|---|---|
+| ①②③ | 用于 ⑤ 的阳性对照 |
+| ④ | 用于 ② 的配置名单对照 |
+| ⑤（T1～T3 与「远超」判定） | 本卡不用、不抄、不重算 |
+| ⑥ | 用于 ① 和 ④ |
+
+H、S、M、掩码、SMT 兄弟编号本卡也都不用。
+
+### （三）推断与已知差异（未核实，不据此行动）
+
+- 仓库现有 scripts/run-scale-sweep.bat 与定稿有两处不同：它是 3 轮 × 6 个规模（256～1536）× 3 种算法，共 54 个配置，比 D6 的取值范围多一个规模 1536；它的目录名是 run01-〈n〉-〈算法〉，直接建在结果目录下，没有 raw/ 子目录；定稿是「每会话 15 个 raw/run〈k〉-〈n〉-〈算法〉/」。
+- 由此推断，S1-T9～S1-T11 用的是改过的批处理，或另一种调用方式。
+- 本卡以 D6 的取值范围和实际目录为准：目录结构整体不对（例如没有 raw/ 子目录），在 ① 的列表扫视里就判 V1 FAIL；目录名格式不对，由 ②-0 预检发现，改手工填表。
+- day15、day16 的 record 文件名是照 day17-record.md 的命名推断的，以实物为准。
+
+### （四）本卡对定稿原文的补充
+
+这些补充不改日期、用时、产出物和验收标准，只补「验收能不能核查」的前提。v1 列出后经 Gemini 辅助判断与协调员裁定复核，v2 全部保留：
+
+- ⑤ 加阳性对照：先证明 findstr 在本机能从 UTF-8 文件里找出「待测」，否则「结果为空」不能当证据。按 D7，两条路线的阳性对照都不成立时判 V7 FAIL。
+- ④ 加路径防呆：同一路径先用 git ls-files 证明不为空。原因是路径写错时，git diff 也是静默无输出、退出码 0（已用 git 2.43 在临时仓库验证）。按 D1，列表还要人工扫视。
+- ② 的列定义：「数据行数」= PASS/YES 行数；k 只对乙、丙、待定有意义，甲写「—」；缺失行数 = 5 − 数据行数。v2 另加「目录名」列，见 ②-2。
+- 阻断时的提交口径：只提交 notes/day18-record.md 一个文件，不动 PROJECT_STATE，不碰任何结果目录。④ 的「不提交」指不为修复做任何提交。协调员已确认（D3）：这份 record 记的是阻断事实和现场证据，不是半成品数据；不动 PROJECT_STATE 是为了隔离主状态。
+- 索引：notes/daily-task-records.md 和 notes/supplements/README.md 的更新，由 S1-T17（收口与索引同步）统一做，本卡不碰（D4）。
+
+## §1 做什么
+
+11-13、11-14、11-15 三个扫描会话的数据入库后、任何汇总分析之前，用 40 分钟只读复核一遍，回答四个问题：
+
+- 45 个 sample.csv 和 3 份锚点 CSV 齐不齐、形态合不合规、行数能不能对上账？
+- 48 个 CSV 的哈希和入库清单一致吗？
+- 各会话 commit A 之后，结果目录有没有被动过？
+- 三份 metadata.md 里还有没有「待测」？
+
+「独立」的意思是：不照抄三个会话自己的验收结论，从文件本身重新数。结果写进核对文件、record 和 PROJECT_STATE 的 Day 18 小节，提交一次。
+
+本卡不汇总、不作图、不写报告、不下任何性能结论；核对文件只写核对结果。发现问题只记录、交协调员：不修复，不补跑扫描，不补填 metadata，不替历史任务补做提交。
+
+## §2 分步拆解
+
+开两个窗口，都切到仓库根目录：cmd 负责 git 和 findstr，PowerShell 负责读文件和算哈希。命令都在附录，开工先按 P0 设好变量。
+
+开工前不 pull，不切分支。核对对象就是本地当前的 HEAD；远端如果有新提交，⑥ 的 push 会被拒，按 K12 交协调员。
+核对文件从 ① 开始边做边贴：在编辑器里新建、粘贴、保存为 UTF-8，不要用 PowerShell 的 > 生成。
+从打开第一份 record 开始计时。
+
+### ① 开工核对（只读，7 分钟）
+
+①-1 打开 notes/day15-record.md、notes/day16-record.md、notes/day17-record.md，抄出以下内容，然后按 P0 在 cmd 里设好 A1～A3：
+
+- 三会话 commit A 的 40 位哈希。day15、day16 在 R11/R12，day17 在 R12⑥，条目号以实物为准。
+- 三会话 commit B 的取法。
+- day17 R12①②③：模板 commit、模板 SHA-256、git show 取回命令原文。
+- day17 R12④：批处理调用原文。
+
+①-2 cmd 跑 P1：
+
+- 记下开工时的 HEAD（40 位）。
+- 三条 merge-base 都应输出 yes。
+- 按各 record 写明的取法取到 B1～B3。
+- 在 git log 列表里认出六次提交：每个会话一次「原始数据」、一次 record。不要求最近一条就是它。
+- 三个目录的 git ls-files 计数都应 ≥ 18。
+- 人工扫视 P1 末尾三份不计数的 git ls-files 列表，确认每个目录都有以下四项。只看计数不算通过。
+  - metadata.md
+  - raw-manifest.sha256
+  - anchor-day07/ 下 1 个 CSV
+  - raw/ 下 15 个 sample.csv
+- 三份列表原样贴进核对文件第一节，扫视结论写进 R1。
+- 限定三个目录的 git status --short 应无输出。
+- 全仓库的 git status --short 原样抄进 R1，⑥ 提交前要用。
+
+①-3 PowerShell 跑 P2：
+
+- PROJECT_STATE 应有 Day 15、16、17 三个小节。
+- 三份 metadata.md 加 -Encoding UTF8 后中文显示正常，目视没有「待测」。
+- 把每份 metadata.md 里「超时跳过的点及阈值」的原文抄进核对文件第二节的对照栏，② 要用。
+
+①-4 判定：
+
+- 任何一项不满足都是阻断，包括列表扫视发现四项缺任何一项。停下，按 §7 收尾 B 记 record、交协调员重排。不替历史任务补填 metadata，不补做它们的提交，不补跑任何扫描会话。
+- 只是多出文件（计数 > 18）不算阻断，把多出的文件名写进 R8，待裁定。
+
+### ② 45 行表（13 分钟）
+
+②-0 目录名预检（D6）。PowerShell 跑 P3 第一段，先看它打印的 45 个目录名（每会话一组 15 个），逐个目视确认都符合 run〈数字〉-〈n〉-〈算法〉 三段形态：
+
+- n 是 256、384、512、768、1024 之一；
+- 算法是 ikj、blocked_64、blocked_128 之一。
+
+每个名字后面的 True/False 是按同一规则做的判断，False 就是不符合。也可以在 cmd 里用 dir /b %W1%\raw（W2、W3 同理）列出名字，自己对照规则看。
+
+- 全部为 True：②-2 用 P3 第二段（自动拆分）。
+- 任一为 False：停用第二段的自动拆分，改跑「第二段·不拆分版」。会话、n、算法三列按目录名逐个手抄；行数等事实仍逐文件读出。把「已改手工填表」和不符合的目录名写进 R8。手工填表会慢不少，到 25 分钟检查点还没做完，就按 §3 止损。
+- 目录结构整体不对（例如没有 raw/ 子目录）不归这一步管：在 ①-2 的列表扫视里就已判 V1 FAIL。
+
+②-1 看 P3 第一段后半，比对三会话的配置集合。应输出「15/15 15/15 15/15」（每组是总数/去重数），之后只有 END-compare。
+
+- 外部清单就是 D6 的取值范围。②-0 全为 True、三组都是 15/15，就说明每个会话恰好是这 15 个组合各一个。R12④ 里如果另有配置清单，再对一遍。
+- 比对方法是去掉 run〈数字〉- 前缀后比剩余部分，不依赖三段拆分。名字如果连这个前缀都没有，比对结果不可用：改成手工逐个对三份名单，记进 R8。
+- 三会话名单互不相同 → 按 K3 处理（V2 FAIL）。
+- 三会话一致，但有组合不在 D6 取值范围内 → 名单原文写进 R8，待裁定，继续。
+
+②-2 跑 P3 第二段，打印 45 个 sample.csv 的事实（②-0 判出要手工填表时，改跑第二段·不拆分版）。输出整段粘进核对文件第二节，用下面这个表头：
+
+| 目录名 | 会话 | n | 算法 | 表头一致 | 总行数 | 数据行数 | 末行段数 | 末段 | 形态 | k |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 「目录名」原样保留，自动拆出的会话、n、算法可以直接和它对照。 |
+| 不拆分版只打印目录名和后五列事实，会话、n、算法三列空着，由你按目录名手抄。 |
+| 「表头一致」是首行与 16 列表头逐字比较的结果。 |
+| 「数据行数」只数 PASS/YES 行。 |
+
+②-3 按下表逐行填「形态」和「k」。口径是 S1-T11 定稿 §6 V7。
+
+| 形态 | 总行数 | 数据行数 | 末行段数 | 末段 | k | 缺失行数 |
+|---|---|---|---|---|---|---|
+| 甲（完整） | 6 | 5 | 16 | 0 | — | 0 |
+| 乙（软超时） | 数据行数 + 2 | 0～4 | 16 | 1 | 等于数据行数 | 5 − k |
+| 丙（硬超时） | 2 | 0 | 15 | 1 | 0 | 5 |
+| 乙/丙待定 | 2 | 0 | 既不是 15 也不是 16 | 1 | 待定 | 5（按丙计） |
+| 异常 | 其余任何组合，或「表头一致」为 False | | | | | 转 V2 FAIL |
+
+末行段数分不出时（上表「待定」那一行），先查该会话 record 里有没有这个配置的窗口 Timeout 提示登记：
+
+- 登记了有提示 → 丙。
+- 明确登记没有提示 → 乙。
+- 都查不到 → 写「乙/丙待定」。
+
+这种情况下乙、丙的数据行都是 0，合计不受影响。
+
+②-4 在表下面写对账：
+
+- 每会话小计 = 该会话 15 行「数据行数」之和，应等于 75 − 该会话缺失之和。
+- 三会话合计应等于 225 − 全部缺失之和；没有超时时恰好是 225。
+- 缺失按文件逐行列出（会话、n、算法、形态、缺失行数），不能只写一个总数。
+
+②-5 对照登记。把本表判出的超时文件，逐条与下面两处比较，结果写「一致」「不一致」或「未登记」：
+
+- 各会话 metadata.md「超时跳过的点及阈值」的原文；
+- record 里的超时登记和行数登记。
+
+不一致不阻断：两边原文并排写进 R8，待裁定，继续往下做。
+
+②-6 跑 P4，核三份锚点：
+
+- 每份 anchor-day07/ 下恰好 1 个 CSV；
+- 76 行（75 条数据行 + 表头），段数只有 12，空值 0；
+- 三份数据行合计 225。
+
+结果三行粘进核对文件第三节。锚点只核这几项，不逐字核表头。
+
+②-7 全程只读。看文件只用 PowerShell，或用记事本只看不存；不要用 Excel 打开 CSV。
+
+### ③ 三份清单重算（4 分钟）
+
+③-1 PowerShell 跑 P5：对每个结果目录下的全部 CSV（1 个锚点 + 15 个 sample.csv）用 Get-FileHash -Algorithm SHA256 重算，再到该目录的 raw-manifest.sha256 里找含这个哈希的那一行。输出整段粘进核对文件第四节。
+
+③-2 逐会话核对：
+
+- CSV 16 个，清单哈希行 16 行。
+- 16 行输出的第三列都是清单里的原行，没有 HITS=0 或 HITS=2。
+- 命中的那一行，路径指向同一个文件。核路径时只需看命中行里的路径（上一级目录名 run〈k〉-〈n〉-〈算法〉 或 anchor-day07 与文件名）是否与当前文件一致；第一列哈希已由匹配本身确认，不另核。
+
+都符合，每会话写「16/16 一致」，三份合计写「48/48 一致」。
+
+③-3 有任何差异就停：不覆盖清单，不重新生成清单，不改 CSV。按 K7 把文件路径、清单哈希、现哈希、LastWriteTime 记进 R4 和 R8，转收尾 B。如果只是 LastWriteTime 变了而哈希一致，不算差异（见 K8）。
+
+③-4 这时看一眼计时：累计 ≤ 25 分钟才往下做，超过了就转收尾 B（最小 record）。
+
+### ④ git diff 为空（3 分钟）
+
+④-1 cmd 跑 P6，共三条 git --no-pager diff 〈Ak〉..HEAD -- 〈第 k 会话目录〉，Ak 就是 R2 里各会话 commit A 的哈希。命令和输出原文（含行尾的 [END-k] 标记）贴进核对文件第五节。--no-pager 只是不进分页器，不改变比较内容。
+
+④-2 这条命令比较的是各会话 commit A 到 HEAD 之间该目录的变化。按设计，commit B 和后面会话的提交都不碰这个目录，所以输出应为空。
+
+输出非空就停：不改，不为修复提交。把输出全文和 P6 第二段列出的提交抄进 R5、R8，转收尾 B。即使看得出是后来的维护提交动的，也如实记录，不自己判断「没关系」。
+
+④-3 路径防呆：P6 和 P1 的 git ls-files 用的是同一个 %Gk% 变量。P1 的计数不为零、列表扫视通过，才能说明 ④ 的空输出不是路径写错造成的。
+
+### ⑤ findstr 检查（3 分钟）
+
+⑤-1 准备阳性对照：
+
+- cmd 跑 P7 第一段，把模板从 R12① 的那个提交取到 %TEMP%\s1t12-template-check.md。
+- 〈模板路径〉取 R12③ 原文里冒号后面、到第一个空格为止的那段纯路径（冒号指紧跟提交哈希的那个；例如 experiments/results/YYYY-MM-DD-scale-sweep-windows/metadata.md）。绝不能带上 > 及后面的重定向目标。
+- 重定向目标只能是 %TEMP%\s1t12-template-check.md。写到结果目录，会把已填好的 metadata.md 覆盖成模板（K14 的触发条件）。
+- 在 PowerShell 跑 P7 第二段算哈希，结果应等于 R12②。ZIP 实测为 f31c77c7…，大小写不计。
+- R12② 如果和 f31c77c7… 不同，以 R12② 为准，两个值并排写进 R8。
+- 算出来不等，多半是在 PowerShell 里做了重定向，回 cmd 重做一次。
+- 重做后仍然不等：对照文件本身不成立，两条路线都没有可用的阳性对照。按 D7 判 V7 FAIL，两个哈希值写进 R8，转收尾 B。
+
+⑤-2 cmd 跑 P7 第三段第一条：findstr 对模板应输出 1 行（10 个「待测」都在第 3 行），接着是 [END-control]。
+
+⑤-3 第二条：findstr /s /c:"待测" 查三个 metadata.md，[END-findstr] 之前应无输出。有输出就说明还有「待测」：阻断，不替 S1-T9～S1-T11 补填，转收尾 B。
+
+⑤-4 如果 ⑤-2 没有输出，说明 findstr 在本机找不到 UTF-8 里的中文（见 K5），⑤-3 的「空」不算数。改跑 P7 第四段的 Select-String -Encoding UTF8：同样先做阳性对照，再做正式检查。两条路线的命令和输出都贴进核对文件第六节。
+
+- 仅一条路线的阳性对照成立（findstr 不成立、Select-String 成立），且正式检查无输出：V7 记「待裁定（替代证据）」，继续。
+- Select-String 的正式检查有输出：同 ⑤-3，还有「待测」，阻断，转收尾 B。
+- 两条路线的阳性对照都不成立 → V7 FAIL，转收尾 B。
+
+### ⑥ 写 record 与 PROJECT_STATE，提交（8 分钟）
+
+⑥-1 在核对文件第七节写 V1～V7 的判定：PASS、待裁定或 FAIL。
+
+⑥-2 写 notes/day18-record.md 的 R1～R9，条目见 §5。
+
+⑥-3 在 PROJECT_STATE.md 加 Day 18 小节，放在 Day 17 小节之上（这个文件最新的在上面；Day 15～17 如果实际不是这样排，就跟着它们排）。只写三项：
+
+- 完整性核对已完成。有待裁定项时写条数，并指向 R8。
+- 45 行表和三份清单重算的结果数字。
+- 「尚未分析」。
+
+不写任何性能结论。用时只写在 R7。
+
+⑥-4 cmd 跑 P8：
+
+- git status --short 应只剩这 3 个文件。
+- 只 add 这 3 个文件。
+- commit，说明写「S1-T12: completeness check (2026-11-16)」。
+- git show --stat HEAD 应恰好列出 3 个文件。
+- push 到 S1-T9～S1-T11 用的远端和分支，不加 --force；被拒按 K12 处理。
+- git status -sb。
+- git rev-parse HEAD。
+
+⑥-5 这次 commit 的完整哈希和 push 结果写不进这次 commit，也不为此追加 commit。把它们抄下来，写进下一次 record 的开头。R9 已写明取法，协调员也能自己取到。
+
+## §3 预计用时
+
+| 步骤 | 内容 | 人工（分钟） | 累计 |
+|---|---|---|---|
+| ① | 开工核对（含三份列表扫视） | 7 | 7 |
+| ② | 目录名预检、45 行表、对账、锚点 | 13 | 20 |
+| ③ | 三份清单重算 | 4 | 24（25 分钟检查点：②③ 须已做完） |
+| ④ | git diff | 3 | 27 |
+| ⑤ | findstr 与阳性对照 | 3 | 30 |
+| ⑥ | 核对文件判定、record、PROJECT_STATE、提交与 push | 8 | 38 |
+| 机动 | 吸收 ④～⑥ 的超时，或 ⑤-4 的替代路线 | 2 | 40 |
+
+验算：7 + 13 + 4 + 3 + 3 + 8 + 2 = 40 分钟人工。连续时间也是 40 分钟：本卡没有机器运行，不加 M。
+
+检查点与顺延：
+
+- 累计 25 分钟时 ②③ 还没做完：转收尾 B，只写最小 record 止损。收尾 B 约 5 分钟，仍在 40 分钟以内。②-0 判出要手工填表时，② 会明显变长；到点没做完同样止损，不为赶时间跳步。
+- 满 40 分钟硬停，不管做到哪一步。第 39 分钟起只做一件事：在 record 末尾写一行「硬停于第〈x〉步」并保存。
+- 11-17～11-18 不碰本卡。本卡未完成时 S1-T13 自动挂起，补做只在 11-19～11-23，由协调员重排。
+
+## §4 前置知识
+
+- Git：会用 log、status、ls-files、diff、show、add、commit、push。知道「〈A〉..HEAD」指 A 之后到 HEAD 之间的变化。知道 git diff 遇到不存在的路径时不报错，只是没有输出。
+- Windows PowerShell 5.1：会用 Get-FileHash、Get-Content、Select-String；会把片段粘进窗口、替换占位符、看懂输出。知道 > 写出来是 UTF-16、-Encoding UTF8 会带 BOM，所以本卡不用 PowerShell 写任何入库文件。
+- cmd：会用 set "变量=值" 和 %变量%；会用 findstr、dir /b；会用 & 在同一行后面接一个 echo 标记。
+- 项目口径：
+  - S1-T11 定稿 §6 V7 的样本形态（甲、乙、丙、待定）；
+  - S1-T9 定稿的结果目录结构（anchor-day07/、raw/、raw-manifest.sha256、metadata.md）；
+  - D6 的目录命名规则：run〈数字〉-〈n〉-〈算法〉，n 与算法的取值范围见证据边界（二）。
+- 不需要：「远超」阈值、T1～T3、M、绑核掩码、SMT 编号。本卡都用不到。
+
+## §5 产出物清单
+
+### 1. 核对文件 notes/supplements/scale-sweep-completeness-2026-11-16.md
+
+在编辑器里新建，粘贴命令输出，保存为 UTF-8。标题下写一句：「S1-T12 完整性核对，只记核对结果，不含分析与性能结论」。正文七节：
+
+| 节 | 内容 |
+|---|---|
+| 第一节 核对对象 | 开工时的 HEAD（40 位）；三个结果目录；三个 commit A（40 位，各注来自哪份 record 的哪一条）；P1 的三份 git ls-files 列表原样 |
+| 第二节 45 行表 | P3 第一段的输出（45 个目录名与 True/False、计数、比对）；填表方式（自动拆分，或已改手工填表）；填好形态与 k 的 11 列 45 行表；对账（小计、合计、缺失逐文件）；与登记的对照，含三份「超时跳过的点及阈值」原文 |
+| 第三节 锚点 | P4 输出的三行 |
+| 第四节 清单重算 | P5 的输出（3 × 17 行），以及「48/48 一致」或差异明细 |
+| 第五节 git diff | 三条命令与输出原文 |
+| 第六节 「待测」检查 | 阳性对照（临时文件哈希、findstr 输出）和正式检查的命令与输出；走了替代路线的一并写上 |
+| 第七节 判定 | V1～V7 逐项写 PASS、待裁定或 FAIL |
+
+### 2. notes/day18-record.md
+
+| 条目 | 内容 |
+|---|---|
+| R1 | 开工核对结果：开工时刻与 HEAD；P1、P2 的输出要点，包括三行 merge-base、三个 ls-files 计数与列表扫视结论（每个目录 metadata.md、raw-manifest.sha256、anchor-day07/ 下 1 个 CSV、raw/ 下 15 个 sample.csv 是否齐全；只写计数不算）、两次 git status --short 原文、Day 15/16/17 小节、metadata 的编码与目视结果 |
+| R2 | 三会话 commit A 的 40 位哈希，commit B 的哈希与取法，六个提交的说明，各注来源条目 |
+| R3 | 45 行表的位置（核对文件第二节）和合计数字：扫描样本数据行合计、超时文件数与缺失行数、锚点合计；与登记对照的结论 |
+| R4 | 清单重算结果：48/48 一致；或差异文件的路径、清单哈希、现哈希、LastWriteTime |
+| R5 | git diff 三条命令与输出。为空就写「为空」；非空就抄全文 |
+| R6 | 「待测」检查：阳性对照和正式检查的结果，替代路线（如果走了） |
+| R7 | 实际人工分钟数：①～⑥ 分步、合计，以及到 25 分钟检查点时做到哪一步 |
+| R8 | 报错与待裁定事项原文。每条写：触发的 V/K 编号、命令与输出原文、我做了什么（应为「未改动」）。②-0 改手工填表时，写「已改手工填表」和不符合的目录名 |
+| R9 | 本次 commit 的取法：git log -1 --format=%H -- notes/day18-record.md。完整哈希和 push 结果写进下一次 record |
+
+### 3. PROJECT_STATE.md 的 Day 18 小节。下面是骨架，〈…〉按实际填：
+
+## Day 18：规模扫描完整性核对（2026-11-16）
+
+完整性核对已完成（S1-T12）〈；另有 N 项待协调员裁定，见 notes/day18-record.md R8〉。45 行表：扫描样本数据行合计 〈X〉（无超时应为 225），超时文件 〈Y〉 个、缺 〈Z〉 行，逐文件见核对文件；锚点数据行合计 〈225〉。三份清单重算：〈48/48 一致〉。尚未分析。核对文件：notes/supplements/scale-sweep-completeness-2026-11-16.md。
+
+### 4. 一次 commit（上面 3 个文件），随后 push。
+
+本卡不产出：
+
+- 任何 CSV、图、报告或汇总表；
+- 三个结果目录里任何文件的改动（含清单和 metadata）；
+- 索引文件的更新（归 S1-T17）。
+
+%TEMP% 里的模板副本不入库。收尾 B 时只提交 record，见 §7。
+
+## §6 验收标准
+
+| 编号 | 判定（逐项可核查） | 记在哪 | 非 PASS 时 |
+|---|---|---|---|
+| V1 开工核对 | 三条 merge-base 都输出 yes；B1～B3 按各 record 的取法都取到了；R2 列出六个提交及其说明（每会话一次原始数据、一次 record）；Day 15、16、17 三个小节都在；三个目录 ls-files 计数都 ≥ 18，并且扫视列表确认四项齐全（metadata.md、raw-manifest.sha256、anchor-day07/ 下 1 个 CSV、raw/ 下 15 个 sample.csv），只计数不算通过；限定三个目录的 git status --short 无输出；三份 metadata.md 目视没有「待测」 | R1、R2；核对文件第一节 | 任一项不满足 → FAIL，收尾 B（K1～K3、K9）。只是多出别的文件 → R8 待裁定。metadata 乱码看不清 → R8 待裁定（K6） |
+| V2 45 行表 | ②-0 的 45 个目录名全为 True，或已按 D6 改手工填表并记进 R8；P3 第一段输出「15/15 15/15 15/15」且只有 END-compare；表恰好 45 行；「表头一致」全为 True；每行的形态和 k 都能由同行四个事实按 ②-3 的规则复算出来；没有「异常」 | 核对文件第二节；R8 | 缺目录、缺文件、三会话名单互不相同、表头不一致或有「异常」→ FAIL，收尾 B（K3、K4）。三会话名单一致，但有组合不在 D6 取值范围内 → 待裁定（R8），继续 |
+| V3 行数对账 | 每会话小计 = 75 − 该会话缺失之和；合计 = 225 − 全部缺失之和（无超时时恰为 225）；缺失逐文件列出；超时文件集合与 metadata「超时跳过的点及阈值」、record 登记一致；record 登记了行数的，与小计一致 | 核对文件第二节；R3 | 算术不闭合 → 重算一次（多半是抄错），仍不闭合 → FAIL，收尾 B。与登记不一致 → 待裁定，两边原文并排写进 R8，继续 |
+| V4 锚点 | 三行都是：CSV 1 个、总行数 76、段数 12、空值 0；数据行合计 225 | 核对文件第三节 | FAIL → 收尾 B |
+| V5 清单重算 | 每会话 CSV 16 个、哈希行 16 行；48 行输出的第三列都是清单原行（没有 HITS=0、HITS=2），且该行路径指向同一文件；写出「48/48 一致」 | 核对文件第四节；R4 | 任一差异 → FAIL：不覆盖清单、不重算清单、不改 CSV，按 K7 记录，收尾 B |
+| V6 git diff | 三条命令在 [END-k] 之前没有任何输出；P1 里同一个 %Gk% 的 ls-files 计数不为零、列表扫视通过 | 核对文件第五节；R5 | 有输出 → FAIL（K10），收尾 B。报 fatal → K9 |
+| V7 无「待测」 | P7 临时文件的哈希 = R12②；findstr 阳性对照输出 1 行；正式检查在 [END-findstr] 之前无输出 | 核对文件第六节；R6 | 正式检查有输出 → FAIL，不补填，收尾 B。findstr 阳性对照无输出 → 走 ⑤-4：Select-String 的阳性对照 1 行、正式检查无输出 → 待裁定（替代证据），继续；其正式检查有输出 → FAIL，收尾 B |
+| V7 双路失效（D7） | 失败情形：findstr 与 Select-String 两条路线的阳性对照都不成立。⑤-1 对照文件哈希重做后仍与 R12② 不符时，两条路线都没有可用的对照文件，同属此情形 | 核对文件第六节；R6、R8 | FAIL（K5 扩展），收尾 B |
+| V8 记录 | record 有 R1～R9；Day 18 小节只有三项内容，没有毫秒数、GMAC/s、比值或快慢判断 | 文件本身 | 改到符合再提交 |
+| V9 提交 | git show --stat HEAD 恰好列出 3 个文件；说明以「S1-T12:」开头；push 成功（git status -sb 不再显示 ahead），或报错已按 K12 处理；完整哈希已抄下 | 下一次 record 开头 | K11、K12：待裁定，不追加 commit |
+| V10 用时 | 人工 ≤ 40 分钟；②③ 做完时累计 ≤ 25 分钟；分步和合计写进 R7 | R7 | 25 分钟没做完 → 收尾 B。满 40 分钟 → 硬停（K15） |
+
+本卡算完成的条件：V1～V10 没有 FAIL，而且 ①～⑥ 全部做完。可以有待裁定项，但必须逐条进 R8。
+
+只有本卡完成，才解除 S1-T13 的挂起。
+任何 FAIL、收尾 B 或硬停都算未完成：S1-T13 不开工，补做只在 11-19～11-23。
+
+## §7 停下条件与常见卡点
+
+### 停下条件
+
+触发下面任一条，立即停止后续核对，转收尾 B：
+
+- V1、V2、V4、V5、V6 中任一项 FAIL；
+- ⑤ 正式检查找到「待测」；
+- ⑤ 两条路线的阳性对照都不成立（V7 FAIL，D7；含 ⑤-1 对照文件哈希重做后仍不符）；
+- 发生 K14（git show 的输出被写进了结果目录）；
+- 累计 25 分钟时 ②③ 还没做完。
+
+满 40 分钟则硬停（见 §3），不走收尾 B 的提交。
+
+以下情况不停，记「待裁定」后继续：
+
+- V3 与登记不一致；
+- V7 走了替代路线（仅一条路线的阳性对照成立，另一条不成立）；
+- 目录里多出文件；
+- ②-0 判出目录名不符合三段形态（D6：改手工填表，R8 写「已改手工填表」）；
+- 三会话名单一致，但有组合不在 D6 取值范围内；
+- K11、K12。
+
+### 收尾 B（约 5 分钟）
+
+- 停止后续核对。已贴进核对文件的内容原样保留，不补也不删。
+- 不改任何结果目录里的文件，不重算或覆盖清单，不补填 metadata，不补跑扫描，也不用 git restore、checkout、stash、clean。
+- 写最小 record：
+  - R1、R2（已取到的部分）、R7、R8 必写；
+  - R3～R6 做到哪写到哪，没做的写「未做」；
+  - R8 写清楚停在哪一步、触发的 V/K 编号、命令与输出原文，并注明「核对文件留在本地，未提交」。
+- 只提交 record 这一个文件（用 P8 的收尾 B 写法），push 不加 --force。PROJECT_STATE 不改。这一口径协调员已确认（D3）。
+- S1-T13 挂起。补做与重排由协调员定。
+
+### 常见卡点
+
+| 编号 | 现象 | 处理 |
+|---|---|---|
+| K1 | record 里找不到某会话 commit A 的 40 位哈希，或找不到 commit B 的取法 | 不从 git log 里挑「看起来像」的那条。只有短哈希时，用 git rev-parse 〈短哈希〉 展开，展开结果和原文并排写进 R2。完全没有时，用 git log --format="%H %s" -- 〈该会话目录〉 列出候选，原样写进 R8，不替它选。V1 FAIL，收尾 B |
+| K2 | P1 里限定三个目录的 git status --short 有输出（文件被修改、被删除，或有未跟踪文件） | 原样抄进 R1。不要 restore、checkout、stash、clean，也不要 add 或 commit：这些都会抹掉现场。V1 FAIL，收尾 B |
+| K3 | 目录或名单不对：①-2 的列表扫视发现四项缺任何一项；某会话 raw/ 下不是 15 个目录，或某个目录缺 sample.csv；ls-files 计数 < 18；三会话配置名单互不相同（Compare-Object 有输出） | 不补跑、不补文件、不改名，照实写进核对文件和 R8。V1 或 V2 FAIL，收尾 B。另：②-0 有 False 而三会话比对无差异，说明是名字格式不同或取值超出 D6 范围，都按 ②-0 改手工填表；取值超出范围的组合另记 R8 待裁定，继续 |
+| K4 | 某行按 ②-3 对不上甲、乙、丙、待定中的任何一种（例如 0 字节、只有表头、表头不一致、有两行标记行、末段既不是 0 也不是 1） | 形态写「异常」，不要打开编辑这个文件。V2 FAIL，收尾 B |
+| K5 | ⑤-2 的阳性对照里 findstr 什么也不输出 | 多半是编码问题：cmd 把检索词「待测」按本机 ANSI 代码页（简体中文系统一般是 GBK）转换后逐字节查找，文件却是 UTF-8，字节对不上。这时 findstr 的「空」不能当证据，按 ⑤-4 改用 Select-String。Select-String 的阳性对照也不成立，说明两条路线都失效、终端环境没法可靠识别中文检索词：V7 FAIL，转收尾 B（D7） |
+| K6 | PowerShell 里中文变成乱码或问号 | 读文件时加 -Encoding UTF8。片段直接粘进窗口运行，不要存成 .ps1：PowerShell 5.1 会把无 BOM 的 UTF-8 脚本按 ANSI 读。metadata.md 加了 -Encoding UTF8 仍是乱码，说明它不是 UTF-8：写进 R1，「待测」的目视结果和 ⑤ 的结论都记待裁定 |
+| K7 | 某个 CSV 的重算哈希和清单对不上 | 不覆盖清单、不重新生成清单、不改 CSV。用 P5 第二段打出该文件的路径、大小、LastWriteTime，连同清单哈希、现哈希、git status --short 和 git config --get core.autocrlf 的输出，一起抄进 R4、R8。肉眼看内容一样也照此处理：多半是换行符或编码被改过（git 换行转换、编辑器另存、Excel 打开后保存），由协调员判断。V5 FAIL，收尾 B |
+| K8 | 只是 LastWriteTime 比入库时晚、哈希一致；或者清单里的哈希是小写、路径用正斜杠或少了目录前缀 | 都不算差异。Get-FileHash 输出大写，Select-String 默认不分大小写；只核对命中的那一行指向同一个文件。LastWriteTime 变了的文件，在 R4 注一句 |
+| K9 | git 报 fatal: bad revision 或 unknown revision，或者 merge-base 输出 NO | 先对照 record 原文，检查哈希有没有抄错、少位或带空格，重设变量后重跑。仍不行，说明该提交不在当前 HEAD 的历史里：把 git branch -vv 的输出抄进 R8，不切分支、不合并，按 K1 收尾 B |
+| K10 | git diff 有输出，或者屏幕底部出现冒号（进了分页器） | 按 q 退出，用 P6 的 --no-pager 写法重跑，输出全文抄进核对文件第五节和 R5。再跑 P6 第二段，列出 commit A 之后动过该目录的提交，一并抄上。不改、不为修复提交，不自己判断「没关系」。V6 FAIL，收尾 B |
+| K11 | ⑥ 提交前，git status --short 里还有这 3 个文件以外的改动；或者提交后 git show --stat HEAD 多于 3 个文件 | 只 add 这 3 个文件，不用 git add .、-A 或 commit -a。已经多提交了，就不要 push，也不要自己 reset 或 amend，把输出写进下一次 record，交协调员 |
+| K12 | push 被拒（rejected、non-fast-forward、认证失败） | 不加 --force，不自己 pull、rebase、merge。本地 commit 保留，报错原文写进下一次 record（不为此追加 commit），交协调员 |
+| K13 | 不小心用 Excel 打开了 CSV | 关闭时选「不保存」。③ 的哈希会说明文件有没有被改过 |
+| K14 | ⑤-1 时 git show 的输出被写进了结果目录（git status 显示某个 metadata.md 被修改） | 立刻停手，把 git status 输出抄进 R8，不要自己还原，转收尾 B。预防办法：只取 R12③ 里冒号后面、到第一个空格为止的纯路径，并遵守 P7 第一段前的警告——重定向目标只能是 %TEMP%\s1t12-template-check.md |
+| K15 | 累计 25 分钟时 ②③ 还没做完；或者人工满 40 分钟 | 前一种转收尾 B。后一种硬停：第 39 分钟起只在 record 末尾写一行「硬停于第〈x〉步」并保存，不再提交 |
+
+## 附录 参考命令片段
+
+这些只是核对用的参考命令，不是实验代码。片段只负责把文件里的事实打印出来；形态判定、对账和结论由零醛按 §2 的规则自己做。
+
+### 占位符规则
+
+- 〈…〉连同尖括号整体换成实际值，两边的引号保留。
+- 〈仓库根〉是本机克隆的绝对路径。
+- 提交哈希一律用 40 位完整哈希。
+- 变量只在当前窗口有效，关掉窗口要重设。
+- cmd 里的 G 变量用正斜杠（给 git 用），W 变量用反斜杠（给 findstr、dir 用）。
+
+### 编码规则
+
+- 本卡不用命令写任何入库文件。
+- 唯一写文件的命令是 P7 第一段，必须在 cmd 里用 >，它原样写字节。
+- Windows PowerShell 5.1 的 > 会写成 UTF-16，Set-Content -Encoding UTF8 会带 BOM，-Encoding ASCII 会把中文变成问号。这三种都不要用来写本卡的文件。
+- PowerShell 片段直接粘进窗口运行，不要存成 .ps1。
+
+### P0 设变量（①-1）
+
+cmd：
+
+```
+cd /d "〈仓库根〉"
+set "G1=experiments/results/2026-11-13-scale-sweep-windows"
+set "G2=experiments/results/2026-11-14-scale-sweep-windows"
+set "G3=experiments/results/2026-11-15-scale-sweep-windows"
+set "W1=experiments\results\2026-11-13-scale-sweep-windows"
+set "W2=experiments\results\2026-11-14-scale-sweep-windows"
+set "W3=experiments\results\2026-11-15-scale-sweep-windows"
+set "A1=〈day15 record 登记的 commit A〉"
+set "A2=〈day16 record 登记的 commit A〉"
+set "A3=〈day17 record R12⑥ 登记的 commit A〉"
+```
+
+PowerShell：
+
+```
+Set-Location '〈仓库根〉'
+$D = 'experiments\results\2026-11-13-scale-sweep-windows', 'experiments\results\2026-11-14-scale-sweep-windows', 'experiments\results\2026-11-15-scale-sweep-windows'
+$H = 'n,algorithm,pilot_ms,sample,repeats,total_ms,ms_per_multiply,C00,expected_C00,checksum,elementwise_match,status,ld,block_size,gmac_per_s,skipped_timeout'
+```
+
+### P1 开工核对（cmd，①-2）
+
+```
+git rev-parse HEAD
+git status --short
+git status --short -- %G1% %G2% %G3%
+git --no-pager log --format="%h %ad %s" --date=short -n 15
+git merge-base --is-ancestor %A1% HEAD && echo A1 yes || echo A1 NO
+git merge-base --is-ancestor %A2% HEAD && echo A2 yes || echo A2 NO
+git merge-base --is-ancestor %A3% HEAD && echo A3 yes || echo A3 NO
+git ls-files -- %G1% | find /c /v ""
+git ls-files -- %G2% | find /c /v ""
+git ls-files -- %G3% | find /c /v ""
+git ls-files -- %G1%
+git ls-files -- %G2%
+git ls-files -- %G3%
+```
+
+B1～B3 照各 record 写明的取法另外跑（day17 是 R12⑥），结果抄进 R2。
+
+期望：
+
+- 限定三个目录的 git status 无输出；
+- 三行都是 yes；
+- 三个计数都 ≥ 18；
+- 末尾三份列表扫视后，每个目录都有 metadata.md、raw-manifest.sha256、anchor-day07/ 下 1 个 CSV、raw/ 下 15 个 sample.csv。只看计数不算通过。
+
+### P2 小节与 metadata（PowerShell，①-3）
+
+```
+Select-String -LiteralPath PROJECT_STATE.md -Pattern '^#.*Day 1[5-7]' -Encoding UTF8
+foreach ($d in $D) { "== $d"; Get-Content -LiteralPath "$d\metadata.md" -Encoding UTF8 }
+```
+
+期望：第一条恰好输出 3 行；三份 metadata 中文显示正常，没有「待测」。
+
+### P3 目录名预检、配置集合与 45 行事实（PowerShell，②-0～②-2）
+
+第一段（②-0、②-1）。前半按会话打印 45 个目录名，并附三段形态判断；后半做配置集合比对（只用 -replace 去前缀，不依赖三段拆分）：
+
+```
+foreach ($d in $D) {
+  "== $d"
+  Get-ChildItem -LiteralPath "$d\raw" -Directory | Sort-Object Name | ForEach-Object {
+    '{0}  {1}' -f $_.Name, ($_.Name -cmatch '^run\d+-(256|384|512|768|1024)-(ikj|blocked_64|blocked_128)$')
+  }
+}
+$c1 = @((Get-ChildItem -LiteralPath "$($D[0])\raw" -Directory).Name -replace '^run\d+-', '')
+$c2 = @((Get-ChildItem -LiteralPath "$($D[1])\raw" -Directory).Name -replace '^run\d+-', '')
+$c3 = @((Get-ChildItem -LiteralPath "$($D[2])\raw" -Directory).Name -replace '^run\d+-', '')
+'{0}/{1} {2}/{3} {4}/{5}' -f $c1.Count, @($c1 | Sort-Object -Unique).Count, $c2.Count, @($c2 | Sort-Object -Unique).Count, $c3.Count, @($c3 | Sort-Object -Unique).Count
+Compare-Object $c1 $c2; Compare-Object $c1 $c3; 'END-compare'
+```
+
+期望：三组各 15 个名字，后面全是 True；接着是「15/15 15/15 15/15」，之后只有 END-compare。也可以在 cmd 里用 dir /b %W1%\raw（W2、W3 同理）列出名字，自己对照规则看。
+
+第二段（②-2，只在 ②-0 全为 True 时用，自动拆分）：
+
+```
+foreach ($d in $D) {
+  Get-ChildItem -LiteralPath "$d\raw" -Directory | Sort-Object Name | ForEach-Object {
+    $p = $_.Name -split '-', 3
+    $L = @(Get-Content -LiteralPath (Join-Path $_.FullName 'sample.csv'))
+    $f = $L[-1] -split ','
+    '| {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} |  |  |' -f $_.Name, $p[0], $p[1], $p[2], ($L[0] -ceq $H), $L.Count, @($L -match ',YES,PASS,').Count, $f.Count, $f[-1]
+  }
+}
+```
+
+第二段·不拆分版（②-0 有任何 False 时改用；会话、n、算法三列空着，由你按目录名手抄）：
+
+```
+foreach ($d in $D) {
+  Get-ChildItem -LiteralPath "$d\raw" -Directory | Sort-Object Name | ForEach-Object {
+    $L = @(Get-Content -LiteralPath (Join-Path $_.FullName 'sample.csv'))
+    $f = $L[-1] -split ','
+    '| {0} |  |  |  | {1} | {2} | {3} | {4} | {5} |  |  |' -f $_.Name, ($L[0] -ceq $H), $L.Count, @($L -match ',YES,PASS,').Count, $f.Count, $f[-1]
+  }
+}
+```
+
+两个版本每行都对应 ②-2 的 11 列：目录名、会话、n、算法、表头一致、总行数、数据行数、末行段数、末段，最后两格留给你填形态和 k。出现红字（找不到 sample.csv）按 K3 处理。
+
+### P4 锚点（PowerShell，②-6）
+
+```
+foreach ($d in $D) {
+  $a = @(Get-ChildItem -LiteralPath "$d\anchor-day07" -File -Filter *.csv)
+  $L = @(Get-Content -LiteralPath $a[0].FullName)
+  $seg = ($L | ForEach-Object { ($_ -split ',').Count } | Sort-Object -Unique) -join '/'
+  $emp = @($L | Select-Object -Skip 1 | ForEach-Object { $_ -split ',' } | Where-Object { $_.Trim() -eq '' }).Count
+  '| {0} | {1} | {2} | {3} | {4} | {5} |' -f (Split-Path -Leaf $d), $a.Count, $a[0].Name, $L.Count, $seg, $emp
+}
+```
+
+每行依次是：目录、CSV 个数、文件名、总行数、段数、空值数。期望 CSV 1 个、总行数 76、段数 12、空值 0。
+
+### P5 清单重算（PowerShell，③）
+
+```
+foreach ($d in $D) {
+  $m = Join-Path $d 'raw-manifest.sha256'
+  $csv = @(Get-ChildItem -LiteralPath $d -Recurse -File -Filter *.csv | Sort-Object FullName)
+  '== {0} | CSV {1} | hash lines {2}' -f (Split-Path -Leaf $d), $csv.Count, @(Select-String -LiteralPath $m -Pattern '[0-9A-Fa-f]{64}').Count
+  foreach ($f in $csv) {
+    $h = (Get-FileHash -LiteralPath $f.FullName -Algorithm SHA256).Hash
+    $hit = @(Select-String -LiteralPath $m -SimpleMatch -Pattern $h)
+    $line = if ($hit.Count -eq 1) { $hit[0].Line } else { "HITS=$($hit.Count)" }
+    '| {0} | {1} | {2} |' -f (Resolve-Path -LiteralPath $f.FullName -Relative), $h, $line
+  }
+}
+```
+
+期望：每会话 CSV 16、hash lines 16；每行第三列都是清单里的原行。
+
+第二段，只在对不上时用（K7）：
+
+```
+Get-Item -LiteralPath '〈对不上的文件〉' | Select-Object FullName, Length, LastWriteTime
+```
+
+另外在 cmd 跑 git status --short 和 git config --get core.autocrlf，输出一并抄进 R4、R8。
+
+### P6 git diff（cmd，④）
+
+```
+git --no-pager diff %A1%..HEAD -- %G1% & echo [END-1]
+git --no-pager diff %A2%..HEAD -- %G2% & echo [END-2]
+git --no-pager diff %A3%..HEAD -- %G3% & echo [END-3]
+```
+
+期望：每条只看到 [END-k]。
+
+第二段，只在输出非空时用（K10）。下面以会话 1 为例，其他会话把 A、G 换成对应编号：
+
+```
+git --no-pager log --format="%H %ad %s" --date=iso %A1%..HEAD -- %G1%
+```
+
+### P7 「待测」检查（⑤）
+
+警告：重定向目标只能是 %TEMP%\s1t12-template-check.md。写到结果目录会覆盖已填好的 metadata.md，这就是 K14 的触发条件。
+
+第一段（cmd）：
+
+- 〈模板 commit〉取 day17 R12①。
+- 〈模板路径〉取 R12③ 原文里冒号后面、到第一个空格为止的那段纯路径（冒号指紧跟提交哈希的那个；例如 experiments/results/YYYY-MM-DD-scale-sweep-windows/metadata.md），绝不能带上 > 及后面的重定向目标。
+
+```
+git show 〈模板 commit〉:〈模板路径〉 > "%TEMP%\s1t12-template-check.md"
+```
+
+第二段（PowerShell）。结果应等于 R12②，大小写不计：
+
+```
+(Get-FileHash -LiteralPath "$env:TEMP\s1t12-template-check.md" -Algorithm SHA256).Hash
+```
+
+第三段（cmd）：
+
+```
+findstr /c:"待测" "%TEMP%\s1t12-template-check.md" & echo [END-control]
+findstr /s /c:"待测" %W1%\metadata.md %W2%\metadata.md %W3%\metadata.md & echo [END-findstr]
+```
+
+期望：第一条先输出模板第 3 行（1 行），再出 [END-control]；第二条只看到 [END-findstr]。
+
+第四段（PowerShell），只在第三段第一条没有输出时用：
+
+```
+Select-String -LiteralPath "$env:TEMP\s1t12-template-check.md" -SimpleMatch -Pattern '待测' -Encoding UTF8
+foreach ($d in $D) { Select-String -LiteralPath "$d\metadata.md" -SimpleMatch -Pattern '待测' -Encoding UTF8 }; 'END-ss'
+```
+
+期望：第一条输出 1 行；第二条只看到 END-ss。第一条也没有输出，就是两条路线的阳性对照都不成立：V7 FAIL，转收尾 B。
+
+### P8 提交（cmd，⑥-4）
+
+正常提交（①～⑥ 都做完）：
+
+```
+git status --short
+git add notes/day18-record.md PROJECT_STATE.md notes/supplements/scale-sweep-completeness-2026-11-16.md
+git commit -m "S1-T12: completeness check (2026-11-16)" -- notes/day18-record.md PROJECT_STATE.md notes/supplements/scale-sweep-completeness-2026-11-16.md
+git --no-pager show --stat --format="%H %s" HEAD
+git push
+git status -sb
+git rev-parse HEAD
+```
+
+commit 命令末尾的「-- 3 个路径」保证只提交这 3 个文件，即使暂存区里还有别的东西。push 用的远端和分支与 S1-T9～S1-T11 相同。
+
+收尾 B（阻断或止损，只提交 record）：
+
+```
+git add notes/day18-record.md
+git commit -m "S1-T12: stopped at step 〈x〉 (2026-11-16)" -- notes/day18-record.md
+git --no-pager show --stat --format="%H %s" HEAD
+git push
+```
+
+R9 的取法，以后任何时候都能用：git log -1 --format=%H -- notes/day18-record.md。
+
+## 附：对 Gemini G1–G8 与协调员裁定 D1–D8 的逐条回应
+
+| Gemini 编号 | 协调员裁定 | v2 改了什么（小节／命令编号） | 没改的部分与理由 |
+|---|---|---|---|
+| G1 必须改：列出必需文件清单 | D1 采纳 | P1 增加三条不计数的 git ls-files -- %G1%／%G2%／%G3%；①-2 增加「人工扫视三份列表、确认四项齐全」一步，三份列表贴进核对文件第一节；①-4 写明四项缺一即阻断；§5 核对文件第一节与 R1 同步；§6 V1 判据改为「计数 ≥ 18 且扫视确认四项齐全，只计数不算通过」，V6 防呆同步；§7 K3 补「扫视发现四项缺一」；§3 ① 由 6 分钟改为 7 分钟 | 计数命令保留：D1 要求计数与扫视并用 |
+| G2 必须改：P7 路径截取边界 | D2 采纳 | ⑤-1 第 1 步改为「取冒号后面、到第一个空格为止的那段纯路径」，给出例子，并注明冒号指紧跟提交哈希的那个；P7 第一段前加警告句（重定向目标只能是 %TEMP%\s1t12-template-check.md，写到结果目录会覆盖 metadata.md，即 K14 的触发条件）；K14 的预防说明同步改写 | — |
+| G3 建议：维持收尾 B 只提交 record | D3 采纳（维持） | 证据边界（四）第 4 条改为「协调员已确认（D3）」并写明理由，删去 v1 的「若协调员要求阻断时一律不提交……」备注；§7 收尾 B 第 4 步注明 D3 | 收尾 B 的口径本身不变：只提交 record，不动 PROJECT_STATE |
+| G4 建议：不顺手补索引 | D4 采纳（维持） | 信息表「下游」、证据边界（四）第 5 条和 §5「不产出」写明：索引由 S1-T17（收口与索引同步）统一更新 | 本卡仍不碰 daily-task-records.md 和 supplements/README.md，与 S1-T9～S1-T11 一致 |
+| G5 建议：不用 R12⑤ 与 H/S/M 等 | D5 采纳（维持） | 无改动 | 证据边界（二）的 R12 用法表，以及「H、S、M、掩码、SMT 兄弟编号也都不用」一句，原样保留 |
+| G6 必须改：目录名形态预检 | D6 采纳（细化执行方式） | 新增 ②-0；P3 第一段改为先按会话打印 45 个目录名并附三段形态判断（True／False），后半的 -replace 比对不变；计数改为「总数/去重数」，使「全为 True 且 15/15」等价于恰好 15 个组合各一；P3 新增「第二段·不拆分版」供手工填表；②-2 的表加「目录名」列（共 11 列）；②-1 的外部清单改为 D6 取值范围，并补上名字无 run 前缀时的处理；证据边界（二）（三）写入 D6 取值范围；§4、§5 第二节与 R8、§6 V2、§7 K3 与「不停」清单同步；③ 由 5 分钟改为 4 分钟（③-2 只核命中行里的目录名），让 ②③ 做完时累计仍为 24 分钟 | 目录结构整体不对（如没有 raw/）不归 ②-0：在 ①-2 的列表扫视里就判 V1 FAIL。D6 没有规定「三会话名单彼此一致、但有组合超出取值范围」的后果，v2 定为待裁定（R8）后继续；三会话名单互不一致仍按 K3 判 FAIL，与 v1 相同 |
+| G7 必须改：双路失效升级为 FAIL | D7 采纳（限定范围） | ⑤-4 末句改为「两条路线的阳性对照都不成立 → V7 FAIL，转收尾 B」；§6 在 V7 后增一行「V7 双路失效」；K5 扩展；§7 停下条件增此项，「不停」清单改为「V7 走了替代路线（仅一条路线的阳性对照成立，另一条不成立）」；P7 第四段期望补同一句。⑤-1 中对照文件哈希重做后仍不符的情形，两条路线都没有可用的对照文件，归入同一情形判 V7 FAIL（v1 为「待裁定后走 ⑤-4」） | 单条路线失效、另一条成立时仍为「待裁定（替代证据）」，按 D7 不变。哈希两次不符归入 FAIL 是 v2 对 D7 范围的理解，协调员如不同意，可恢复 v1 写法 |
+| G8 建议：日程与工作量 PASS | D8 采纳 | 日期 2026-11-16、总用时 40 分钟、硬停与 25 分钟检查点都不变 | §3 只调了步骤内分配（① 6→7、③ 5→4），用来容纳 D1、D6 新增的扫视；合计仍 40 分钟，②③ 做完时累计仍 24 分钟，不影响 PASS 的结论 |
+
+---
+
+<a id="s1-t13"></a>
+
+## S1-T13 Day 8 概念对照与预测核对骨架（纸面）
+
+原定日期：2026-11-17｜预计用时：30 分钟
+
+# S1-T13 任务卡 v2：Day 8 概念对照与预测核对骨架（纸面）
+
+2026-11-07 01:00 轮，第 1 遍打磨，修订稿 v2，计划主创 Claude。依据：段一计划定稿中 S1-T13 的原文（协调员转述）、本轮仓库 ZIP、协调员补注 C1–C6、Gemini 辅助判断 Q1–Q7、协调员裁定 D1–D8。执行者是零醛，下文称「你」。
+
+任务卡信息表
+
+| 任务 | S1-T13 Day 8 概念对照与预测核对骨架（纸面，轻） |
+| 执行日 | 2026-11-17（二）。备考紧张时可整体顺延到 2026-11-19（四），仍在同一周，周合计不变 |
+| Day 编号 | Day 19。推断：按 S1-T12 卡「11-16 = Day 18」往后推。见证据（一）9 与 K11 |
+| 用时 | 人工 30 分钟；机器 0；连续 30 分钟 |
+| 前置 | 开工闸门是 S1-T12 已完成并入库，由 ① 的 A1-5、A1-6、A1-7 核对：核对文件 notes/supplements/scale-sweep-completeness-2026-11-16.md 已提交；PROJECT_STATE.md 有 Day 18 小节标题，且提到 S1-T12。另需 Day 8 笔记与方法报告 |
+| 下游 | S1-T16（11-21，110 分钟）的第 7 节填预测核对、第 9 节填 7 行概念对照，都以本卡的两个表为输入。「判定依据」的行号来自 S1-T14（11-19，100 分钟）产出的 summary.csv，由 S1-T16 填 |
+| 产出 | notes/day19-notes.md、notes/day19-record.md、PROJECT_STATE.md 的 Day 19 小节；1 个 commit 并 push |
+| 终端 | 检查命令与 git 命令在 cmd 里运行。附录按 cmd 语法写，%ERRORLEVEL% 在 PowerShell 里无效。写文件用编辑器，保存为 UTF-8。只有用命令写出文件时才分终端：PowerShell 用 Set-Content -Encoding ASCII 或 -Encoding UTF8，cmd 用 >，同一个文件不混用。不要用 PowerShell 5.1 的 > 或 Out-File 写文件，它们会写成 UTF-16 |
+| 日历 | 11-17 是数分期中（11-18）前一天。11-17 备考紧张时整卡顺延到 11-19（四），仍在同一周，周合计不变。不要为了赶 11-17 而挤占期中复习。 |
+
+证据边界
+
+（一）仓库证据
+
+1. 仓库 ZIP 解包后是 lingquan11/cpp-matmul-performance，提交 24fa425ea44546f0c3fcb6c3100b103341ee9a63。ZIP 根目录有 LICENSE、PROJECT_STATE.md、README.md、benchmarks、code_history、experiments、notes、scripts、src、templates、tests，另有隐藏项.github/ 和.gitignore，没有 docs/。ZIP 不含.git，所以提交号 24fa425… 无法从 ZIP 本身核对，按协调员给出的记。
+2. PROJECT_STATE.md 共 99 行，最新条目是「2026-11-02 维护补充（不是新学习日）」，没有 Day 9 及以后的小节。ZIP 里没有以下内容：
+- plans/
+- notes/scale-sweep-preregistration.md
+- notes/supplements/scale-sweep-completeness-2026-11-16.md
+- 规模扫描的 summary.csv
+ZIP 里唯一同名的文件是 experiments/figures/day07-summary.csv，它是 Day 7 图表的汇总数据，与本卡无关。
+3. notes/day08-notes.md 共 96 行，UTF-8 无 BOM。各节标题及所在行：
+- §1 核心模型，第 6 行
+- §2 LLC 未命中次数与未命中率，第 21 行
+- §3 带宽、延迟与排队，第 28 行
+- §4 MLP（Memory-Level Parallelism），第 34 行
+- §5 Core Bound、Memory Bound 与 SMT，第 44 行（「亲和性对照」在第 52 行）
+- §6 Top-down Pipeline Slots，第 54 行
+- §7 2×2 因子实验与交互项，第 69 行
+- §8 perf 计数范围与测量对齐，第 79 行
+- §9 数据真实性，第 94 行
+4. 教学示例数值的位置。§9 写明这些都是教学示例，不是实测：
+- 第 17 行（§1）：1,000,000 instructions、IPC=2.0、4 GHz、125 μs；800,000 instructions、IPC=2.1、95.238 μs；23.81%、1.3125、31.25%。
+- 第 77 行（§7）：A=100、B=110、C=108、D=130 μs，交互项 12 μs，118.8 μs。
+- 第 90 行（§8）另有经验值「100 μs」，原文是说单次核心区间可能太短。
+5. experiments/reports/day08-performance-analysis.md 共 37 行，没有节号，只有节名：我的学习记录、摘要、我的表现（第 11 行）、关键公式、后续真实实验建议（6 条）、数据边界。
+- 关键公式只有四个公式块：T≈I/(IPC×F)（同一块里还有 CPI=1/IPC，在第 16 行）、N=λW、TotalSlots=Cycles×SlotsPerCycle、Interaction=T_D−T_B−T_C+T_A。
+- 全文不含第 4 条列出的任何示例数值。
+- 因此出处列一律用笔记的节号。
+6. 118.8 的全部出处：
+- notes/day08-notes.md 第 77 行，是教学示例。
+- notes/day08-dialogue-record.md 第 52 行，是同一个教学示例。
+- experiments/results/2026-11-01-compiler-blocking-windows/03-od.csv 第 47 行，是 total_ms 列的实测值。该行为 128,blocked_64,2.758200,5,37,118.866400,...。
+- 同目录 02-od.csv 第 64 行，total_ms 实测值 118.887500。
+- 仓库里没有 experiments/measurements/ 目录，实测值都在 experiments/results/ 下。
+- findstr /C:“118.8” 按子串匹配，"118.866400" 含子串 “118.8”，会被命中。但这些值只在 11-01 的 CSV 里，不在产出文件里，所以不影响本卡。
+7. 规模扫描原始 CSV 的列名见 tests/fixtures/scale-sweep/fixture.csv 的表头，含 pilot_ms、total_ms、ms_per_multiply、gmac_per_s、skipped_timeout。这份 fixture 是人工构造的格式测试数据，不是实测。CP1、CP2 出自 experiments/reports/YYYY-MM-DD-scale-sweep.md 模板。
+ms：ms_per_multiply、total_ms、pilot_ms。两个 ms 相减仍算 ms 类。
+8. 段二能采到哪些计数器还没定，notes/pmc-feasibility.md 全是「待填」。所以「需段二计数器」只表示本实验测不到，不表示段二一定测得到。
+9. Day 编号按学习单元走，不按日历日。Day 4、Day 5 同在 2026-10-26，Day 6、Day 7 同在 2026-10-27。
+
+（二）协调员转述：ZIP 里没有，执行时以实物为准
+- S1-T13：计划原文，包括日期、用时、目标、前置、产出、验收。
+- S1-T12：
+- 其卡明「本卡未完成，S1-T13 自动挂起不开工」。协调员称 S1-T12 已完成。
+- 它的核对文件 notes/supplements/scale-sweep-completeness-2026-11-16.md 不在 ZIP 里。执行时以 S1-T12 的 record 与 PROJECT_STATE.md 的 Day 18 小节为准。
+- 本轮 ZIP 是 11-07 的，段一尚未开始。所以「已完成」只能是对 11-17 开工时状态的预判，① 照样核对实物。
+- S1-T2 预注册第 6 章：至少 2 条预测，每条有理由，并有可用 summary.csv 判定的证伪条件（数学比较式）；另有「不足 → 无法判断」的细则。
+- S1-T14 的 summary.csv：本卡不读，11-19 由 S1-T14 产出。预测核对表的「判定依据」列待它出来后填「summary.csv 第×行」（15 行之一）。
+- S1-T16：11-21 实验报告，它的第 7 节填预测核对、第 9 节填 7 行概念对照，都以本卡的两个表为输入。
+- S1-T17：段一收尾，统一处理 notes/daily-task-records.md 的索引。本卡不建索引，见 §1。
+- 日历：11-17 是数分期中（11-18）前一天；11-19 是顺延日；11-21 是 S1-T16。
+- 体例来源：S1-T9～S1-T12 的定稿卡（段一计划定稿，协调员转述）。
+- 协调员补注 C1–C6 原文（照录，不改写）：
+- C1：增强稿「合并计算用时但分开执行」表述不准确。顺延到 11-19 当天为本卡 30 分钟 + S1-T14 100 分钟，合计 130 分钟，分开做、当日不另加任务；先做本卡再做 S1-T14；本卡未完成不影响 S1-T14。以本条为准。
+- C2：增强稿把 push 细节压缩成「单次 commit（不加 --force），附哈希」。完整做法：commit 后 push，不加 --force；push 被拒按 K 卡处理；push 发生在 commit 之后，结果写不进本次 commit，也不为此再追加 commit。
+- C3：增强稿只写「Set-Content -Encoding UTF8」。意图允许 Set-Content -Encoding ASCII/UTF8 或 cmd 的 >，不要只写 UTF8 一种。
+- C4：增强稿省略了 findstr 的子串说明。23.81 是 95.238 的子串形态，须用五个 /c: 逐个精确匹配、不用通配；另补充其余教学示例数字：§1 的 125 μs、§7 的 A=100、B=110、C=108、D=130 μs、交互项 12 μs，同样不得写入产出文件。
+- C5：增强稿「推定 11-17 对应 Day 19」须加限定：这是按 S1-T12 卡「11-16 = Day 18」的映射推断，执行时以 record 与 PROJECT_STATE.md 的 Day 19 小节为准，如映射有出入以实物为准并记 record。
+- C6：增强稿未展开 §5 产出物清单。须明确列出三项：notes/day19-notes.md、notes/day19-record.md、PROJECT_STATE.md 的 Day 19 小节。预测核对表「判定依据」列待 S1-T14 的 summary.csv 出来后填「summary.csv 第×行」（15 行之一）；「无法判断」按 S1-T2 细则（相关组被标为「不足」时记「无法判断」，不算证实也不算证伪）。
+
+（三）与协调员转述的出入（核对后的更正）
+- C4 提到的「23.81 是 95.238 的子串形态」是错的：协调员已用 Python 核对，'23.81' 不是 '95.238' 的子串（95.238 由字符 9、5、.、2、3、8 组成，不含 23.81）。23.81% 与 95.238 μs 只是算术相关（23.81% ≈ (125−95.238)/125），不是子串关系。五个 /C: 仍须逐个写，因为每个 /C: 只取一个字面串；命令本身没错。〔01:00 轮续跑复核 G1：v2 原句「这句话本身没错」作废；C4 原文见证据（二），照录不改写〕
+- 五个数（95.238、23.81、31.25、1.3125、118.8）的出处不完整：它们只在 notes/day08-notes.md 的第 17、77 行出现（§1、§7），但 118.8 还有其他出处，见证据（一）6。
+- 「findstr 需要加 /I 才能避免漏命中」是 v1 的说法，没有实测依据。命令里的 /I 保留，理由见 Q4 的回应：它对数字没有影响，留作保险。
+
+§1 做什么
+只在 notes/day19-notes.md 里搭两个表的骨架：7 行 Day 8 概念对照表（每行写满四列，但第 3、4 列只写量名），和一张预测核对表空表头（只写表头，编号和内容都留空）。然后写 record（notes/day19-record.md）、在 PROJECT_STATE.md 顶部加 Day 19 小节、单次 commit 并 push。
+不做这些：不写学习笔记正文；不填任何预测内容、判定或分析数据；不读 summary.csv；不跑任何计时；不碰 S1-T14 的 summary.csv、不碰 S1-T16 的报告、不碰任何.cpp/.h、不改任何已有文件的内容，只在 PROJECT_STATE.md 顶部加一个小节。
+7 行概念表不是「概念清单」，每行必须写满四列：概念、Day 8 出处（文件加节号）、本实验可直接观测的量、不能直接观测、需段二计数器的量。预测核对表只写表头和表下说明，编号、内容、判定依据、判定四列都留空。
+骨架搭好后：
+1. 在 notes/day19-notes.md 里只保留这两个表，不加任何分析段落。
+2. record 只写核对结果和用时，不写结论。
+3. 索引由 S1-T17 统一做，本卡不建。
+4. 顺延时：文件名仍用 day19，依据是证据边界（一）9（Day 编号按学习单元走）；日期写实际的 11-19。实物另有安排时按 K11 处理。
+
+§2 分步拆解
+命令按附录编号引用（A1-1 起），都在 cmd 的仓库根目录下运行；文件用编辑器写。
+① 开工核对（只读）｜3 分钟｜累计 0→3｜cmd 加编辑器
+0. 先决定今天做不做。如果你判断今天备考紧张，就不开工、不建任何文件，按 K2 整体顺延。
+1. 在 cmd 依次跑附录 A1（A1-1 可选），看这四处：
+- A1-3 git status --short：最好无输出。有输出就照记，不阻断开工，但 ⑤ 只能 add 本卡的三个文件。如果列出的是 S1-T12 的文件或 PROJECT_STATE.md，说明 S1-T12 没完全入库，按 K1 处理。
+- A1-4 git log -1 --oneline：有一行输出。
+- A1-5 git log -1 --oneline -- notes/supplements/scale-sweep-completeness-2026-11-16.md：有一行输出（S1-T12 那次提交）表示已入库；无输出按 K1 处理。
+- A1-6 findstr /N /I /L /C:"Day 18" PROJECT_STATE.md：至少 1 行在「行号:」后紧跟「## 」；A1-7 findstr /N /I /L /C:"S1-T12" PROJECT_STATE.md：至少 1 行；0 行按 K1 处理。
+2. A1-6 与 A1-7 两条都过才算这一项过。不要用管道把两条拼成一条：Day 18 的标题行未必含 S1-T12，拼起来会误判。
+3. 逐条核对：A1-3 无输出最好；A1-4 有一行输出；A1-5 有一行输出表示已入库；A1-6 至少一行在「行号:」后紧跟「## 」；A1-7 至少一行。任一不满足按 K1 处理。
+② 7 行概念表骨架｜12 分钟｜累计 3→15｜编辑器（不用终端）
+a. 把下面的骨架粘进 notes/day19-notes.md，标题、节号、列名、行顺序一字不改：
+```markdown
+# S1-T13：Day 8 概念对照与预测核对骨架
+
+> 纸面骨架：不含数据、不含分析。第 3、4 列只写量名；预测编号、预测内容、判定依据和判定由 S1-T16 填。
+
+## 1. Day 8 概念对照表
+
+| 概念 | Day 8 出处 | 本实验可直接观测的量 | 不能直接观测、需段二计数器的量 |
+| --- | --- | --- | --- |
+| 工作集与缓存容量 | notes/day08-notes.md §2 | | |
+| T≈I/(IPC×F) | notes/day08-notes.md §1 | | |
+| 带宽、延迟与 MLP | notes/day08-notes.md §3/§4 | | |
+| Memory/Core Bound 与 Pipeline Slots | notes/day08-notes.md §5、§6 | | |
+| SMT 与亲和性 | notes/day08-notes.md §5 | | |
+| 因子实验与交互尺度 | notes/day08-notes.md §7 | | |
+| 计数范围对齐 | notes/day08-notes.md §8 | | |
+```
+b. 第 3、4 列由你判断，只写量名，不写任何数值。思路是：第 3 列问「summary.csv 里哪一列能让我看到这个概念的影子」，第 4 列问「要坐实它还缺哪个计数器」。第 3 列里没有 IPC、指令数、频率、未命中、带宽、延迟、MLP、Bound、Slots、槽位、SMT 这些词。出现就是错列，移到第 4 列。量名本身不禁：IPC、带宽等量名可以出现在第 4 列；出现在第 3 列是放错列，由 V3 管。
+c. 注意这两处容易错的地方：出处列必须用笔记的节号，不能用方法报告的节名；概念行的顺序不能换。
+不禁公式符号，例如 T≈I/(IPC×F) 里的 I、IPC、F。
+不禁第 3、4 列的量名，例如 IPC、带宽。量名放错列由 V3 管。
+ms：ms_per_multiply、total_ms、pilot_ms。两个 ms 相减仍算 ms 类。
+③ 预测核对表空表头｜3 分钟｜累计 15→18｜编辑器
+a. 把下面的骨架粘进 notes/day19-notes.md，放在第 1 节之后，标题、列名一字不改：
+```markdown
+## 2. 预测核对表
+
+| 预测编号 | 预测内容 | 判定依据（待填 summary.csv 的行） | 成立/不成立/无法判断 |
+| --- | --- | --- | --- |
+| | | | |
+
+填表规则：
+1. 预测编号、预测内容：取自 S1-T2 预注册（notes/scale-sweep-preregistration.md）第 6 章，由 S1-T16 填；本表现在不写任何预测。
+2. 判定依据：待填 summary.csv 的行号。只填行号，不写数值，不做判定。
+3. 最后一列只填「成立」「不成立」「无法判断」之一；相关组按 S1-T2 细则被标为「不足」时记「无法判断」，不算证实，也不算证伪。
+```
+b. 编号和内容留空。不要从 S1-T2 的预注册文件里抄预测内容，也不要自己编预测。
+④ 禁入数字检查｜5 分钟｜累计 18→23｜cmd
+补注里的 findstr 命令在本卡改为带 /N /I /L，路径用反斜杠（附录 A2-1、A2-3）。命令是否有效，以阳性对照 P1、P2、P3 的结果为证（见 ④）。
+先保存 day19-notes.md，再在 cmd 依次跑附录 A2-1 至 A2-7。
+a. 阳性对照 P1（A2-1）：用五个禁入数字查 notes\day08-notes.md，应恰好 2 行，行首分别是 17: 和 77:。命中内容只在终端里看，不抄进任何文件。
+b. 阳性对照 P2（A2-2）：在 notes\day19-notes.md 里查 summary.csv，应 ≥1 行（按骨架应为 2 行）。0 行按 K7 处理。
+c. 正式检查（A2-3、A2-4）：用五个禁入数字查 notes\day19-notes.md，应无任何输出；紧接着的 A2-4 应显示 ERRORLEVEL=1（0 表示有命中）。
+d. 补充黑名单（A2-5 至 A2-7，加目视）：验收只禁列出的五个数，但其余教学示例数字同样不得写入产出文件。这些数字是 §1 的 125 μs，以及 §7 的 A=100、B=110、C=108、D=130 μs 和交互项 12 μs。用 A2-6 的扫描串（125、100、110、108、130、1,000,000、800,000、2.0、2.1、4 GHz）查 notes\day19-notes.md，应无输出；再目视确认全文没有「12 μs」之类的示例值。依据是 day08-notes.md §9 和方法报告的「数据边界」。
+1. 先跑阳性对照 P3（A2-5）：用同一组扫描串查 notes\day08-notes.md，应恰好 3 行：17:、77:、90:。这三行只在终端里看，不抄进任何文件。
+2. 再跑 A2-6、A2-7：查 notes\day19-notes.md，应无输出，ERRORLEVEL=1。扫描串用的是不带「A=」「IPC=」的数值本身，这样「A = 100」这类带空格的写法也能扫到。
+3. 目视确认全文没有黑名单数值，见下面补充黑名单的数值列表。目视发现的数值删掉本身（连同单位），量名和概念保留。
+说明：
+- findstr 的 /C: 按子串命中，118.8 会命中 118.866 这样的实测值（见证据（一）6）。产出文件本来就不该有数值，所以有命中就按 e 处理，不去辨认是不是「别的数」。
+- 文件如果被存成 UTF-16，findstr 查不到任何 ASCII 串，会给出假的「无输出」，所以先做 P2。
+- 命令是否有效以阳性对照为证：P1 不符合预期时，A2-3 的「无输出」不算数；P3 不符合预期时，A2-6 的「无输出」不算数（见 K7）。
+e. 正式检查（A2-3、A2-4）与补充黑名单（A2-6、A2-7）：
+1. A2-3 有命中：按 FAIL 处理，删掉那个数字和它所在的整句，只留概念。
+2. A2-6 有命中或目视发现：删掉那个数值本身（连同单位），量名和概念保留。
+3. 改完保存，重跑 A2-2、A2-3、A2-4、A2-6、A2-7，直到都符合预期。
+⑤ 写 record 与提交｜7 分钟｜累计 23→30｜cmd 加编辑器
+先决定今天做不做。如果你判断今天备考紧张，就不开工、不建任何文件，按 K2 整体顺延。
+a. 用下面的骨架写 notes/day19-record.md，〈〉处改成实际内容，不用 PowerShell：
+```text
+# Day 19 任务记录：S1-T13 Day 8 概念对照与预测核对骨架
+- 日期：
+- R1 开工核对：
+- R2 位置：
+- R3 findstr：
+- R4 用时：
+- R5 顺延：
+- R6 报错与待裁定：
+```
+R1：写「已通过」或「已阻断（K1）」；阻断时写哪项没过，并把 A1-5 的提交行、A1-6、A1-7 的命中行数写上。
+R2：两张表在 notes/day19-notes.md 里的小节标题（「1. Day 8 概念对照表」「2. 预测核对表」）；7 行表完成时的累计分钟。
+R3：写附录 A2 的命令原文和结果。正式检查与补充扫描写「无输出」；A2-4、A2-7 写「ERRORLEVEL=1」。P1（A2-1）、P3（A2-5）只写命中的行号与行数，不粘贴命中内容。
+R4：写分步分钟数，如 3 + 12 + 3 + 5 + 7 = 30。
+R5：写「否」；顺延时写「是」，加上原因、去向 11-19、11-19 补做了哪些步骤。
+R6：报错原文 / 决策结果；触发条件引用 K 编号。
+b. PROJECT_STATE.md（1 分钟）：在「# 我现在做到哪」下面、现有第一个「## 」小节之前插入下面的内容，文件其他地方不动。顺延时日期写成「2026-11-19，原定 11-17」。
+```
+## Day 19：Day 8 概念对照与预测核对骨架（〈日期〉）
+S1-T13：概念对照骨架已完成，7 行 Day 8 概念表与预测核对表空表头已搭好，在 notes/day19-notes.md。尚未分析。计时实验：无新进展。核对与用时见 notes/day19-record.md。
+```
+只写这些：不写性能结论，不写预测判定，不写数字。「计时实验：无新进展」是 PROJECT_STATE.md 第 75 行自己的规则，不是结论。
+〈日期〉：实际执行日，默认 2026-11-17；顺延时为 2026-11-19。
+c. 在 cmd 依次跑附录 A3-1 至 A3-7（3 分钟），每条的预期见附录。三个关键点：
+- A3-2、A3-3 只列出上面三个文件；多了别的文件按 K8 处理。
+- A3-5 输出的哈希与 A1-4 记下的提交哈希不同，说明已产生新 commit；相同则说明 commit 未成功，检查 A3-4 的报错。
+- A3-6 push 被拒按 K10 处理。
+d. 预期：A3-2、A3-3 只列出上面三个文件。A3-6 push 正常完成，A3-7 的第一行是 ## main...origin/main（或你当前分支对应的 upstream）。push 被拒按 K10 处理。如果这套 push 做法与 S1-T9～S1-T12 的定稿不同，以定稿为准。
+
+§3 预计用时
+
+| 步骤 | 人工 | 累计 |
+| --- | --- | --- |
+| ① 开工核对 | 3 | 3 |
+| ② 7 行概念表骨架 | 12 | 15 |
+| ③ 预测核对表空表头 | 3 | 18 |
+| ④ 禁入数字检查 | 5 | 23 |
+| ⑤ 写 record 与提交 | 7 | 30 |
+| 合计 | 30 | 30 |
+
+闭环验算：
+- 3 + 12 + 3 + 5 + 7 = 30 分钟。
+- 步骤内部：② 为 1 + 10 + 1 = 12；③ 为 1 + 1 + 1（缓冲）= 3；⑤ 为 3 + 1 + 3 = 7。
+- 机器时间 M = 0，所以连续时间 = 30 + 0 = 30 分钟。
+检查点与硬停：
+- 7 行表计划在 15 分钟完成，最晚 20 分钟。
+- 如果 ② 拖到 20 分钟，后三步还需要 3 + 5 + 7 = 15 分钟，合计 35 分钟，硬停大约落在 ⑤ 开始后 2 分钟。这时按 K5 把剩下的部分移到 11-19。
+顺延：
+- 11-17 计 0 分钟。
+- 11-19 = 本卡 30 + S1-T14 100 = 130 分钟，分两段做，先本卡后 S1-T14，每段都不超过 120 分钟，当天不另加任务。
+- 周合计 −30 + 30 = 0，不变。
+
+§4 前置知识
+读 Day 8 笔记的 §1、§2、§3/§4、§5、§6、§7、§8，知道每节在讲什么：§1 讲时间公式 T≈I/(IPC×F)；§2 讲工作集与缓存容量；§3/§4 讲带宽、延迟与 MLP；§5/§6 讲 Memory/Core Bound 与 Pipeline Slots；§5 讲 SMT 与亲和性；§7 讲因子实验与交互尺度；§8 讲计数范围对齐。
+会用 cmd 跑 chcp、cd、git status、git log、findstr 和 echo %ERRORLEVEL%。知道 git add、git commit、git push 是什么。不用会 PowerShell，不用会画图，不用会算 GMAC/s。
+summary.csv 里有哪些列，见证据边界（一）7。需要时查 tests/fixtures/scale-sweep/fixture.csv 的表头和 experiments/reports/YYYY-MM-DD-scale-sweep.md 的模板。
+
+§5 产出物清单
+notes/day19-notes.md（UTF-8）：一个 # 大标题、一句范围说明、「## 1. Day 8 概念对照表」7 行表、「## 2. 预测核对表」空表头加三条规则。
+notes/day19-record.md（UTF-8）：按 §2⑤a 的骨架写，R1–R6 齐全。
+PROJECT_STATE.md（UTF-8）：在「# 我现在做到哪」下面、现有第一个「## 」小节之前插入 Day 19 小节。
+1 个 commit 并 push：三个文件一次提交，commit 信息是 S1-T13: Day 8 concept mapping skeleton。push 不加 --force；push 的结果写不进本次 commit。
+顺延时：文件名仍用 day19（依据证据边界第 8 条：Day 编号按学习单元走），日期写实际的 11-19。实物另有安排时按 K11 处理。
+
+§6 验收标准
+
+| 编号 | 验收项 | 通过条件 | 记录位置 | FAIL 处理 |
+| --- | --- | --- | --- | --- |
+| V1 开工闸门 | ① 的各项 | A1-5 有一行；A1-6 有「行号:」后紧跟「## 」的行；A1-7 ≥1 行；A1-3 没列出 S1-T12 的文件或 PROJECT_STATE.md；两份 Day 8 文件能打开 | R1 | 按 K1 阻断：本地记 record，不提交、不 push |
+| V2 概念表骨架 | 7 行，行顺序与 §2②a 一致，标题、列名一字不差；全文件只有一个 # 大标题 | 全部满足 | R2 | 否则按 K3 修正 |
+| V3 第 3 列 | 只出现 ms 类、GMAC/s 类、比值类、范围类四类量名，或其他 summary.csv 列的量名（如有效样本数、超时计数、中位数等），或「无」；没有禁入词；没有测量值或示例值；没有空白格 | 7 行全对 | R2 | 错列的移到第 4 列，删掉数值 |
+| V4 概念表出处 | 每行出处都是笔记的节号，节号与概念对应 | 全部满足 | R2 | 否则按 K4 修正 |
+| V5 预测核对表 | 只有表头、表下说明和一个空行；编号、内容、判定依据、判定都留空 | 全部满足 | R2 | 否则按 K3 修正 |
+| V6 禁入五数 | P1（A2-1）恰为第 17、77 行；P2（A2-2）≥1 行；A2-3 无输出且 A2-4 为 ERRORLEVEL=1 | 同时满足 | R3 | A2-3 有命中按 K6；P1 不符按 K7；P2 为 0 按 K7 |
+| V7 补充黑名单 | P3（A2-5）恰为第 17、77、90 行；A2-6 无输出且 A2-7 为 ERRORLEVEL=1；目视没有「12 μs」及黑名单数值的其他写法。只看数值本身，量名与公式符号不算 | 同时满足 | R3 | 发现即删数值本身（按 K6）；P3 不符按 K7 |
+| V8 record | 日期和 R1–R6 齐全；R3 有命令原文，没有粘贴阳性对照的命中行；R4 有分步分钟数 | 满足 | record 本身 | 补齐后再 commit |
+| V9 PROJECT_STATE | 在「# 我现在做到哪」下面、现有第一个「## 」小节之前有 Day 19 小节，措辞与 §2⑤b 一致，日期是实际执行日 | 满足 | PROJECT_STATE.md | 修正后再 commit |
+| V10 提交与 push | 3 个文件一次 commit；commit 信息与 §2⑤c 一致；push 成功；status -sb 显示已同步 | 全部满足 | R5 | 否则按 K8/K9/K10 |
+| V11 用时与顺延 | 人工合计 30 分钟；顺延时 11-17 计 0、11-19 计 130，分两段 | 满足 | R4、R5 | 超时按 K5 |
+
+§7 停下条件与常见卡点
+K1 开工闸门不过
+触发条件（任一）：A1-5 无输出；A1-6 没有「行号:」后紧跟「## 」的行；A1-7 为 0 行；A1-3 列出 S1-T12 的文件或 PROJECT_STATE.md 的未提交改动；Day 8 文件打不开。
+- 停下，不建 day19-notes.md，不补做 S1-T12，不补跑扫描。
+- notes/day19-record.md，只写日期、R1（写「已阻断（K1）」和哪项没过）、R6（命令输出原文）。这个文件只存在本地，不 commit、不 push。
+- 本地 record 不会出现在仓库 ZIP 里，所以要把 R1、R6 原文直接转给协调员，交协调员重排；Day 编号一并由协调员裁定。
+K2 备考紧张
+触发条件：你判断今天备考紧张。
+- 整体顺延到 11-19。11-17 不开工、不建文件、不 commit。
+- R5 写「11-17 未开工，整体顺延」。
+K3 概念表骨架被改了
+触发条件：粘贴的骨架与 §2②a 或 §2③a 不一致（标题、列名、行顺序、节号被改）。
+- 按 §2②a 或 §2③a 的骨架重贴一遍。
+K4 出处节号或第 3、4 列错了
+触发条件：V3 或 V4 不通过。
+- 出处错：按证据（一）3 的节号改。
+- 第 3、4 列错：把错列的量移到第 4 列，删掉数值。
+K5 超过 30 分钟
+触发条件：人工累计超过 30 分钟，或 ② 拖到 20 分钟仍未完成 7 行表。
+- 硬停。未完成的部分移到 11-19。
+- R4 写实际分钟数，R5 写顺延。
+K6 正式检查有命中
+触发条件：A2-3 或 A2-6 有命中，或目视发现黑名单数值。
+- A2-3 有命中：按 FAIL 处理，删掉那个数字和它所在的整句，只留概念。
+- A2-6 有命中或目视发现：删掉那个数值本身（连同单位），量名和概念保留。
+- 改完保存，重跑 A2-2、A2-3、A2-4、A2-6、A2-7，直到都符合预期。
+K7 阳性对照不符
+触发条件：P1（A2-1）不是「恰好 2 行，行首 17:、77:」，或 P3（A2-5）不是「恰好 3 行，行首 17:、77:、90:」，或 P2（A2-2）为 0 行。
+- 0 行：命令或路径打错了（检查引号、/C: 的冒号、反斜杠），或者误在 PowerShell 里跑了。回到 cmd 重跑。
+- P1 通过前，A2-3 的「无输出」不算数；P3 通过前，A2-6 的「无输出」不算数。
+K8 commit 里混进别的文件
+触发条件：A3-2 或 A3-3 列出本卡三个文件以外的文件。
+- 只 add 本卡的三个文件，重新 git add，不要用 git add -A 或 git add.。
+K9 commit 信息写错
+触发条件：A3-4 的提交说明与 §2⑤c 不一致。
+- 用 git commit --amend -m "S1-T13: Day 8 concept mapping skeleton" 改掉，不要新开一个 commit。
+K10 push 被拒
+触发条件：A3-6 失败或 A3-7 仍显示 ahead。
+- 按附录 A4 处理。不要加 --force。
+K11 文件存成 UTF-16 或 Day 19 编号冲突
+触发条件：findstr 查不到任何 ASCII 串（文件被存成 UTF-16），或执行时发现 PROJECT_STATE.md 顶部已有 Day 19 小节，或 S1-T12 的 record 写明了别的编号安排。
+- UTF-16：用编辑器另存为 UTF-8，重新跑 ④。
+- Day 19 编号：按 K11 处理，记 R6，交协调员裁定。
+K12 分不清「可直接观测的量」和「不能直接观测、需段二计数器的量」
+触发条件：第 3 列出现禁入词，或把量名写错列。
+- 按 §2②b 的思路重判：先问 summary.csv 里哪一列能看到影子，再问要坐实还缺哪个计数器。
+- 索引由 S1-T17 统一做，本卡不建。
+
+附录 写法规则
+- 命令按附录编号引用（A1-1 起），都在 cmd 的仓库根目录下运行；文件用编辑器写。
+- 用命令写文件时按附录的写法规则，不要用 PowerShell 5.1 的 > 或 Out-File。
+- 检查命令与 git 命令在 cmd 里运行。附录按 cmd 语法写，%ERRORLEVEL% 在 PowerShell 里无效。
+- 同一个文件不混用两种写法：要么全用 PowerShell 的 Set-Content -Encoding ASCII 或 -Encoding UTF8，要么全用 cmd 的 >。
+- -Encoding ASCII 会把中文写成「?」，而本卡三个文件都含中文。这是说明后果，不是收窄选项。
+
+附录 A1：开工核对（cmd）
+
+| 编号 | 命令 | 预期 | 不符时 |
+| --- | --- | --- | --- |
+| A1-1 | chcp 65001 | 可选，只让中文正常显示，不影响结果 | — |
+| A1-2 | cd /d "〈仓库根目录〉" | 进入仓库根目录 | 改正占位符 |
+| A1-3 | git status --short | 最好无输出；有输出照记 | 列出 S1-T12 的文件或 PROJECT_STATE.md → K1 |
+| A1-4 | git log -1 --oneline | 一行，照记 | — |
+| A1-5 | git log -1 --oneline -- notes/supplements/scale-sweep-completeness-2026-11-16.md | 一行（S1-T12 那次提交） | 无输出 → K1 |
+| A1-6 | findstr /N /I /L /C:"Day 18" PROJECT_STATE.md | 至少一行在「行号:」后紧跟「## 」 | 没有 → K1 |
+| A1-7 | findstr /N /I /L /C:"S1-T12" PROJECT_STATE.md | ≥1 行 | 0 行 → K1 |
+
+A1-6 与 A1-7 两条都过才算这一项过。不要用管道把两条拼成一条：Day 18 的标题行未必含 S1-T12，拼起来会误判。
+
+附录 A2：禁入数字检查（cmd）
+
+| 编号 | 命令 | 预期 | 不符时 |
+| --- | --- | --- | --- |
+| A2-1（P1） | findstr /N /I /L /C:"95.238" /C:"23.81" /C:"31.25" /C:"1.3125" /C:"118.8" notes\day08-notes.md | 恰 2 行，行首 17:、77: | K7 |
+| A2-2（P2） | findstr /N /L /C:"summary.csv" notes\day19-notes.md | ≥1 行（按骨架应为 2 行） | K7 |
+| A2-3（正式） | findstr /N /I /L /C:"95.238" /C:"23.81" /C:"31.25" /C:"1.3125" /C:"118.8" notes\day19-notes.md | 无输出 | K6 |
+| A2-4 | echo ERRORLEVEL=%ERRORLEVEL% | 紧接 A2-3 跑，显示 ERRORLEVEL=1 | 0 → K6 |
+| A2-5（P3） | findstr /N /I /L /C:"125" /C:"100" /C:"110" /C:"108" /C:"130" /C:"1,000,000" /C:"800,000" /C:"2.0" /C:"2.1" /C:"4 GHz" notes\day08-notes.md | 恰 3 行，行首 17:、77:、90: | K7 |
+| A2-6（补充） | findstr /N /I /L /C:"125" /C:"100" /C:"110" /C:"108" /C:"130" /C:"1,000,000" /C:"800,000" /C:"2.0" /C:"2.1" /C:"4 GHz" notes\day19-notes.md | 无输出 | K6 |
+| A2-7 | echo ERRORLEVEL=%ERRORLEVEL% | 紧接 A2-6 跑，显示 ERRORLEVEL=1 | 0 → K6 |
+
+附录 A3：提交（cmd）
+
+| 编号 | 命令 | 预期 | 不符时 |
+| --- | --- | --- | --- |
+| A3-1 | git add notes/day19-notes.md notes/day19-record.md PROJECT_STATE.md | 无报错 | — |
+| A3-2 | git status --short | 只列出上面三个文件 | 多了别的文件 → K8 |
+| A3-3 | git diff --cached --stat | 只列出上面三个文件 | 多了别的文件 → K8 |
+| A3-4 | git commit -m "S1-T13: Day 8 concept mapping skeleton" | 提交成功 | 失败 → K9 |
+| A3-5 | git rev-parse HEAD | 40 位哈希，抄下 | — |
+| A3-6 | git push | 成功（不加 --force） | K10 |
+| A3-7 | git status -sb | 第一行是 ## main...origin/main（或你当前分支对应的 upstream） | 不是 → K10 |
+
+A3-5 输出的哈希与 A1-4 记下的提交哈希不同，说明已产生新 commit；相同则说明 commit 未成功，检查 A3-4 的报错。
+
+附录 A4：push 被拒（K10）
+
+| 编号 | 命令 | 预期 | 不符时 |
+| --- | --- | --- | --- |
+| A4-1 | git pull --rebase | 无冲突 | 有冲突跑 A4-4；因未提交改动被拒就停下，不 stash |
+| A4-2 | git push | 正常完成 | 被拒 → K10 |
+| A4-3 | git rev-parse HEAD | 抄下完整哈希 | — |
+| A4-4 | git rebase --abort | 只在 A4-1 有冲突时跑，回到 commit 之后的状态 | 跑完停下 |
+
+说明：Q/E 编号描述的部分内容，在我出的 v1 里找不到对应文字。例如：12000、experiments/measurements/、docs/、C3 被写成用时分段、两个 # 大标题、「不要用记事本新建文件」、（三）里的「卡片结构不同」和「我的表现」两条。这可能是转述或合并时的版本差异。下表以我出的 v1 为底稿逐条处理。裁定要求的最终状态都已落实，唯一没照做的是删去方法报告的「我的表现」节名，理由见倒数第二行。
+
+逐条回应表（v1 → v2）
+
+| Gemini 项 | 协调员裁定 | v2 改了什么、在哪 | 未改原因 |
+| --- | --- | --- | --- |
+| Q1（E1） | D1 采纳 | 证据（一）3 改为 D1 列出的实测节名全称，§4 写全为「MLP（Memory-Level Parallelism）」，保留各节标题行号。§2②a 的映射与 §4 前置知识不动 | v1 的节名本来就是逐行实测的（附行号），不是捏造。唯一的出入是 §4 用了简称 |
+| Q2 | D2 采纳 | 黑名单按 D2 展开为 §1 第 17 行的 6 个、§7 第 77 行的 5 个、§8 第 90 行的「100 μs」，新增阳性对照 P3（A2-5，预期第 17、77、90 行）。A2-6 扫描串用不带「A=」「IPC=」的数值本身，扫「A = 100」这类带空格的写法。④d 与 V7 同步 | 补充黑名单不占用新时间：原 ④ 预计 5 分钟已含「人工扫读」，P3 不占用新时间，用来给补充扫描提供实证。v1 漏了「12000」、裸数字「100」等，以及「12 μs」这类带单位的数值；「95.238 μs」与五数串有交集，但不属于黑名单新增内容 |
+| Q3（E6） | D3 采纳 | 118.8 的全部出处集中到证据（一）6：03-od.csv 第 47 行 total_ms 的整行原文、02-od.csv 第 64 行、对话记录第 52 行，并注明仓库没有 experiments/measurements/。④「说明」保留子串那一句 | v1 从未提到 experiments/measurements/，路径一直写的是 experiments/results/…。02-od.csv 第 64 行同样属实，一并保留 |
+| Q4（E13） | D4 采纳 | 删掉 ④ 中关于多个 /C: 与 /I 的说明段。保留子串一句与 UTF-16 假阴性提醒。有效性改以 P1、P2、P3 为证（④「说明」第 3 条） | 命令里的 /I 保留，D3 已认可它对数字没有影响。P1 只能证明命令能跑、能命中第 17、77 行，不能逐串证明五个串都会被检出，所以留 /I 作保险。这一行为有公开记载（多个字面串时 findstr 可能给出错误结果，加 /I 可以避免），不是凭空猜测；按裁定不再在卡内讲解 |
+| Q5 | D5 采纳 | 删掉 K1 的通配符例外。K1 改为：停下，本地记 record，不提交、不 push | 加了一句「把 R1、R6 原文转给协调员」，因为本地 record 不会出现在仓库 ZIP 里 |
+| Q6 | D6 采纳 | 删掉 A5 和 K1 里的提交步骤。⑤a 的 R1 写明闸门不过时记「已阻断（K1）」。K10 与 A4 保留，附录止于 A4 | — |
+| Q7 E8 | D8 | 证据（二）新增「协调员补注 C1–C6 原文」，逐字照录。（三）第一条据此更正 C4 中的子串说法 | v1 的（二）并没有转述 C1–C6，也没有把 C3 写成用时分段。按裁定补上原文 |
+| Q7 E10/E12 | D8 | 附录改为「编号｜命令｜预期｜不符时」逐行对照表（A1-1 至 A4-4），不再用「预期依次为」。§2①1 写全命令，不再用省略号。⑤a 的 R3 改为指向附录 A2 全部命令。阳性对照由「A/B」改名为 P1、P2、P3 | v1 的「预期依次为」6 条与 6 条命令本来一一对应，R3 当时指向的是 ④。但「阳性对照 A」与「附录 A1」同名容易混淆，所以一并改名 |
+| Q7 E11 | D8 | 两个小节标题改为「## 1. Day 8 概念对照表」「## 2. 预测核对表」。②a 写明全文件只有一个 # 大标题，③a 写明以二级标题追加。V2 增加「只有一个 # 大标题」 | v1 本来就只有一个 # 大标题，③a 本来就以 ## 追加，结构没有变 |
+| Q7 E14 | D8 | 信息表「终端」行恢复两种写出方式（PS：Set-Content -Encoding ASCII/UTF8；cmd：>），写明写文件用编辑器、用命令写出时才分终端。删掉「本卡不用 PowerShell」。附录写法规则同步修改 | v1 里没有「不要用记事本新建文件」这一句。保留一句事实提醒：-Encoding ASCII 会把中文写成「?」，而本卡三个文件都含中文。这是说明后果，不是收窄选项 |
+| Q7 A1 | D7 | A1 拆成 A1-6（Day 18，须有「行号:」后紧跟「## 」的行）和 A1-7（S1-T12，≥1 行），两条都过才算过，不用管道。§2①1、V1、K1 同步修改。K11 改为由 ①2 目视 PROJECT_STATE.md 顶部来触发，不再接「S1-T12 用了别的编号」，这种情形改走 K1 | 请协调员留意：按 D7，S1-T12 的小节如果不叫 Day 18，会走 K1 阻断，而不是按 C5「以实物为准」继续。v2 按 D7 写；如需放宽，请再裁 |
+| —（D8：证据（一）9） | 整条删 | 删掉 v1 证据（一）9（PROJECT_STATE.md 第 67 行的索引约定与第 75 行规则）。⑤a 的 R6 删掉「要不要补索引」。§1、§5、K12 写明索引由 S1-T17 统一做，（二）加一条 S1-T17 | v1 的（一）9 并不涉及 docs/。第 75 行这条依据仍保留在 ⑤b，用来说明「计时实验：无新进展」 |
+| —（D8：（三）第三条） | 删「我的表现」 | v1 的（三）第三条（118.8 的其他出处）已按 D3 移入证据（一）6 | 「我的表现」不在 v1 的（三）里，只出现在证据（一）5 的节名列表中。方法报告第 11 行确有「## 我的表现」，所以 v2 保留这个节名，请协调员复核 |
+| Q7 可保留 | — | 结构（§1–§7）与日历排期未动。日期 2026-11-17、人工 30 分钟、§3 分时（3 + 12 + 3 + 5 + 7 = 30）都不变，没有加新任务 | — |
 
 ---

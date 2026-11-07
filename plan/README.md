@@ -6,7 +6,7 @@
 
 ## 文件
 
-- [seg1-scale-sweep.md](seg1-scale-sweep.md)：段一「规模扫描实测」任务卡。已收 S1-T1～S1-T11（共 17 块，余下定稿后补入）。
+- [seg1-scale-sweep.md](seg1-scale-sweep.md)：段一「规模扫描实测」任务卡。已收 S1-T1～S1-T13（共 17 块，余下定稿后补入）。
 - 段二～段五：各段任务卡定稿后在本文件夹新增对应文件，并在本索引补行。
 
 ## 读取约定（给 tutor 型 AI）
