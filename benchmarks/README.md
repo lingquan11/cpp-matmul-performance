@@ -4,4 +4,4 @@
 
 正式可跑驱动等我本地测稳后再放进来。仓库里没有云端可跑的基准。以前从 main 拿掉的计时脚手架（`benchmarks/run_bench.py` 和云端计时 workflow）不恢复。
 
-[`.github/workflows/compile.yml`](../.github/workflows/compile.yml) 只做编译检查，调用 [`tests/smoke.sh`](../tests/smoke.sh)。它不是性能测试，也不是计时基准。Day 4、Day 5 的计时复现：未验证。
+[`.github/workflows/compile.yml`](../.github/workflows/compile.yml) 做两项检查：调用 [`tests/smoke.sh`](../tests/smoke.sh) 做编译与正确性冒烟，再运行 `python3 experiments/summarize_medians.py` 从归档 CSV 只读重算中位数（输出截取前 30 行）。它不是性能测试，也不是计时基准，不运行任何计时入口。Day 4、Day 5 的计时复现：未验证。
