@@ -25,4 +25,4 @@
 | 用 g++ 跑通整合版来宣称复现了用户正式 CSV | 不适用 | 临时目录里的运行只核对这份 GPT 整合版自身。数字不写入 `experiments/results/` |
 | 跨日缺口对照 `PROJECT_STATE.md` | 已具备 | 已从缺口列表去掉：Day 7 成品源码（以 GPT 整合版补入并标明来源）、Day 5 用时、128 阶分析文档、Visual Studio IDE 更细版本号。仍保留 Day 4 截图转录源码缺口，以及 MSVC toolset 未记录 |
 
-历史报告、结果目录 `metadata.md` 和 `code_history/` 里的快照本次不改写。若其中仍出现「Day 7 环境未记录」「Day 5 用时未记录」「src 无 Day 7」或「Visual Studio 2026 18.x」，以本目录和 [`PROJECT_STATE.md`](../../PROJECT_STATE.md) 的补缴后表述为准。
+历史报告、结果目录 `metadata.md` 和 `code_history/` 里的快照本次不改写。若其中仍出现「Day 7 环境未记录」「Day 5 用时未记录」「src 无 Day 7」或「Visual Studio 2026 18.x」，以本目录和 [`PROJECT_STATE.md`](../history/PROJECT_STATE-2026-11.md) 的补缴后表述为准。

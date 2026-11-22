@@ -26,7 +26,7 @@
 
 Visual Studio IDE 版本与 MSVC 编译器/toolset 版本不是同一层信息。`18.11.1` 只记 IDE。不把 IDE 版本推断成 toolset 版本。
 
-Day 7 结果目录里的 `metadata.md` 在归档当时写过「环境：未记录」。那份原文本次不改。现行环境事实以本文件和 [`PROJECT_STATE.md`](../../PROJECT_STATE.md) 为准：同机、Windows、Intel Core Ultra 7 255HX、Visual Studio 2026 18.11.1、Release / x64；MSVC toolset 独立版本号未记录。
+Day 7 结果目录里的 `metadata.md` 在归档当时写过「环境：未记录」。那份原文本次不改。现行环境事实以本文件和 [`PROJECT_STATE.md`](../history/PROJECT_STATE-2026-11.md) 为准：同机、Windows、Intel Core Ultra 7 255HX、Visual Studio 2026 18.11.1、Release / x64；MSVC toolset 独立版本号未记录。
 
 ## 解释实验数据时的约束
 

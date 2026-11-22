@@ -71,7 +71,10 @@ python experiments\summarize_medians.py
 - [x] 小矩阵、逐元素对照与边界检查；循环顺序和分块实验。
 - [x] 归档原始样本、分析异常并保留分块未加速的结果。
 - [x] 对现行整合版进行编译选项与分块复测（执行与限制见报告）。
-- [ ] 在记录频率、负载和亲和性等条件后增加独立运行轮次，继续分析分块与编译优化。
-- [ ] 学习 SIMD 与向量化；探索脉动阵列及数据流的软件建模。软件模型与真实 NPU 硬件测试分开记录。2026-11-02 只入库了行跨度 LDA 和 SIMD 对照的脚手架（在 `templates/gpt/`，不在 `src/`），kernel 还没写，没有新的计时数字。
+当前在做 **收尾战役 v1.0**（2026-11-23 → 12-06）：硬件事实与分块预测 → 扩大规模实测（n 到 2048）→ SIMD → 总结 → 打 `v1.0`。
 
-更详细的学习过程与材料缺口见 [项目状态](PROJECT_STATE.md)。
+- 现在做到哪：[STATE.md](STATE.md)
+- 战役目标、必做线与加分线：[CAMPAIGN.md](CAMPAIGN.md)，任务卡在 [tasks/](tasks/)
+- 规则（一页）：[RULES.md](RULES.md) · 学习日志：[log.md](log.md) · 暂不做的想法：[IDEAS.md](IDEAS.md)
+
+2026-11-22 之前的项目状态全文见 [notes/history/PROJECT_STATE-2026-11.md](notes/history/PROJECT_STATE-2026-11.md)。未实现的实验脚手架已归档到 [archive/2026-11-scaffolds/](archive/2026-11-scaffolds/README.md)。

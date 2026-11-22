@@ -26,12 +26,14 @@
 | [day08-dialogue-record.md](day08-dialogue-record.md) | Day 8 对话记录，只含看得见的部分，有缺口 |
 | [day08-visible-user-turns.md](day08-visible-user-turns.md) | Day 8 我的原话，只含看得见的部分 |
 | [day08-code-materials.md](day08-code-materials.md) | Day 8：没有新代码；Day 5 历史快照的比较 |
-| [handoff-day08-github-maintenance-agent-prompt.md](handoff-day08-github-maintenance-agent-prompt.md) | Day 8 归档包附带的 GitHub 维护提示词，GPT 写的，原样保存 |
-| [dayNN-dataflow-derivation.md](dayNN-dataflow-derivation.md) | 1002-I4 纸笔表模板。六行留空，不是新的学习日。他人推断和待核对的账本总数写在对照小节，不能抄进我的格子 |
+| [history/handoff-day08-github-maintenance-agent-prompt.md](history/handoff-day08-github-maintenance-agent-prompt.md) | Day 8 归档包附带的 GitHub 维护提示词，GPT 写的，原样保存 |
 | [daily-task-records.md](daily-task-records.md) | 已做完并有反馈的每天 |
 | [supplements/](supplements/README.md) | 2026-10-27 材料补缴：环境、128 阶分析、Day 5 用时、Day 4 源码缺口、完整性检查 |
-| [handoff-2026-10-25-项目变更与协作同步报告.md](handoff-2026-10-25-项目变更与协作同步报告.md) | 2026-10-25 定下来的范围和约定 |
-| [dayNN-asm-reading.md](dayNN-asm-reading.md) | 汇编阅读空表。日程序号未定，不是新的学习日，待零醛填写 |
-| [dayNN-hw-facts.md](dayNN-hw-facts.md) | CPU-Z 的 L1D 容量和相联度，数值待测。行跨度和以后的硬件笔记共用这一份 |
+| [history/handoff-2026-10-25-项目变更与协作同步报告.md](history/handoff-2026-10-25-项目变更与协作同步报告.md) | 2026-10-25 定下来的范围和约定 |
+| [block-size-hw-facts.md](block-size-hw-facts.md) | 硬件事实表（收尾战役 T02 填写），读数以工具截图为准 |
+| [block-size-prediction.md](block-size-prediction.md) | 分块预测（收尾战役 T02），先提交再测量 |
+| [history/PROJECT_STATE-2026-11.md](history/PROJECT_STATE-2026-11.md) | 2026-11-22 之前的项目状态全文（已被根目录 `STATE.md` 取代） |
+
+2026-11-22：`dayNN-asm-reading.md`、`dayNN-hw-facts.md`、`dayNN-dataflow-derivation.md`、`gemm-shape-mapping.md`、`pmc-feasibility.md` 这些空模板已归档到 [`../archive/2026-11-scaffolds/notes/`](../archive/2026-11-scaffolds/notes/)。
 
 Day 4 的版本快照在 [`code_history/day04/`](../code_history/day04/README.md)。Day 5 的在 [`code_history/day05/`](../code_history/day05/README.md)。

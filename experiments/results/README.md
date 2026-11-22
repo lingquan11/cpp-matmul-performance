@@ -12,9 +12,9 @@ Day 8 没有结果目录：那天没有真实硬件计数器采集，也没有�
 
 以后我自己测稳、决定公开的计时结果，再按日期放在这个目录里。现在没有可跑的云端基准脚本。编译检查不在这里跑计时。Day 4、Day 5、Day 7 的计时复现：未验证。
 
-2026-11-02 的数据流账本没有结果目录，也没有新的 CSV。脚手架在 `templates/gpt/` 和 `scripts/`。计数口径（待零醛确认）：C 的部分和第一趟是否计读？只计片外/缓冲访问，还是也计 PE 间传递？
+2026-11-02 的数据流账本没有结果目录，也没有新的 CSV。脚手架已于 2026-11-22 归档到 [`archive/2026-11-scaffolds/`](../../archive/2026-11-scaffolds/README.md)。
 
 
 2026-11-01：[/O2 与 /Od、分块复测的原始数据和环境](2026-11-01-compiler-blocking-windows/metadata.md)，四次独立运行，执行与限制见元数据。
 
-2026-11-02：[行跨度 LDA 模板](YYYY-MM-DD-layout-lda-windows/metadata.md) 和 [SIMD 对照模板](YYYY-MM-DD-simd-factor-windows/metadata.md)。两个目录都没有 CSV，也没有汇编。占位名等我开跑那天再改。
+收尾战役要用的结果目录模板：[规模扫描](YYYY-MM-DD-scale-sweep-windows/metadata.md)（T03）和 [SIMD 对照](YYYY-MM-DD-simd-factor-windows/metadata.md)（T04）。两个目录都还没有 CSV。占位名等我开跑那天再改。行跨度 LDA 和 PMC 的结果模板已归档。

@@ -72,42 +72,27 @@ Linux 上可同样编译运行，但 **VM 或 g++ 的毫秒不能写入正式报
 
 正确性通过只能说明这些输入与边界组合通过。它不是用户历史 75 条 CSV 的逐行复现，也不能证明分块性能更好或缓存未命中更少。历史 Day 7 程序仍是 GPT 整合版，来源说明保持不变。
 
-## 行跨度与 SIMD 脚手架检查（未接入 smoke）
+## SIMD 脚手架检查（未接入 smoke）
 
-[`layout-lda-correctness.cpp`](layout-lda-correctness.cpp) 用 `#define main` 引入 [`templates/gpt/layout-lda.cpp`](../templates/gpt/layout-lda.cpp)。两个 LDA kernel 还是 `TODO(零醛)` 时，它打印 `SKIP`，退出码 0。这不是 `PASS`。n=70 以及 `lda>n` 的逐元素比对要等 kernel 实现之后才会执行。
-
-[`simd-factor-check.cpp`](simd-factor-check.cpp) 同样只在 kernel 未实现时打印 `SKIP`。它检查 build 标记和「n=1024 不能沿用 day07 的 int 公式」，不跑计时。
-
-两个检查都不要接进 [`smoke.sh`](smoke.sh)，待零醛实现后接入。`smoke.sh` 会编译 `src/` 下全部 `.cpp`，但不会编译 `templates/`。
+[`simd-factor-check.cpp`](simd-factor-check.cpp) 只在 kernel 未实现时打印 `SKIP`。它检查 build 标记和「n=1024 不能沿用 day07 的 int 公式」，不跑计时。这不是 `PASS`。收尾战役 T04 实现之后再接入 [`smoke.sh`](smoke.sh)。`smoke.sh` 会编译 `src/` 下全部 `.cpp`，但不会编译 `templates/`。
 
 格式测试，非实测：
 
 ```sh
 python3 tests/test_scan_asm_keywords.py
-python3 tests/test_summarize_layout_lda.py
+python3 tests/test-block-size-table.py
 ```
 
-夹具在 [`fixtures/asm-keyword-fixture/`](fixtures/asm-keyword-fixture/README.md) 和 [`fixtures/layout-lda-fixture/`](fixtures/layout-lda-fixture/README.md)。里面的数字和指令计数不能写进正式 CSV 或报告。
+夹具在 [`fixtures/asm-keyword-fixture/`](fixtures/asm-keyword-fixture/README.md)。里面的数字和指令计数不能写进正式 CSV 或报告。
 
-在仓库根目录单独编译并跑脚手架检查：
+在仓库根目录单独编译并跑 SIMD 脚手架检查：
 
 ```sh
 bash scripts/build-lda-simd.sh
 ```
 
-核心未实现时，`./build/layout-lda --algo ijk --n 64 --lda n --runs 1 --out build/layout-lda.csv` 应打印「未实现」并以非零码退出，且不创建 CSV。SIMD 那份同样。实现并自测通过后，把对应文件里的 `kLayoutLdaImplemented` 或 `kSimdKernelImplemented` 改为 `true`，确认检查输出以 `PASS:` 开头，再决定是否写入 `smoke.sh`。
+核心未实现时，`./build/simd-factor --algo ikj --n 256 --runs 1 --out build/simd.csv` 应打印「未实现」并以非零码退出，且不创建 CSV。实现并自测通过后，把 `kSimdKernelImplemented` 改为 `true`，确认检查输出以 `PASS:` 开头，再写入 `smoke.sh`。
 
-## 1002-I4 脚手架测试（未接入 smoke）
+## 已归档的脚手架测试
 
-下面两项不在 [`smoke.sh`](smoke.sh) 里。四种新循环顺序和三个访存计数还是 `TODO(零醛)`。待零醛实现后接入。
-
-```sh
-g++ -std=c++17 -O2 -Wall -Wextra -pedantic -o build/loop-orders-correctness tests/loop-orders-correctness.cpp
-build/loop-orders-correctness
-python3 tests/test_dataflow_ledger.py
-python3 scripts/dataflow-ledger.py --M 64 --K 64 --N 64 --R 8 --C 8 --dataflow OS
-```
-
-循环顺序测试在 `n ∈ {1,2,70,255,256}` 上检查。`ijk` 和 `ikj` 与独立 int64 参考比较；`jik`、`kij`、`jki`、`kji` 未实现时打印 `SKIP`。未实现的桩若改写了 C，测试失败。账本脚本未实现时退出码非零，测试把数值对照记为 `SKIP`。
-
-Claude 给出的参考值，待零醛手推核对；WS/IS 的值取决于计数口径。`(64,64,64)` 在 8×8 上是 OS 69632、WS 98304、IS 98304；在 16×4 上是 OS 86016、WS 98304、IS 147456。提示词只给了这些总数，没有 A/B/C 分项。计数口径（待零醛确认）：C 的部分和第一趟是否计读？只计片外/缓冲访问，还是也计 PE 间传递？这些数不是本仓库的实测，也不是程序当前的输出。
+2026-11-22：行跨度 LDA、六种循环顺序（1002-I4）、数据流账本、打包分块、GEMM 形状、PMC/Plan B 的测试与夹具，已随脚手架一起归档到 [`../archive/2026-11-scaffolds/tests/`](../archive/2026-11-scaffolds/tests/)，保持原文件名。取回时连同对应的 `templates/gpt/` 和 `scripts/` 文件一起取回。
