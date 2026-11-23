@@ -1,4 +1,4 @@
-# Measured CSV and experiments/results/ stay tracked.
+# Measured CSV under results/experiments/*/data/ stays tracked.
 # Do not add a global *.csv ignore or ignore that directory.
 
 # Build artifacts
