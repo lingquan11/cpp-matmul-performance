@@ -15,7 +15,7 @@
 
 MSVC 19.51 是否打印 C5001/C5002，以本机 txt 为准。Microsoft Learn 记载了这两个消息号，但本仓库的云端环境没有 cl，不能把文档写成已经在 19.51 上见过。
 
-若报告显示未向量化，只记录在 [`notes/dayNN-asm-reading.md`](../../notes/dayNN-asm-reading.md)，不改代码去迎合编译器。
+若报告显示未向量化，只记录在 本报告的汇编阅读一节（旧空表已归档到 [`archive/2026-11-scaffolds/notes/dayNN-asm-reading.md`](../../archive/2026-11-scaffolds/notes/dayNN-asm-reading.md)），不改代码去迎合编译器。
 
 关键字表最后一列留空，等我填。计数本身不是「已经向量化」或「没有向量化」。
 

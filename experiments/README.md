@@ -1,6 +1,6 @@
 # 我的实验
 
-分析写在 [`reports/`](reports/README.md)，原始 CSV、图和环境记录放在 [`results/`](results/README.md)。当前做到哪以仓库根的 [`PROJECT_STATE.md`](../PROJECT_STATE.md) 为准。
+分析写在 [`reports/`](reports/README.md)，原始 CSV、图和环境记录放在 [`results/`](results/README.md)。当前做到哪以仓库根的 [`STATE.md`](../STATE.md) 为准。
 
 | 实验 | 报告 | 原始数据 |
 | --- | --- | --- |
@@ -9,7 +9,6 @@
 | 2026-10-27，Day 7 分块，75 条 | [2026-10-27-day07-blocking.md](reports/2026-10-27-day07-blocking.md) | [2026-10-27-day07-blocking-local/](results/2026-10-27-day07-blocking-local/) |
 | Day 8 性能诊断方法（日期未记录），无实测 | [day08-performance-analysis.md](reports/day08-performance-analysis.md) | 没有。文中数字是教学示例 |
 | 阶段 A：2×2 算法实现与正确性 | [stage-a-algorithm-implementation.md](reports/stage-a-algorithm-implementation.md) | 这次没有单独的测量目录 |
-| 数据流账本模板，无实测 | [YYYY-MM-DD-dataflow-ledger.md](reports/YYYY-MM-DD-dataflow-ledger.md) | 没有。不在这里放次数或毫秒 |
 
 ## 从归档 CSV 再打一遍中位数
 
@@ -31,4 +30,4 @@ python3 experiments/summarize_medians.py
 
 2026-11-01：[/O2 与 /Od、分块复测](reports/2026-11-01-compiler-blocking-windows.md) · [原始数据与环境](results/2026-11-01-compiler-blocking-windows/metadata.md)。
 
-2026-11-02 的行跨度 LDA 和 SIMD 对照只有模板：[LDA 报告模板](reports/YYYY-MM-DD-layout-lda.md)、[SIMD 报告模板](reports/YYYY-MM-DD-simd-factor.md)。没有新的 CSV，也没有实测数字。计时实验：无新进展。
+收尾战役（2026-11-23 → 12-06）要用的报告模板：[规模扫描](reports/YYYY-MM-DD-scale-sweep.md)（T03）、[SIMD 对照](reports/YYYY-MM-DD-simd-factor.md)（T04）。其余未实现的实验模板已于 2026-11-22 归档到 [`archive/2026-11-scaffolds/`](../archive/2026-11-scaffolds/README.md)。
