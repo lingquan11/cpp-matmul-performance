@@ -12,9 +12,7 @@
 - 任务卡中标 `[me]` 的代码你不写，按 tutor.md 的提示梯度引导我自己写。
 
 ## 任务的机器验收全部通过
-1. 任务卡写明"不考官"时跳过考核，直接视为通过。
-2. 否则先提醒我：**"机器验收已全部通过。建议切换到 GPT-6.2 Astra、推理强度 High 再开始考核（客户端：输入框旁的模型选择器；CLI：`/model`）。切换好后回复'继续'。"** 等我回复后再开始。你不能自己切换模型；我回复"继续"但没有切换，也照常考核。
-3. 按 [start/prompts/examiner.md](start/prompts/examiner.md) 考核。考核结束后提醒我可以切回日常模型（GPT-6.2 Sol / Medium）再归档。
+按 [start/prompts/examiner.md](start/prompts/examiner.md) 执行（它自己决定是否需要考核、是否先提醒切换模型）。
 
 ## 我说"结束"、"今天到这"、"学完了"（或考核结束后）
 按 [start/prompts/archiver.md](start/prompts/archiver.md) 归档：同步所有联动文件 → 运行 `python start/scripts/progress.py` 直到全部 ✓ → 提交并推送 → 用 3–5 行告诉我改了什么、进度条现在是多少、下次从哪里开始。
