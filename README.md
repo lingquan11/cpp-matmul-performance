@@ -4,23 +4,29 @@ Matrix multiplication in C++: loop order, blocking and SIMD, measured on a lapto
 
 用 C++ 矩阵乘法学习访存与局部性：循环顺序、分块、SIMD，每一步都有正确性校验和计时数据。
 
-## 我怎么开始学习
-1. 打开 [start/STATE.md](start/STATE.md)：当前战役、当前任务、下一步
-2. 打开它指向的任务卡
-3. 把 [start/prompts/tutor.md](start/prompts/tutor.md) + STATE + 任务卡贴给导师 AI，开始学习
-4. 学完用 [start/prompts/archiver.md](start/prompts/archiver.md) 归档；任务做完用 `examiner.md` 考核
+## 学习进度
+<!-- progress:start -->
+```
+当前战役 C0 cpp-matmul 收尾 v1.0
+  ░░░░░░░░░░░░░░░░░░░░   0%  0/6 个必做任务通过 · 已用 0h / 计划 14.5h · 截止 2026-12-06
+当前任务 C0-T01 三区重构（AI 已完成迁移，待我核对） · 最近学习 2026-11-23
+```
+<!-- progress:end -->
 
-路线见 [start/ROADMAP.md](start/ROADMAP.md)，规则见 [start/RULES.md](start/RULES.md)。
+## 我怎么开始学习
+在 Codex 中打开本仓库，说"开始学习"；学完说"结束"，Codex 自动归档并更新进度。流程见 [AGENTS.md](AGENTS.md)，路线见 [start/ROADMAP.md](start/ROADMAP.md)。
 
 ## 学习过程
-[journey/](journey/README.md)：时间线、每次学习的日志、按主题整理的笔记。
+[journey/](journey/README.md)：时间线、每次学习的日志、按主题整理的笔记、考核记录。
 
 ## 学习成果
-| 做了什么 | 结论 | 在哪里 |
-|---|---|---|
-| 循环顺序 ijk vs ikj | `ikj` 快 6.85–9.38 倍（n = 64–256） | [results/01](results/experiments/01-loop-order/) |
-| 分块 b = 16 / 32 / 64 | n ≤ 256 时没有加速，n = 128、256 慢 11–60% | [results/02](results/experiments/02-blocking/) |
-| 编译选项 /O2 vs /Od | `/O2` 下分块仍慢于 `ikj` | [results/03](results/experiments/03-compiler-flags/) |
+<!-- results:start -->
+| # | 做了什么 | 结论 | 目录 |
+|---|---|---|---|
+| 01 | 循环顺序 ijk vs ikj | `ikj` 快 6.85–9.38 倍（n = 64–256，中位数） | [experiments/01-loop-order](results/experiments/01-loop-order/) |
+| 02 | 分块 b = 16 / 32 / 64 | n = 128、256 时分块比 `ikj` 慢 11–60%；n = 64、b = 64 基本持平 | [experiments/02-blocking](results/experiments/02-blocking/) |
+| 03 | 编译选项 /O2 vs /Od | `/O2` 下分块仍慢于 `ikj`；`/Od` 下 n = 256 的 `ikj` 从约 1.3 ms 变为 22.8–24.8 ms | [experiments/03-compiler-flags](results/experiments/03-compiler-flags/) |
+<!-- results:end -->
 
 复现：`bash results/tests/smoke.sh`（编译全部程序并运行正确性测试）。详见 [results/](results/README.md)。
 

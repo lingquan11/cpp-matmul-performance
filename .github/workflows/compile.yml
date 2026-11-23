@@ -15,3 +15,5 @@ jobs:
         run: bash results/tests/smoke.sh
       - name: Read-only median check from archived CSV
         run: python3 results/scripts/summarize-medians.py | head -n 30
+      - name: Check README progress, budgets and links
+        run: python3 start/scripts/progress.py --check

@@ -2,8 +2,7 @@
 
 - 更新：2026-11-23
 - 战役：C0 cpp-matmul 收尾（截止 2026-12-06）→ [campaigns/c0-cpp-wrapup/campaign.md](campaigns/c0-cpp-wrapup/campaign.md)
-- 当前任务：T01 三区重构 → [t01-restructure.md](campaigns/c0-cpp-wrapup/t01-restructure.md)
-- 任务状态：待我核对（AI 已完成迁移，PR #37）
+- 当前任务：C0-T01 三区重构（AI 已完成迁移，待我核对）→ [t01-restructure.md](campaigns/c0-cpp-wrapup/t01-restructure.md)
 - 本战役已用：0h / 预算 16–20h
 
 ## 上次停在哪
@@ -15,8 +14,8 @@
 - MSVC `/O2` 有没有自动向量化 ikj？（T04）
 
 ## 下一步
-- 读一遍首页，在 `journey/log.md` 写一行核对结论，以 `[me]` 提交（完成 T01）
-- 然后开始 T02：用 Coreinfo 或 CPU-Z 读缓存参数
+- 读一遍首页，对 Codex 说"开始学习"完成 C0-T01 的核对
+- 然后开始 C0-T02：用 Coreinfo 或 CPU-Z 读缓存参数
 
 ## 环境
 - Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.11.1，MSVC 19.51（x64 Release）

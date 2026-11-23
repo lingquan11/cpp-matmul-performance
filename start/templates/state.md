@@ -3,7 +3,6 @@
 - 更新：YYYY-MM-DD
 - 战役：<id>-<名称>（截止 YYYY-MM-DD）→ start/campaigns/<id>-<名称>/campaign.md
 - 当前任务：<任务ID> <标题> → start/campaigns/<id>-<名称>/<任务文件>.md
-- 任务状态：未开始 / 进行中 / 待考官 / 通过
 - 本战役已用：Xh / 预算 Yh
 
 ## 上次停在哪
