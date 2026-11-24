@@ -17,7 +17,7 @@
    - `campaign.md` 环境准备表中该任务的状态改为 `就绪`（进行到一半就写 `进行中`）
    - 把版本号和验收命令的输出写进 `results/hw/environment.md`（实验的可信度依赖这些事实）
    - `start/STATE.md` 的"环境"一节更新为当前版本
-   - `journey/log.md` 追加 1 行，任务 ID 用完整形式（如 `C1-S01`），用时问我
+   - `journey/log.md`（双线仓库写 `journey/practice/log.md`）追加 1 行，任务 ID 用完整形式（如 `C1-S01`），用时问我
    - 运行 `python start/scripts/progress.py` 直到全部 ✓，用 `[ai] 环境：<ID> <一句话>` 提交并推送
 8. 用 2–3 行告诉我：装了什么、版本是多少、下一个学习任务可以开始了吗。
 
