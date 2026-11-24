@@ -9,6 +9,7 @@ Matrix multiplication in C++: loop order, blocking and SIMD, measured on a lapto
 ```
 当前战役 C0 cpp-matmul 收尾 v1.0
   ░░░░░░░░░░░░░░░░░░░░   0%  0/6 个必做任务通过 · 已用 0h / 计划 14.5h · 截止 2026-12-06
+环境准备 0/1 就绪（与 Muse 协作，不计入学习进度）· 已用 0h
 当前任务 C0-T01 三区重构（AI 已完成迁移，待我核对） · 最近学习 2026-11-23
 ```
 <!-- progress:end -->

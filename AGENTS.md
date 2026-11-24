@@ -7,6 +7,9 @@
 2. 如果当前任务卡还不存在（只有 `campaign.md` 中的一行）：按 `start/templates/task.md` 起草，验收不得弱于 `campaign.md` 中的验收要点。给我审核，我确认后提交，再开始学习。
 3. 按 [start/prompts/tutor.md](start/prompts/tutor.md) 教学。
 
+## 环境任务（`<id>-Sxx`）
+安装、配置、工程骨架这类前提由我和 Muse 按 [start/prompts/setup.md](start/prompts/setup.md) 完成。教学时如果当前学习任务依赖的环境任务还没"就绪"，提醒我先去完成，不要在教学中途代我安装。
+
 ## 学习过程中
 - 机器验收的命令由你执行，原样保留输出。**计时测量**只在我明确说"开始测量"时才运行。
 - 任务卡中标 `[me]` 的代码你不写，按 tutor.md 的提示梯度引导我自己写。

@@ -28,7 +28,7 @@ BUDGETS = {  # 文件 → 行数上限（start/RULES.md §1）
     "start/STATE.md": 30,
 }
 LOG_LINE_MAX = 120
-PASSED, DONE, ACTIVE = "通过", "完成", "进行中"
+PASSED, DONE, ACTIVE, READY = "通过", "完成", "进行中", "就绪"
 BAR_WIDTH = 20
 
 
@@ -82,15 +82,23 @@ def campaign_info(path: Path) -> dict:
             rows = [(r[0], hours(r[hi]), r[si]) for r in body if len(r) > si]
     if not title or not rows:
         sys.exit(f"{path}：需要“# 战役 <id>：<名称>”标题和“## 必做线”表（含“计划用时”“状态”列）")
-    return {"id": title.group(1), "name": title.group(2).strip(), "deadline": deadline.group(1) if deadline else "未设", "tasks": rows}
+    env = []  # 环境任务（与 Muse 协作，不计入学习进度）
+    if "## 环境准备" in text:
+        for header, body in tables(text.split("## 环境准备", 1)[1].split("\n## ", 1)[0]):
+            if "状态" in header:
+                si = header.index("状态")
+                env = [(r[0], r[si]) for r in body if len(r) > si]
+    return {"id": title.group(1), "name": title.group(2).strip(), "deadline": deadline.group(1) if deadline else "未设", "tasks": rows, "env": env}
 
 
-def used_hours(campaign_id: str) -> float:
+def used_hours(campaign_id: str, env: bool = False) -> float:
+    """本战役已用时：env=False 只算学习任务，env=True 只算环境任务（ID 形如 C1-S01）。"""
     total = 0.0
     for line in read("journey/log.md").splitlines():
         parts = [p.strip() for p in line.split("|")]
         if len(parts) >= 3 and re.match(r"\d{4}-\d{2}-\d{2}$", parts[0]) and parts[2].startswith(campaign_id + "-"):
-            total += hours(parts[1])
+            if parts[2].startswith(campaign_id + "-S") == env:
+                total += hours(parts[1])
     return total
 
 
@@ -129,6 +137,9 @@ def progress_block() -> str:
         cur = next((s for cid, s in route if cid == c["id"]), "")
         rfrac = (finished + (frac if cur == ACTIVE else 0)) / len(route)
         lines += [f"整条路线 {route[0][0]} → {route[-1][0]}", f"  {bar(rfrac)} {rfrac:4.0%}  {finished}/{len(route)} 个战役完成"]
+    if c["env"]:
+        ready = sum(1 for _, s in c["env"] if s == READY)
+        lines += [f"环境准备 {ready}/{len(c['env'])} 就绪（与 Muse 协作，不计入学习进度）· 已用 {fmt(used_hours(c['id'], env=True))}h"]
     lines += [f"当前任务 {current_task_line()} · 最近学习 {last_log_date()}"]
     return "```\n" + "\n".join(lines) + "\n```"
 

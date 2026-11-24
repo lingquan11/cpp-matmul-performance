@@ -15,6 +15,11 @@
 | C0-T05 | 总结（≤ 1000 字） | 2h | 见 [t05-summary.md](t05-summary.md) | 未开始 |
 | C0-T06 | v1.0 收尾 | 1h | 见 [t06-release.md](t06-release.md) | 未开始 |
 
+## 环境准备（与 Muse 协作，按 [setup.md](../../prompts/setup.md)；状态：未开始 / 进行中 / 就绪）
+| ID | 内容 | 验收命令 / 要点 | 被哪些学习任务依赖 | 状态 |
+|---|---|---|---|---|
+| C0-S01 | Sysinternals Coreinfo 与 CPU-Z；VS 2026 的 x64 Native Tools 命令行；Python 3（含 matplotlib） | `coreinfo64 -c -l` 有输出；x64 Native Tools 中 `cl` 能编译 `results/src/blocking.cpp`；`python results/scripts/plot-blocking.py --output-dir <临时目录>` 能运行 | C0-T02、T03、T04 | 未开始 |
+
 ## 加分线（必做线全部通过后才碰）
 | ID | 任务 | 计划用时 |
 |---|---|---:|
