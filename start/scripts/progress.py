@@ -98,7 +98,7 @@ def roadmap_campaigns() -> list[tuple[str, str]]:
     for header, body in tables(read("start/ROADMAP.md")):
         if header and header[0] == "ID" and "状态" in header:
             si = header.index("状态")
-            return [(r[0], r[si]) for r in body if re.match(r"^C\d+$", r[0]) and len(r) > si]
+            return [(r[0], r[si]) for r in body if re.match(r"^[A-Z]\d+$", r[0]) and len(r) > si]
     return []
 
 
