@@ -9,7 +9,13 @@
 <!-- progress:end -->
 
 ## 我怎么开始学习
-在 Codex 中打开本仓库，说"开始学习"；学完说"结束"，Codex 自动归档并更新进度。流程见 [AGENTS.md](AGENTS.md)，路线见 [start/ROADMAP.md](start/ROADMAP.md)。
+| 我想 | 对谁说 |
+|---|---|
+| 学习（结束时自动归档、更新进度） | GPT / Codex："开始学习" … "结束" |
+| 考核一个做完的任务 | Gemini："考核 <任务ID>" |
+| 装环境、配工具 | Muse："准备环境" |
+
+分工见 [AGENTS.md](AGENTS.md)，路线见 [start/ROADMAP.md](start/ROADMAP.md)。
 
 ## 学习过程
 [journey/](journey/README.md)：时间线、每次学习的日志、笔记、考核记录。

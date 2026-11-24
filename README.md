@@ -10,12 +10,19 @@ Matrix multiplication in C++: loop order, blocking and SIMD, measured on a lapto
 当前战役 C0 cpp-matmul 收尾 v1.0
   ░░░░░░░░░░░░░░░░░░░░   0%  0/6 个必做任务通过 · 已用 0h / 计划 14.5h · 截止 2026-12-06
 环境准备 0/1 就绪（与 Muse 协作，不计入学习进度）· 已用 0h
-当前任务 C0-T01 三区重构（AI 已完成迁移，待我核对） · 最近学习 2026-11-23
+当前任务 C0-T01 三区重构（AI 已完成迁移，待我核对）
+最近学习 2026-11-23
 ```
 <!-- progress:end -->
 
 ## 我怎么开始学习
-在 Codex 中打开本仓库，说"开始学习"；学完说"结束"，Codex 自动归档并更新进度。流程见 [AGENTS.md](AGENTS.md)，路线见 [start/ROADMAP.md](start/ROADMAP.md)。
+| 我想 | 对谁说 |
+|---|---|
+| 学习（结束时自动归档、更新进度） | GPT / Codex："开始学习" … "结束" |
+| 考核一个做完的任务 | Gemini："考核 <任务ID>" |
+| 装环境、配工具 | Muse："准备环境" |
+
+分工见 [AGENTS.md](AGENTS.md)，路线见 [start/ROADMAP.md](start/ROADMAP.md)。
 
 ## 学习过程
 [journey/](journey/README.md)：时间线、每次学习的日志、按主题整理的笔记、考核记录。
@@ -29,6 +36,4 @@ Matrix multiplication in C++: loop order, blocking and SIMD, measured on a lapto
 | 03 | 编译选项 /O2 vs /Od | `/O2` 下分块仍慢于 `ikj`；`/Od` 下 n = 256 的 `ikj` 从约 1.3 ms 变为 22.8–24.8 ms | [experiments/03-compiler-flags](results/experiments/03-compiler-flags/) |
 <!-- results:end -->
 
-复现：`bash results/tests/smoke.sh`（编译全部程序并运行正确性测试）。详见 [results/](results/README.md)。
-
-相关仓库：[AI-Infra-Learning](https://github.com/lingquan11/AI-Infra-Learning)（CUDA 路线）· [IC-Design-Learning](https://github.com/lingquan11/IC-Design-Learning)（数字 IC 路线）
+复现：`bash results/tests/smoke.sh`；详见 [results/](results/README.md)。相关仓库：[AI-Infra-Learning](https://github.com/lingquan11/AI-Infra-Learning)（CUDA 路线）· [IC-Design-Learning](https://github.com/lingquan11/IC-Design-Learning)（数字 IC 路线）

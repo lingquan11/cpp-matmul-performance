@@ -14,6 +14,7 @@ README.md 中对应的块只由本脚本写入，不要手动修改。
 from __future__ import annotations
 
 import argparse
+import hashlib
 import os
 import re
 import sys
@@ -28,6 +29,10 @@ BUDGETS = {  # 文件 → 行数上限（start/RULES.md §1）
     "start/STATE.md": 30,
 }
 LOG_LINE_MAX = 120
+LOGS = ["journey/log.md", "journey/theory/log.md", "journey/practice/log.md"]  # 双线仓库分理论 / 实践日志
+REVIEW_DIRS = ["journey/reviews", "journey/theory/reviews"]  # Gemini 判定
+LOCK = "start/WORKFLOW.lock"  # 共享文件的 sha256，由 learning-workflow 的 sync.py 写入
+TASK_ID = re.compile(r"\b([A-Z]\d+-[TPS]\d+)\b")
 PASSED, DONE, ACTIVE, READY = "通过", "完成", "进行中", "就绪"
 BAR_WIDTH = 20
 
@@ -52,6 +57,10 @@ def tables(text: str) -> list[tuple[list[str], list[list[str]]]]:
     return out
 
 
+def log_lines() -> list[str]:
+    return [line for rel in LOGS if (ROOT / rel).exists() for line in read(rel).splitlines()]
+
+
 def hours(cell: str) -> float:
     m = re.search(r"(\d+(?:\.\d+)?)\s*h", cell)
     return float(m.group(1)) if m else 0.0
@@ -74,30 +83,39 @@ def campaign_info(path: Path) -> dict:
     text = read(str(path))
     title = re.search(r"^# 战役 (\S+)：(.+)$", text, re.M)
     deadline = re.search(r"\*\*周期\*\*：.*?→\s*(\d{4}-\d{2}-\d{2})", text)
-    must = text.split("## 必做线", 1)[1].split("\n## ", 1)[0] if "## 必做线" in text else ""
-    rows = []
-    for header, body in tables(must):
-        if "状态" in header and "计划用时" in header:
-            hi, si = header.index("计划用时"), header.index("状态")
-            rows = [(r[0], hours(r[hi]), r[si]) for r in body if len(r) > si]
+    def section_rows(name: str) -> list:
+        if f"## {name}" not in text:
+            return []
+        body_text = text.split(f"## {name}", 1)[1].split("\n## ", 1)[0]
+        for header, body in tables(body_text):
+            if "状态" in header and "计划用时" in header:
+                hi, si = header.index("计划用时"), header.index("状态")
+                return [(r[0], hours(r[hi]), r[si]) for r in body if len(r) > si]
+        return []
+
+    # 单线仓库用“必做线”；双线仓库用“理论线”和“实践线”
+    lanes = [("必做线", section_rows("必做线"))] if "## 必做线" in text else [(n, section_rows(n)) for n in ("理论线", "实践线") if f"## {n}" in text]
+    lanes = [(n, r) for n, r in lanes if r]
+    rows = [t for _, r in lanes for t in r]
     if not title or not rows:
-        sys.exit(f"{path}：需要“# 战役 <id>：<名称>”标题和“## 必做线”表（含“计划用时”“状态”列）")
+        sys.exit(f"{path}：需要“# 战役 <id>：<名称>”标题，以及“## 必做线”表或“## 理论线”/“## 实践线”表（含“计划用时”“状态”列）")
     env = []  # 环境任务（与 Muse 协作，不计入学习进度）
     if "## 环境准备" in text:
         for header, body in tables(text.split("## 环境准备", 1)[1].split("\n## ", 1)[0]):
             if "状态" in header:
                 si = header.index("状态")
                 env = [(r[0], r[si]) for r in body if len(r) > si]
-    return {"id": title.group(1), "name": title.group(2).strip(), "deadline": deadline.group(1) if deadline else "未设", "tasks": rows, "env": env}
+    return {"id": title.group(1), "name": title.group(2).strip(), "deadline": deadline.group(1) if deadline else "未设", "tasks": rows, "lanes": lanes, "env": env}
 
 
-def used_hours(campaign_id: str, env: bool = False) -> float:
-    """本战役已用时：env=False 只算学习任务，env=True 只算环境任务（ID 形如 C1-S01）。"""
+def used_hours(campaign_id: str, kind: str = "learn") -> float:
+    """本战役已用时。kind：learn = 全部学习任务；env = 环境任务（如 C1-S01）；T / P = 理论线 / 实践线任务。"""
     total = 0.0
-    for line in read("journey/log.md").splitlines():
+    for line in log_lines():
         parts = [p.strip() for p in line.split("|")]
         if len(parts) >= 3 and re.match(r"\d{4}-\d{2}-\d{2}$", parts[0]) and parts[2].startswith(campaign_id + "-"):
-            if parts[2].startswith(campaign_id + "-S") == env:
+            letter = parts[2][len(campaign_id) + 1:][:1]
+            if (kind == "learn" and letter != "S") or (kind == "env" and letter == "S") or letter == kind:
                 total += hours(parts[1])
     return total
 
@@ -110,13 +128,13 @@ def roadmap_campaigns() -> list[tuple[str, str]]:
     return []
 
 
-def current_task_line() -> str:
-    m = re.search(r"^- 当前任务：(.+)$", read("start/STATE.md"), re.M)
-    return re.sub(r"\s*→.*$", "", m.group(1)).strip() if m else "未设"
+def current_task_lines() -> list[str]:
+    found = re.findall(r"^- 当前(理论|实践)?任务：(.+)$", read("start/STATE.md"), re.M)
+    return [f"当前{lane}任务 " + re.sub(r"\s*→.*$", "", text).strip() for lane, text in found] or ["当前任务 未设"]
 
 
 def last_log_date() -> str:
-    dates = re.findall(r"^(\d{4}-\d{2}-\d{2}) \|", read("journey/log.md"), re.M)
+    dates = re.findall(r"^(\d{4}-\d{2}-\d{2}) \|", "\n".join(log_lines()), re.M)
     return max(dates) if dates else "无"
 
 
@@ -127,10 +145,18 @@ def progress_block() -> str:
     passed = sum(1 for *_, s in c["tasks"] if s == PASSED)
     frac = done / plan if plan else 0.0
     fmt = lambda x: f"{x:g}"
-    lines = [
-        f"当前战役 {c['id']} {c['name']}",
-        f"  {bar(frac)} {frac:4.0%}  {passed}/{len(c['tasks'])} 个必做任务通过 · 已用 {fmt(used_hours(c['id']))}h / 计划 {fmt(plan)}h · 截止 {c['deadline']}",
-    ]
+    if len(c["lanes"]) == 1:
+        lines = [
+            f"当前战役 {c['id']} {c['name']}",
+            f"  {bar(frac)} {frac:4.0%}  {passed}/{len(c['tasks'])} 个必做任务通过 · 已用 {fmt(used_hours(c['id']))}h / 计划 {fmt(plan)}h · 截止 {c['deadline']}",
+        ]
+    else:
+        lines = [f"当前战役 {c['id']} {c['name']} · 截止 {c['deadline']}"]
+        for name, rows in c["lanes"]:
+            lp = sum(h for _, h, _ in rows)
+            lf = sum(h for _, h, s in rows if s == PASSED) / lp if lp else 0.0
+            ln = sum(1 for *_, s in rows if s == PASSED)
+            lines.append(f"  {name} {bar(lf)} {lf:4.0%}  {ln}/{len(rows)} 个任务通过 · 已用 {fmt(used_hours(c['id'], name[0] == '理' and 'T' or 'P'))}h / 计划 {fmt(lp)}h")
     route = roadmap_campaigns()
     if len(route) > 1:
         finished = sum(1 for _, s in route if s == DONE)
@@ -139,8 +165,8 @@ def progress_block() -> str:
         lines += [f"整条路线 {route[0][0]} → {route[-1][0]}", f"  {bar(rfrac)} {rfrac:4.0%}  {finished}/{len(route)} 个战役完成"]
     if c["env"]:
         ready = sum(1 for _, s in c["env"] if s == READY)
-        lines += [f"环境准备 {ready}/{len(c['env'])} 就绪（与 Muse 协作，不计入学习进度）· 已用 {fmt(used_hours(c['id'], env=True))}h"]
-    lines += [f"当前任务 {current_task_line()} · 最近学习 {last_log_date()}"]
+        lines += [f"环境准备 {ready}/{len(c['env'])} 就绪（与 Muse 协作，不计入学习进度）· 已用 {fmt(used_hours(c['id'], 'env'))}h"]
+    lines += current_task_lines() + [f"最近学习 {last_log_date()}"]
     return "```\n" + "\n".join(lines) + "\n```"
 
 
@@ -170,8 +196,54 @@ def render_readme() -> str:
     return text
 
 
-def check(expected_readme: str) -> list[str]:
+def consistency() -> list[str]:
+    """归档漏步检查：状态、日志、STATE、考核结果之间是否一致。"""
     problems = []
+    c = campaign_info(current_campaign())
+    status = {tid: s for tid, _, s in c["tasks"]} | dict(c["env"])
+    for line in current_task_lines():
+        for tid in TASK_ID.findall(line):
+            if tid not in status:
+                problems.append(f"start/STATE.md 指向的 {tid} 不在当前战役的任务表中")
+    logged = set()
+    for line in log_lines():
+        parts = [p.strip() for p in line.split("|")]
+        if len(parts) >= 3 and re.match(r"\d{4}-\d{2}-\d{2}$", parts[0]):
+            logged.update(TASK_ID.findall(parts[2]))
+    for tid in sorted(logged):
+        if status.get(tid) == "未开始":
+            problems.append(f"{tid} 已有学习日志，但任务表中的状态仍是“未开始”")
+    for d in REVIEW_DIRS:
+        for f in sorted((ROOT / d).glob("*.md")) if (ROOT / d).exists() else []:
+            verdicts = re.findall(r"^结论:\s*(通过|不通过)", f.read_text(encoding="utf-8"), re.M)
+            tid = f.stem
+            if verdicts and tid in status:
+                if verdicts[-1] == "通过" and status[tid] != PASSED:
+                    problems.append(f"{tid} 的最新考核结论是“通过”，但任务表中的状态是“{status[tid]}”")
+                if verdicts[-1] == "不通过" and status[tid] == PASSED:
+                    problems.append(f"{tid} 的最新考核结论是“不通过”，但任务表中的状态是“通过”")
+    return problems
+
+
+def lock_problems() -> list[str]:
+    """共享文件是否与 learning-workflow 同步时一致（防止被直接修改）。"""
+    if not (ROOT / LOCK).exists():
+        return []
+    problems = []
+    for line in read(LOCK).splitlines():
+        if not line.strip() or line.startswith("#"):
+            continue
+        digest, rel = line.split(maxsplit=1)
+        path = ROOT / rel
+        if not path.exists():
+            problems.append(f"共享文件缺失：{rel}（用 learning-workflow 的 sync.py 同步）")
+        elif hashlib.sha256(path.read_bytes()).hexdigest() != digest:
+            problems.append(f"共享文件被直接修改：{rel}（只能用 learning-workflow 的 sync.py 同步）")
+    return problems
+
+
+def check(expected_readme: str) -> list[str]:
+    problems = lock_problems() + consistency()
     if read("README.md") != expected_readme:
         problems.append("README.md 的进度块或成果块没有同步：运行 python start/scripts/progress.py")
     budgets = dict(BUDGETS)
@@ -182,9 +254,9 @@ def check(expected_readme: str) -> list[str]:
             n = len(read(rel).splitlines()) if rel != "README.md" else len(expected_readme.splitlines())
             if n > limit:
                 problems.append(f"{rel}：{n} 行，超过上限 {limit}")
-    for line in read("journey/log.md").splitlines():
+    for line in log_lines():
         if re.match(r"\d{4}-\d{2}-\d{2} \|", line) and len(line) > LOG_LINE_MAX:
-            problems.append(f"journey/log.md 有一行 {len(line)} 字，超过 {LOG_LINE_MAX}：{line[:30]}…")
+            problems.append(f"日志有一行 {len(line)} 字，超过 {LOG_LINE_MAX}：{line[:30]}…")
     for md in sorted(ROOT.rglob("*.md")):
         rel = md.relative_to(ROOT).as_posix()
         if rel.startswith((".git/", "journey/archive/", "start/templates/")):
