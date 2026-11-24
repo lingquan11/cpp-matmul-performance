@@ -1,11 +1,11 @@
-# learning-workflow 43a6b50（单线）：由 sync.py 生成，不要手动修改
+# learning-workflow 0b6573d（单线）：由 sync.py 生成，不要手动修改
 f956c4bbd5b660e96c2e29fbe2f86e68730d5cc0e328310c34e593edc3447fb2  AGENTS.md
 a4dc52fbf67a27f7b05d4da2e5aeea54e21572e99f0a7039b17fa2aafc9790ae  GEMINI.md
 41a5970774f809f275680831386db3f6b76be30bb0554b3a6208a0a142a2cbef  start/RULES.md
 5d67acefe641b4c86540391e7eb36b2fbd29dc9ad143bb4e869af3edefad3181  start/prompts/archiver.md
 175f0204037d10252b3bd5c4ca2252d6a6b567c53148e6306c49280c52c48746  start/prompts/examiner.md
 14f01050a450f7b808048e1c2e78c6444ea80be862cf3522b3503ed116794b68  start/prompts/setup.md
-7e9633d4d65cfb4ffd1913e1a621841e6e0cdfdd4cfeab8bcbd86ddeeb7a95ea  start/prompts/tutor.md
+9793424ff9e1b9fff3a22e58bbced2e7aedc859c7a17127b0448f6b4b7a12057  start/prompts/tutor.md
 0704c24f904d55291a51ae5b6f94163c48aca246daf039029cfbaf34e7f6fc66  start/scripts/progress.py
 68ad3b4e2e39f6df1dd5626bc31ff4d930fba849f1c48cb22aad2e19163d4cde  start/templates/campaign-dual.md
 350a64a8750324aa98074ed47fa825ac592143129ab7c969f6cf383b8e6eae08  start/templates/campaign.md
