@@ -4,7 +4,7 @@
 - 战役：C0 cpp-matmul 收尾（截止 2026-12-06）→ [campaign.md](campaigns/c0-cpp-wrapup/campaign.md)
 
 ## 阅读（Muse 记录）
-- 当前阅读：C0-R01 CS:APP 第 6 章 + MEM:BLOCKING
+- 当前阅读：C0-R01 Algorithmica 第 8 章 External Memory（主教材全程只用这一本）
 - 下一步：读完对 Muse 说"读完 C0-R01"
 
 ## 编程（GPT 维护）

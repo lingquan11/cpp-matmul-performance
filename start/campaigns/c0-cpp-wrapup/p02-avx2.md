@@ -1,6 +1,6 @@
 # C0-P02 手写 AVX2 版 ikj
 
-- **栏**：编程 | **计划用时**：2.5h | **先读**：C0-R02（Algorithmica 矩阵乘法） | **依赖动手**：C0-H01（已完成）
+- **栏**：编程 | **计划用时**：2.5h | **先读**：C0-R03、R04（Algorithmica 的 SIMD Parallelism 与 Matrix Multiplication） | **依赖动手**：C0-H01（已完成）
 - **一句话目标**：亲手写一次 SIMD 内层循环，知道 8 路 int32 理论上快 8 倍、实际差在哪里
 
 ## 材料（一手来源）

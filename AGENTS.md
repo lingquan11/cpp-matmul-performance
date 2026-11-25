@@ -8,7 +8,7 @@
 | **我** | — | 按当前战役 `campaign.md` 的阅读表读长文，不和 AI 讨论 | 阅读表 |
 | **GPT**（编程导师） | "开始写代码" … "结束" | 带我写 `[me]` 代码、运行测试；结束时归档编程任务 | [coding-tutor.md](start/prompts/coding-tutor.md) → [coding-archiver.md](start/prompts/coding-archiver.md) |
 | **Muse**（动手助理） | "准备环境" / "做 <H 任务ID>" | 装环境、配工具、跑实验与工具、整理结果，并归档 | [hands-on.md](start/prompts/hands-on.md) |
-| **Muse** | "读完 <R 编号>" / "在读 <R 编号>" | 记录阅读进度（不提问、不考核） | [hands-on.md](start/prompts/hands-on.md) |
+| **Muse** | "读完 / 在读 <R 编号>"、"做完 <S 编号>" | 记录阅读和支线练习进度（不提问、不考核） | [hands-on.md](start/prompts/hands-on.md) |
 
 ## 各自只改的文件
 | | GPT | Muse |
