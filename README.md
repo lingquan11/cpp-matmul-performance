@@ -4,6 +4,29 @@ Matrix multiplication in C++: loop order, blocking and SIMD, measured on a lapto
 
 用 C++ 矩阵乘法学习访存与局部性：循环顺序、分块、SIMD，每一步都有正确性校验和计时数据。
 
+## 学习进度
+<!-- progress:start -->
+```
+当前战役 C0 cpp-matmul 收尾 v1.0 · 截止 2026-12-06
+  阅读 ░░░░░░░░░░░░░░░░░░░░   0%  0/2 项完成 · 已用 0h / 计划 4h
+  编程 ░░░░░░░░░░░░░░░░░░░░   0%  0/2 项完成 · 已用 0h / 计划 5h
+  动手 █░░░░░░░░░░░░░░░░░░░   6%  1/5 项完成 · 已用 0.5h / 计划 8.5h
+当前阅读 C0-R01 CS:APP 第 6 章 + MEM:BLOCKING
+当前编程任务 C0-P01 大矩阵版 ikj 与分块（等 H02 的预测提交后开始）
+当前动手任务 C0-H02 硬件事实 + 我的纸面预测（读完 R01 后）
+最近学习 2026-11-25
+```
+<!-- progress:end -->
+
+## 我怎么开始学习
+| 我想 | 怎么做 |
+|---|---|
+| 学理论 | 自己读当前阅读任务的长文（不和 AI 对话，不考核）；读完对 Muse 说"读完 <R编号>" |
+| 写代码（kernel、正确性测试） | GPT："开始写代码" … "结束"（结束时自动归档） |
+| 跑测量、看向量化报告、作图 | Muse："做 <H任务ID>" |
+
+分工见 [AGENTS.md](AGENTS.md)，路线见 [ROADMAP](start/ROADMAP.md)，当前位置见 [STATE](start/STATE.md)；学习过程（时间线、日志、笔记）见 [journey/](journey/README.md)。
+
 ## 学习成果
 <!-- results:start -->
 | # | 做了什么 | 结论 | 目录 |
@@ -14,26 +37,3 @@ Matrix multiplication in C++: loop order, blocking and SIMD, measured on a lapto
 <!-- results:end -->
 
 测量环境：Windows，Intel Core Ultra 7 255HX，Release x64；数字只代表这台机器。复现：`bash results/tests/smoke.sh`（需 g++，只验证编译和正确性、不计时）；详见 [results/](results/README.md)。相关仓库：[AI-Infra-Learning](https://github.com/lingquan11/AI-Infra-Learning)（CUDA 路线）· [IC-Design-Learning](https://github.com/lingquan11/IC-Design-Learning)（数字 IC 路线） · 工作流：[learning-workflow](https://github.com/lingquan11/learning-workflow)（三个仓库共用的规则、提示词和进度脚本）
-## 学习进度
-<!-- progress:start -->
-```
-当前战役 C0 cpp-matmul 收尾 v1.0
-  ██░░░░░░░░░░░░░░░░░░  10%  1/6 个必做任务通过 · 已用 0.1h / 计划 14.5h · 截止 2026-12-06
-环境准备 1/1 就绪（与 Muse 协作，不计入学习进度）· 已用 0.5h
-当前任务 C0-T02 硬件事实 + 纸面预测
-最近学习 2026-11-25
-```
-<!-- progress:end -->
-
-## 我怎么开始学习
-| 我想 | 对谁说 |
-|---|---|
-| 学习（结束时自动归档、更新进度） | GPT / Codex："开始学习" … "结束" |
-| 考核一个做完的任务 | Gemini："考核 <任务ID>" |
-| 装环境、配工具 | Muse："准备环境" |
-
-分工见 [AGENTS.md](AGENTS.md)，路线见 [start/ROADMAP.md](start/ROADMAP.md)。
-· [当前位置与下一步](start/STATE.md) 
-
-## 学习过程
-[journey/](journey/README.md)：时间线、每次学习的日志、按主题整理的笔记、考核记录。

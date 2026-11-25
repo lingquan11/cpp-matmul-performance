@@ -6,7 +6,7 @@
     python start/scripts/progress.py --check  # 只检查，不写文件（CI 用）
 
 数据源（唯一）：
-    进度条  ← 当前战役 campaign.md 的"必做线"表（状态列）+ journey/log.md 的用时
+    进度条  ← 当前战役 campaign.md 的"阅读""编程""动手"三张表（状态列）+ 日志中的用时
               + start/ROADMAP.md 的战役表（状态列）
     成果表  ← results/README.md 中 <!-- results:start --> 与 <!-- results:end --> 之间的表格
 README.md 中对应的块只由本脚本写入，不要手动修改。
@@ -29,11 +29,14 @@ BUDGETS = {  # 文件 → 行数上限（start/RULES.md §1）
     "start/STATE.md": 30,
 }
 LOG_LINE_MAX = 120
-LOGS = ["journey/log.md", "journey/theory/log.md", "journey/practice/log.md"]  # 双线仓库分理论 / 实践日志
+LOGS = ["journey/coding-log.md", "journey/hands-on-log.md", "journey/log.md"]  # 编程（GPT）/ 动手与阅读（Muse）
 REVIEW_DIRS = ["journey/reviews", "journey/theory/reviews"]  # Gemini 判定
 LOCK = "start/WORKFLOW.lock"  # 共享文件的 sha256，由 learning-workflow 的 sync.py 写入
-TASK_ID = re.compile(r"\b([A-Z]\d+-[TPS]\d+)\b")
+TASK_ID = re.compile(r"\b([A-Z]\d+-[RPHTS]\d+)\b")
 PASSED, DONE, ACTIVE, READY = "通过", "完成", "进行中", "就绪"
+FINISHED = {"通过", "读完", "完成", "就绪"}  # 三栏各自的"完成"状态
+NOT_STARTED = {"未开始", "未读"}
+LANES = [("阅读", "R"), ("编程", "P"), ("动手", "H")]
 BAR_WIDTH = 20
 
 
@@ -88,17 +91,23 @@ def campaign_info(path: Path) -> dict:
             return []
         body_text = text.split(f"## {name}", 1)[1].split("\n## ", 1)[0]
         for header, body in tables(body_text):
-            if "状态" in header and "计划用时" in header:
-                hi, si = header.index("计划用时"), header.index("状态")
+            hcol = next((h for h in ("计划用时", "预计用时") if h in header), None)
+            if "状态" in header and hcol:
+                hi, si = header.index(hcol), header.index("状态")
                 return [(r[0], hours(r[hi]), r[si]) for r in body if len(r) > si]
         return []
 
     # 单线仓库用“必做线”；双线仓库用“理论线”和“实践线”
-    lanes = [("必做线", section_rows("必做线"))] if "## 必做线" in text else [(n, section_rows(n)) for n in ("理论线", "实践线") if f"## {n}" in text]
+    if "## 必做线" in text:
+        lanes = [("必做线", section_rows("必做线"))]
+    elif any(f"## {n}" in text for n, _ in LANES):
+        lanes = [(n, section_rows(n)) for n, _ in LANES]
+    else:
+        lanes = [(n, section_rows(n)) for n in ("理论线", "实践线")]
     lanes = [(n, r) for n, r in lanes if r]
     rows = [t for _, r in lanes for t in r]
     if not title or not rows:
-        sys.exit(f"{path}：需要“# 战役 <id>：<名称>”标题，以及“## 必做线”表或“## 理论线”/“## 实践线”表（含“计划用时”“状态”列）")
+        sys.exit(f"{path}：需要“# 战役 <id>：<名称>”标题，以及“## 阅读”“## 编程”“## 动手”表（含“计划用时”或“预计用时”和“状态”列）")
     env = []  # 环境任务（与 Muse 协作，不计入学习进度）
     if "## 环境准备" in text:
         for header, body in tables(text.split("## 环境准备", 1)[1].split("\n## ", 1)[0]):
@@ -109,7 +118,7 @@ def campaign_info(path: Path) -> dict:
 
 
 def used_hours(campaign_id: str, kind: str = "learn") -> float:
-    """本战役已用时。kind：learn = 全部学习任务；env = 环境任务（如 C1-S01）；T / P = 理论线 / 实践线任务。"""
+    """本战役已用时。kind：learn = 全部学习任务；env = 环境任务（S）；R / P / H / T = 阅读 / 编程 / 动手 / 理论任务。"""
     total = 0.0
     for line in log_lines():
         parts = [p.strip() for p in line.split("|")]
@@ -129,8 +138,8 @@ def roadmap_campaigns() -> list[tuple[str, str]]:
 
 
 def current_task_lines() -> list[str]:
-    found = re.findall(r"^- 当前(理论|实践)?任务：(.+)$", read("start/STATE.md"), re.M)
-    return [f"当前{lane}任务 " + re.sub(r"\s*→.*$", "", text).strip() for lane, text in found] or ["当前任务 未设"]
+    found = re.findall(r"^- 当前(阅读|编程任务|动手任务|理论任务|实践任务|任务)：(.+)$", read("start/STATE.md"), re.M)
+    return [f"当前{label} " + re.sub(r"\s*→.*$", "", text).strip() for label, text in found] or ["当前任务 未设"]
 
 
 def last_log_date() -> str:
@@ -141,8 +150,8 @@ def last_log_date() -> str:
 def progress_block() -> str:
     c = campaign_info(current_campaign())
     plan = sum(h for _, h, _ in c["tasks"])
-    done = sum(h for _, h, s in c["tasks"] if s == PASSED)
-    passed = sum(1 for *_, s in c["tasks"] if s == PASSED)
+    done = sum(h for _, h, s in c["tasks"] if s in FINISHED)
+    passed = sum(1 for *_, s in c["tasks"] if s in FINISHED)
     frac = done / plan if plan else 0.0
     fmt = lambda x: f"{round(x, 1):g}"  # 用时显示一位小数
     if len(c["lanes"]) == 1:
@@ -154,9 +163,9 @@ def progress_block() -> str:
         lines = [f"当前战役 {c['id']} {c['name']} · 截止 {c['deadline']}"]
         for name, rows in c["lanes"]:
             lp = sum(h for _, h, _ in rows)
-            lf = sum(h for _, h, s in rows if s == PASSED) / lp if lp else 0.0
-            ln = sum(1 for *_, s in rows if s == PASSED)
-            lines.append(f"  {name} {bar(lf)} {lf:4.0%}  {ln}/{len(rows)} 个任务通过 · 已用 {fmt(used_hours(c['id'], name[0] == '理' and 'T' or 'P'))}h / 计划 {fmt(lp)}h")
+            lf = sum(h for _, h, s in rows if s in FINISHED) / lp if lp else 0.0
+            ln = sum(1 for *_, s in rows if s in FINISHED)
+            lines.append(f"  {name} {bar(lf)} {lf:4.0%}  {ln}/{len(rows)} 项完成 · 已用 {fmt(used_hours(c['id'], dict(LANES + [('理论线', 'T'), ('实践线', 'P')]).get(name, 'learn')))}h / 计划 {fmt(lp)}h")
     route = roadmap_campaigns()
     if len(route) > 1:
         finished = sum(1 for _, s in route if s == DONE)
@@ -211,8 +220,8 @@ def consistency() -> list[str]:
         if len(parts) >= 3 and re.match(r"\d{4}-\d{2}-\d{2}$", parts[0]):
             logged.update(TASK_ID.findall(parts[2]))
     for tid in sorted(logged):
-        if status.get(tid) == "未开始":
-            problems.append(f"{tid} 已有学习日志，但任务表中的状态仍是“未开始”")
+        if status.get(tid) in NOT_STARTED:
+            problems.append(f"{tid} 已有日志，但任务表中的状态仍是“{status[tid]}”")
     for d in REVIEW_DIRS:
         for f in sorted((ROOT / d).glob("*.md")) if (ROOT / d).exists() else []:
             verdicts = re.findall(r"^结论:\s*(通过|不通过)", f.read_text(encoding="utf-8"), re.M)

@@ -10,4 +10,4 @@
 - 两个优化设置下分别以相同编译选项构建 `tests/day07-correctness.cpp`，均输出 `PASS: 392 algorithm/input cases`；该独立测试覆盖整合版，不代表历史计时复现。
 - 运行时未记录频率、温度、后台负载、电源状态或 CPU 亲和性；混合大小核和系统调度可能影响结果。只有每种构建两次进程运行，不能视作充分的统计证据。没有采集硬件计数器。
 
-[原始分析报告](../../../journey/archive/experiments/reports/2026-11-01-compiler-blocking-windows.md) · [01 /O2](data/01-o2.csv) · [02 /Od](data/02-od.csv) · [03 /Od](data/03-od.csv) · [04 /O2](data/04-o2.csv)
+[原始分析报告](https://github.com/lingquan11/cpp-matmul-performance/blob/archive-2026-11-23/journey/archive/experiments/reports/2026-11-01-compiler-blocking-windows.md) · [01 /O2](data/01-o2.csv) · [02 /Od](data/02-od.csv) · [03 /Od](data/03-od.csv) · [04 /O2](data/04-o2.csv)

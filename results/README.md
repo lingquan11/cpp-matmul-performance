@@ -8,7 +8,7 @@
 | 03 | 编译选项 /O2 vs /Od | `/O2` 下分块仍慢于 `ikj`；`/Od` 下 n = 256 的 `ikj` 从约 1.3 ms 变为 22.8–24.8 ms | [experiments/03-compiler-flags](experiments/03-compiler-flags/) |
 <!-- results:end -->
 
-进行中：04 规模扫描（n 到 2048）、05 SIMD，见 [start/STATE.md](../start/STATE.md)。
+进行中：04 规模扫描（n 到 2048）、05 SIMD，见 [战役 C0](../start/campaigns/c0-cpp-wrapup/campaign.md)。
 
 ## 复现
 ```bash
@@ -18,7 +18,6 @@ bash results/tests/smoke.sh
 
 ## 目录
 - `src/`：矩阵乘法程序
-- `harness/`：AI 写的计时框架（`[ai]`），供 04、05 使用
 - `tests/`：正确性测试
 - `experiments/`：一个实验一个目录（README + data/ + 图）
-- `scripts/`：汇总、作图和 Windows 运行脚本
+- `scripts/`：汇总、作图脚本和向量化报告脚本（`vec-report.bat`）
