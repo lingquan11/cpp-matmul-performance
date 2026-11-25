@@ -23,7 +23,7 @@ Matrix multiplication in C++: loop order, blocking and SIMD, measured on a lapto
 | 装环境、配工具 | Muse："准备环境" |
 
 分工见 [AGENTS.md](AGENTS.md)，路线见 [start/ROADMAP.md](start/ROADMAP.md)。
-· [当前位置与下一步](start/STATE.md)
+· [当前位置与下一步](start/STATE.md) 
 
 ## 学习过程
 [journey/](journey/README.md)：时间线、每次学习的日志、按主题整理的笔记、考核记录。
