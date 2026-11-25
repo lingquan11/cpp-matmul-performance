@@ -144,7 +144,7 @@ def progress_block() -> str:
     done = sum(h for _, h, s in c["tasks"] if s == PASSED)
     passed = sum(1 for *_, s in c["tasks"] if s == PASSED)
     frac = done / plan if plan else 0.0
-    fmt = lambda x: f"{x:g}"
+    fmt = lambda x: f"{round(x, 1):g}"  # 用时显示一位小数
     if len(c["lanes"]) == 1:
         lines = [
             f"当前战役 {c['id']} {c['name']}",
