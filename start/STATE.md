@@ -19,5 +19,7 @@
 - 环境就绪后开始 C0-T02：读取本机缓存参数，手算后提交分块性能预测。
 
 ## 环境
-- Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.11.1，MSVC 19.51（x64 Release）
+- Windows（10.0.26200.9974），Intel Core Ultra 7 255HX；缓存（Coreinfo 实测）：L1D 48/32 KB、L1I 64 KB、L2 3/4 MB、L3 30 MB，行 64 B
+- Visual Studio 2026 Community 18.11.1，MSVC 19.51.36260（x64）；Python 3.13.5，matplotlib 3.10.0；Coreinfo64 已备（全路径运行）
+- C0-S01 已就绪（2026-11-25，验收记录见 `results/hw/environment.md`）；本机编译 `blocking.cpp` 须加 `/utf-8`
 - 元素类型 `int`；`blocking.cpp` 的 `MAX_N = 256`，静态二维数组
