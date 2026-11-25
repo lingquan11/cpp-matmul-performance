@@ -10,10 +10,10 @@
 | 2026-10-27 | 分块实现：n ≤ 256 时没有加速 | [results/02](../results/experiments/02-blocking/) |
 | 日期未记录 | CPU 性能诊断：缓存、IPC/CPI、Top-down、实验设计 | [notes/07](notes/07-cpu-performance-diagnosis.md) |
 | 2026-11-01 | 编译选项复测：`/O2` 下分块仍慢于 `ikj` | [results/03](../results/experiments/03-compiler-flags/) |
-| 2026-11-23 | 仓库重构为 start / journey / results 三区，开始收尾战役 C0 | [log.md](log.md) |
+| 2026-11-23 | 仓库重构为 start / journey / results 三区，开始收尾战役 C0 | [日志](hands-on-log.md) |
 | 2026-11-25 | C0-T01 通过，首页补上当前位置与下一步的入口 | [验收](https://github.com/lingquan11/cpp-matmul-performance/actions/runs/45610239444) |
+| 2026-11-25 | 改为三栏学习：阅读长文 / 编程（GPT）/ 动手（Muse）；删除未用脚手架，旧归档移到 tag | [战役 C0](../start/campaigns/c0-cpp-wrapup/campaign.md) |
 
-- 每次学习的记录：[log.md](log.md)
+- 日志：[编程](coding-log.md)（GPT）· [动手与阅读](hands-on-log.md)（Muse）
 - 笔记（按主题）：[notes/](notes/)
-- 考核记录：reviews/（从 C0 开始积累）
-- 原始材料（逐日记录、对话、补缴说明、旧计划、未完成的脚手架）：[archive/](archive/README.md)，不再维护
+- 重构前的原始材料（逐日记录、对话、旧计划、未完成的脚手架）：tag [archive-2026-11-23](https://github.com/lingquan11/cpp-matmul-performance/tree/archive-2026-11-23/journey/archive) 中的 `journey/archive/`，不再维护

@@ -1,4 +1,4 @@
-# 本机环境与验收记录（C0-S01）
+# 本机环境与验收记录（C0-H01，原 C0-S01）
 
 - 日期：2026-11-25
 - 机器：Windows（版本 10.0.26200.9974），Intel Core Ultra 7 255HX
@@ -55,4 +55,4 @@ Wrote summary CSV, SVG and provenance to C:\Users\LEGION\AppData\Local\Temp\c0-s
 
 ## 结论
 
-C0-S01 三项验收全部通过，状态：就绪。
+C0-H01 三项验收全部通过，状态：完成。
