@@ -10,7 +10,7 @@
 ## 阅读（我自己读，不和 AI 对话；读完对 Muse 说"读完 <ID>"；状态：未读 / 在读 / 读完）
 | ID | 长文 | 读哪些部分 | 预计用时 | 读完应该能回答（自测，不考核） | 状态 |
 |---|---|---|---:|---|---|
-| C0-R01 | Bryant & O'Hallaron, *Computer Systems: A Programmer's Perspective*（第 3 版）第 6 章 | Locality、Cache Memories、Writing Cache-Friendly Code、Putting It Together 几节；加 Web Aside [MEM:BLOCKING](https://csapp.cs.cmu.edu/public/waside/waside-blocking.pdf) | 2.5h | ijk 和 ikj 的内层循环各以什么步长访问三个矩阵？分块想提高哪种局部性、代价是什么？存储器山说明了什么？ | 未读 |
+| C0-R01 | Bryant & O'Hallaron, [*Computer Systems: A Programmer's Perspective*（第 3 版）](https://csapp.cs.cmu.edu/3e/home.html)第 6 章 | Locality、Cache Memories、Writing Cache-Friendly Code、Putting It Together 几节；加 Web Aside [MEM:BLOCKING](https://csapp.cs.cmu.edu/public/waside/waside-blocking.pdf) | 2.5h | ijk 和 ikj 的内层循环各以什么步长访问三个矩阵？分块想提高哪种局部性、代价是什么？存储器山说明了什么？ | 未读 |
 | C0-R02 | Sergey Slotin, *Algorithms for Modern Hardware*：[Matrix Multiplication](https://en.algorithmica.org/hpc/algorithms/matmul/) | 全文（Baseline 到 Blocking） | 1.5h | 转置和向量化各解决了什么问题？为什么寄存器复用的微内核比单纯分块更关键？这能不能解释我的分块没有变快？ | 未读 |
 
 ## 编程（GPT 带写，只看机器验收；状态：未开始 / 进行中 / 通过）
