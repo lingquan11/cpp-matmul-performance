@@ -73,7 +73,7 @@ if not exist "%OUT%\asm" (
 )
 
 echo V1：cl /O2 /Qvec-report:2 /FAs /c  不加 /arch
-cl /nologo /O2 /Qvec-report:2 /FAs /c /Fo"%OUT%\asm\day07-v1.obj" /Fa"%OUT%\asm\day07-v1.asm" "%ROOT%\src\blocking.cpp" > "%OUT%\vec-report-v1.txt" 2>&1
+cl /nologo /utf-8 /O2 /Qvec-report:2 /FAs /c /Fo"%OUT%\asm\day07-v1.obj" /Fa"%OUT%\asm\day07-v1.asm" "%ROOT%\src\blocking.cpp" > "%OUT%\vec-report-v1.txt" 2>&1
 set "RC=%ERRORLEVEL%"
 if not "%RC%"=="0" (
   echo V1 编译失败，退出码 %RC%。原文在 "%OUT%\vec-report-v1.txt"。不要为了编过改 day07。
@@ -81,7 +81,7 @@ if not "%RC%"=="0" (
 )
 
 echo V2：同一条命令加上 /arch:AVX2
-cl /nologo /O2 /arch:AVX2 /Qvec-report:2 /FAs /c /Fo"%OUT%\asm\day07-v2.obj" /Fa"%OUT%\asm\day07-v2.asm" "%ROOT%\src\blocking.cpp" > "%OUT%\vec-report-v2.txt" 2>&1
+cl /nologo /utf-8 /O2 /arch:AVX2 /Qvec-report:2 /FAs /c /Fo"%OUT%\asm\day07-v2.obj" /Fa"%OUT%\asm\day07-v2.asm" "%ROOT%\src\blocking.cpp" > "%OUT%\vec-report-v2.txt" 2>&1
 set "RC=%ERRORLEVEL%"
 if not "%RC%"=="0" (
   echo V2 编译失败，退出码 %RC%。原文在 "%OUT%\vec-report-v2.txt"。不要为了编过改 day07。
