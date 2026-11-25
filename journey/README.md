@@ -11,6 +11,7 @@
 | 日期未记录 | CPU 性能诊断：缓存、IPC/CPI、Top-down、实验设计 | [notes/07](notes/07-cpu-performance-diagnosis.md) |
 | 2026-11-01 | 编译选项复测：`/O2` 下分块仍慢于 `ikj` | [results/03](../results/experiments/03-compiler-flags/) |
 | 2026-11-23 | 仓库重构为 start / journey / results 三区，开始收尾战役 C0 | [log.md](log.md) |
+| 2026-11-25 | C0-T01 通过，首页补上当前位置与下一步的入口 | [验收](https://github.com/lingquan11/cpp-matmul-performance/actions/runs/45610239444) |
 
 - 每次学习的记录：[log.md](log.md)
 - 笔记（按主题）：[notes/](notes/)

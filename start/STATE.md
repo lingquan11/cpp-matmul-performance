@@ -1,11 +1,12 @@
 # STATE（≤ 30 行，只写当前）
 
-- 更新：2026-11-23
+- 更新：2026-11-25
 - 战役：C0 cpp-matmul 收尾（截止 2026-12-06）→ [campaigns/c0-cpp-wrapup/campaign.md](campaigns/c0-cpp-wrapup/campaign.md)
-- 当前任务：C0-T01 三区重构（AI 已完成迁移，待我核对）→ [t01-restructure.md](campaigns/c0-cpp-wrapup/t01-restructure.md)
-- 本战役已用：0h / 预算 16–20h
+- 当前任务：C0-T02 硬件事实 + 纸面预测 → [t02-hw-facts-and-prediction.md](campaigns/c0-cpp-wrapup/t02-hw-facts-and-prediction.md)
+- 本战役已用：5 分钟 / 预算 16–20h
 
 ## 上次停在哪
+- C0-T01 通过；首页已补上当前位置与下一步的入口。
 - Day 8 学了 CPU 性能诊断概念，没有实测；之后只有 AI 搭的脚手架，SIMD kernel 没写
 
 ## 未解决的问题
@@ -14,8 +15,8 @@
 - MSVC `/O2` 有没有自动向量化 ikj？（T04）
 
 ## 下一步
-- 读一遍首页，对 Codex 说"开始学习"完成 C0-T01 的核对
-- 然后开始 C0-T02：用 Coreinfo 或 CPU-Z 读缓存参数
+- C0-S01 尚未就绪，先对 Muse 说“做 C0-S01”，准备本机工具。
+- 环境就绪后开始 C0-T02：读取本机缓存参数，手算后提交分块性能预测。
 
 ## 环境
 - Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.11.1，MSVC 19.51（x64 Release）

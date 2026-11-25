@@ -8,7 +8,7 @@
 ## 必做线（状态：未开始 / 进行中 / 待考官 / 通过）
 | ID | 任务 | 计划用时 | 验收要点 | 状态 |
 |---|---|---:|---|---|
-| C0-T01 | 三区重构：start / journey / results | 1.5h | 见 [t01-restructure.md](t01-restructure.md) | 进行中 |
+| C0-T01 | 三区重构：start / journey / results | 1.5h | 见 [t01-restructure.md](t01-restructure.md) | 通过 |
 | C0-T02 | 硬件事实 + 纸面预测 | 2h | 见 [t02-hw-facts-and-prediction.md](t02-hw-facts-and-prediction.md) | 未开始 |
 | C0-T03 | 扩大规模实测：n = 256 → 2048 | 4h | 见 [t03-scale-sweep.md](t03-scale-sweep.md) | 未开始 |
 | C0-T04 | SIMD：自动向量化 vs AVX2 手写 | 4h | 见 [t04-simd.md](t04-simd.md) | 未开始 |
