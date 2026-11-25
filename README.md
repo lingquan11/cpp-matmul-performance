@@ -8,10 +8,10 @@ Matrix multiplication in C++: loop order, blocking and SIMD, measured on a lapto
 <!-- progress:start -->
 ```
 当前战役 C0 cpp-matmul 收尾 v1.0 · 截止 2026-12-06
-  阅读 ░░░░░░░░░░░░░░░░░░░░   0%  0/2 项完成 · 已用 0h / 计划 4h
+  阅读 ░░░░░░░░░░░░░░░░░░░░   0%  0/4 项完成 · 已用 0h / 计划 5h
   编程 ░░░░░░░░░░░░░░░░░░░░   0%  0/2 项完成 · 已用 0h / 计划 5h
   动手 █░░░░░░░░░░░░░░░░░░░   6%  1/5 项完成 · 已用 0.5h / 计划 8.5h
-当前阅读 C0-R01 CS:APP 第 6 章 + MEM:BLOCKING
+当前阅读 C0-R01 Algorithmica 第 8 章 External Memory（主教材全程只用这一本）
 当前编程任务 C0-P01 大矩阵版 ikj 与分块（等 H02 的预测提交后开始）
 当前动手任务 C0-H02 硬件事实 + 我的纸面预测（读完 R01 后）
 最近学习 2026-11-25
@@ -21,7 +21,7 @@ Matrix multiplication in C++: loop order, blocking and SIMD, measured on a lapto
 ## 我怎么开始学习
 | 我想 | 怎么做 |
 |---|---|
-| 学理论 | 自己读当前阅读任务的长文（不和 AI 对话，不考核）；读完对 Muse 说"读完 <R编号>" |
+| 学理论（主线）+ 做练习（支线，选做） | 读 Algorithmica 的当前章节（不和 AI 对话，不考核）；配套练习在 Performance Ninja 上做；读完 / 做完对 Muse 说"读完 <R编号>" / "做完 <S编号>" |
 | 写代码（kernel、正确性测试） | GPT："开始写代码" … "结束"（结束时自动归档） |
 | 跑测量、看向量化报告、作图 | Muse："做 <H任务ID>" |
 
