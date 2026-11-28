@@ -22,4 +22,4 @@
 超时按 campaign.md 的砍线顺序处理。v1.0 发布后，在这里放总结摘要和 Release 链接。
 
 ## 之后
-C0 结束后转到 [AI-Infra-Learning](https://github.com/lingquan11/AI-Infra-Learning) 的 C1 CUDA SGEMM（2026-12-07 起），本仓库的分块和 SIMD 结论是那里共享内存分块和 `float4` 向量化的对照组。相关仓库：[IC-Design-Learning](https://github.com/lingquan11/IC-Design-Learning)（数字 IC 路线）· [learning-workflow](https://github.com/lingquan11/learning-workflow)（三个仓库共用的规则、提示词和进度脚本）
+C0 结束后转到 [ai-infra-plan](https://github.com/lingquan11/ai-infra-plan)（代码放在 [AI-Infra-Learning](https://github.com/lingquan11/AI-Infra-Learning)），本仓库的分块和 SIMD 结论是它第 14 周逐步优化 CUDA GEMM 时的对照组。相关仓库：[IC-Design-Learning](https://github.com/lingquan11/IC-Design-Learning)（数字 IC 路线）· [learning-workflow](https://github.com/lingquan11/learning-workflow)（本仓库和 IC-Design-Learning 共用的规则、提示词和进度脚本）

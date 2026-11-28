@@ -8,7 +8,7 @@
 - **主教材**：Sergey Slotin, [*Algorithms for Modern Hardware*](https://en.algorithmica.org/hpc/)（Algorithmica，免费在线书）；阅读表全部出自它
 - **统一约定**：元素类型 `int`；计时只在我说"开始测量"时运行；每个配置预热 1 次、正式 5 次取中位数；接通电源、"最佳性能"模式、绑定到一个 P 核；吞吐量用 GOPS = 2·n³ / 耗时（int 运算，不叫 GFLOPS）
 - **推荐顺序**：R01 → R02 → H02（预测先提交）→ P01 → H03 → R03 → R04 → P02 → H04 → H05
-- **下一个战役**：[AI-Infra-Learning](https://github.com/lingquan11/AI-Infra-Learning) 的 C1 CUDA SGEMM（2026-12-07 起）
+- **之后**：[ai-infra-plan](https://github.com/lingquan11/ai-infra-plan)（36 周 AI Infra 计划，代码放在 [AI-Infra-Learning](https://github.com/lingquan11/AI-Infra-Learning)）
 
 ## 阅读（我自己读，不和 AI 对话；读完对 Muse 说"读完 <ID>"；状态：未读 / 在读 / 读完）
 | ID | 长文 | 读哪些部分 | 预计用时 | 读完应该能回答（自测，不考核） | 状态 |
@@ -54,4 +54,4 @@
 3. （仍然超时）C0-P02 不手写 intrinsics，C0-H04 只做自动向量化对比，在总结中写明
 
 ## 收尾定义
-2026-12-06：三栏必做全部完成 → 打 `v1.0` → 冻结 `start/`（见 C0-H05），本仓库只保留成果 → 进入 AI-Infra-Learning 的 C1。没完成的必做项在总结的"边界与未完成"一节写明，同样收尾。
+2026-12-06：三栏必做全部完成 → 打 `v1.0` → 冻结 `start/`（见 C0-H05），本仓库只保留成果 → 进入 ai-infra-plan。没完成的必做项在总结的"边界与未完成"一节写明，同样收尾。
