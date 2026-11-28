@@ -1,25 +1,9 @@
-# Day 7 分块实验元数据
+# 实验 02 元数据
 
-- 日期：2026-10-27
-- 主题：分块矩阵乘法（blocked_16 / blocked_32 / blocked_64）与 ijk、ikj 同轮对比
-- 环境：未记录（本包未写 CPU / 编译器版本；若与 Day 4/5 同机，待用户确认后再补）
-- 配置：未记录（Release | x64 等截图未随本包提供）
-- 计时口径：含结果矩阵 C 清零与矩阵乘法；输入初始化、正确性检查、校验和在计时外
-- 矩阵规模：64、128、256
-- 算法：ijk、ikj、blocked_16、blocked_32、blocked_64
-- 每组合正式样本：5 次；合计 75 条
-- 正确性：75 条 status=PASS，elementwise_match=YES
-- 边界测试：n=70、block_size=32，截图显示 PASS（非正式性能样本）
-
-## 文件
-
-| 文件 | 来源类型 | 原程序写出名 |
-| --- | --- | --- |
-| `data/blocking.csv`（原名 `day07-blocking-program-export.csv`） | 程序直接导出 | `matmul_benchmark_day7_blocking.csv` |
-| `boundary-test-n70-b32.png`（原名 `day07-boundary-test-n70-block32.png`） | 控制台边界测试截图 | — |
-
-字节内容按归档包原样复制，未改实测值。
-
-## 源码说明
-
-用户在聊天中提交的是修改过程中的中间版本（分块试测曾位于 Reference / reference_checksum 建立之前），按原样放在 `code_history/day07/V01_user_submitted_intermediate.cpp`。未收到修正后的完整整合源码，故不写入 `src/` 冒充现行成品。GPT 分块片段在 `templates/gpt/day07-blocking-snippets.md`。
+- 日期：2026-10-27（学习记录中的 Day 7）
+- 环境：数据包里没有记录 CPU、编译器版本和构建配置；[分块笔记](../../../journey/notes/blocking.md) 写的是与前几天同机（Windows，Intel Core Ultra 7 255HX，Visual Studio 2026 18.11.1，Release | x64）
+- 算法与规模：`ijk`、`ikj`、`blocked_16` / `32` / `64` 同轮对比；n = 64、128、256；每组 5 个正式样本，共 75 条
+- 计时范围：C 清零和乘法在计时内；输入初始化、正确性检查、校验和在计时外
+- 正确性：75 条均为 status=PASS、elementwise_match=YES；另有 n = 70、b = 32 的边界测试，[截图](boundary-test-n70-b32.png)显示 PASS（不算性能样本）
+- 原始数据：[`data/blocking.csv`](data/blocking.csv) 是程序直接导出的 CSV（程序写出名 `matmul_benchmark_day7_blocking.csv`，入库前名为 `day07-blocking-program-export.csv`），按原样复制，测量值没有改。[`data/summary.csv`](data/summary.csv) 和 [`speedup.svg`](speedup.svg) 由它生成，来源与口径记录在 [`data/figure-provenance.json`](data/figure-provenance.json)
+- 源码：当时在聊天中提交的是修改过程中的中间版本（分块试测还在参考结果建立之前），原样保存在归档的 [`code_history/day07/V01_user_submitted_intermediate.cpp`](https://github.com/lingquan11/cpp-matmul-performance/blob/archive-2026-11-23/journey/archive/code_history/day07/V01_user_submitted_intermediate.cpp)；GPT 的分块片段在归档的 [`templates/gpt/day07-blocking-snippets.md`](https://github.com/lingquan11/cpp-matmul-performance/blob/archive-2026-11-23/journey/archive/templates/gpt/day07-blocking-snippets.md)。现在的 [`results/src/blocking.cpp`](../../src/blocking.cpp) 是事后的整合版，不是这组数据的逐字源码

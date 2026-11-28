@@ -21,4 +21,4 @@
 ## 数据与复现
 - 原始数据：[data/loop-order.csv](data/loop-order.csv)，环境：[metadata.md](metadata.md)（Windows，Core Ultra 7 255HX，VS 2026 Release x64）
 - 程序：[results/src/loop-order.cpp](../../src/loop-order.cpp)；重算中位数：`python3 results/scripts/summarize-medians.py`
-- 所属章节：[第 2 章 循环顺序与缓存局部性](../../../02-loop-order/)
+- 所属章节：[第 2 章 循环顺序与缓存局部性](../../../journey/02-loop-order.md)

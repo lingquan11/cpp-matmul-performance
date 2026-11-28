@@ -1,20 +1,29 @@
 # cpp-matmul-performance
-
 Matrix multiplication in C++: loop order, blocking and SIMD, measured on a laptop CPU.
 
-用 C++ 矩阵乘法学习访存与局部性：6 章从手算一个元素走到 SIMD，每一步都有正确性校验和计时数据。测量环境 Windows / Intel Core Ultra 7 255HX / Release x64，数字只代表这台机器；复现：`bash results/tests/smoke.sh`。学习方式见 [AGENTS.md](AGENTS.md)，当前位置见 [STATE](start/STATE.md)，学习过程见 [journey/](journey/README.md)。
+用 C++ 写 `int` 矩阵乘法，依次尝试换循环顺序、分块、SIMD；每一步先校验算对，再计时。正确性测试一条命令复现：`bash results/tests/smoke.sh`（编译全部程序，不计时）。
 
-## 章节总览
-| 章节 | 主题 | 用时 | 难度 | 前置 | 成果 |
-|---|---|---|---|---|---|
-| [第 1 章](01-baseline/) | 正确性与测量 | 已记录 3h | ★☆☆ | C++ 基础 | 校验与计时方法 |
-| [第 2 章](02-loop-order/) | 循环顺序与缓存局部性 | 已记录 1h | ★★☆ | 第 1 章 | [实验 01](results/experiments/01-loop-order/) |
-| [第 3 章](03-blocking/) | 分块与编译选项 | 未记录 | ★★☆ | 第 2 章 | [实验 02](results/experiments/02-blocking/)、[03](results/experiments/03-compiler-flags/) |
-| [第 4 章](04-perf-diagnosis/) | 性能诊断与规模扫描 | 已记录 5h + 计划 9.5h | ★★★ | 第 3 章 | 实验 04（C0 中产出） |
-| [第 5 章](05-simd/) | SIMD 与向量化 | 计划 6h | ★★★ | 第 4 章 | 实验 05（C0 中产出） |
-| [第 6 章](06-summary/) | 总结与 v1.0 | 计划 3h | ★★☆ | 第 4、5 章 | v1.0 Release |
+## 结论
+数字测于 Windows，Intel Core Ultra 7 255HX，MSVC Release x64，只代表这台机器；局限见各实验的“边界”一节。
+<!-- results:start -->
+| # | 做了什么 | 结论 | 目录 |
+|---|---|---|---|
+| 01 | 循环顺序 ijk vs ikj | `ikj` 快 6.85–9.38 倍（n = 64–256，中位数） | [experiments/01-loop-order](results/experiments/01-loop-order/) |
+| 02 | 分块 b = 16 / 32 / 64 | n = 128、256 时分块比 `ikj` 慢 11–60%；n = 64、b = 64 基本持平 | [experiments/02-blocking](results/experiments/02-blocking/) |
+| 03 | 编译选项 /O2 vs /Od | `/O2` 下分块仍慢于 `ikj`；`/Od` 下 n = 256 的 `ikj` 从约 1.3 ms 变为 22.8–24.8 ms | [experiments/03-compiler-flags](results/experiments/03-compiler-flags/) |
+<!-- results:end -->
 
-## 学习进度
+## 章节
+| 章节 | 回答的问题 | 状态 |
+|---|---|---|
+| [1 正确性与测量](journey/01-baseline.md) | 怎样确认乘法算对了，怎样计时才可信？ | 完成 |
+| [2 循环顺序](journey/02-loop-order.md) | 只交换循环顺序，能快多少？ | 完成 |
+| [3 分块与编译选项](journey/03-blocking.md) | 小矩阵（n ≤ 256）分块能不能更快？ | 完成 |
+| [4 性能诊断与规模扫描](journey/04-perf-diagnosis.md) | n 扩大到 2048，分块从哪里开始变快？ | 进行中 |
+| [5 SIMD](journey/05-simd.md) | 手写 AVX2 比编译器自动向量化快多少？ | 未开始 |
+| [6 总结与 v1.0](journey/06-summary.md) | 三种优化在不同规模下各带来什么？ | 未开始 |
+
+## 学习进度（[当前位置](start/STATE.md) · [学习过程](journey/README.md) · [AI 协作规则](AGENTS.md)）
 <!-- progress:start -->
 ```
 当前战役 C0 cpp-matmul 收尾 v1.0 · 截止 2026-12-06
@@ -27,12 +36,3 @@ Matrix multiplication in C++: loop order, blocking and SIMD, measured on a lapto
 最近学习 2026-11-25
 ```
 <!-- progress:end -->
-
-## 学习成果
-<!-- results:start -->
-| # | 做了什么 | 结论 | 目录 |
-|---|---|---|---|
-| 01 | 循环顺序 ijk vs ikj | `ikj` 快 6.85–9.38 倍（n = 64–256，中位数） | [experiments/01-loop-order](results/experiments/01-loop-order/) |
-| 02 | 分块 b = 16 / 32 / 64 | n = 128、256 时分块比 `ikj` 慢 11–60%；n = 64、b = 64 基本持平 | [experiments/02-blocking](results/experiments/02-blocking/) |
-| 03 | 编译选项 /O2 vs /Od | `/O2` 下分块仍慢于 `ikj`；`/Od` 下 n = 256 的 `ikj` 从约 1.3 ms 变为 22.8–24.8 ms | [experiments/03-compiler-flags](results/experiments/03-compiler-flags/) |
-<!-- results:end -->

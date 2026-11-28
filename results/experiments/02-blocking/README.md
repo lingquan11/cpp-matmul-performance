@@ -22,4 +22,4 @@
 ## 数据与复现
 - 原始数据：[data/blocking.csv](data/blocking.csv)，汇总：[data/summary.csv](data/summary.csv)，环境：[metadata.md](metadata.md)
 - 程序：[results/src/blocking.cpp](../../src/blocking.cpp)；作图：`python3 results/scripts/plot-blocking.py`（需要 matplotlib）
-- 所属章节：[第 3 章 分块与编译选项](../../../03-blocking/)
+- 所属章节：[第 3 章 分块与编译选项](../../../journey/03-blocking.md)
