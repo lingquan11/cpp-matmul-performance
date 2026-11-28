@@ -23,3 +23,4 @@
 ## 数据与复现
 - 原始数据：[data/](data/)（4 个 CSV），环境与命令：[metadata.md](metadata.md)
 - 作图：`python3 results/scripts/plot-compiler-flags.py`（需要 matplotlib）
+- 所属章节：[第 3 章 分块与编译选项](../../../03-blocking/)

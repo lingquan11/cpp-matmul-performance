@@ -2,7 +2,17 @@
 
 Matrix multiplication in C++: loop order, blocking and SIMD, measured on a laptop CPU.
 
-用 C++ 矩阵乘法学习访存与局部性：循环顺序、分块、SIMD，每一步都有正确性校验和计时数据。
+用 C++ 矩阵乘法学习访存与局部性：6 章从手算一个元素走到 SIMD，每一步都有正确性校验和计时数据。测量环境 Windows / Intel Core Ultra 7 255HX / Release x64，数字只代表这台机器；复现：`bash results/tests/smoke.sh`。学习方式见 [AGENTS.md](AGENTS.md)，当前位置见 [STATE](start/STATE.md)，学习过程见 [journey/](journey/README.md)。
+
+## 章节总览
+| 章节 | 主题 | 用时 | 难度 | 前置 | 成果 |
+|---|---|---|---|---|---|
+| [第 1 章](01-baseline/) | 正确性与测量 | 已记录 3h | ★☆☆ | C++ 基础 | 校验与计时方法 |
+| [第 2 章](02-loop-order/) | 循环顺序与缓存局部性 | 已记录 1h | ★★☆ | 第 1 章 | [实验 01](results/experiments/01-loop-order/) |
+| [第 3 章](03-blocking/) | 分块与编译选项 | 未记录 | ★★☆ | 第 2 章 | [实验 02](results/experiments/02-blocking/)、[03](results/experiments/03-compiler-flags/) |
+| [第 4 章](04-perf-diagnosis/) | 性能诊断与规模扫描 | 已记录 5h + 计划 9.5h | ★★★ | 第 3 章 | 实验 04（C0 中产出） |
+| [第 5 章](05-simd/) | SIMD 与向量化 | 计划 6h | ★★★ | 第 4 章 | 实验 05（C0 中产出） |
+| [第 6 章](06-summary/) | 总结与 v1.0 | 计划 3h | ★★☆ | 第 4、5 章 | v1.0 Release |
 
 ## 学习进度
 <!-- progress:start -->
@@ -18,15 +28,6 @@ Matrix multiplication in C++: loop order, blocking and SIMD, measured on a lapto
 ```
 <!-- progress:end -->
 
-## 我怎么开始学习
-| 我想 | 怎么做 |
-|---|---|
-| 学理论（主线）+ 做练习（支线，选做） | 读 Algorithmica 的当前章节（不和 AI 对话，不考核）；配套练习在 Performance Ninja 上做；读完 / 做完对 Muse 说"读完 <R编号>" / "做完 <S编号>" |
-| 写代码（kernel、正确性测试） | GPT："开始写代码" … "结束"（结束时自动归档） |
-| 跑测量、看向量化报告、作图 | Muse："做 <H任务ID>" |
-
-分工见 [AGENTS.md](AGENTS.md)，路线见 [ROADMAP](start/ROADMAP.md)，当前位置见 [STATE](start/STATE.md)；学习过程（时间线、日志、笔记）见 [journey/](journey/README.md)。
-
 ## 学习成果
 <!-- results:start -->
 | # | 做了什么 | 结论 | 目录 |
@@ -35,5 +36,3 @@ Matrix multiplication in C++: loop order, blocking and SIMD, measured on a lapto
 | 02 | 分块 b = 16 / 32 / 64 | n = 128、256 时分块比 `ikj` 慢 11–60%；n = 64、b = 64 基本持平 | [experiments/02-blocking](results/experiments/02-blocking/) |
 | 03 | 编译选项 /O2 vs /Od | `/O2` 下分块仍慢于 `ikj`；`/Od` 下 n = 256 的 `ikj` 从约 1.3 ms 变为 22.8–24.8 ms | [experiments/03-compiler-flags](results/experiments/03-compiler-flags/) |
 <!-- results:end -->
-
-测量环境：Windows，Intel Core Ultra 7 255HX，Release x64；数字只代表这台机器。复现：`bash results/tests/smoke.sh`（需 g++，只验证编译和正确性、不计时）；详见 [results/](results/README.md)。相关仓库：[AI-Infra-Learning](https://github.com/lingquan11/AI-Infra-Learning)（CUDA 路线）· [IC-Design-Learning](https://github.com/lingquan11/IC-Design-Learning)（数字 IC 路线） · 工作流：[learning-workflow](https://github.com/lingquan11/learning-workflow)（三个仓库共用的规则、提示词和进度脚本）
